@@ -48,9 +48,18 @@
             animation: spin 3s ease-in-out infinite;
         }
 
-        .subtext{
-
+        .subtext {
+            font-size: 1.2rem; /* Gleiche Größe wie der obere Text */
+            font-weight: bold; /* Macht den Text dicker, damit der Verlauf besser wirkt */
+            text-transform: uppercase; /* Schreibt alles in Großbuchstaben (wie h1) */
+            letter-spacing: 1px; /* Leicht erhöhter Buchstabenabstand */
+    
+            /* Der exakt gleiche Orange-Verlauf wie bei h1 */
+            background: linear-gradient(45deg, #ff7b00, #ffae00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
+
         
         @keyframes spin {
             to { transform: rotate(360deg); }
