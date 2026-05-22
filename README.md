@@ -15,6 +15,13 @@ Here are some ideas to get you started:
 - ⚡ Fun fact: ...
 -->
 
+<!--
 <a href="https://khz-66.github.io/" target="_blank">
 Homepage
 </a>
+--!>
+
+<a href="https://khz-66.github.io/" onclick="window.open(this.href, '_blank'); return false;">
+    Homepage
+</a>
+
