@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, #ff7b00, #ffae00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        p {
+            font-size: 1.2rem;
+            color: #a0a0a0;
+            margin-bottom: 30px;
+        }
+
+        /* NEU: Der Avatar-Container sitzt jetzt zentriert im Textfluss */
+        .avatar-widget-container {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px auto; /* Zentriert das Element und gibt Abstand nach unten */
+        }
+
+        .subtext {
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            background: linear-gradient(45deg, #ff7b00, #ffae00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px; /* Abstand zum Link */
+        }
+
+        a {
+            color: #ff7b00;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Verhindert, dass die Canvas ausbricht, macht sie rund und fügt deinen Rahmen hinzu */
+        #avatar-animation-holder canvas {
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 50%;
+            border: 5px solid #5A6E8F;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+    <script src="p5.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Coming Soon</h1>
+        <p>Hier entsteht gerade etwas Neues. Schau bald wieder vorbei!</p> 
+        
+        <div class="avatar-widget-container">
+            <div id="avatar-animation-holder"></div>
+        </div>
+
+        <p class="subtext">Projekt-Start: Sommer 2026</p>
+
+        <a href="https://khz-66.github.io/processing.js/" target="_blank">
+            Strahlenblumen
+        </a>
+    </div>
+
+    <script>
+    const avatarSketch = (p) => {
+      let img;
+      let blinkTimer = 0;
+      let isBlinking = false;
+
+      p.preload = () => {
+        img = p.loadImage('me.jpg'); 
+      };
+
+      p.setup = () => {
+        let canvas = p.createCanvas(350, 350);
+        canvas.parent('avatar-animation-holder');
+      };
+
+      p.draw = () => {
+        p.clear();
+
+        // 1. Das normale Bild zeichnen
+        p.image(img, 0, 0, p.width, p.height);
+
+        // 2. Deine angepasste Blinzel-Logik
+        if (p.frameCount % 200 === 0) {
+          isBlinking = true;
+          blinkTimer = 10; 
+        }
+
+        if (isBlinking) {
+          blinkEyes();
+          blinkTimer--;
+          if (blinkTimer <= 0) {
+            isBlinking = false;
+          }
+        }
+           
+        // Deine überzeichnete Nase
+        p.stroke(0);          
+        p.strokeWeight(6);    
+        p.fill(183, 189, 189);          
+        p.ellipse(175, 185, 170, 120);
+      };
+
+      function blinkEyes() {
+        p.push(); 
+        p.stroke(0);          
+        p.strokeWeight(6);    
+        p.fill(183, 189, 189);          
+
+        p.ellipse(135, 115, 70, 70); 
+        p.ellipse(205, 115, 75, 75); 
+
+        p.strokeWeight(5);
+        p.line(130, 115, 174, 115); 
+        p.line(176, 115, 220, 115); 
+
+        p.pop(); 
+      }
+    };
+
+    new p5(avatarSketch);
+    </script>
+
+</body>
+</html>
