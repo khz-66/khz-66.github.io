@@ -76,11 +76,14 @@
             text-align: center;
         }
 
+        /* GEÄNDERT: Maximale Breite auf 500px & erzwingt Platzierung UNTER dem Text */
         .content-image {
-            max-width: 100%;
+            display: block;        /* Verhält sich wie ein Block, Text muss weichen */
+            max-width: 500px;      /* Begrenzt die Breite auf maximal 500 Pixel */
+            width: 100%;           /* Skaliert sauber runter, falls der Bildschirm kleiner als 500px ist */
             height: auto;
             border-radius: 8px;
-            margin: 20px 0;
+            margin: 20px auto;     /* 20px Abstand nach oben/unten, "auto" zentriert das Bild */
         }
 
         a {
@@ -170,75 +173,80 @@
 
         <h2>Ich</h2>
         
-        <img src="pola.png" alt="Neues Bild" class="content-image" width="100" onerror="this.style.display='none';">
-     </p>
+        <img src="pola.png" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
         
-        <p>Ein abgehalfterter Hilfslehrer.
-        </p>
+        <p>Ein abgehalfterter Hilfslehrer.</p>
+        
         <p>
-        <a href="https://flickr.com/photos/10824397@N04" target="_blank">Flickr Fotografie</a>
-       
-        
+            <a href="https://flickr.com/photos/10824397@N04" target="_blank">Flickr Fotografie</a>
+        </p>
 
-         <img src="https://live.staticflickr.com/65535/48225929961_3bcdb577bf.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
-     </p>
-     <p>
-         <a href="kakteen_und_andere_sukkulenten.html" target="_blank">Kakteen und andere Sukkulenten</a><br>
-         Unter anderem Brutblätter und einige Frostharte in Freilandüberwinterung.
-        </p>
-        <img src="echinopsis.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
-     </p>
+        <img src="https://live.staticflickr.com/65535/48225929961_3bcdb577bf.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
         
         <p>
-       <a href="https://flickr.com/photos/10824397@N04" target="_blank">Malen und Zeichnen</a><br>
-       Liebhaberei ohne Erfolg, zum Teil wegen Lähmungs&shy;erscheinungen in meinen Händen.
-       <img src="aquarellmarker.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
-     </p>
-     
-       <p>
-       <a href="esoterik_und_magie.html" target="_blank">Esoterik und Magie</a><br>
-       Tarot, Steine und die Laut&shy;formel&shy;sprache Ela Vior. In der Tradition von Karl Spiesberger, Franz Bardon und der Magie des frühen 20. Jahrhunderts.
-       <img src="electrickery.jpeg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+            <a href="kakteen_und_andere_sukkulenten.html" target="_blank">Kakteen und andere Sukkulenten</a><br>
+            Unter anderem Brutblätter und einige Frostharte in Freilandüberwinterung.
         </p>
         
-         <p>
-       <a href="lektüre,_filme_und_musik.html" target="_blank">Lektüre, Filme und Musik</a><br>
-       Was mir gefällt...
-       <img src="buliwyf.jpeg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+        <img src="echinopsis.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+        
+        <p>
+            <a href="https://flickr.com/photos/10824397@N04" target="_blank">Malen und Zeichnen</a><br>
+            Liebhaberei ohne Erfolg, zum Teil wegen Lähmungs&shy;erscheinungen in meinen Händen.
         </p>
+        
+        <img src="aquarellmarker.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+     
+        <p>
+            <a href="esoterik_und_magie.html" target="_blank">Esoterik und Magie</a><br>
+            Tarot, Steine und die Laut&shy;formel&shy;sprache Ela Vior. In der Tradition von Karl Spiesberger, Franz Bardon und der Magie des frühen 20. Jahrhunderts.
+        </p>
+        
+        <img src="electrickery.jpeg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+        
+        <p>
+            <a href="lektüre,_filme_und_musik.html" target="_blank">Lektüre, Filme und Musik</a><br>
+            Was mir gefällt...
+        </p>
+        
+        <img src="buliwyf.jpeg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+        
         <hr style="border: 0; height: 1px; background: #ccc; margin: 40px 0;">
+        
         <h2>Meine Aktivitäten</h2>
         
         <img src="lampe.png" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
-     </p>
-       <p class="subtext text-center">Der Deckenfluter hat schlapp gemacht und die Vase ist zerbrochen</p>  
+        
+        <p class="subtext text-center">Der Deckenfluter hat schlapp gemacht und die Vase ist zerbrochen</p>  
        
         <p>Basteleien aller Art, analog und digital, virtuell und real.</p>
         
         <h3>Processing</h3>
         <p><a href="https://khz-66.github.io/processing.js/" target="_blank">Strahlenblumen</a></p>
     
-       <h3>Arduino</h3>
-       <p><a href="https://khz-66.github.io/processing.js/" target="_blank">Strahlenblumen</a></p>
+        <h3>Arduino</h3>
+        <p><a href="https://khz-66.github.io/processing.js/" target="_blank">Strahlenblumen</a></p>
     
-       <h3>Analoge Elektronik</h3>
-    <p><a href="https://khz-66.github.io/processing.js/" target="_blank">Strahlenblumen</a></p>
+        <h3>Analoge Elektronik</h3>
+        <p><a href="https://khz-66.github.io/processing.js/" target="_blank">Strahlenblumen</a></p>
    
-   <h3>Modellbau</h3>
-    <p><a href="https://khz-66.github.io/processing.js/" target="_blank">Papier</a><br>
-    Ein paar interessante, schöne und ausgefallene Vorlagen.</p>
-    <img src="impossible.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
-     </p>
+        <h3>Modellbau</h3>
+        <p>
+            <a href="https://khz-66.github.io/processing.js/" target="_blank">Papier</a><br>
+            Ein paar interessante, schöne und ausgefallene Vorlagen.
+        </p>
+        
+        <img src="impossible.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
      
-    <p><a href="https://khz-66.github.io/processing.js/" target="_blank">Plastik</a></p>
-<img src="yak-21.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
-     </p>
+        <p><a href="https://khz-66.github.io/processing.js/" target="_blank">Plastik</a></p>
+        
+        <img src="yak-21.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
      
-<p><a href="https://khz-66.github.io/processing.js/" target="_blank">RC</a></p>
-<img src="buggy.jpeg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
-     </p>
+        <p><a href="https://khz-66.github.io/processing.js/" target="_blank">RC</a></p>
+        
+        <img src="buggy.jpeg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
      
-     <hr style="border: 0; height: 1px; background: #ccc; margin: 40px 0;">
+        <hr style="border: 0; height: 1px; background: #ccc; margin: 40px 0;">
         
         <p class="subtext text-center">Sommer 2026</p>
     </div>
