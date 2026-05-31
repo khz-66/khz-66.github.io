@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deine Vorlage (Einfarbiger Hintergrund)</title>
+    
+    <style>
+        /* ==========================================================================
+           1. RESET & BASICS
+           ========================================================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            background-color: #343434; 
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff; /* GEÄNDERT: Dunkler Text auf hellem Grund */
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden; 
+        }
+
+        /* ==========================================================================
+           2. INHALTS-LAYOUT (HAUPTCONTAINER)
+           ========================================================================== */
+        .container {
+            position: relative;
+            z-index: 1; 
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, #ff7b00, #ffae00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1; 
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin: 40px 0 20px 0;
+            color: #ffae00;
+            line-height: 1.1;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin: 40px 0 20px 0;
+            color: #ffae00;
+            line-height: 1.1;
+        }
+        
+        p {
+            font-size: 1.2rem;
+            color: #ffffff; /* GEÄNDERT: Sichtbares Grau statt Hellgrau */
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+
+        .content-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        a {
+            color: #ff7b00;
+            text-decoration: none;
+            transition: color 0.2s ease;
+            line-height: 0.8;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #ffae00;
+        }
+
+        .subtext {
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            background: linear-gradient(45deg, #ff7b00, #ffae00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            /*margin-top: 40px;*/
+        }
+
+        /* ==========================================================================
+           3. AVATAR WIDGET (STEUERUNG)
+           ========================================================================== */
+        .avatar-widget-container {
+            width: 120px;
+            height: 120px;
+            z-index: 10;
+            /*ausblenden*/ 
+            /*display:none; */
+        }
+
+        .avatar-top-right {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+        }
+
+        /* OPTION B: Links Unten fixiert */
+        .avatar-bottom-left {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+        }
+
+        #avatar-animation-holder canvas {
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 50%;
+            border: 5px solid #5A6E8F !important; 
+        }
+        
+        #puzzle-holder {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Verhindert, dass das Puzzle-Canvas unschön verzerrt */
+        #puzzle-holder canvas {
+            display: block;
+        }
+        
+    </style>
+
+    <script src="p5.min.js"></script>
+</head>
+<body>
+
+    <div class="avatar-widget-container avatar-bottom-left ">
+        <div id="avatar-animation-holder"></div>
+    </div>
+
+    <div class="container">
+        <h1>Guten Tag!</h1>
+        
+        <div id="puzzle-holder">
+            <script src="puzzle.js"></script>
+        </div>
+        
+        <p class="subtext text-center">Ich bin grade dabei, mich zu sortieren. Doppelklick ins schwarze Quadrat für Hilfe!</p> 
+        
+        <hr style="border: 0; height: 1px; background: #ccc; margin: 40px 0;">
+
+        <h2>Ich</h2>
+        
+        <img src="pola.png" alt="Neues Bild" class="content-image" width="100" onerror="this.style.display='none';">
+     </p>
+        
+        <p>Ein abgehalfterter Hilfslehrer.
+        </p>
+        <p>
+        <a href="https://flickr.com/photos/10824397@N04" target="_blank">Flickr Fotografie</a>
+       
+        
+
+         <img src="https://live.staticflickr.com/65535/48225929961_3bcdb577bf.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+     </p>
+     <p>
+         <a href="kakteen_und_andere_sukkulenten.html" target="_blank">Kakteen und andere Sukkulenten</a><br>
+         Unter anderem Brutblätter und einige Frostharte in Freilandüberwinterung.
+        </p>
+        <img src="echinopsis.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+     </p>
+        
+        <p>
+       <a href="https://flickr.com/photos/10824397@N04" target="_blank">Malen und Zeichnen</a><br>
+       Liebhaberei ohne Erfolg, zum Teil wegen Lähmungs&shy;erscheinungen in meinen Händen.
+       <img src="aquarellmarker.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+     </p>
+     
+       <p>
+       <a href="esoterik_und_magie.html" target="_blank">Esoterik und Magie</a><br>
+       Tarot, Steine und die Laut&shy;formel&shy;sprache Ela Vior. In der Tradition von Karl Spiesberger, Franz Bardon und der Magie des frühen 20. Jahrhunderts.
+       <img src="electrickery.jpeg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+        </p>
+        
+         <p>
+       <a href="lektüre,_filme_und_musik.html" target="_blank">Lektüre, Filme und Musik</a><br>
+       Was mir gefällt...
+       <img src="buliwyf.jpeg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+        </p>
+        <hr style="border: 0; height: 1px; background: #ccc; margin: 40px 0;">
+        <h2>Meine Aktivitäten</h2>
+        
+        <img src="lampe.png" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+     </p>
+       <p class="subtext text-center">Der Deckenfluter hat schlapp gemacht und die Vase ist zerbrochen</p>  
+       
+        <p>Basteleien aller Art, analog und digital, virtuell und real.</p>
+        
+        <h3>Processing</h3>
+        <p><a href="https://khz-66.github.io/processing.js/" target="_blank">Strahlenblumen</a></p>
+    
+       <h3>Arduino</h3>
+       <p><a href="https://khz-66.github.io/processing.js/" target="_blank">Strahlenblumen</a></p>
+    
+       <h3>Analoge Elektronik</h3>
+    <p><a href="https://khz-66.github.io/processing.js/" target="_blank">Strahlenblumen</a></p>
+   
+   <h3>Modellbau</h3>
+    <p><a href="https://khz-66.github.io/processing.js/" target="_blank">Papier</a><br>
+    Ein paar interessante, schöne und ausgefallene Vorlagen.</p>
+    <img src="impossible.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+     </p>
+     
+    <p><a href="https://khz-66.github.io/processing.js/" target="_blank">Plastik</a></p>
+<img src="yak-21.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+     </p>
+     
+<p><a href="https://khz-66.github.io/processing.js/" target="_blank">RC</a></p>
+<img src="buggy.jpeg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+     </p>
+     
+     <hr style="border: 0; height: 1px; background: #ccc; margin: 40px 0;">
+        
+        <p class="subtext text-center">Sommer 2026</p>
+    </div>
+
+    <script>
+    const avatarSketch = (p) => {
+      let img;
+      let blinkTimer = 0;
+      let isBlinking = false;
+
+      p.preload = () => {
+        img = p.loadImage('me.jpg'); 
+      };
+
+      p.setup = () => {
+        let canvas = p.createCanvas(350, 350);
+        canvas.parent('avatar-animation-holder');
+      };
+
+      p.draw = () => {
+        p.clear();
+        p.image(img, 0, 0, p.width, p.height);
+
+        if (p.frameCount % 200 === 0) {
+          isBlinking = true;
+          blinkTimer = 10; 
+        }
+
+        if (isBlinking) {
+          blinkEyes();
+          blinkTimer--;
+          if (blinkTimer <= 0) {
+            isBlinking = false;
+          }
+        }
+           
+        p.stroke(0);          
+        p.strokeWeight(6);    
+        p.fill(183, 189, 189);          
+        p.ellipse(175, 185, 170, 120);
+      };
+
+      function blinkEyes() {
+        p.push(); 
+        p.stroke(0);          
+        p.strokeWeight(6);    
+        p.fill(183, 189, 189);          
+
+        p.ellipse(135, 115, 70, 70); 
+        p.ellipse(205, 115, 75, 75); 
+
+        p.strokeWeight(5);
+        p.line(130, 115, 174, 115); 
+        p.line(176, 115, 220, 115); 
+
+        p.pop(); 
+      }
+    };
+
+    new p5(avatarSketch);
+    </script>
+
+</body>
+</html>
