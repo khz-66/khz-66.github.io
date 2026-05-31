@@ -15,7 +15,7 @@ Here are some ideas to get you started:
 - ⚡ Fun fact: ...
 -->
 
-<a href="https://khz-66.github.io/" target="_blank">
+<a href="https://khz-66.github.io/?weiterleitung=ja" target="_blank">
 Homepage
 </a>
 
