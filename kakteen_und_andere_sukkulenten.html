@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deine Vorlage (Einfarbiger Hintergrund)</title>
+    
+    <style>
+        /* ==========================================================================
+           1. RESET & BASICS
+           ========================================================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            /* HIER DEINE HINTERGRUNDFARBE WÄHLEN */
+            background-color: whitesmoke; 
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden; 
+        }
+
+        /* ==========================================================================
+           2. INHALTS-LAYOUT (HAUPTCONTAINER)
+           ========================================================================== */
+        .container {
+            position: relative;
+            z-index: 1; 
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        /* Typografie & Standard-Elemente für neue Inhalte */
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, #ff7b00, #ffae00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin: 40px 0 20px 0;
+            color: #ffae00;
+        }
+        
+        p {
+            font-size: 1.2rem;
+            color: #a0a0a0;
+            margin-bottom: 20px;
+            text-align: left; /* Besser lesbar bei längeren Texten */
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+
+        /* Platzhalter für neue Bilder */
+        .content-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Links */
+        a {
+            color: #ff7b00;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #ffae00;
+        }
+
+        .subtext {
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            background: linear-gradient(45deg, #ff7b00, #ffae00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: 40px;
+        }
+
+        /* ==========================================================================
+           3. AVATAR WIDGET (STEUERUNG)
+           ========================================================================== */
+        .avatar-widget-container {
+            width: 120px;
+            height: 120px;
+            z-index: 10;
+        }
+
+        /* OPTION A: Rechts Oben fixiert */
+        .avatar-top-right {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+        }
+
+        /* OPTION B: Links Unten fixiert */
+        .avatar-bottom-left {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+        }
+
+        /* Formatierung des P5-Canvas im Avatar */
+        #avatar-animation-holder canvas {
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 50%;
+            border: 5px solid #5A6E8F !important; 
+            box-shadow: none !important; 
+        }
+    </style>
+
+    <script src="p5.min.js"></script>
+</head>
+<body>
+
+    <div class="avatar-widget-container avatar-top-right">
+        <div id="avatar-animation-holder"></div>
+    </div>
+
+    <div class="container">
+        <h1>Kakteen und andere Sukkulen&shy;ten</h1>
+        <p class="text-center">Hier entsteht gerade etwas Neues. Schau bald wieder vorbei!</p> 
+        
+        <hr style="border: 0; height: 1px; background: #333; margin: 40px 0;">
+
+        <h2>Ein neuer Abschnitt</h2>
+        <p>Dies ist ein Beispielabschnitt, der zeigt, wie sich Text auf der Seite verhält. Durch die Anpassung des Layouts kannst du hier nun beliebig viele Absätze, Listen oder Logdateien einfügen, ohne dass das Layout zerbricht.</p>
+        
+        <img src="bild.png" alt="Beispiel Bild" class="content-image" onerror="this.style.display='none';">
+
+        <p>Du kannst jederzeit weitere Abschnitte mit Bildern füllen und externe <a href="https://khz-66.github.io/processing.js/" target="_blank">Links verknüpfen</a>.</p>
+        
+        <p class="subtext text-center">Projekt-Start: Sommer 2026</p>
+    </div>
+
+    <script>
+    const avatarSketch = (p) => {
+      let img;
+      let blinkTimer = 0;
+      let isBlinking = false;
+
+      p.preload = () => {
+        img = p.loadImage('me.jpg'); 
+      };
+
+      p.setup = () => {
+        let canvas = p.createCanvas(350, 350);
+        canvas.parent('avatar-animation-holder');
+      };
+
+      p.draw = () => {
+        p.clear();
+        p.image(img, 0, 0, p.width, p.height);
+
+        if (p.frameCount % 200 === 0) {
+          isBlinking = true;
+          blinkTimer = 10; 
+        }
+
+        if (isBlinking) {
+          blinkEyes();
+          blinkTimer--;
+          if (blinkTimer <= 0) {
+            isBlinking = false;
+          }
+        }
+           
+        p.stroke(0);          
+        p.strokeWeight(6);    
+        p.fill(183, 189, 189);          
+        p.ellipse(175, 185, 170, 120);
+      };
+
+      function blinkEyes() {
+        p.push(); 
+        p.stroke(0);          
+        p.strokeWeight(6);    
+        p.fill(183, 189, 189);          
+
+        p.ellipse(135, 115, 70, 70); 
+        p.ellipse(205, 115, 75, 75); 
+
+        p.strokeWeight(5);
+        p.line(130, 115, 174, 115); 
+        p.line(176, 115, 220, 115); 
+
+        p.pop(); 
+      }
+    };
+
+    new p5(avatarSketch);
+    </script>
+
+</body>
+</html>
