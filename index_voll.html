@@ -76,6 +76,42 @@
             text-align: center;
         }
 
+        /* HIGHLIGHTS BOX RECHTECK */
+        .highlights-box {
+            background: #ffae00;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px auto 30px auto;
+            max-width: 600px;
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .highlights-box h4 {
+            font-size: 0.8rem;
+            color: #ffffff;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .highlights-box p {
+            font-size: 0.8rem;
+            color: #ffffff;
+            margin-bottom: 0;
+        }
+
+        .highlights-box a {
+            color: #ffffff;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .highlights-box a:hover {
+            color: #343434;
+            text-decoration: none;
+        }
+
         /* GEÄNDERT: Maximale Breite auf 500px & erzwingt Platzierung UNTER dem Text */
         .content-image {
             display: block;        /* Verhält sich wie ein Block, Text muss weichen */
@@ -163,6 +199,12 @@
     <div class="container">
         <h1>Guten Tag!</h1>
         
+        <div class="highlights-box">
+            <h4>Highlights:</h4>
+            <p style="text-align: right;"><a href="#processing">Processing</a><br>
+            <a href="esoterik_und_magie.html">Esoterik &amp; Magie</a></p>
+        </div>
+        
         <div id="puzzle-holder">
             <script src="puzzle.js"></script>
         </div>
@@ -197,7 +239,7 @@
         
         <img src="aquarellmarker.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
      
-        <p>
+        <p id="magie">
             <a href="esoterik_und_magie.html" target="_blank">Esoterik und Magie</a><br>
             Tarot, Steine und die Laut&shy;formel&shy;sprache Ela Vior. In der Tradition von Karl Spiesberger, Franz Bardon und der Magie des frühen 20. Jahrhunderts.
         </p>
@@ -217,11 +259,11 @@
         
         <img src="lampe.png" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
         
-        <p class="subtext text-center">Der Deckenfluter hat schlapp gemacht und die Vase ist zerbrochen</p>  
+        <p class="subtext text-center">Der Deckenfluter hat schlapp gemacht und die Vase ist zerbrochen. Jetzt haben beide ein neues Leben.</p>  
        
         <p>Basteleien aller Art, analog und digital, virtuell und real.</p>
         
-        <h3>Processing</h3>
+        <h3 id="processing">Processing</h3>
         <p><a href="https://khz-66.github.io/processing.js/" target="_blank">Strahlenblumen</a></p>
     
         <h3>Arduino</h3>
@@ -245,6 +287,9 @@
         <p><a href="https://khz-66.github.io/processing.js/" target="_blank">RC</a></p>
         
         <img src="buggy.jpeg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+   
+   <p><a href="https://khz-66.github.io/processing.js/" target="_blank">Modellraketen</a></p>
+   <img src="die_rakete_zu_den_planetenraeumen.png" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
      
         <hr style="border: 0; height: 1px; background: #ccc; margin: 40px 0;">
         
