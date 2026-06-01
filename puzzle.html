@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            background-color: #343434;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+            min-height: 100vh;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, #ff7b00, #ffae00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #puzzle-holder {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .subtext {
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            background: linear-gradient(45deg, #ff7b00, #ffae00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: 20px;
+        }
+    </style>
+
+    <script src="p5.min.js"></script>
+</head>
+<body>
+
+    
+
+    <div id="puzzle-holder">
+        <script src="puzzle.js"></script>
+    </div>
+
+    <p class="subtext">Ich bin grade dabei, mich zu sortieren. Zum puzzeln Kacheln anklicken, für Hilfe Doppelklick ins schwarze Quadrat!</p>
+
+</body>
+</html>
