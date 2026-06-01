@@ -50,14 +50,12 @@
             background: linear-gradient(45deg, #ff7b00, #ffae00);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            line-height: 1.1;
         }
 
         h2 {
             font-size: 2rem;
             margin: 40px 0 20px 0;
             color: #ffae00;
-            line-height: 1.1;
         }
         
         p {
@@ -71,61 +69,15 @@
             text-align: center;
         }
 
-       /* GEÄNDERT: Maximale Breite auf 500px & erzwingt Platzierung UNTER dem Text */
+        /* Platzhalter für neue Bilder */
         .content-image {
-            display: block;        /* Verhält sich wie ein Block, Text muss weichen */
-            max-width: 500px;      /* Begrenzt die Breite auf maximal 500 Pixel */
-            width: 100%;           /* Skaliert sauber runter, falls der Bildschirm kleiner als 500px ist */
+            max-width: 100%;
             height: auto;
             border-radius: 8px;
-            margin: 20px auto;     /* 20px Abstand nach oben/unten, "auto" zentriert das Bild */
+            margin: 20px 0;
+            border: none !important;
+            box-shadow: none !important;
         }
-      
-      img.frame {
-  border: 1px solid rgba(255,255,255,0.7);
-  border-radius: 4px;
-  box-shadow: 0 0 6px rgba(255,255,255,0.15);
-}
-        
-     .image-row {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-}
-
-.image-row img {
-  height: 300px;        /* feste Höhe */
-  width: auto;
-  object-fit: cover;    /* schneidet sauber zu */
-  border-radius: 6px;
-}
-
-.image-scroll {
-  display: flex;
-  flex-wrap: nowrap;       /* verhindert Umbruch */
-  overflow-x: auto;        /* aktiviert horizontales Scrollen */
-  gap: 12px;               /* Abstand zwischen Bildern */
-  padding: 20px 0;         /* Abstand oben und unten */
-  scrollbar-width: thin;   /* Firefox */
-  margin-bottom: 40px;
-}
-
-.image-scroll::-webkit-scrollbar {
-  height: 8px;             /* Höhe der Scrollbar */
-}
-
-.image-scroll::-webkit-scrollbar-thumb {
-  background: #555;
-  border-radius: 4px;
-}
-
-.image-scroll img {
-  height: 300px;           /* einheitliche Höhe */
-  width: auto;
-  object-fit: cover;       /* sauberer Zuschnitt */
-  border-radius: 8px;
-  flex-shrink: 0;          /* verhindert, dass Bilder gequetscht werden */
-}
 
         /* Links */
         a {
@@ -146,15 +98,7 @@
             -webkit-text-fill-color: transparent;
             margin-top: 40px;
         }
-.biblio p {
-  font-size: 0.8rem !important;
-  color: #a0a0a0 !important;
-  margin: 0 0 0.5em 0 !important;
-  padding-left: 2em !important;
-  text-indent: -2em !important;
-  text-align: left !important;
-  line-height: 1.1; !important;
-}
+
         /* ==========================================================================
            3. AVATAR WIDGET (STEUERUNG)
            ========================================================================== */
@@ -197,59 +141,17 @@
     </div>
 
     <div class="container">
-        <h1><br>Esoterik und Magie</h1>
-        <p class="text-center">Ein "Sigillen-Player" für Android, der mit Buchstaben, Zahlen, Hebräischer Schrift oder mit dem Malachim-Alphabet kreisförmige und Planetenquadrat-Sigillen zeichnet und animiert. </p> 
-        
-        <video src="sigill_player_hexagramm.mp4" autoplay muted controls loop 
-       style="mix-blend-mode: screen; width: 270px; height: 270px; object-fit: cover;">
-</video>
+        <h1>Coming Soon</h1>
+        <p class="text-center">Hier entsteht gerade etwas Neues. Schau bald wieder vorbei!</p> 
         
         <hr style="border: 0; height: 1px; background: #333; margin: 40px 0;">
 
-        <h2>Die modernen Klassiker</h2>
-        <p>Franz Bardon, Karl Spiesberger und H. E. Douval.</p>
+        <h2>Ein neuer Abschnitt</h2>
+        <p>Dies ist ein Beispielabschnitt, der zeigt, wie sich Text auf der Seite verhält. Durch die Anpassung des Layouts kannst du hier nun beliebig viele Absätze, Listen oder Logdateien einfügen, ohne dass das Layout zerbricht.</p>
         
-        <div class="image-scroll">
-  <a href="schwarz.html"><img src="bardon_weg.jpg" alt="" class="frame"></a>
-  <a href="schwarz.html"><img src="spiesberger_einweihung.jpg" alt=""  class="frame"></a>
-  <a href="schwarz.html"><img src="spiesberger_praxis.jpg" alt="" class="frame"></a>
-  <a href="schwarz.html"><img src="douval_buecher.jpg" alt="" class="frame"></a>
-</div>
-        
-        <div class="biblio">
-  <p>Bardon, Franz: <i>Der Weg zum wahren Adepten.</i> Freiburg i. Br.: Bauer, 1994.</p>
-  <p>Spiesberger, Karl: <i>Magische Einweihung.</i> Berlin: Schikowski, o. J.</p>
-  <p>Spiesberger, Karl: <i>Magische Praxis.</i> Berlin: Schikowski, o. J.</p>
-  <p>Douval, H. E.: <i>Bücher der praktischen Magie.</i> Interlaken: Ansata, 8. Aufl.</p>
-</div>
-        
-         <hr style="border: 0; height: 1px; background: #333; margin: 40px 0;">
-        
-        <h2>Tarot</h2>
-        <p>Meine Lieblings-Tarot&shy;decks. Neben dem Rider-Waite-<b>Coleman-Smith</b>-Tarot zum Karten&shy;legen am liebsten die intui&shy;tiven Decks von <b>Toppi</b> und <b>Pinter</b> und auch das eso&shy;teri&shy;sche <b>Zillich</b> -Tarot. Das <b>Botanica</b>-Tarot wegen der schönen Pflanzembilder und die Decks von <b>Manara</b>, <b>Serpieri</b> und <b>Frazetta</b> eher als Comic- und Fantasy-Fan. Das <b>Dakini-Orakel</b>, weil es sehr spiri&shy;tuell ist und das <b>Shamans Oracle</b> wegen der schönen und geheim&shy;nis&shy;vollen Höhlen&shy;malereien.</p>
-        
-        <div class="image-scroll">
-  <a href="schwarz.html"><img src="coleman-smith-karte.jpg" alt="" class="frame"></a>
-  <a href="schwarz.html"><img src="primordeal_tarot.jpg" alt="" class="frame"></a>
-  <a href="schwarz.html"><img src="pinter_tarot.jpg" alt=""  class="frame"></a>
-  <a href="schwarz.html"><img src="zillich_tarot.png" alt=""></a>
-  <a href="schwarz.html"><img src="botanica_tarot.jpg" alt="" class="frame"></a>
-  <a href="schwarz.html"><img src="manara_tarot.jpg" alt="" class="frame"></a>
-  <a href="schwarz.html"><img src="serpieri_tarot.jpg" alt="" class="frame"></a>
-  <a href="schwarz.html"><img src="frazetta_tarot.jpg" alt="" class="frame"></a>
-  <a href="schwarz.html"><img src="dakini_oracle.jpg" alt="" class="frame"></a>
-  <a href="schwarz.html"><img src="shamans_oracle.jpg" alt="" class="frame"></a>
-  <a href="schwarz.html"><img src="karte79.jpg" alt="" class="frame"></a>
-</div>
-        
+        <img src="bild.png" alt="Beispiel Bild" class="content-image" onerror="this.style.display='none';">
 
- <hr style="border: 0; height: 1px; background: #333; margin: 40px 0;">
-
-<h2>Die Lautformelsprache Ela Vior</h2>
-
-        <p>Eine Sprache für magische Formeln und <a href="https://khz-66.github.io/processing.js/" target="_blank">Anrufungen</a>.</p>
-        
-         <hr style="border: 0; height: 1px; background: #333; margin: 40px 0;">
+        <p>Du kannst jederzeit weitere Abschnitte mit Bildern füllen und externe <a href="https://khz-66.github.io/processing.js/" target="_blank">Links verknüpfen</a>.</p>
         
         <p class="subtext text-center">Projekt-Start: Sommer 2026</p>
     </div>
