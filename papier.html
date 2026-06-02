@@ -104,6 +104,42 @@ img.frame {
     border-radius: 6px;
 }
 
+/* Container für Bild + Text */
+.image-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0; /* Reset für Standard-Browser-Abstände */
+    width: 100%;
+    /* Falls nebeneinander mit Mindestbreite (Variante 2 aus der vorherigen Antwort): */
+     flex: 1 1 280px; 
+     max-width: 100%; 
+}
+
+/* Die Links in den Items */
+.image-item a {
+    display: block;
+    width: 100%;
+    max-width: 500px; /* Begrenzung, damit die Bilder untereinander nicht zu riesig werden */
+}
+
+/* Die Bilder selbst */
+.image-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+/* Die Bildunterschrift / Überschrift */
+.image-item figcaption {
+    font-size: 0.95rem;       /* Etwas kleinere Schrift (Standard im Container ist 1.2rem) */
+    color: #a0a0a0;           /* Ein dezentes Grau, passend zum Fließtext */
+    margin-top: 8px;          /* Kleiner Abstand zum Bild darüber */
+    text-align: center;       /* Zentriert den Text unter dem Bild */
+    width: 100%;
+    max-width: 500px;         /* Bündig mit der maximalen Bildbreite */
+}
 
 
 .image-scroll {
@@ -221,14 +257,27 @@ img.frame {
       
         <p>Seiteninhalt</p> 
         
-        
-       <div class="image-row">
-    <a href="schwarz.html"><img src="papervisor_tn.jpg" alt="" class="frame"></a>
-    <a href="schwarz.html"><img src="starcopter_tn.jpg" alt="" class="frame"></a>
+        <div class="image-row">
+    <figure class="image-item">
+        <figcaption>Papervisor Modellübersicht</figcaption>
+        <a href="schwarz.html">
+            <img src="papervisor_tn.jpg" alt="Papervisor Modell" class="frame">
+        </a>
+    </figure>
+
+    <figure class="image-item">
+        <figcaption>Starcopter Bauplan</figcaption>
+        <a href="schwarz.html">
+            <img src="starcopter_tn.jpg" alt="Starcopter Modell" class="frame">
+        </a>
+    </figure>
 </div>
 
 
-     
+
+
+   <!-- pdf viewer ausfeblendet für spätere verwendung
+   
         <div class="pdf-viewer-container">
     <object data="papervisor.pdf" type="application/pdf" width="100%" height="100%">
         <iframe src="papervisor.pdf" width="100%" height="100%" style="border: none;">
@@ -239,10 +288,11 @@ img.frame {
     </object>
 </div>
 
-        
+  -->
+  
         <hr style="border: 0; height: 1px; background: #333; margin: 40px 0;">
         
-        <p class="subtext text-center">Start Sommer 2026</p>
+        <p class="subtext text-center">Sommer 2026</p>
     </div>
 
     <script>
