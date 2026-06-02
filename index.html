@@ -3,14 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deine Vorlage (Einfarbiger Hintergrund)</title>
-    
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('weiterleitung') === 'ja') {
-            window.location.href = "index_voll.html"; // <-- Für Weiterleitung "?weiterleitung=ja" an die Adresse anhängen
-        }
-    </script>
+    <title>Homepage khz</title>
     
     <style>
         /* ==========================================================================
@@ -79,8 +72,50 @@
             text-align: left;
         }
         
+        /* bold colered hervorgehoben */
+        bc {
+         font-weight: bold !important;
+         color: #08fcd5 !important;
+       }
+        
         .text-center {
             text-align: center;
+        }
+
+        /* HIGHLIGHTS BOX RECHTECK */
+        .highlights-box {
+            background: #ffae00;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px auto 30px auto;
+            max-width: 500px;
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .highlights-box h4 {
+            font-size: 1rem;
+            color: #ffffff;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .highlights-box p {
+            font-size: 1rem;
+            color: #ffffff;
+            margin-bottom: 0;
+        }
+
+        .highlights-box a {
+            color: #ffffff;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .highlights-box a:hover {
+            color: #343434;
+            text-decoration: none;
         }
 
         /* GEÄNDERT: Maximale Breite auf 500px & erzwingt Platzierung UNTER dem Text */
@@ -170,21 +205,120 @@
     <div class="container">
         <h1>Guten Tag!</h1>
         
+        <div class="highlights-box">
+            <h4>Highlights:</h4>
+            <p style="text-align: right;"><a href="#processing">Processing</a><br>
+            <!-- ausgeblendet in index
+            <a href="esoterik_und_magie.html">Esoterik &amp; Magie</a></p>
+            -->
+        </div>
+       
+       
         <div id="puzzle-holder">
             <script src="puzzle.js"></script>
         </div>
         
         <p class="subtext text-center">Ich bin grade dabei, mich zu sortieren. Zum puzzeln Kacheln anklicken, für Hilfe Doppelklick ins schwarze Quadrat!</p> 
-        
+         
         <hr style="border: 0; height: 1px; background: #ccc; margin: 40px 0;">
-
-       
+          
+      
+        <!-- ausgeblendet in index
+        <h2>Ich</h2>
+        
+        <a href="puzzle"><img src="polas.jpg" alt="Neues Bild" class="content-image" height: auto;" onerror="this.style.display='none';"></a>
+        
+        <p>Ein abgehalfterter Hilfslehrer.</p>
+        -->
+        
         <p>
             <a href="https://flickr.com/photos/10824397@N04" target="_blank">Flickr Fotografie</a>
         </p>
 
+<p>Unter anderem mit einer für <bc>IR-Fotografie</bc> modifizierten Olympus C-100. </p>
+
         <img src="https://live.staticflickr.com/65535/48225929961_3bcdb577bf.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
         
+        <!-- ausgeblendet in index
+        <p>
+            <a href="kakteen_und_andere_sukkulenten.html" target="_blank">Kakteen und andere Sukkulenten</a><br>
+            Unter anderem Brutblätter und einige Frostharte in Freilandüberwinterung.
+        </p>
+        
+        <img src="echinopsis.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+        
+      
+        
+        <p>
+            <a href="https://flickr.com/photos/10824397@N04" target="_blank">Malen und Zeichnen</a><br>
+            Liebhaberei ohne Erfolg, zum Teil wegen Lähmungs&shy;erscheinungen in meinen Händen.
+        </p>
+        
+        <img src="aquarellmarker.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+     -->
+     <!-- ausgeblendet in index
+        <p id="magie">
+            <a href="esoterik_und_magie.html" target="_blank">Esoterik und Magie</a><br>
+            Tarot, Steine und die Laut&shy;formel&shy;sprache Ela Vior. In der Tradition von Karl Spiesberger, Franz Bardon und der Magie des frühen 20. Jahrhunderts.
+        </p>
+        
+        <img src="electrickery.jpeg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+     -->
+     
+     <!-- ausgeblendet in index
+        <p>
+            <a href="lektüre,_filme_und_musik.html" target="_blank">Lektüre, Filme und Musik</a><br>
+            Was mir gefällt...
+        </p>
+        
+        <img src="buliwyf.jpeg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+       -->
+       
+        <hr style="border: 0; height: 1px; background: #ccc; margin: 40px 0;">
+        
+        <h2>Meine Aktivitäten</h2>
+        
+        <img src="lampe.png" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+        
+        <p class="subtext text-center">Der Deckenfluter hat schlapp gemacht und die Vase ist zerbrochen. Jetzt haben beide ein neues Leben.</p>  
+       
+        <p>Basteleien aller Art, analog und digital, virtuell und real.</p>
+        
+        <h3 id="processing">Processing</h3>
+        <p>Schönes und unnützes.</p>
+        <p><a href="https://khz-66.github.io/processing.js/" target="_blank">Strahlenblumen</a> <a href="https://github.com/khz-66/processing.js?tab=readme-ov-file" target="_blank">(Quelltext)</a></p>
+    
+     <p><a href="https://khz-66.github.io/Orbiter-Live-Hintergrund/" target="_blank">Orbiter</a> <a href="https://github.com/khz-66/Orbiter-Live-Hintergrund?tab=readme-ov-file" target="_blank">(Quelltext)</a> - Unter Quelltext liegt die <a href="https://github.com/khz-66/Orbiter-Live-Hintergrund/blob/main/class_orbiter_demo_random_Orbiters.apk">apk-Installationsdatei</a> für einen Android <bc>Live-Hintergrund</bc>. Ich bin als Android Entwickler registriert, aber wahrscheinlich werden bei Installation trotz&shy;dem Warnungen ausgegeben...</p>
+    
+        <!-- ausgeblendet in index
+        <h3>Arduino</h3>
+        <p><a href="https://khz-66.github.io/processing.js/" target="_blank">Strahlenblumen</a></p>
+    
+        <h3>Analoge Elektronik</h3>
+        <p><a href="https://khz-66.github.io/processing.js/" target="_blank">Strahlenblumen</a></p>
+   -->
+        <h3>Modellbau</h3>
+        <p>
+            <a href="papier.html" target="_blank">Papier</a><br>
+            Ein paar interessante, schöne und ausgefallene Vorlagen.
+        </p>
+        
+        
+        <img src="impossible.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+     
+     <!-- ausgeblendet
+        <p><a href="https://khz-66.github.io/processing.js/" target="_blank">Plastik</a></p>
+        
+        <img src="yak-21.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+     
+        <p><a href="https://khz-66.github.io/processing.js/" target="_blank">RC</a></p>
+        
+        <img src="buggy.jpeg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+   
+   <p><a href="https://khz-66.github.io/processing.js/" target="_blank">Modellraketen</a></p>
+   <img src="die_rakete_zu_den_planetenraeumen.png" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+     -->
+     
         <hr style="border: 0; height: 1px; background: #ccc; margin: 40px 0;">
         
         <p class="subtext text-center">Sommer 2026</p>
