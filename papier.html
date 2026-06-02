@@ -16,14 +16,13 @@
         }
         
         html {
-            /* HIER DEINE HINTERGRUNDFARBE WÄHLEN */
             background-color: whitesmoke; 
             scroll-behavior: smooth;
         }
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #ffffff;
+            color: #ffffff; /* Hinweis: Weißer Text auf whitesmoke ist unsichtbar! Eventuell zu #333333 ändern */
             min-height: 100vh;
             line-height: 1.6;
             overflow-x: hidden; 
@@ -34,6 +33,207 @@
            ========================================================================== */
         .container {
             position: relative;
+            z-index: 1; 
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, #ff7b00, #ffae00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1; 
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin: 40px 0 20px 0;
+            color: #ffae00;
+        }
+        
+        p {
+            font-size: 1.2rem;
+            color: #a0a0a0;
+            margin-bottom: 20px;
+            text-align: left; 
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+
+        .content-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: none !important;
+            box-shadow: none !important;
+        }
+
+        a {
+            color: #ff7b00;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #ffae00;
+        }
+
+        .subtext {
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            background: linear-gradient(45deg, #ff7b00, #ffae00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: 40px;
+        }
+
+        /* ==========================================================================
+           3. AVATAR WIDGET (STEUERUNG)
+           ========================================================================== */
+        .avatar-widget-container {
+            width: 120px;
+            height: 120px;
+            z-index: 10;
+        }
+
+        .avatar-bottom-left {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+        }
+
+        #avatar-animation-holder canvas {
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 50%;
+            border: 5px solid #5A6E8F !important; 
+            box-shadow: none !important; 
+        }
+        
+        a.avatar-link-wrapper {
+            text-decoration: none;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; 
+            height: 0;
+            overflow: hidden;
+        }
+
+        /* Container für den PDF-Viewer */
+        .pdf-viewer-container {
+            width: 100%;
+            max-width: 900px;
+            height: 600px;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+
+    <script src="p5.min.js"></script>
+</head>
+<body>
+
+    <div class="avatar-widget-container avatar-bottom-left">
+        <a href="index_voll.html" class="avatar-link-wrapper">
+            <div id="avatar-animation-holder"></div>
+        </a>
+    </div>
+
+    <div class="container">
+        <h1>Papier&shy;modelle</h1>
+      
+        <p>Seiteninhalt</p> 
+        
+        <div class="pdf-viewer-container">
+            <iframe src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/web/viewer.html?file=papervisor.pdf"></iframe>
+        </div>
+        
+        <hr style="border: 0; height: 1px; background: #333; margin: 40px 0;">
+        
+        <p class="subtext text-center">Start Sommer 2026</p>
+    </div>
+
+    <script>
+    const avatarSketch = (p) => {
+      let img;
+      let blinkTimer = 0;
+      let isBlinking = false;
+
+      p.preload = () => {
+        img = p.loadImage('me.jpg'); 
+      };
+
+      p.setup = () => {
+        let canvas = p.createCanvas(350, 350);
+        canvas.parent('avatar-animation-holder');
+      };
+
+      p.draw = () => {
+        p.clear();
+        p.image(img, 0, 0, p.width, p.height);
+
+        if (p.frameCount % 200 === 0) {
+          isBlinking = true;
+          blinkTimer = 10; 
+        }
+
+        if (isBlinking) {
+          blinkEyes();
+          blinkTimer--;
+          if (blinkTimer <= 0) {
+            isBlinking = false;
+          }
+        }
+           
+        p.stroke(0);          
+        p.strokeWeight(6);    
+        p.fill(183, 189, 189);          
+        p.ellipse(175, 185, 170, 120);
+      };
+
+      function blinkEyes() {
+        p.push(); 
+        p.stroke(0);          
+        p.strokeWeight(6);    
+        p.fill(183, 189, 189);          
+
+        p.ellipse(135, 115, 70, 70); 
+        p.ellipse(205, 115, 75, 75); 
+
+        p.strokeWeight(5);
+        p.line(130, 115, 174, 115); 
+        p.line(176, 115, 220, 115); 
+
+        p.pop(); 
+      }
+    };
+
+    new p5(avatarSketch);
+    </script>
+
+</body>
+</html>
             z-index: 1; 
             max-width: 800px;
             margin: 0 auto;
