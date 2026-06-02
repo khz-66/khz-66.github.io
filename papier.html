@@ -138,6 +138,29 @@ a.avatar-widget-container {
     cursor: pointer;
 }
 
+     .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Seitenverhältnis */
+            height: 0;
+            overflow: hidden;
+        }
+        /* Container für den PDF-Viewer */
+        .pdf-viewer-container {
+            width: 100%;
+            max-width: 900px;
+            height: 600px;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+   
         
     </style>
 
@@ -156,6 +179,17 @@ a.avatar-widget-container {
         <h1>Papier&shy;modelle</h1>
       
         <p>Seiteninhalt</p> 
+        
+      
+
+
+<div class="pdf-viewer-container">
+    <iframe src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/web/viewer.html?file=https://github.com/khz-66/khz-66.github.io/blob/main/papervisor.pdf"></iframe>
+</div>
+
+
+
+
         
         <hr style="border: 0; height: 1px; background: #333; margin: 40px 0;">
 
