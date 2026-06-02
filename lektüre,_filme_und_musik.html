@@ -131,7 +131,7 @@
             height: 120px;
             z-index: 10;
             /* ausblenden */
-            display: none;
+            /*display: none; */
         }
 
         /* OPTION A: Rechts Oben fixiert */
@@ -156,6 +156,14 @@
             border: 5px solid #5A6E8F !important; /* Dein ursprünglicher Rahmen */
             box-shadow: none !important; /* Schatten hier ebenfalls entfernt */
         }
+        
+        /* Verhindert Unterstreichung und zeigt den Zeigefinger beim Avatar-Link */
+a.avatar-widget-container {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+        
     </style>
 
     <script src="p5.min.js"></script>
@@ -166,11 +174,17 @@
     <canvas id="bg-canvas" data-processing-sources="orbiter_bg.pde orbiter_class.pde"></canvas>
 
     <div class="avatar-widget-container avatar-top-right">
-        <div id="avatar-animation-holder"></div>
+        <a href="index.html" class="avatar-widget-container avatar-bottom-left" style="display: block;">
+    <div id="avatar-animation-holder"></div>
+</a>
+
     </div>
 
     <div class="container">
         <h1>Lektüre, Filme und Musik</h1>
+        
+        
+        
         
         <img src="buliwyf.jpeg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
         <p class="subtext text-center">Buliwyf aus "Der 13.  Krieger"</p> 

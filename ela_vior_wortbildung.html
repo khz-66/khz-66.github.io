@@ -133,6 +133,13 @@
             box-shadow: none !important; 
         }
         
+        /* Verhindert Unterstreichung und zeigt den Zeigefinger beim Avatar-Link */
+a.avatar-widget-container {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+        
         table, th, td {
   border: 1px solid #fff;
   color: #a0a0a0;
@@ -145,7 +152,10 @@
 <body>
 
     <div class="avatar-widget-container avatar-top-right">
-        <div id="avatar-animation-holder"></div>
+        <a href="index.html" class="avatar-widget-container avatar-bottom-left" style="display: block;">
+    <div id="avatar-animation-holder"></div>
+</a>
+
     </div>
 
     <div class="container">
