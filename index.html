@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage khz</title>
     
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('weiterleitung') === 'ja') {
+            window.location.href = "index_voll.html"; // <-- Für Weiterleitung "?weiterleitung=ja" an die Adresse anhängen
+        }
+    </script>
+    
     <style>
         /* ==========================================================================
            1. RESET & BASICS
