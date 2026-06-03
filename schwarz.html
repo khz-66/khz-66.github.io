@@ -63,6 +63,12 @@
             color: #a0a0a0;
             margin-bottom: 20px;
             text-align: left; /* Besser lesbar bei längeren Texten */
+            
+    hyphens: auto;
+    -webkit-hyphens: auto; /* Für Safari */
+    lang: de; /* WICHTIG: Der Browser muss wissen, dass es Deutsch ist! */
+
+
         }
         
         .text-center {
@@ -169,60 +175,91 @@ a.avatar-widget-container {
 
     <script>
     const avatarSketch = (p) => {
-      let img;
-      let blinkTimer = 0;
-      let isBlinking = false;
+  let img;
+  let blinkTimer = 0;
+  let pauseTimer = 0;       // NEU: Timer für die Pause zwischen den Blinzlern
+  let isBlinking = false;
+  let doubleBlinkQueue = false; 
+  let nextBlinkFrame = 200;     
 
-      p.preload = () => {
-        img = p.loadImage('me.jpg'); 
-      };
+  p.preload = () => {
+    img = p.loadImage('me.jpg'); 
+  };
 
-      p.setup = () => {
-        let canvas = p.createCanvas(350, 350);
-        canvas.parent('avatar-animation-holder');
-      };
+  p.setup = () => {
+    let canvas = p.createCanvas(350, 350);
+    canvas.parent('avatar-animation-holder');
+  };
 
-      p.draw = () => {
-        p.clear();
-        p.image(img, 0, 0, p.width, p.height);
+  p.draw = () => {
+    p.clear();
+    p.image(img, 0, 0, p.width, p.height);
 
-        if (p.frameCount % 200 === 0) {
-          isBlinking = true;
-          blinkTimer = 10; 
+    // Wenn der Ziel-Frame erreicht ist und gerade absolut gar nichts passiert
+    if (p.frameCount >= nextBlinkFrame && !isBlinking && pauseTimer <= 0) {
+      isBlinking = true;
+      blinkTimer = 10; 
+      
+      // Zu 10% Wahrscheinlichkeit folgt ein Doppelblinzeln
+      doubleBlinkQueue = p.random(1) < 0.1; 
+      
+      // Nächstes Standard-Intervall festlegen
+      nextBlinkFrame = p.frameCount + p.floor(p.random(200, 250));
+    }
+
+    // 1. Logik für das Blinzeln (geschlossene Augen)
+    if (isBlinking) {
+      blinkEyes();
+      blinkTimer--;
+      
+      if (blinkTimer <= 0) {
+        isBlinking = false;
+        
+        // Wenn ein Doppelblinzeln ansteht, aktivieren wir die Pause
+        if (doubleBlinkQueue) {
+          doubleBlinkQueue = false; 
+          pauseTimer = 6; // 6 Frames lang bleiben die Augen jetzt offen
         }
-
-        if (isBlinking) {
-          blinkEyes();
-          blinkTimer--;
-          if (blinkTimer <= 0) {
-            isBlinking = false;
-          }
-        }
-           
-        p.stroke(0);          
-        p.strokeWeight(6);    
-        p.fill(183, 189, 189);          
-        p.ellipse(175, 185, 170, 120);
-      };
-
-      function blinkEyes() {
-        p.push(); 
-        p.stroke(0);          
-        p.strokeWeight(6);    
-        p.fill(183, 189, 189);          
-
-        p.ellipse(135, 115, 70, 70); 
-        p.ellipse(205, 115, 75, 75); 
-
-        p.strokeWeight(5);
-        p.line(130, 115, 174, 115); 
-        p.line(176, 115, 220, 115); 
-
-        p.pop(); 
       }
-    };
+    }
+    
+    // 2. Logik für die Pause (Augen offen, Timer läuft ab)
+    if (pauseTimer > 0) {
+      pauseTimer--;
+      // Wenn die Pause vorbei ist, wird das zweite Blinzeln ausgelöst
+      if (pauseTimer === 0) {
+        isBlinking = true;
+        blinkTimer = 10;
+      }
+    }
+       
+    // Brille / Hintergrundelemente des Avatars
+    p.stroke(0);          
+    p.strokeWeight(6);    
+    p.fill(183, 189, 189);          
+    p.ellipse(175, 185, 170, 120);
+  };
 
-    new p5(avatarSketch);
+  function blinkEyes() {
+    p.push(); 
+    p.stroke(0);          
+    p.strokeWeight(6);    
+    p.fill(183, 189, 189);          
+
+    p.ellipse(135, 115, 70, 70); 
+    p.ellipse(205, 115, 75, 75); 
+
+    p.strokeWeight(5);
+    p.line(130, 115, 174, 115); 
+    p.line(176, 115, 220, 115); 
+
+    p.pop(); 
+  }
+};
+
+new p5(avatarSketch);
+
+
     </script>
 
 </body>
