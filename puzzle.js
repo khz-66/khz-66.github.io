@@ -11,6 +11,12 @@ const puzzleSketch = (p) => {
   let lastSolveTime = 0;      
   const solveDelay = 1500;     
 
+  // Variablen für den Überstrahl-Effekt (An- und Abschwellen)
+  let isSolved = false;
+  let solvedAnimFrame = 0;
+  const maxAnimFrames = 60; // Gesamtdauer der Animation (ca. 1 Sekunde bei 60fps)
+  const peakFrame = 50;     // Der Moment, in dem der Blitz am hellsten ist
+
   p.preload = () => {
     for (let i = 1; i <= 8; i++) {
       images.push(p.loadImage(`bild${i}.jpg`)); 
@@ -33,6 +39,8 @@ const puzzleSketch = (p) => {
   function startNewGame() {
     resetToSolved();
     shuffleBoard();
+    isSolved = false; 
+    solvedAnimFrame = 0;
   }
 
   function resetToSolved() {
@@ -76,14 +84,25 @@ const puzzleSketch = (p) => {
           let prevEmptySlot = moveHistory.pop();
           moveTile(prevEmptySlot.r, prevEmptySlot.c, false);
           lastSolveTime = currentTime;
+          
+          if (moveHistory.length === 0 && checkIsSolved()) {
+            isSolved = true;
+            solvedAnimFrame = maxAnimFrames;
+          }
         } else {
           isSolving = false; 
         }
       }
     }
 
-    p.background(0); 
+    // Hintergrund bleibt weiß, wenn gelöst
+    if (isSolved) {
+      p.background(255); 
+    } else {
+      p.background(0);   
+    }
 
+    // Tiles zeichnen
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
         let imgIndex = board[r][c];
@@ -91,21 +110,70 @@ const puzzleSketch = (p) => {
         if (imgIndex !== -1) {
           p.image(images[imgIndex], c * w, r * h, w, h);
         } else {
-          p.fill(0);
+          p.fill(isSolved ? 255 : 0);
           p.rect(c * w, r * h, w, h);
         }
 
-        p.stroke(255, 50);
-        p.noFill();
-        p.rect(c * w, r * h, w, h);
+        // Standard-Gitterlinien (ausgeblendet, wenn gelöst)
+        if (!isSolved) {
+          p.stroke(255, 50);
+          p.noFill();
+          p.rect(c * w, r * h, w, h);
+        }
       }
+    }
+
+    // --- ANIMATION: AUFBLITZEN & ÜBERSTRAHLEN (Anschwellen & Abschwellen) ---
+    if (isSolved) {
+      if (solvedAnimFrame > 0) {
+        let progress = 0;
+        
+        // Phase 1: Schnelles Anschwellen (von maxAnimFrames bis peakFrame)
+        if (solvedAnimFrame > peakFrame) {
+          progress = p.map(solvedAnimFrame, maxAnimFrames, peakFrame, 0, 1);
+        } 
+        // Phase 2: Sanftes Abschwellen (von peakFrame bis 0)
+        else {
+          progress = p.map(solvedAnimFrame, peakFrame, 0, 1, 0);
+        }
+
+        // 1. Das Überstrahlen des Bildes (Weißer Schleier)
+        let flashAlpha = p.map(progress, 0, 1, 0, 200); 
+        p.fill(255, flashAlpha);
+        p.noStroke();
+        p.rect(0, 0, p.width, p.height);
+
+        // 2. Der glühende Rahmen (Mehrere Ebenen für Weichheit)
+        p.noFill();
+        for (let i = 1; i <= 6; i++) {
+          let glowWeight = i * 8 * progress; 
+          let glowAlpha = p.map(progress, 0, 1, 0, 45 / i);
+          
+          p.stroke(255, glowAlpha * 2.5);
+          p.strokeWeight(glowWeight);
+          p.rect(0, 0, p.width, p.height);
+        }
+        
+        // Kern des Rahmens (Die scharfe weiße Innenkante)
+        p.stroke(255);
+        p.strokeWeight(1 + 5 * progress);
+        p.rect(0, 0, p.width, p.height);
+
+        solvedAnimFrame--; // Countdown
+      } else {
+        // Permanenter Zustand nach der Animation: Weißer, cleaner Rahmen
+        p.stroke(255);
+        p.strokeWeight(4);
+        p.noFill();
+        p.rect(0, 0, p.width, p.height);
+      }
+      p.strokeWeight(1); // Reset für nachfolgende Berechnungen
     }
   };
 
   p.mousePressed = () => {
-    if (isSolving) return;
+    if (isSolving || isSolved) return; 
 
-    // Nur reagieren, wenn der Klick auch auf diesem Canvas stattfindet
     if (p.mouseX >= 0 && p.mouseX <= p.width && p.mouseY >= 0 && p.mouseY <= p.height) {
       let c = p.floor(p.mouseX / w);
       let r = p.floor(p.mouseY / h);
@@ -113,12 +181,22 @@ const puzzleSketch = (p) => {
       if (c >= 0 && c < cols && r >= 0 && r < rows) {
         if (isAdjacent(r, c, emptySlot.r, emptySlot.c)) {
           moveTile(r, c, false);
+          
+          if (checkIsSolved()) {
+            isSolved = true;
+            solvedAnimFrame = maxAnimFrames; 
+          }
         }
       }
     }
   };
 
   p.doubleClicked = () => {
+    if (isSolved) {
+      startNewGame();
+      return;
+    }
+    
     if (isSolving) return;
 
     if (p.mouseX >= 0 && p.mouseX <= p.width && p.mouseY >= 0 && p.mouseY <= p.height) {
@@ -183,5 +261,4 @@ const puzzleSketch = (p) => {
   }
 };
 
-// Startet die Puzzle-Instanz
 new p5(puzzleSketch);
