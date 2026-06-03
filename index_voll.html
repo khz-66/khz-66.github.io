@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage khz Vollversion</title>
     
+    <!-- Für index.html: Weiterleitung zu index-voll.html
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('weiterleitung') === 'ja') {
+            window.location.href = "index_voll.html"; // <-- Für Weiterleitung "?weiterleitung=ja" an die Adresse anhängen
+        }
+    </script> -->
+    
     <style>
         /* ==========================================================================
            1. RESET & BASICS
@@ -295,12 +303,12 @@
    -->
         <h3>Modellbau</h3>
         <p>
-            <a href="papier.html" target="_blank">Papier</a><br>
+            <a href="papier.html">Papier</a><br>
             Ein paar interessante, schöne und ausgefallene Vorlagen.
         </p>
         
         
-        <img src="impossible.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+        <a href="papier.html"><img src="impossible.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';"></a>
      
      <!-- ausgeblendet
         <p><a href="https://khz-66.github.io/processing.js/" target="_blank">Plastik</a></p>
