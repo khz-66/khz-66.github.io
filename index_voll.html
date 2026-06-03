@@ -5,14 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage khz Vollversion</title>
     
-    <!-- Für index.html: Weiterleitung zu index-voll.html
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('weiterleitung') === 'ja') {
-            window.location.href = "index_voll.html"; // <-- Für Weiterleitung "?weiterleitung=ja" an die Adresse anhängen
-        }
-    </script> -->
-    
     <style>
         /* ==========================================================================
            1. RESET & BASICS
@@ -199,6 +191,53 @@
         #puzzle-holder canvas {
             display: block;
         }
+
+        /* ==========================================================================
+           5. SCHLICHTES PUZZLE POP-UP (IFRAME)
+           ========================================================================== */
+        #puzzleDialog {
+            border: 2px solid #777777; /* Einfacher, solider grauer Rahmen */
+            border-radius: 6px;
+            padding: 35px 15px 15px 15px; /* Platz für das 'X' oben */
+            max-width: 750px; /* Etwas breiter für das Puzzle-Spielfeld */
+            width: 90%;
+            height: 80vh; /* Nutzt 80% der Bildschirmhöhe */
+            background-color: #111111;
+            box-shadow: none; /* Explizit kein Glühen */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #puzzleDialog::backdrop {
+            background-color: rgba(0, 0, 0, 0.8); /* Normaler, dunkler Hintergrund */
+            backdrop-filter: none;
+            background-image: none;
+        }
+
+        #puzzleDialog iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background-color: #000000;
+        }
+
+        #closePuzzleBtn {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: #777777; /* Passend zum grauen Rahmen */
+            font-size: 26px;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        #closePuzzleBtn:hover {
+            color: #ffffff;
+        }
         
     </style>
 
@@ -219,20 +258,19 @@
             <a href="esoterik_und_magie.html">Esoterik &amp; Magie</a></p>
         </div>
        
-       <!-- ausgeblendet in index_voll
-        <div id="puzzle-holder">
-            <script src="puzzle.js"></script>
-        </div>
-        
-        <p class="subtext text-center">Ich bin grade dabei, mich zu sortieren. Zum puzzeln Kacheln anklicken, für Hilfe Doppelklick ins schwarze Quadrat!</p> 
-         -->
-        <hr style="border: 0; height: 1px; background: #ccc; margin: 40px 0;">
+       <hr style="border: 0; height: 1px; background: #ccc; margin: 40px 0;">
           
-      
       
         <h2>Ich</h2>
         
-        <a href="puzzle.html" target="_blank"><img src="polas.jpg" alt="Neues Bild" class="content-image" height: auto;" onerror="this.style.display='none';"></a>
+        <a href="#" id="openPuzzleBtn">
+            <img src="polas.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+        </a>
+
+        <dialog id="puzzleDialog">
+            <button id="closePuzzleBtn" aria-label="Schließen">&times;</button>
+            <iframe src="" title="Puzzle"></iframe>
+        </dialog>
         
         <p>Ein abgehalfterter Hilfslehrer.</p>
         
@@ -242,7 +280,7 @@
         
         <p>Unter anderem mit einer für <bc>IR-Fotografie</bc> modifizierten Olympus C-100. </p>
 
-        <a href=https://www.flickr.com/photos/khz66/48225929961" target="blank"> <img src="https://live.staticflickr.com/65535/48225929961_3bcdb577bf.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';"></a>
+        <a href="https://www.flickr.com/photos/khz66/48225929961" target="_blank"> <img src="https://live.staticflickr.com/65535/48225929961_3bcdb577bf.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';"></a>
         
         
         <p>
@@ -252,33 +290,14 @@
         
         <a href="kakteen_und_andere_sukkulenten.html"> <img src="echinopsis.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';"></a>
        
-       <!-- ausgeblendet
-        
-        <p>
-            <a href="https://flickr.com/photos/10824397@N04" target="_blank">Malen und Zeichnen</a><br>
-            Liebhaberei ohne Erfolg, zum Teil wegen Lähmungs&shy;erscheinungen in meinen Händen.
-        </p>
-        
-        <img src="aquarellmarker.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
-     -->
-     
-        <p id="magie">
+       <p id="magie">
             <a href="esoterik_und_magie.html">Esoterik und Magie</a><br>
             Tarot, Steine und die <bc>Laut&shy;formel&shy;sprache</bc> Ela Vior. In der Tradition von Karl Spiesberger, Franz Bardon und der Magie des frühen 20. Jahrhunderts.
         </p>
         
         <a href="esoterik_und_magie.html"><img src="electrickery.jpeg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';"></a>
      
-     <!-- ausgeblendet   
-        <p>
-            <a href="lektüre,_filme_und_musik.html" target="_blank">Lektüre, Filme und Musik</a><br>
-            Was mir gefällt...
-        </p>
-        
-        <img src="buliwyf.jpeg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
-       -->
-       
-        <hr style="border: 0; height: 1px; background: #ccc; margin: 40px 0;">
+     <hr style="border: 0; height: 1px; background: #ccc; margin: 40px 0;">
         
         <h2>Meine Aktivitäten</h2>
         
@@ -294,13 +313,6 @@
     
      <p><a href="https://khz-66.github.io/Orbiter-Live-Hintergrund/" target="_blank">Orbiter</a> <a href="https://github.com/khz-66/Orbiter-Live-Hintergrund?tab=readme-ov-file" target="_blank">(Quelltext)</a> - Unter Quelltext liegt die <a href="https://github.com/khz-66/Orbiter-Live-Hintergrund/blob/main/class_orbiter_demo_random_Orbiters.apk">apk-Installationsdatei</a> für einen Android <bc>Live-Hintergrund</bc>. Ich bin als Android Entwickler registriert, aber wahrscheinlich werden bei Installation trotz&shy;dem Warnungen ausgegeben...</p>
     
-        <!-- ausgeblendet
-        <h3>Arduino</h3>
-        <p><a href="https://khz-66.github.io/processing.js/" target="_blank">Strahlenblumen</a></p>
-    
-        <h3>Analoge Elektronik</h3>
-        <p><a href="https://khz-66.github.io/processing.js/" target="_blank">Strahlenblumen</a></p>
-   -->
         <h3>Modellbau</h3>
         <p>
             <a href="papier.html">Papier</a><br>
@@ -310,111 +322,124 @@
         
         <a href="papier.html"><img src="impossible.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';"></a>
      
-     <!-- ausgeblendet
-        <p><a href="https://khz-66.github.io/processing.js/" target="_blank">Plastik</a></p>
-        
-        <img src="yak-21.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
-     
-        <p><a href="https://khz-66.github.io/processing.js/" target="_blank">RC</a></p>
-        
-        <img src="buggy.jpeg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
-   
-   <p><a href="https://khz-66.github.io/processing.js/" target="_blank">Modellraketen</a></p>
-   <img src="die_rakete_zu_den_planetenraeumen.png" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
-     -->
-     
-        <hr style="border: 0; height: 1px; background: #ccc; margin: 40px 0;">
+     <hr style="border: 0; height: 1px; background: #ccc; margin: 40px 0;">
         
         <p class="subtext text-center">Sommer 2026</p>
     </div>
 
     <script>
-    const avatarSketch = (p) => {
-  let img;
-  let blinkTimer = 0;
-  let pauseTimer = 0;       // NEU: Timer für die Pause zwischen den Blinzlern
-  let isBlinking = false;
-  let doubleBlinkQueue = false; 
-  let nextBlinkFrame = 200;     
+    // ----------------------------------------------------------------------
+    // Puzzle Pop-up Logik (iframe)
+    // ----------------------------------------------------------------------
+    const puzzleDialog = document.getElementById('puzzleDialog');
+    const openPuzzleBtn = document.getElementById('openPuzzleBtn');
+    const closePuzzleBtn = document.getElementById('closePuzzleBtn');
+    const puzzleIframe = puzzleDialog ? puzzleDialog.querySelector('iframe') : null;
 
-  p.preload = () => {
-    img = p.loadImage('me.jpg'); 
-  };
+    if (openPuzzleBtn && puzzleDialog && closePuzzleBtn) {
+        openPuzzleBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (puzzleIframe) {
+                puzzleIframe.src = "puzzle.html"; // Setzt die Quelle frisch
+            }
+            puzzleDialog.showModal();
+        });
 
-  p.setup = () => {
-    let canvas = p.createCanvas(350, 350);
-    canvas.parent('avatar-animation-holder');
-  };
-
-  p.draw = () => {
-    p.clear();
-    p.image(img, 0, 0, p.width, p.height);
-
-    // Wenn der Ziel-Frame erreicht ist und gerade absolut gar nichts passiert
-    if (p.frameCount >= nextBlinkFrame && !isBlinking && pauseTimer <= 0) {
-      isBlinking = true;
-      blinkTimer = 10; 
-      
-      // Zu 10% Wahrscheinlichkeit folgt ein Doppelblinzeln
-      doubleBlinkQueue = p.random(1) < 0.1; 
-      
-      // Nächstes Standard-Intervall festlegen
-      nextBlinkFrame = p.frameCount + p.floor(p.random(200, 250));
-    }
-
-    // 1. Logik für das Blinzeln (geschlossene Augen)
-    if (isBlinking) {
-      blinkEyes();
-      blinkTimer--;
-      
-      if (blinkTimer <= 0) {
-        isBlinking = false;
-        
-        // Wenn ein Doppelblinzeln ansteht, aktivieren wir die Pause
-        if (doubleBlinkQueue) {
-          doubleBlinkQueue = false; 
-          pauseTimer = 6; // 6 Frames lang bleiben die Augen jetzt offen
+        function closePuzzleAndClear() {
+            puzzleDialog.close();
+            if (puzzleIframe) {
+                puzzleIframe.src = ""; // Stoppt jegliche Skripte im iframe
+            }
         }
-      }
+
+        closePuzzleBtn.addEventListener('click', closePuzzleAndClear);
+
+        puzzleDialog.addEventListener('click', (e) => {
+            if (e.target === puzzleDialog) {
+                closePuzzleAndClear();
+            }
+        });
     }
-    
-    // 2. Logik für die Pause (Augen offen, Timer läuft ab)
-    if (pauseTimer > 0) {
-      pauseTimer--;
-      // Wenn die Pause vorbei ist, wird das zweite Blinzeln ausgelöst
-      if (pauseTimer === 0) {
-        isBlinking = true;
-        blinkTimer = 10;
+
+    // ----------------------------------------------------------------------
+    // P5.js Avatar Sketch
+    // ----------------------------------------------------------------------
+    const avatarSketch = (p) => {
+      let img;
+      let blinkTimer = 0;
+      let pauseTimer = 0;       
+      let isBlinking = false;
+      let doubleBlinkQueue = false; 
+      let nextBlinkFrame = 200;     
+
+      p.preload = () => {
+        img = p.loadImage('me.jpg'); 
+      };
+
+      p.setup = () => {
+        let canvas = p.createCanvas(350, 350);
+        canvas.parent('avatar-animation-holder');
+      };
+
+      p.draw = () => {
+        p.clear();
+        p.image(img, 0, 0, p.width, p.height);
+
+        if (p.frameCount >= nextBlinkFrame && !isBlinking && pauseTimer <= 0) {
+          isBlinking = true;
+          blinkTimer = 10; 
+          
+          doubleBlinkQueue = p.random(1) < 0.1; 
+          
+          nextBlinkFrame = p.frameCount + p.floor(p.random(200, 250));
+        }
+
+        if (isBlinking) {
+          blinkEyes();
+          blinkTimer--;
+          
+          if (blinkTimer <= 0) {
+            isBlinking = false;
+            
+            if (doubleBlinkQueue) {
+              doubleBlinkQueue = false; 
+              pauseTimer = 6; 
+            }
+          }
+        }
+        
+        if (pauseTimer > 0) {
+          pauseTimer--;
+          if (pauseTimer === 0) {
+            isBlinking = true;
+            blinkTimer = 10;
+          }
+        }
+           
+        p.stroke(0);          
+        p.strokeWeight(6);    
+        p.fill(183, 189, 189);          
+        p.ellipse(175, 185, 170, 120);
+      };
+
+      function blinkEyes() {
+        p.push(); 
+        p.stroke(0);          
+        p.strokeWeight(6);    
+        p.fill(183, 189, 189);          
+
+        p.ellipse(135, 115, 70, 70); 
+        p.ellipse(205, 115, 75, 75); 
+
+        p.strokeWeight(5);
+        p.line(130, 115, 174, 115); 
+        p.line(176, 115, 220, 115); 
+
+        p.pop(); 
       }
-    }
-       
-    // Brille / Hintergrundelemente des Avatars
-    p.stroke(0);          
-    p.strokeWeight(6);    
-    p.fill(183, 189, 189);          
-    p.ellipse(175, 185, 170, 120);
-  };
+    };
 
-  function blinkEyes() {
-    p.push(); 
-    p.stroke(0);          
-    p.strokeWeight(6);    
-    p.fill(183, 189, 189);          
-
-    p.ellipse(135, 115, 70, 70); 
-    p.ellipse(205, 115, 75, 75); 
-
-    p.strokeWeight(5);
-    p.line(130, 115, 174, 115); 
-    p.line(176, 115, 220, 115); 
-
-    p.pop(); 
-  }
-};
-
-new p5(avatarSketch);
-
-
+    new p5(avatarSketch);
     </script>
 
 </body>
