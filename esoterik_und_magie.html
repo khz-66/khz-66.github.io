@@ -125,12 +125,29 @@
 }
 
 .image-scroll img {
-  height: 300px;           /* einheitliche Höhe */
+  height: 300px;           /* einheitliche Höhe bleibt */
   width: auto;
-  object-fit: cover;       /* sauberer Zuschnitt */
+  object-fit: cover;       /* sauberer Zuschnitt bleibt */
   border-radius: 8px;
-  flex-shrink: 0;          /* verhindert, dass Bilder gequetscht werden */
+  flex-shrink: 0;          /* verhindert Quetschen */
+  
+  /* NEU: Cyanfarbener Rahmen wie beim Pop-up */
+  border: 2px solid #08fcd5; 
+  
+  /* NEU: Dezentes magisches Glühen nach außen */
+  box-shadow: 0 0 10px rgba(8, 252, 213, 0.3);
+  
+  /* NEU: Ein weicher Übergang, falls du später Hover-Effekte nutzt */
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
+
+/* OPTIONAL: Wenn man mit der Maus über die Bilder fährt, 
+   leuchten sie etwas stärker und heben sich leicht an 
+.image-scroll img:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 18px rgba(8, 252, 213, 0.6);
+} */
+
 
         /* Links */
         a {
@@ -158,7 +175,7 @@
   padding-left: 2em !important;
   text-indent: -2em !important;
   text-align: left !important;
-  line-height: 1.1; !important;
+  line-height: 1.1 !important;
 }
         /* ==========================================================================
            3. AVATAR WIDGET (STEUERUNG)
@@ -198,6 +215,107 @@ a.avatar-widget-container {
     cursor: pointer;
 }
 
+#infoDialog {
+    border: 2px solid #08fcd5; /* Dein Cyan-Rahmen */
+    border-radius: 8px;
+    padding: 30px 20px 20px 20px;
+    max-width: 450px; /* Etwas schmaler für reine Info-Karten */
+    width: 90%;
+    background-color: #111;
+    color: #fff;
+    box-shadow: 0 0 25px 5px rgba(8, 252, 213, 0.4);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#infoDialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(4px);
+}
+
+/* Sorgt dafür, dass das Bild perfekt in das Pop-up passt */
+.popup-img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 15px; /* Abstand zum darunterliegenden Text */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Der Schließen-Button */
+#closeInfoBtn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: #08fcd5;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+
+        /* ==========================================================================
+           4. POP-UP DIALOG (VIDEO) - MIT SICHTBAREM LEUCHTEN
+           ========================================================================== */
+        #videoDialog {
+            border: 2px solid #08fcd5; /* Cyanfarbener Rahmen */
+            border-radius: 8px;
+            padding: 25px 20px 20px 20px;
+            max-width: 560px;
+            width: 75%;
+            background-color: #111;
+            
+            /* GEÄNDERT: Ein intensiverer Schatten, der nicht abgeschnitten wird */
+            box-shadow: 0 0 25px 5px rgba(8, 252, 213, 0.4); 
+            
+            /* Erzwingt, dass der Schatten im Top-Layer sichtbar bleibt */
+            overflow: visible; 
+
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #videoDialog::backdrop {
+            background-color: rgba(0, 0, 0, 0.82);
+            backdrop-filter: blur(4px);
+            
+            /* ZUSÄTZLICHER TRICK: Wir legen ein leichtes glühendes Gegenlicht 
+               direkt auf den Hintergrund hinter das Pop-up */
+            background-image: radial-gradient(circle, rgba(8, 252, 213, 0.15) 0%, rgba(0,0,0,0) 70%);
+        }
+
+
+
+        #videoDialog::backdrop {
+            background-color: rgba(0, 0, 0, 0.82);
+            backdrop-filter: blur(4px);
+        }
+
+        #closeVideoBtn {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: #ffae00;
+            font-size: 28px;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+
+        #closeVideoBtn:hover {
+            color: #ffffff;
+        }
+
+        .popup-link-container {
+            margin-top: 15px;
+        }
         
     </style>
 
@@ -207,18 +325,40 @@ a.avatar-widget-container {
 
     <div class="avatar-widget-container avatar-top-right">
         <a href="index_voll.html" class="avatar-widget-container avatar-bottom-left" style="display: block;">
-    <div id="avatar-animation-holder"></div>
-</a>
-
+            <div id="avatar-animation-holder"></div>
+        </a>
     </div>
 
     <div class="container">
-        <h1><br>Esoterik und Magie</h1>
-        <p class="text-center">Ein "Sigillen-Player" für Android, der mit Buchstaben, Zahlen, Hebräischer Schrift oder mit dem Malachim-Alphabet kreisförmige und Planetenquadrat-Sigillen zeichnet und animiert. </p> 
+        <h1>Esoterik und Magie</h1>
+        <p>Ein "Sigillen-Player" für An&shy;dro&shy;id, der mit Buch&shy;staben, Zahlen, <bc>Hebrä&shy;ischer Schrift</bc> oder mit dem <bc>Malachim-Alphabet</bc> kreis&shy;förmige und Planeten&shy;quadrat-<bc>Sigillen</bc> zeichnet und animiert. </p> 
         
         <video src="sigill_player_hexagramm.mp4" autoplay muted controls loop 
        style="mix-blend-mode: screen; width: 270px; height: 270px; object-fit: cover;">
-</video>
+        </video>
+  
+        <div class="popup-link-container">
+            <a href="#" id="openVideoBtn">➔ Zusätzliche Informationen als Kurzvideo ansehen</a>
+        </div>
+
+        <dialog id="videoDialog">
+            <button id="closeVideoBtn" aria-label="Schließen">&times;</button>
+            <video id="popupVideo" controls style="width: 100%; height: auto; display: block; border-radius: 4px;">
+                <source src="primordeal_tarot.mp4" type="video/mp4">
+                Ihr Browser unterstützt dieses Video nicht.
+            </video>
+        </dialog>
+        
+        <a href="#" id="openInfoBtn">Mehr Infos anzeigen</a>
+
+<dialog id="infoDialog">
+    <button id="closeInfoBtn" aria-label="Schließen">&times;</button>
+    
+    <img src="schnell-laut-gut.jpg" alt="Info Bild" class="popup-img">
+    <h3>Titel der Information</h3>
+    <p>Hier steht der begleitende Text, der zusätzliche Details erklärt.</p>
+</dialog>
+
         
         <hr style="border: 0; height: 1px; background: #333; margin: 40px 0;">
 
@@ -226,18 +366,18 @@ a.avatar-widget-container {
         <p>Franz Bardon, Karl Spiesberger und H. E. Douval.</p>
         
         <div class="image-scroll">
-  <a href="schwarz.html"><img src="bardon_weg.jpg" alt="" class="frame"></a>
-  <a href="schwarz.html"><img src="spiesberger_einweihung.jpg" alt=""  class="frame"></a>
-  <a href="schwarz.html"><img src="spiesberger_praxis.jpg" alt="" class="frame"></a>
-  <a href="schwarz.html"><img src="douval_buecher.jpg" alt="" class="frame"></a>
-</div>
+          <a href="schwarz.html"><img src="bardon_weg.jpg" alt="" class="frame"></a>
+          <a href="schwarz.html"><img src="spiesberger_einweihung.jpg" alt=""  class="frame"></a>
+          <a href="schwarz.html"><img src="spiesberger_praxis.jpg" alt="" class="frame"></a>
+          <a href="schwarz.html"><img src="douval_buecher.jpg" alt="" class="frame"></a>
+        </div>
         
         <div class="biblio">
-  <p>Bardon, Franz: <i>Der Weg zum wahren Adepten.</i> Freiburg i. Br.: Bauer, 1994.</p>
-  <p>Spiesberger, Karl: <i>Magische Einweihung.</i> Berlin: Schikowski, o. J.</p>
-  <p>Spiesberger, Karl: <i>Magische Praxis.</i> Berlin: Schikowski, o. J.</p>
-  <p>Douval, H. E.: <i>Bücher der praktischen Magie.</i> Interlaken: Ansata, 8. Aufl.</p>
-</div>
+          <p>Bardon, Franz: <i>Der Weg zum wahren Adepten.</i> Freiburg i. Br.: Bauer, 1994.</p>
+          <p>Spiesberger, Karl: <i>Magische Einweihung.</i> Berlin: Schikowski, o. J.</p>
+          <p>Spiesberger, Karl: <i>Magische Praxis.</i> Berlin: Schikowski, o. J.</p>
+          <p>Douval, H. E.: <i>Bücher der praktischen Magie.</i> Interlaken: Ansata, 8. Aufl.</p>
+        </div>
         
          <hr style="border: 0; height: 1px; background: #333; margin: 40px 0;">
         
@@ -245,18 +385,18 @@ a.avatar-widget-container {
         <p>Meine Lieblings-Tarot&shy;decks. Neben dem Rider-Waite-<bc>Colman-Smith</bc>-Tarot zum Karten&shy;legen am liebsten die intui&shy;tiven Decks von <bc>Toppi</bc> und <bc>Pinter</bc> und auch das eso&shy;teri&shy;sche <bc>Zillich</bc> -Tarot. Das <bc>Botanica</bc>-Tarot wegen der schönen Pflanzembilder und die Decks von <bc>Manara</bc>, <bc>Serpieri</bc> und <bc>Frazetta</bc> eher als Comic- und Fantasy-Fan. Das <bc>Dakini-Orakel</bc>, weil es sehr spiri&shy;tuell ist und das <bc>Shamans Oracle</bc> wegen der schönen und geheim&shy;nis&shy;vollen Höhlen&shy;malereien.</p>
         
         <div class="image-scroll">
-  <a href="schwarz.html"><img src="colman-smith-karte.jpg" alt="" class="frame"></a>
-  <a href="schwarz.html"><img src="primordeal_tarot.jpg" alt="" class="frame"></a>
-  <a href="schwarz.html"><img src="pinter_tarot.jpg" alt=""  class="frame"></a>
-  <a href="schwarz.html"><img src="zillich_tarot.png" alt=""></a>
-  <a href="schwarz.html"><img src="botanica_tarot.jpg" alt="" class="frame"></a>
-  <a href="schwarz.html"><img src="manara_tarot.jpg" alt="" class="frame"></a>
-  <a href="schwarz.html"><img src="serpieri_tarot.jpg" alt="" class="frame"></a>
-  <a href="schwarz.html"><img src="frazetta_tarot.jpg" alt="" class="frame"></a>
-  <a href="schwarz.html"><img src="dakini_oracle.jpg" alt="" class="frame"></a>
-  <a href="schwarz.html"><img src="shamans_oracle.jpg" alt="" class="frame"></a>
-  <a href="schwarz.html"><img src="karte79.jpg" alt="" class="frame"></a>
-</div>
+          <a href="schwarz.html"><img src="colman-smith-karte.jpg" alt="" class="frame"></a>
+          <a href="schwarz.html"><img src="primordeal_tarot.jpg" alt="" class="frame"></a>
+          <a href="schwarz.html"><img src="pinter_tarot.jpg" alt=""  class="frame"></a>
+          <a href="schwarz.html"><img src="zillich_tarot.png" alt=""></a>
+          <a href="schwarz.html"><img src="botanica_tarot.jpg" alt="" class="frame"></a>
+          <a href="schwarz.html"><img src="manara_tarot.jpg" alt="" class="frame"></a>
+          <a href="schwarz.html"><img src="serpieri_tarot.jpg" alt="" class="frame"></a>
+          <a href="schwarz.html"><img src="frazetta_tarot.jpg" alt="" class="frame"></a>
+          <a href="schwarz.html"><img src="dakini_oracle.jpg" alt="" class="frame"></a>
+          <a href="schwarz.html"><img src="shamans_oracle.jpg" alt="" class="frame"></a>
+          <a href="schwarz.html"><img src="karte79.jpg" alt="" class="frame"></a>
+        </div>
         
 
  <hr style="border: 0; height: 1px; background: #333; margin: 40px 0;">
@@ -264,8 +404,7 @@ a.avatar-widget-container {
 <h2>Die Lautformelsprache Ela Vior</h2>
 <p>Lautformelsprache ist keine gesprochene Alltagssprache, sondern ein Instrument der Schwingung und bewussten Resonanz. Diese Sprache dient nicht der Mitteilung, sondern der Wirkung: Sie soll die feinstofflichen Ebenen ansprechen, insbesondere die Elemente und Naturgeister.</p>
 
-
-        <p>Eine Sprache für magische Formeln und Anrufungen</a>.</p>
+        <p>Eine Sprache für magische Formeln und Anrufungen.</p>
         
        <a href="ela_vior.html" >Lautformelsprache Ela Vior</a><br>
      
@@ -279,92 +418,139 @@ a.avatar-widget-container {
     </div>
 
     <script>
-    const avatarSketch = (p) => {
-  let img;
-  let blinkTimer = 0;
-  let pauseTimer = 0;       // NEU: Timer für die Pause zwischen den Blinzlern
-  let isBlinking = false;
-  let doubleBlinkQueue = false; 
-  let nextBlinkFrame = 200;     
+    // ----------------------------------------------------------------------
+    // Pop-up Dialog Logik
+    // ----------------------------------------------------------------------
+    const videoDialog = document.getElementById('videoDialog');
+    const openVideoBtn = document.getElementById('openVideoBtn');
+    const closeVideoBtn = document.getElementById('closeVideoBtn');
+    const popupVideo = document.getElementById('popupVideo');
 
-  p.preload = () => {
-    img = p.loadImage('me.jpg'); 
-  };
+    openVideoBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        videoDialog.showModal();
+        popupVideo.play(); // Video startet automatisch beim Öffnen
+    });
 
-  p.setup = () => {
-    let canvas = p.createCanvas(350, 350);
-    canvas.parent('avatar-animation-holder');
-  };
-
-  p.draw = () => {
-    p.clear();
-    p.image(img, 0, 0, p.width, p.height);
-
-    // Wenn der Ziel-Frame erreicht ist und gerade absolut gar nichts passiert
-    if (p.frameCount >= nextBlinkFrame && !isBlinking && pauseTimer <= 0) {
-      isBlinking = true;
-      blinkTimer = 10; 
-      
-      // Zu 10% Wahrscheinlichkeit folgt ein Doppelblinzeln
-      doubleBlinkQueue = p.random(1) < 0.1; 
-      
-      // Nächstes Standard-Intervall festlegen
-      nextBlinkFrame = p.frameCount + p.floor(p.random(200, 250));
+    function closeDialogAndPauseVideo() {
+        videoDialog.close();
+        popupVideo.pause(); // Verhindert, dass der Ton im Hintergrund weiterläuft
     }
 
-    // 1. Logik für das Blinzeln (geschlossene Augen)
-    if (isBlinking) {
-      blinkEyes();
-      blinkTimer--;
-      
-      if (blinkTimer <= 0) {
-        isBlinking = false;
-        
-        // Wenn ein Doppelblinzeln ansteht, aktivieren wir die Pause
-        if (doubleBlinkQueue) {
-          doubleBlinkQueue = false; 
-          pauseTimer = 6; // 6 Frames lang bleiben die Augen jetzt offen
+    closeVideoBtn.addEventListener('click', closeDialogAndPauseVideo);
+
+    // Schließen per Klick auf den abgedunkelten Hintergrund
+    videoDialog.addEventListener('click', (e) => {
+        if (e.target === videoDialog) {
+            closeDialogAndPauseVideo();
         }
+    });
+
+
+    // ----------------------------------------------------------------------
+    // P5.js Avatar Sketch
+    // ----------------------------------------------------------------------
+    const avatarSketch = (p) => {
+      let img;
+      let blinkTimer = 0;
+      let pauseTimer = 0;       
+      let isBlinking = false;
+      let doubleBlinkQueue = false; 
+      let nextBlinkFrame = 200;     
+
+      p.preload = () => {
+        img = p.loadImage('me.jpg'); 
+      };
+
+      p.setup = () => {
+        let canvas = p.createCanvas(350, 350);
+        canvas.parent('avatar-animation-holder');
+      };
+
+      p.draw = () => {
+        p.clear();
+        p.image(img, 0, 0, p.width, p.height);
+
+        if (p.frameCount >= nextBlinkFrame && !isBlinking && pauseTimer <= 0) {
+          isBlinking = true;
+          blinkTimer = 10; 
+          
+          doubleBlinkQueue = p.random(1) < 0.1; 
+          
+          nextBlinkFrame = p.frameCount + p.floor(p.random(200, 250));
+        }
+
+        if (isBlinking) {
+          blinkEyes();
+          blinkTimer--;
+          
+          if (blinkTimer <= 0) {
+            isBlinking = false;
+            
+            if (doubleBlinkQueue) {
+              doubleBlinkQueue = false; 
+              pauseTimer = 6; 
+            }
+          }
+        }
+        
+        if (pauseTimer > 0) {
+          pauseTimer--;
+          if (pauseTimer === 0) {
+            isBlinking = true;
+            blinkTimer = 10;
+          }
+        }
+           
+        p.stroke(0);          
+        p.strokeWeight(6);    
+        p.fill(183, 189, 189);          
+        p.ellipse(175, 185, 170, 120);
+      };
+
+      function blinkEyes() {
+        p.push(); 
+        p.stroke(0);          
+        p.strokeWeight(6);    
+        p.fill(183, 189, 189);          
+
+        p.ellipse(135, 115, 70, 70); 
+        p.ellipse(205, 115, 75, 75); 
+
+        p.strokeWeight(5);
+        p.line(130, 115, 174, 115); 
+        p.line(176, 115, 220, 115); 
+
+        p.pop(); 
       }
-    }
+    };
+
+    new p5(avatarSketch);
     
-    // 2. Logik für die Pause (Augen offen, Timer läuft ab)
-    if (pauseTimer > 0) {
-      pauseTimer--;
-      // Wenn die Pause vorbei ist, wird das zweite Blinzeln ausgelöst
-      if (pauseTimer === 0) {
-        isBlinking = true;
-        blinkTimer = 10;
-      }
+    
+   const infoDialog = document.getElementById('infoDialog');
+const openInfoBtn = document.getElementById('openInfoBtn');
+const closeInfoBtn = document.getElementById('closeInfoBtn');
+
+// Öffnen
+openInfoBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    infoDialog.showModal();
+});
+
+// Schließen über das X
+closeInfoBtn.addEventListener('click', () => {
+    infoDialog.close();
+});
+
+// Schließen über Klick auf den Hintergrund
+infoDialog.addEventListener('click', (e) => {
+    if (e.target === infoDialog) {
+        infoDialog.close();
     }
-       
-    // Brille / Hintergrundelemente des Avatars
-    p.stroke(0);          
-    p.strokeWeight(6);    
-    p.fill(183, 189, 189);          
-    p.ellipse(175, 185, 170, 120);
-  };
-
-  function blinkEyes() {
-    p.push(); 
-    p.stroke(0);          
-    p.strokeWeight(6);    
-    p.fill(183, 189, 189);          
-
-    p.ellipse(135, 115, 70, 70); 
-    p.ellipse(205, 115, 75, 75); 
-
-    p.strokeWeight(5);
-    p.line(130, 115, 174, 115); 
-    p.line(176, 115, 220, 115); 
-
-    p.pop(); 
-  }
-};
-
-new p5(avatarSketch);
-
-
+});
+ 
+    
     </script>
 
 </body>
