@@ -15,7 +15,7 @@ const puzzleSketch = (p) => {
   let isSolved = false;
   let solvedAnimFrame = 0;
   const maxAnimFrames = 60; // Gesamtdauer der Animation (ca. 1 Sekunde bei 60fps)
-  const peakFrame = 50;     // Der Moment, in dem der Blitz am hellsten ist
+  const peakFrame = 55;     // Der Moment, in dem der Blitz am hellsten ist
 
   p.preload = () => {
     for (let i = 1; i <= 8; i++) {
