@@ -1013,6 +1013,26 @@
     <p class="subtext text-center">Start Sommer 2026</p>
 
     <script>
+      
+      document.addEventListener("DOMContentLoaded", () => {
+    const avatarLink = document.getElementById('avatar-link');
+    
+    if (avatarLink) { // Sicherheitsprüfung, falls die ID mal vergessen wurde
+        // 1. URL-Parameter prüfen (?weiterleitung=ja)
+        const urlParams = new URLSearchParams(window.location.search);
+        const hatWeiterleitungParam = urlParams.get('weiterleitung') === 'ja';
+        
+        // 2. Herkunft (Referrer) prüfen
+        const kamVonIndexVoll = document.referrer.includes('index_voll.html');
+
+        // Wenn eine der Bedingungen stimmt, Link auf index_voll.html ändern
+        if (hatWeiterleitungParam || kamVonIndexVoll) {
+            avatarLink.href = "index_voll.html";
+        }
+    }
+});
+
+      
     const avatarSketch = (p) => {
         let img;
         let blinkTimer = 0;

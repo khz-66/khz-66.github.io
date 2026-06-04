@@ -174,7 +174,7 @@ a.avatar-widget-container {
     <canvas id="bg-canvas" data-processing-sources="orbiter_bg.pde orbiter_class.pde"></canvas>
 
     <div class="avatar-widget-container avatar-top-right">
-        <a href="index_voll.html" class="avatar-widget-container avatar-bottom-left" style="display: block;">
+        <a href="index.html" class="avatar-widget-container avatar-bottom-left" style="display: block;">
     <div id="avatar-animation-holder"></div>
 </a>
 
@@ -216,6 +216,26 @@ a.avatar-widget-container {
     </div>
 
     <script>
+      
+      document.addEventListener("DOMContentLoaded", () => {
+    const avatarLink = document.getElementById('avatar-link');
+    
+    if (avatarLink) { // Sicherheitsprüfung, falls die ID mal vergessen wurde
+        // 1. URL-Parameter prüfen (?weiterleitung=ja)
+        const urlParams = new URLSearchParams(window.location.search);
+        const hatWeiterleitungParam = urlParams.get('weiterleitung') === 'ja';
+        
+        // 2. Herkunft (Referrer) prüfen
+        const kamVonIndexVoll = document.referrer.includes('index_voll.html');
+
+        // Wenn eine der Bedingungen stimmt, Link auf index_voll.html ändern
+        if (hatWeiterleitungParam || kamVonIndexVoll) {
+            avatarLink.href = "index_voll.html";
+        }
+    }
+});
+
+      
     const avatarSketch = (p) => {
   let img;
   let blinkTimer = 0;

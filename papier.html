@@ -22,7 +22,7 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #222222; /* Hinweis: Weißer Text auf whitesmoke ist unsichtbar! Eventuell zu #333333 ändern */
+            color: #222222; 
             min-height: 100vh;
             line-height: 1.6;
             overflow-x: hidden; 
@@ -63,120 +63,117 @@
             margin-bottom: 20px;
             text-align: left;
             hyphens: auto;
-    -webkit-hyphens: auto; /* Für Safari */
-    lang: de; /* WICHTIG: Der Browser muss wissen, dass es Deutsch ist! */
-
+            -webkit-hyphens: auto; 
+            lang: de; 
         }
         
         .text-center {
             text-align: center;
         }
 
-bc {
-         font-weight: bold;
-         color: #08fcd5;
-       }
-
-        .content-image {
-            display: block;        /* Verhält sich wie ein Block, Text muss weichen */
-            max-width: 500px;      /* Begrenzt die Breite auf maximal 500 Pixel */
-            width: 100%;           /* Skaliert sauber runter, falls der Bildschirm kleiner als 500px ist */
-            height: auto;
-            border-radius: 8px;
-            margin: 20px auto;     /* 20px Abstand nach oben/unten, "auto" zentriert das Bild */
+        bc {
+            font-weight: bold;
+            color: #08fcd5;
         }
 
-img.frame {
-  border: 1px solid rgba(255,255,255,0.7);
-  border-radius: 4px;
-  box-shadow: 0 0 6px rgba(255,255,255,0.15);
-}
+        .content-image {
+            display: block;        
+            max-width: 500px;      
+            width: 100%;           
+            height: auto;
+            border-radius: 8px;
+            margin: 20px auto;     
+        }
+
+        img.frame {
+            border: 1px solid rgba(255,255,255,0.7);
+            border-radius: 4px;
+            box-shadow: 0 0 6px rgba(255,255,255,0.15);
+        }
         
-     .image-row {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    flex-wrap: wrap;        /* Erlaubt das automatische Untereinanderbrechen */
-    margin-bottom: 40px;
-}
+        .image-row {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;        
+            margin-bottom: 40px;
+        }
 
-.image-row a {
-    display: block;
-    flex: 1 1 280px;        /* 280px ist die Mindestbreite pro Bild. Wird es enger, bricht es um */
-    max-width: 100%;        /* Verhindert das Herausragen auf ganz kleinen Displays */
-}
+        .image-row a {
+            display: block;
+            flex: 1 1 280px;        
+            max-width: 100%;        
+        }
 
-.image-row img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 6px;
-}
+        .image-row img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 6px;
+        }
 
-/* Container für Bild + Text */
-.image-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0; /* Reset für Standard-Browser-Abstände */
-    width: 100%;
-    /* Falls nebeneinander mit Mindestbreite (Variante 2 aus der vorherigen Antwort): */
-     flex: 1 1 280px; 
-     max-width: 100%; 
-}
+        /* Container für Bild + Text */
+        .image-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0; 
+            width: 100%;
+            flex: 1 1 280px; 
+            max-width: 100%; 
+        }
 
-/* Die Links in den Items */
-.image-item a {
-    display: block;
-    width: 100%;
-    max-width: 500px; /* Begrenzung, damit die Bilder untereinander nicht zu riesig werden */
-}
+        /* Die Links in den Items */
+        .image-item a {
+            display: block;
+            width: 100%;
+            max-width: 500px; 
+        }
 
-/* Die Bilder selbst */
-.image-item img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 6px;
-}
+        /* Die Bilder selbst */
+        .image-item img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 6px;
+        }
 
-/* Die Bildunterschrift / Überschrift */
-.image-item figcaption {
-    font-size: 0.95rem;       /* Etwas kleinere Schrift (Standard im Container ist 1.2rem) */
-    color: #555555;           /* Ein dezentes Grau, passend zum Fließtext */
-    margin-top: 8px;          /* Kleiner Abstand zum Bild darüber */
-    text-align: left;       /* Zentriert den Text unter dem Bild */
-    width: 100%;
-    max-width: 500px;         /* Bündig mit der maximalen Bildbreite */
-}
+        /* Die Bildunterschrift / Überschrift */
+        .image-item figcaption {
+            font-size: 0.95rem;       
+            color: #555555;           
+            margin-top: 8px;          
+            text-align: left;       
+            width: 100%;
+            max-width: 500px;         
+        }
 
+        .image-scroll {
+            display: flex;
+            flex-wrap: nowrap;       
+            overflow-x: auto;        
+            gap: 12px;               
+            padding: 20px 0;         
+            scrollbar-width: thin;   
+            margin-bottom: 40px;
+        }
 
-.image-scroll {
-  display: flex;
-  flex-wrap: nowrap;       /* verhindert Umbruch */
-  overflow-x: auto;        /* aktiviert horizontales Scrollen */
-  gap: 12px;               /* Abstand zwischen Bildern */
-  padding: 20px 0;         /* Abstand oben und unten */
-  scrollbar-width: thin;   /* Firefox */
-  margin-bottom: 40px;
-}
+        .image-scroll::-webkit-scrollbar {
+            height: 8px;             
+        }
 
-.image-scroll::-webkit-scrollbar {
-  height: 8px;             /* Höhe der Scrollbar */
-}
+        .image-scroll::-webkit-scrollbar-thumb {
+            background: #555;
+            border-radius: 4px;
+        }
 
-.image-scroll::-webkit-scrollbar-thumb {
-  background: #555;
-  border-radius: 4px;
-}
-
-.image-scroll img {
-  height: 300px;           /* einheitliche Höhe */
-  width: auto;
-  object-fit: cover;       /* sauberer Zuschnitt */
-  border-radius: 8px;
-  flex-shrink: 0;          /* verhindert, dass Bilder gequetscht werden */
-}
+        .image-scroll img {
+            height: 300px;           
+            width: auto;
+            object-fit: cover;       
+            border-radius: 8px;
+            flex-shrink: 0;          
+        }
 
         a {
             color: #ff7b00;
@@ -220,6 +217,7 @@ img.frame {
             box-shadow: none !important; 
         }
         
+        /* ID hinzugefügt, um den Link gezielt per JS anzusprechen */
         a.avatar-link-wrapper {
             text-decoration: none;
             cursor: pointer;
@@ -256,7 +254,8 @@ img.frame {
 <body>
 
     <div class="avatar-widget-container avatar-bottom-left">
-        <a href="index.html" class="avatar-link-wrapper">
+        <!-- ID "avatar-link" vergeben, damit wir den Link dynamisch ändern können -->
+        <a href="index.html" id="avatar-link" class="avatar-link-wrapper">
             <div id="avatar-animation-holder"></div>
         </a>
     </div>
@@ -264,72 +263,50 @@ img.frame {
     <div class="container">
         <h1>Papier&shy;modelle</h1>
       
-       <img src="impossible.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
-      
+        <img src="impossible.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
       
         <p>Die Modellbögen dürften größten&shy;teils selbst&shy;erklärend sein. Zum down&shy;loaden auf das Bild klicken.</p> 
         
         <div class="image-row">
-        
-    <figure class="image-item">
-        <figcaption>Unmögliche Figur - Durch die Per&shy;spek&shy;tive wird sie möglich!</figcaption>
-            <img src="impossible_solution.jpg" alt="" class="frame">
-        
-    </figure>
-    
-    <figure class="image-item">
-        <figcaption>Unmögliche Figur.</figcaption>
-        <a href="impossible_model.pdf">
-            <img src="impossible_model_tn.jpg" alt="" class="frame">
-        </a>
-    </figure>
+            <figure class="image-item">
+                <figcaption>Unmögliche Figur - Durch die Per&shy;spek&shy;tive wird sie möglich!</figcaption>
+                <img src="impossible_solution.jpg" alt="" class="frame">
+            </figure>
+            
+            <figure class="image-item">
+                <figcaption>Unmögliche Figur.</figcaption>
+                <a href="impossible_model.pdf">
+                    <img src="impossible_model_tn.jpg" alt="" class="frame">
+                </a>
+            </figure>
 
-<figure class="image-item">
-        <figcaption>Blendschutz oder "Visor". Ritzt man die Hilfs&shy;linien ein, formt sich der Sonnen&shy;schirm von selbst.</figcaption>
-        <a href="papervisor.pdf">
-            <img src="papervisor_tn.jpg" alt="Papervisor Modell" class="frame">
-        </a>
-    </figure>
+            <figure class="image-item">
+                <figcaption>Blendschutz oder "Visor". Ritzt man die Hilfs&shy;linien ein, formt sich der Sonnen&shy;schirm von selbst.</figcaption>
+                <a href="papervisor.pdf">
+                    <img src="papervisor_tn.jpg" alt="Papervisor Modell" class="frame">
+                </a>
+            </figure>
 
-    <figure class="image-item">
-        <figcaption>"Starcopter" - Funktioniert auf einer Strick&shy;nadel über dem Heiz&shy;körper auch als Windmühle.</figcaption>
-        <a href="starcopter.pdf">
-            <img src="starcopter_tn.jpg" alt="Starcopter Modell" class="frame">
-        </a>
-    </figure>
-    
-        <figure class="image-item">
-        <figcaption>Ein Frosch von <bc>Canon Creative Park</bc>.</figcaption>
-            <img src="frosch.jpg" alt="" class="frame">
-        
-    </figure>
-   
-       <figure class="image-item">
-        <figcaption>Viele schöne und oft recht einfache Modellbögen zum kostenlosen download auf <bc>Canon Creative Park</bc>.</figcaption>
-        <a href="https://creativepark.canon/de/index.html">
-            <img src="canon.jpg" alt="" class="frame">
-        </a>
-    </figure>
-    
-</div>
+            <figure class="image-item">
+                <figcaption>"Starcopter" - Funktioniert auf einer Strick&shy;nadel über dem Heiz&shy;körper auch als Windmühle.</figcaption>
+                <a href="starcopter.pdf">
+                    <img src="starcopter_tn.jpg" alt="Starcopter Modell" class="frame">
+                </a>
+            </figure>
+            
+            <figure class="image-item">
+                <figcaption>Ein Frosch von <bc>Canon Creative Park</bc>.</figcaption>
+                <img src="frosch.jpg" alt="" class="frame">
+            </figure>
+           
+            <figure class="image-item">
+                <figcaption>Viele schöne und oft recht einfache Modellbögen zum kostenlosen download auf <bc>Canon Creative Park</bc>.</figcaption>
+                <a href="https://creativepark.canon/de/index.html">
+                    <img src="canon.jpg" alt="" class="frame">
+                </a>
+            </figure>
+        </div>
 
-
-
-
-   <!-- pdf viewer ausfeblendet für spätere verwendung
-   
-        <div class="pdf-viewer-container">
-    <object data="papervisor.pdf" type="application/pdf" width="100%" height="100%">
-        <iframe src="papervisor.pdf" width="100%" height="100%" style="border: none;">
-            <p>Dein Browser kann die PDF nicht direkt anzeigen. 
-               <a href="papervisor.pdf" target="_blank"><b>Hier klicken, um das Papiermodell zu öffnen</b></a>.
-            </p>
-        </iframe>
-    </object>
-</div>
-
-  -->
-  
         <hr style="border: 0; height: 1px; background: #333; margin: 40px 0;">
         
         <p class="subtext text-center">Sommer 2026</p>
@@ -337,92 +314,101 @@ img.frame {
 
 
     <script>
-    const avatarSketch = (p) => {
-  let img;
-  let blinkTimer = 0;
-  let pauseTimer = 0;       // NEU: Timer für die Pause zwischen den Blinzlern
-  let isBlinking = false;
-  let doubleBlinkQueue = false; 
-  let nextBlinkFrame = 200;     
-
-  p.preload = () => {
-    img = p.loadImage('me.jpg'); 
-  };
-
-  p.setup = () => {
-    let canvas = p.createCanvas(350, 350);
-    canvas.parent('avatar-animation-holder');
-  };
-
-  p.draw = () => {
-    p.clear();
-    p.image(img, 0, 0, p.width, p.height);
-
-    // Wenn der Ziel-Frame erreicht ist und gerade absolut gar nichts passiert
-    if (p.frameCount >= nextBlinkFrame && !isBlinking && pauseTimer <= 0) {
-      isBlinking = true;
-      blinkTimer = 10; 
-      
-      // Zu 10% Wahrscheinlichkeit folgt ein Doppelblinzeln
-      doubleBlinkQueue = p.random(1) < 0.1; 
-      
-      // Nächstes Standard-Intervall festlegen
-      nextBlinkFrame = p.frameCount + p.floor(p.random(200, 250));
-    }
-
-    // 1. Logik für das Blinzeln (geschlossene Augen)
-    if (isBlinking) {
-      blinkEyes();
-      blinkTimer--;
-      
-      if (blinkTimer <= 0) {
-        isBlinking = false;
+    // ==========================================================================
+    <!-- DYNAMISCHE AVATAR-LINK ANPASSUNG -->
+    // ==========================================================================
+    document.addEventListener("DOMContentLoaded", () => {
+        const avatarLink = document.getElementById('avatar-link');
         
-        // Wenn ein Doppelblinzeln ansteht, aktivieren wir die Pause
-        if (doubleBlinkQueue) {
-          doubleBlinkQueue = false; 
-          pauseTimer = 6; // 6 Frames lang bleiben die Augen jetzt offen
+        // 1. URL-Parameter prüfen (?weiterleitung=ja)
+        const urlParams = new URLSearchParams(window.location.search);
+        const hatWeiterleitungParam = urlParams.get('weiterleitung') === 'ja';
+        
+        // 2. Herkunft (Referrer) prüfen, falls der Parameter fehlt oder beim direkten Klick
+        const kamVonIndexVoll = document.referrer.includes('index_voll.html');
+
+        // Wenn die Bedingung zutrifft, Link auf index_voll.html biegen
+        if (hatWeiterleitungParam || kamVonIndexVoll) {
+            avatarLink.href = "index_voll.html";
         }
-      }
-    }
-    
-    // 2. Logik für die Pause (Augen offen, Timer läuft ab)
-    if (pauseTimer > 0) {
-      pauseTimer--;
-      // Wenn die Pause vorbei ist, wird das zweite Blinzeln ausgelöst
-      if (pauseTimer === 0) {
-        isBlinking = true;
-        blinkTimer = 10;
-      }
-    }
-       
-    // Brille / Hintergrundelemente des Avatars
-    p.stroke(0);          
-    p.strokeWeight(6);    
-    p.fill(183, 189, 189);          
-    p.ellipse(175, 185, 170, 120);
-  };
+    });
 
-  function blinkEyes() {
-    p.push(); 
-    p.stroke(0);          
-    p.strokeWeight(6);    
-    p.fill(183, 189, 189);          
+    // ==========================================================================
+    // P5 SKETCH FÜR DEN AVATAR
+    // ==========================================================================
+    const avatarSketch = (p) => {
+        let img;
+        let blinkTimer = 0;
+        let pauseTimer = 0;       
+        let isBlinking = false;
+        let doubleBlinkQueue = false; 
+        let nextBlinkFrame = 200;     
 
-    p.ellipse(135, 115, 70, 70); 
-    p.ellipse(205, 115, 75, 75); 
+        p.preload = () => {
+            img = p.loadImage('me.jpg'); 
+        };
 
-    p.strokeWeight(5);
-    p.line(130, 115, 174, 115); 
-    p.line(176, 115, 220, 115); 
+        p.setup = () => {
+            let canvas = p.createCanvas(350, 350);
+            canvas.parent('avatar-animation-holder');
+        };
 
-    p.pop(); 
-  }
-};
+        p.draw = () => {
+            p.clear();
+            p.image(img, 0, 0, p.width, p.height);
 
-new p5(avatarSketch);
+            if (p.frameCount >= nextBlinkFrame && !isBlinking && pauseTimer <= 0) {
+                isBlinking = true;
+                blinkTimer = 10; 
+                doubleBlinkQueue = p.random(1) < 0.1; 
+                nextBlinkFrame = p.frameCount + p.floor(p.random(200, 250));
+            }
 
+            if (isBlinking) {
+                blinkEyes();
+                blinkTimer--;
+                
+                if (blinkTimer <= 0) {
+                    isBlinking = false;
+                    if (doubleBlinkQueue) {
+                        doubleBlinkQueue = false; 
+                        pauseTimer = 6; 
+                    }
+                }
+            }
+            
+            if (pauseTimer > 0) {
+                pauseTimer--;
+                if (pauseTimer === 0) {
+                    isBlinking = true;
+                    blinkTimer = 10;
+                }
+            }
+               
+            p.stroke(0);          
+            p.strokeWeight(6);    
+            p.fill(183, 189, 189);          
+            p.ellipse(175, 185, 170, 120);
+        };
 
+        function blinkEyes() {
+            p.push(); 
+            p.stroke(0);          
+            p.strokeWeight(6);    
+            p.fill(183, 189, 189);          
+
+            p.ellipse(135, 115, 70, 70); 
+            p.ellipse(205, 115, 75, 75); 
+
+            p.strokeWeight(5);
+            p.line(130, 115, 174, 115); 
+            p.line(176, 115, 220, 115); 
+
+            p.pop(); 
+        }
+    };
+
+    new p5(avatarSketch);
     </script>
 
 </body>
