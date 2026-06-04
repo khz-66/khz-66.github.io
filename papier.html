@@ -314,24 +314,30 @@
 
 
     <script>
-    // ==========================================================================
-    <!-- DYNAMISCHE AVATAR-LINK ANPASSUNG -->
-    // ==========================================================================
-    document.addEventListener("DOMContentLoaded", () => {
-        const avatarLink = document.getElementById('avatar-link');
-        
-        // 1. URL-Parameter prüfen (?weiterleitung=ja)
+document.addEventListener("DOMContentLoaded", () => {
+    const avatarLink = document.getElementById('avatar-link');
+    
+    if (avatarLink) {
+        // 1. Prüfen, ob der URL-Parameter gesetzt ist ODER ob der direkte Referrer index_voll.html ist
         const urlParams = new URLSearchParams(window.location.search);
         const hatWeiterleitungParam = urlParams.get('weiterleitung') === 'ja';
-        
-        // 2. Herkunft (Referrer) prüfen, falls der Parameter fehlt oder beim direkten Klick
-        const kamVonIndexVoll = document.referrer.includes('index_voll.html');
+        const kamDirektVonIndexVoll = document.referrer.includes('index_voll.html');
 
-        // Wenn die Bedingung zutrifft, Link auf index_voll.html biegen
-        if (hatWeiterleitungParam || kamVonIndexVoll) {
+        // 2. Wenn eins von beiden zutrifft, merken wir uns das für die gesamte Session
+        if (hatWeiterleitungParam || kamDirektVonIndexVoll) {
+            sessionStorage.setItem('kommtVonIndexVoll', 'true');
+        }
+
+        // 3. Jetzt prüfen wir: Ist das session-Flag gesetzt? (Egal ob jetzt gerade oder von einer Seite zuvor)
+        const istAktiviertFuerSession = sessionStorage.getItem('kommtVonIndexVoll') === 'true';
+
+        // Wenn ja, Link auf index_voll.html umbiegen
+        if (istAktiviertFuerSession) {
             avatarLink.href = "index_voll.html";
         }
-    });
+    }
+});
+
 
     // ==========================================================================
     // P5 SKETCH FÜR DEN AVATAR
