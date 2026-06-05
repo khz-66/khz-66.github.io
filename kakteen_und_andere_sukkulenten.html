@@ -153,9 +153,9 @@
         }
 
         /* ==========================================================================
-           QUERFORMAT / DESKTOP-ANSICHT (AB 1024px)
+           QUERFORMAT / DESKTOP-ANSICHT (AB 1200px statt 1024px)
            ========================================================================== */
-        @media (min-width: 1024px) {
+        @media (min-width: 700px) { /* <- Hier das "ü" entfernt und auf 1200px erhöht */
             .plant {
                 display: flex;
                 flex-direction: row; /* Hauptbild links, Textcontainer rechts */
@@ -189,6 +189,7 @@
                 margin-top: 15px;
             }
         }
+
 
         /* Links & Subtext */
         a {
@@ -269,11 +270,7 @@
                     <li><strong>01.03.26:</strong> Vertrocknet</li>
                 </ul>
 
-                <div class="image-scroll">
-                    <img src="pcr_pictures/bild.jpg" alt="Adromischus Ansicht 1">
-                    <img src="pcr_pictures/bild.jpg" alt="Adromischus Ansicht 2">
-                    <img src="pcr_pictures/bild.jpg" alt="Adromischus Ansicht 3">
-                </div>
+                
             </div>
         </section>
 
@@ -313,6 +310,13 @@
                     <li><strong>29.09.25:</strong> Ende Sommerfrische</li>
                     <li><strong>28.05.26:</strong> Ans Westfenster gestellt</li>
                 </ul>
+                
+                <div class="image-scroll">
+                    <img src="pcr_pictures/bild.jpg" alt="Adromischus Ansicht 1">
+                    <img src="pcr_pictures/bild.jpg" alt="Adromischus Ansicht 2">
+                    <img src="pcr_pictures/bild.jpg" alt="Adromischus Ansicht 3">
+                </div>
+                
             </div>
         </section>
 
@@ -566,6 +570,13 @@
                     <li><strong>25.09.25:</strong> Am Nordfenster platziert</li>
                     <li><strong>27.05.26:</strong> Auf den Balkon gestellt</li>
                 </ul>
+                
+                <div class="image-scroll">
+                    <img src="pcr_pictures/bild.jpg" alt="Adromischus Ansicht 1">
+                    <img src="pcr_pictures/bild.jpg" alt="Adromischus Ansicht 2">
+                    <img src="pcr_pictures/bild.jpg" alt="Adromischus Ansicht 3">
+                </div>
+                
             </div>
         </section>
 
@@ -676,6 +687,13 @@
                     <li><strong>03.06.25:</strong> Gießen</li>
                     <li><strong>17.06.25:</strong> Ans Südfenster gestellt</li>
                 </ul>
+                
+                <div class="image-scroll">
+                    <img src="pcr_pictures/bild.jpg" alt="Adromischus Ansicht 1">
+                    <img src="pcr_pictures/bild.jpg" alt="Adromischus Ansicht 2">
+                    <img src="pcr_pictures/bild.jpg" alt="Adromischus Ansicht 3">
+                </div>
+                
             </div>
         </section>
 
@@ -862,10 +880,12 @@
                 </ul>
             </div>
         </section>
-    </div>
-        
+      
+        <hr style="border: 0; height: 1px; background: #333; margin: 40px 0;">
+         
     <p class="subtext text-center">Sommer 2026</p>
-
+ </div>
+    
     <script>
     document.addEventListener("DOMContentLoaded", () => {
         const avatarLink = document.getElementById('avatar-link');
