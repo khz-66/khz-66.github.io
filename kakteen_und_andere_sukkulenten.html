@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kakteen und andere Sukkulenten</title>
+    
+    <style>
+        /* ==========================================================================
+           1. RESET & BASICS
+           ========================================================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            background-color: #d9fadc; 
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #a0a0a0;
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden; 
+        }
+
+        /* ==========================================================================
+           2. INHALTS-LAYOUT (HAUPTCONTAINER)
+           ========================================================================== */
+        .container {
+            position: relative;
+            z-index: 1; 
+            max-width: 900px; 
+            margin: 0 auto;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, #ff7b00, #ffae00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1; 
+        }
+
+        /* Standard-Layout für Mobilgeräte (Hochkant-Ansicht alles gestapelt) */
+        .plant {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(51, 51, 51, 0.1); 
+            text-align: left;
+        }
+
+        .plant:last-of-type {
+            border-bottom: none;
+        }
+
+        /* Einzelnes Hauptbild */
+        .plant .content-image {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 8px;
+            /* border: 2px solid #ffae00; */
+        }
+
+        /* Text-Container */
+        .plant-details {
+            width: 100%;
+        }
+
+        .plant-details h2 {
+            font-size: 2rem;
+            margin: 0 0 10px 0;
+            color: #ffae00;
+            line-height: 1.1; 
+            text-align: left;
+        }
+
+        .plant-details h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: normal;
+            text-align: left;
+        }
+        
+        .plant-details p {
+            font-size: 1.2rem;
+            color: #a0a0a0;
+            margin-bottom: 10px;
+            text-align: left;
+            hyphens: auto;
+            -webkit-hyphens: auto;
+        }
+
+        .plant-details ul {
+            text-align: left;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* ==========================================================================
+           IMAGE-SCROLL SYSTEM (BÜNDIG ZUM TEXT, REINES ORANGE)
+           ========================================================================== */
+        .image-scroll {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            gap: 12px;
+            padding: 10px 0;
+            scrollbar-width: thin;
+            width: 100%;
+            -webkit-overflow-scrolling: touch;
+            margin-bottom: 10px;
+        }
+
+        .image-scroll::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .image-scroll::-webkit-scrollbar-thumb {
+            background: rgba(51, 51, 51, 0.2);
+            border-radius: 4px;
+        }
+
+        .image-scroll img {
+            height: 200px; /* Perfekte Höhe für die Galerie im Textfluss */
+            width: auto;
+            object-fit: cover;
+            border-radius: 8px;
+            flex-shrink: 0;
+            border: 2px solid #ffae00; 
+            box-shadow: none !important;
+            transition: transform 0.2s ease;
+        }
+
+        @media (hover: hover) {
+            .image-scroll img:hover {
+                transform: translateY(-4px);
+            }
+        }
+
+        /* ==========================================================================
+           QUERFORMAT / DESKTOP-ANSICHT (AB 1024px)
+           ========================================================================== */
+        @media (min-width: 1024px) {
+            .plant {
+                display: flex;
+                flex-direction: row; /* Hauptbild links, Textcontainer rechts */
+                align-items: start;
+                gap: 35px;
+            }
+
+            .plant .content-image {
+                flex: 0 0 300px; /* Fixiert das Hauptbild präzise auf max 300px */
+                width: 300px;
+            }
+
+            .plant-details {
+                flex: 1;
+                /* Erzeugt das zweispaltige Raster für Pflege und Log im Textbereich */
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 25px;
+            }
+
+            /* Überschriften spannen über beide Spalten */
+            .plant-details h2,
+            .plant-details h3 {
+                grid-column: span 2;
+            }
+
+            /* Die Scroll-Bilder Galerie bricht darunter aus und zieht sich über die Breite des Textes */
+            .plant-details .image-scroll {
+                grid-column: span 2;
+                width: 100%;
+                margin-top: 15px;
+            }
+        }
+
+        /* Links & Subtext */
+        a {
+            color: #ff7b00;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #ffae00;
+        }
+
+        .subtext {
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            background: linear-gradient(45deg, #ff7b00, #ffae00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: 40px;
+        }
+
+        /* ==========================================================================
+           3. AVATAR WIDGET (STEUERUNG)
+           ========================================================================== */
+        .avatar-widget-container {
+            width: 120px;
+            height: 120px;
+            z-index: 10;
+        }
+
+        .avatar-bottom-left {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+        }
+
+        #avatar-animation-holder canvas {
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 50%;
+            border: 5px solid #5A6E8F !important; 
+            box-shadow: none !important; 
+        }
+        
+        a.avatar-widget-container {
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+
+    <script src="p5.min.js"></script>
+</head>
+<body>
+
+    <div class="avatar-widget-container avatar-bottom-left">
+        <a href="index.html" id="avatar-link" class="avatar-link-wrapper" style="display: block;">
+            <div id="avatar-animation-holder"></div>
+        </a>
+    </div>
+
+    <div class="container">
+        <h1>Kakteen und andere Sukku&shy;lenten</h1>
+      
+        <section class="plant" id="adromischus">
+            <img src="pcr_pictures/PCR105_20241012_65197.jpg" alt="Adromischus" class="content-image">
+            <div class="plant-details">
+                <h2>Adromischus</h2>
+                <h3><em>Adromischus cooperi</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Steht bevorzugt warm. Sommerquartier: Küchenfenster, Winterquartier: Treppenhaus. Substrat: Uhlig Kakteenerde Standard ggf. gemischt mit COMPO CACTEA® und rein mineralischem Substrat 1:1:1 (Düngen nach 8 Wochen).
+                </p>
+                <ul>
+                    <li><strong>27.04.25:</strong> Kulturhinweise aktualisiert</li>
+                    <li><strong>08.10.24:</strong> Vom Süd- zum Nordfenster gestellt</li>
+                    <li><strong>13.05.25:</strong> Ans Südfenster gestellt</li>
+                    <li><strong>01.06.25:</strong> Ans Küchenfenster?</li>
+                    <li><strong>01.03.26:</strong> Vertrocknet</li>
+                </ul>
+
+                <div class="image-scroll">
+                    <img src="pcr_pictures/bild.jpg" alt="Adromischus Ansicht 1">
+                    <img src="pcr_pictures/bild.jpg" alt="Adromischus Ansicht 2">
+                    <img src="pcr_pictures/bild.jpg" alt="Adromischus Ansicht 3">
+                </div>
+            </div>
+        </section>
+
+        <section class="plant" id="aloe">
+            <img src="pcr_pictures/PCR105_20250523_60406.jpg" alt="Aloe" class="content-image">
+            <div class="plant-details">
+                <h2>Aloe</h2>
+                <h3><em>Aloe vera</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Steckling von Mama aus Australien mitgebracht. Substrat: Uhlig Kakteenerde Standard pur oder Uhlig Mix Erde + COMPO CACTEA® 1:1.
+                </p>
+                <ul>
+                    <li><strong>22.05.25:</strong> Von Bärbel erhalten</li>
+                    <li><strong>22.06.25:</strong> Umtopfen</li>
+                    <li><strong>26.06.25:</strong> Angießen</li>
+                    <li><strong>20.09.25:</strong> Sieht schon wieder so schlecht aus 😕</li>
+                    <li><strong>08.11.25:</strong> Vertrocknet ☹️</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="plant" id="brutblatt">
+            <img src="pcr_pictures/PCR105_20250529_91981.jpg" alt="Brutblatt" class="content-image">
+            <div class="plant-details">
+                <h2>Brutblatt</h2>
+                <h3><em>Kalanchoe daigremontiana</em></h3>
+                <p>
+                    Mehrere Exemplare, vermehrt sich sehr leicht selbst aus den Jungpflanzen am Blattrand.<br><br>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Sommerfrische auf dem Balkon. Substrat: Uhlig Kakteenerde Standard oder gemischt mit COMPO CACTEA® und rein mineralischem Substrat 1:1:1 (Düngen nach 8 Wochen).
+                </p>
+                <ul>
+                    <li><strong>15.04.25:</strong> Sommerfrische Balkon</li>
+                    <li><strong>24.05.25:</strong> Umtopfen in 10 cm Topf mit Gemisch</li>
+                    <li><strong>29.05.25:</strong> Gießen</li>
+                    <li><strong>29.09.25:</strong> Ende Sommerfrische</li>
+                    <li><strong>28.05.26:</strong> Ans Westfenster gestellt</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="plant" id="chamaecereus">
+            <img src="pcr_pictures/PCR105_20250628_55411.jpg" alt="Chamaecereus" class="content-image">
+            <div class="plant-details">
+                <h2>Chamaecereus</h2>
+                <h3><em>Echinopsis Chamaecereus cv. Daniel Orange</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Blütezeit im Juni. Frosthart bis -10°C. Substrat: Uhlig Kakteenerde Standard (Düngen nach 8 Wochen).
+                </p>
+                <ul>
+                    <li><strong>10.05.25:</strong> Knospenbildung</li>
+                    <li><strong>16.06.25:</strong> Blüte geöffnet</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="plant" id="crassula">
+            <img src="pcr_pictures/PCR105_20250515_11612.jpg" alt="Crassula" class="content-image">
+            <div class="plant-details">
+                <h2>Crassula</h2>
+                <h3><em>Crassula spec.</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Sommerfrische auf dem Balkon.
+                </p>
+                <ul>
+                    <li><strong>10.05.25:</strong> Sommerfrische Balkon</li>
+                    <li><strong>29.09.25:</strong> Ans Westfenster gestellt</li>
+                    <li><strong>28.05.26:</strong> Ans Westfenster gestellt</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="plant" id="disophyllum">
+            <img src="pcr_pictures/PCR105_20250510_93747.jpg" alt="Disophyllum" class="content-image">
+            <div class="plant-details">
+                <h2>Disophyllum</h2>
+                <h3><em>Disophyllum-Hybr. 'Frühlingsgold' PE 131</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Klassischer "Blattkaktus". Angekommen von Uhlig Kakteen. Substrat: Uhlig Epi Erde pur oder gemischt mit COMPO CACTEA® im Verhältnis 2:1 (Epi Erde : COMPO CACTEA®). Düngen nach 6 Wochen.
+                </p>
+                <ul>
+                    <li><strong>10.05.25:</strong> Bestellt bei Uhlig</li>
+                    <li><strong>17.05.25:</strong> Geliefert und angekommen</li>
+                    <li><strong>12.07.25:</strong> Umtopfen</li>
+                    <li><strong>23.07.25:</strong> Düngen</li>
+                    <li><strong>23.07.25:</strong> Angießen</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="plant" id="echinacactus">
+            <img src="pcr_pictures/PCR105_20241010_72263.jpg" alt="Echinacactus" class="content-image">
+            <div class="plant-details">
+                <h2>Echinacactus</h2>
+                <h3><em>Echinocactus grusonii?</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Erhalten von Vera. Sommerfrische auf dem Balkon. Substrat: Uhlig Kakteenerde Standard ggf. gemischt mit COMPO CACTEA® und rein mineralischem Substrat 1:1:1 (Düngen nach 8 Wochen).
+                </p>
+                <ul>
+                    <li><strong>30.04.25:</strong> Sommerfrische Balkon</li>
+                    <li><strong>27.09.25:</strong> Ende Sommerfrische</li>
+                    <li><strong>27.05.26:</strong> Auf den Balkon gestellt</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="plant" id="echinocereus-klapperi">
+            <img src="pcr_pictures/PCR105_20250722_64625.jpg" alt="Echinocereus klapperi" class="content-image">
+            <div class="plant-details">
+                <h2>Echinocereus klapperi</h2>
+                <h3><em>Echinocereus klapperi</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Möglicherweise frosthart bis -10°C? Herkunft: Uhlig Kakteen. Haltung im Balkon-Blumenkasten. Substrat: Uhlig Mix Erde oder Kakteenerde Standard gemischt mit COMPO CACTEA® und rein mineralischem Substrat 1:1:1 (Düngen nach 8 Wochen).
+                </p>
+                <ul>
+                    <li><strong>20.05.25:</strong> Umtopfen</li>
+                    <li><strong>24.05.25:</strong> In den Blumenkasten gepflanzt</li>
+                    <li><strong>13.06.25:</strong> Etwas Sonnenbrand (?), auf Balkon-Fensterbank umgestellt</li>
+                    <li><strong>28.06.25:</strong> Blütenansatz gesichtet</li>
+                    <li><strong>20.07.25:</strong> Erste Blüte geöffnet</li>
+                    <li><strong>23.07.25:</strong> Düngen</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="plant" id="echinopsis-jungpflanze">
+            <img src="pcr_pictures/PCR105_20250515_42640.jpg" alt="Echinopsis Jungpflanze" class="content-image">
+            <div class="plant-details">
+                <h2>Echinopsis Jungpflanze</h2>
+                <h3><em>Echinopsis?</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Aus Vereinzelung der großen Echinopsis gezogen. Sommerfrische auf dem Balkon, Winterquartier im Treppenhaus.
+                </p>
+                <ul>
+                    <li><strong>27.04.25:</strong> Sommerfrische Balkon</li>
+                    <li><strong>20.09.25:</strong> Scheint Knospen zu bilden</li>
+                    <li><strong>30.09.25:</strong> Ins Treppenhaus geräumt</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="plant" id="echinopsis-orange">
+            <img src="pcr_pictures/PCR105_20241012_54977.jpg" alt="Echinopsis Orange" class="content-image">
+            <div class="plant-details">
+                <h2>Echinopsis Orange</h2>
+                <h3><em>Echinopsis-Hybride?</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Ganzjährig am Südfenster. Jugendform wächst kugelig.
+                </p>
+            </div>
+        </section>
+
+        <section class="plant" id="echinopsis-wei">
+            <img src="pcr_pictures/PCR105_20250705_19392.jpg" alt="Echinopsis Weiß" class="content-image">
+            <div class="plant-details">
+                <h2>Echinopsis Weiß</h2>
+                <h3><em>Echinopsis?</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Erhalten von Vera. Sommerfrische auf dem Balkon.
+                </p>
+                <ul>
+                    <li><strong>05.10.24:</strong> Blütenbildung dokumentiert</li>
+                    <li><strong>13.04.25:</strong> Sommerfrische Balkon</li>
+                    <li><strong>27.05.25:</strong> Möglicherweise neuer Blütenansatz</li>
+                    <li><strong>03.06.25:</strong> Blütenansatz deutlich sichtbar</li>
+                    <li><strong>28.06.25:</strong> Blüte geöffnet</li>
+                    <li><strong>27.09.25:</strong> Ende Sommerfrische</li>
+                    <li><strong>27.05.26:</strong> Auf den Balkon gestellt</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="plant" id="escobaria-sneedii">
+            <img src="pcr_pictures/PCR105_20250711_33922.jpg" alt="Escobaria sneedii" class="content-image">
+            <div class="plant-details">
+                <h2>Escobaria sneedii</h2>
+                <h3><em>Escobaria sneedii ssp. leei</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Frosthart bis -10°C. Im Blumenkasten platziert. Substrat: Uhlig Mix Substrat (Nachdüngen nach 8 Wochen erforderlich).
+                </p>
+                <ul>
+                    <li><strong>20.05.25:</strong> Umtopfen</li>
+                    <li><strong>24.05.25:</strong> In den Blumenkasten gesetzt</li>
+                    <li><strong>29.06.25:</strong> Möglicherweise Blütenansatz gesichtet</li>
+                    <li><strong>23.07.25:</strong> Gedüngt</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="plant" id="euphorbia-obesa">
+            <img src="pcr_pictures/PCR105_20250523_81060.jpg" alt="Euphorbia obesa" class="content-image">
+            <div class="plant-details">
+                <h2>Euphorbia obesa</h2>
+                <h3><em>Euphorbia obesa</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Herkunft von astrophytumland.com. Standplatz ganzjährig am Südfenster. Pflanzen lagen nach Ankunft kurz offen. Substrat: Uhlig Mix-Erde.
+                </p>
+                <ul>
+                    <li><strong>23.05.25:</strong> Bestellt</li>
+                    <li><strong>28.05.25:</strong> Versendet</li>
+                    <li><strong>02.06.25:</strong> Angekommen</li>
+                    <li><strong>05.06.25:</strong> Eintopfen</li>
+                    <li><strong>08.06.25:</strong> Angießen</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="plant" id="gasteria">
+            <img src="pcr_pictures/PCR105_20241010_67152.jpg" alt="Gasteria" class="content-image">
+            <div class="plant-details">
+                <h2>Gasteria</h2>
+                <h3><em>Gasteria verrucosa ?</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Erhalten von Vera. Wächst primär im Winter; benötigt dann je nach Temperatur alle 2 bis 4 Wochen ausreichend Wasser. Bei Überwinterung auf Zimmertemperatur wöchentlich gießen. Sommerquartier: Laubengang oder Nordfenster, Winterquartier: Treppenhaus oder Nordfenster. Vermehrung über getrocknete Blattstücke möglich. Substrat: Uhlig Kakteenerde Standard oder gemischt mit COMPO CACTEA® und rein mineralischem Substrat 1:1:1 (Düngen nach 8 Wochen).
+                </p>
+                <ul>
+                    <li><strong>13.04.25:</strong> Sommerfrische Balkon</li>
+                    <li><strong>27.04.25:</strong> Sieht schlecht aus, vertrocknet?</li>
+                    <li><strong>18.05.25:</strong> Blütenansatz gesichtet</li>
+                    <li><strong>25.05.25:</strong> Auf den Laubengang gestellt</li>
+                    <li><strong>27.09.25:</strong> Ins Treppenhaus geräumt</li>
+                    <li><strong>26.05.26:</strong> Auf den Laubengang gestellt</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="plant" id="gasteria-2">
+            <img src="pcr_pictures/PCR105_20241010_12160.jpg" alt="Gasteria" class="content-image">
+            <div class="plant-details">
+                <h2>Gasteria</h2>
+                <h3><em>Gasteria bicolor ?</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Erhalten von Vera. Wächst im Winter und benötigt je nach Temperatur alle 2 bis 4 Wochen Wasser. Bei Überwinterung im warmen Zimmer wöchentlich gießen. Sommerquartier: Laubengang oder Nordfenster, Winterquartier: Treppenhaus oder Nordfenster. Vermehrung über angetrocknete Blattstücke am Topfrand machbar. Substrat: Uhlig Kakteenerde Standard oder gemischt mit COMPO CACTEA® und rein mineralischem Substrat 1:1:1 (Düngen nach 8 Wochen).
+                </p>
+                <ul>
+                    <li><strong>13.04.25:</strong> Sommerfrische Balkon</li>
+                    <li><strong>27.04.25:</strong> Sieht schlecht aus, vertrocknet?</li>
+                    <li><strong>25.05.25:</strong> Auf den Laubengang gestellt</li>
+                    <li><strong>27.09.25:</strong> Ins Treppenhaus geräumt</li>
+                    <li><strong>26.05.26:</strong> Auf den Laubengang gestellt</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="plant" id="geldbaum">
+            <div style="width: 300px; height: 1px;" class="content-image"></div>
+            <div class="plant-details">
+                <h2>Geldbaum</h2>
+                <h3><em>Crassula arborescens</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Sommerquartier: Balkon, Winterquartier: Treppenhaus. Substrat: Uhlig Kakteenerde Standard ggf. gemischt mit COMPO CACTEA® und rein mineralischem Substrat 1:1:1 (Düngen nach 8 Wochen).
+                </p>
+                <ul>
+                    <li><strong>12.05.25:</strong> Sommerfrische Balkon</li>
+                    <li><strong>30.09.25:</strong> Ende Sommerfrische</li>
+                    <li><strong>28.05.26:</strong> Auf den Balkon gestellt</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="plant" id="goethepflanze-gruppe">
+            <img src="pcr_pictures/PCR105_20250621_34125.jpg" alt="Goethepflanze Gruppe" class="content-image">
+            <div class="plant-details">
+                <h2>Goethepflanze</h2>
+                <h3><em>Kalanchoe tubiflora</em></h3>
+                <p>
+                    Mehrere Exemplare, vermehrt sich sehr leicht selbst aus den Jungpflanzen am Blattrand.<br><br>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Drei Exemplare vorhanden. Sommerfrische auf dem Balkon. Substrat: Uhlig Kakteenerde Standard oder gemischt mit COMPO CACTEA® und rein mineralischem Substrat 1:1:1 (Düngen nach 8 Wochen).
+                </p>
+                <ul>
+                    <li><strong>05.10.24:</strong> Drei Exemplare dokumentiert</li>
+                    <li><strong>15.04.25:</strong> Sommerfrische Balkon</li>
+                    <li><strong>13.06.25:</strong> Umtopfen</li>
+                    <li><strong>21.06.25:</strong> Foto gemacht</li>
+                    <li><strong>25.09.25:</strong> Am Nordfenster platziert</li>
+                    <li><strong>27.05.26:</strong> Auf den Balkon gestellt</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="plant" id="gymnocalycium-bruchii">
+            <img src="pcr_pictures/PCR105_20250601_59351.jpg" alt="Gymnocalycium bruchii" class="content-image">
+            <div class="plant-details">
+                <h2>Gymnocalycium bruchii</h2>
+                <h3><em>Gymnocalycium bruchii</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Ganzjahreskultur bei Zimmertemperatur gut möglich. Eventuell frosthart bis -10°C? Herkunft: Uhlig Kakteen. Sommer- & Winterquartier flexibel: Nordfenster / Südfenster / Balkon-Fensterbank. Substrat: Uhlig Kakteenerde Standard.
+                </p>
+                <ul>
+                    <li><strong>10.05.25:</strong> Knospenbildung</li>
+                    <li><strong>31.05.25:</strong> In voller Blüte</li>
+                    <li><strong>13.06.25:</strong> Umtopfen (Wurzeln waren noch nass vom Gießen)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="plant" id="haemanthus-albiflos">
+            <img src="pcr_pictures/PCR105_20240105_11281.jpg" alt="Elefantenohr / Haemanthus albiflos" class="content-image">
+            <div class="plant-details">
+                <h2>Elefantenohr</h2>
+                <h3><em>Haemanthus albiflos</em></h3>
+                <p>
+                    Keine Sukkulente, aber doch mit ausgeprägter Ruhezeit.<br><br>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Ganzjährig am Nordfenster möglich. Bestäubung durch Insekten oder künstlich möglich. Samen max. 2 Wochen haltbar – vor dem Austrocknen aussäen. Substrat: 2 Teile COMPO CACTEA®, 1 Teil Uhlig Kakteenerde Standard, 1 Teil mineralisches Substrat. Umtopfen im Frühsommer bis Sommer. Von Mama.
+                </p>
+                <ul>
+                    <li><strong>05.10.24:</strong> Umtopfen</li>
+                    <li><strong>01.05.25:</strong> Einige Blätter vertrocknet</li>
+                    <li><strong>21.05.25:</strong> Blätter abgestaubt und Magnesit + Rosenquarz für Regeneration nach Trockenstress auf die Erde gelegt</li>
+                    <li><strong>02.06.25:</strong> Ans Nordfenster gestellt</li>
+                    <li><strong>10.06.25:</strong> Blattaustrieb</li>
+                    <li><strong>19.07.25:</strong> Blütenansatz</li>
+                    <li><strong>27.09.25:</strong> Ans Südfenster gestellt</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section class="plant" id="haworthia">
+            <img src="pcr_pictures/PCR105_20241012_84008.jpg" alt="Haworthia" class="content-image">
+            <div class="plant-details">
+                <h2>Haworthia</h2>
+                <h3><em>Haworthia radula (?)</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Standplatz ganzjährig am Südfenster. Substrat: Uhlig Kakteenerde Standard ggf. gemischt mit COMPO CACTEA® und rein mineralischem Substrat 1:1:1 (Düngen nach 8 Wochen).
+                </p>
+                <ul>
+                    <li><strong>05.10.24:</strong> Knospenbildung beobachtet</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="plant" id="huernia-bayeri">
+            <img src="pcr_pictures/PCR105_20250601_88370.jpg" alt="Huernia bayeri" class="content-image">
+            <div class="plant-details">
+                <h2>Huernia bayeri</h2>
+                <h3><em>Huernia bayeri</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Herkunft von www.kakteen-niess.at. Standplatz ganzjährig am Südfenster. Substrat: Rein mineralisches Substrat mit etwas COMPO CACTEA® (bis zu 1:1) bzw. mineralisches Substrat mit sehr wenig organischem Anteil.
+                </p>
+                <ul>
+                    <li><strong>23.05.25:</strong> Bestellt</li>
+                    <li><strong>31.05.25:</strong> Eingetopft in mineralisches Substrat</li>
+                    <li><strong>01.06.25:</strong> Foto dokumentiert</li>
+                    <li><strong>03.06.25:</strong> Vorsichtig angießen</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="plant" id="huernia-pillansii">
+            <img src="pcr_pictures/PCR105_20250523_30120.jpg" alt="Huernia pillansii" class="content-image">
+            <div class="plant-details">
+                <h2>Huernia pillansii</h2>
+                <h3><em>Huernia pillansii</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Herkunft von astrophytumland.com. Pflanzen lagen nach Ankunft kurz offen. Standplatz ganzjährig am Südfenster. Substrat: Rein mineralisches Substrat mit etwas COMPO CACTEA® (bis zu 1:1).
+                </p>
+                <ul>
+                    <li><strong>23.05.25:</strong> Bestellt</li>
+                    <li><strong>28.05.25:</strong> Versendet</li>
+                    <li><strong>02.06.25:</strong> Angekommen</li>
+                    <li><strong>05.06.25:</strong> Eintopfen in rein mineralisches Substrat</li>
+                    <li><strong>08.06.25:</strong> Angießen</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="plant" id="kalanchoe-ableger">
+            <img src="pcr_pictures/PCR105_20250601_59649.jpg" alt="Kalanchoe Ableger" class="content-image">
+            <div class="plant-details">
+                <h2>Kalanchoe beharensis</h2>
+                <h3><em>Kalanchoe beharensis</em></h3>
+                <p>
+                    Mehrere Exemplare, Kopfsteckling aus Altpflanze.<br><br>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Aus Vereinzelung der K. beharensis-Gruppe gezogen. Haltung erfordert warme Überwinterung. Standplatz ganzjährig am Südfenster. Substrat: Uhlig Kakteenerde Standard ggf. gemischt mit COMPO CACTEA® und rein mineralischem Substrat 1:1:1 (Düngen nach 8 Wochen). Ggf. zweischichtiges Befüllen: Mixerde unten, Mineralsubstrat oben.
+                </p>
+                <ul>
+                    <li><strong>31.05.25:</strong> Teilbewurzelte Ableger separiert und eingetopft</li>
+                    <li><strong>01.06.25:</strong> Foto gemacht</li>
+                    <li><strong>03.06.25:</strong> Gießen</li>
+                    <li><strong>17.06.25:</strong> Ans Südfenster gestellt</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="plant" id="lobivia">
+            <img src="pcr_pictures/PCR105_20250621_19019.jpg" alt="Lobivia" class="content-image">
+            <div class="plant-details">
+                <h2>Lobivia</h2>
+                <h3><em>Lobivia winteriana</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Herkunft von astrophytumland.com. Mit offener Blüte geliefert. Standplatz ganzjährig auf der Balkon-Fensterbank. Substrat: Uhlig Kakteenerde Standard ODER bei geplanter Überwinterung im Freiland eine Mischung aus 1 Teil Uhlig Standarderde + 1 Teil COMPO CACTEA® + 1 Teil Uhlig rein mineralischem Substrat. Düngen nach 8 Wochen nötig.
+                </p>
+                <ul>
+                    <li><strong>23.05.25:</strong> Bestellt</li>
+                    <li><strong>28.05.25:</strong> Versendet</li>
+                    <li><strong>02.06.25:</strong> Angekommen, direkt in Standarderde eingetopft</li>
+                    <li><strong>05.06.25:</strong> Vorsichtig angießen</li>
+                    <li><strong>21.06.25:</strong> Erneute Blüte dokumentiert</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="plant" id="lophophora-koehresii">
+            <img src="pcr_pictures/PCR105_20250612_23459.jpg" alt="Lophophora koehresii" class="content-image">
+            <div class="plant-details">
+                <h2>Lophophora koehresii</h2>
+                <h3><em>Lophophora koehresii</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Herkunft von www.kakteen-niess.at. Lieferung erfolgte bereits mit sichtbarer Blütenknospe. Sommerquartier: Südfenster, Winterquartier: Treppenhaus. Substrat: Rein mineralisches Substrat, evtl. versetzt mit maximal 10% COMPO CACTEA®.
+                </p>
+                <ul>
+                    <li><strong>23.05.25:</strong> Bestellt</li>
+                    <li><strong>31.05.25:</strong> Geliefert und eingetopft in mineralisches Substrat</li>
+                    <li><strong>01.06.25:</strong> Foto gemacht</li>
+                    <li><strong>03.06.25:</strong> Erste vorsichtige Wassergabe</li>
+                    <li><strong>12.06.25:</strong> Blüte erfolgreich geöffnet</li>
+                    <li><strong>30.09.25:</strong> In das Winterquartier (Treppenhaus) geräumt</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="plant" id="lophophora-wiliamsii-peyotl">
+            <img src="pcr_pictures/PCR105_20250529_17628.jpg" alt="Lophophora wiliamsii, Peyotl" class="content-image">
+            <div class="plant-details">
+                <h2>Peyotl</h2>
+                <h3><em>Lophophora wiliamsii</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Erworben in Berlin. Sommerquartier am Südfenster, zur Überwinterung ins Treppenhaus stellen. Substrat: Rein mineralisches Substrat, evtl. gemischt mit ca. 10% COMPO CACTEA®.
+                </p>
+                <ul>
+                    <li><strong>08.10.24:</strong> Ins Treppenhaus gestellt</li>
+                    <li><strong>13.04.25:</strong> Ans Südfenster umgezogen</li>
+                    <li><strong>13.05.25:</strong> Erste Anzeichen von Blütenbildung</li>
+                    <li><strong>29.05.25:</strong> Blüte öffnet sich, geht jedoch nicht ganz auf</li>
+                    <li><strong>31.05.25:</strong> Blüte verblüht</li>
+                    <li><strong>29.09.25:</strong> Zur Überwinterung wieder ins Treppenhaus geräumt</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="plant" id="mammillaria-gaumeri">
+            <img src="pcr_pictures/PCR105_20250723_46917.jpg" alt="Mammillaria gaumeri" class="content-image">
+            <div class="plant-details">
+                <h2>Mammillaria gaumeri</h2>
+                <h3><em>Mammilaria gaumeri</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Herkunft von Kakteen Uhlig. Absolut trockene Winterruhe einhalten. Sommerquartier: Balkon-Fensterbank oder Westfenster, Winterquartier: Treppenhaus. Substrat: Uhlig Kakteenerde Standard ggf. gemischt mit COMPO CACTEA® im Verhältnis 1:1 (Nachdüngen nach 8 Wochen).
+                </p>
+                <ul>
+                    <li><strong>15.04.25:</strong> Sommerfrische Balkon</li>
+                    <li><strong>20.05.25:</strong> Umtopfen in reine Uhlig Kakteenerde Standard</li>
+                    <li><strong>15.06.25:</strong> Blütenansatz entdeckt</li>
+                    <li><strong>11.07.25:</strong> Gießrand muss vergrößert werden</li>
+                    <li><strong>29.09.25:</strong> Zur Überwinterung ins Treppenhaus gestellt</li>
+                    <li><strong>28.05.26:</strong> An das Westfenster gestellt</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="plant" id="mammillaria-longimamma">
+            <img src="pcr_pictures/PCR105_20250524_33128.jpg" alt="Mammillaria longimamma" class="content-image">
+            <div class="plant-details">
+                <h2>Mammillaria longimamma</h2>
+                <h3><em>Mammillaria longimamma</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Herkunft von astrophytumland.com. Pflanzen lagen nach Ankunft offen. Absolut trockene Winterruhe einhalten. Sommerquartier: Balkon-Fensterbank oder Küchenfenster, Winterquartier: Treppenhaus. Substrat: Uhlig Kakteenerde Standard ggf. gemischt mit COMPO CACTEA® im Verhältnis 1:1 (Nachdüngen nach 8 Wochen).
+                </p>
+                <ul>
+                    <li><strong>23.05.25:</strong> Bestellt</li>
+                    <li><strong>28.05.25:</strong> Versendet</li>
+                    <li><strong>02.06.25:</strong> Angekommen</li>
+                    <li><strong>05.06.25:</strong> Eingetopft in Standarderde</li>
+                    <li><strong>08.06.25:</strong> Erstes Angießen</li>
+                    <li><strong>29.09.25:</strong> Ins Treppenhaus geräumt</li>
+                    <li><strong>28.05.26:</strong> An das Westfenster gestellt</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="plant" id="mammillaria-senilis">
+            <img src="pcr_pictures/PCR105_20250524_96766.jpg" alt="Mammillaria senilis" class="content-image">
+            <div class="plant-details">
+                <h2>Mammillaria senilis</h2>
+                <h3><em>Mammillaria senilis</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Herkunft von astrophytumland.com. Pflanzen lagen nach Ankunft offen. Absolut trockene Winterruhe einhalten. Sommerquartier: Balkon oder Balkon-Fensterbank, Winterquartier: Balkon-Fensterbank. Substrat: Uhlig Mix Erde (Nachdüngen nach 8 Wochen).
+                </p>
+                <ul>
+                    <li><strong>23.05.25:</strong> Bestellt</li>
+                    <li><strong>28.05.25:</strong> Versendet</li>
+                    <li><strong>02.06.25:</strong> Angekommen</li>
+                    <li><strong>05.06.25:</strong> Eintopfen abgeschlossen</li>
+                    <li><strong>08.06.25:</strong> Angießen</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="plant" id="melokaktus">
+            <img src="pcr_pictures/PCR105_20241012_37997.jpg" alt="Melokaktus" class="content-image">
+            <div class="plant-details">
+                <h2>Melokaktus</h2>
+                <h3><em>Melocactus pachyacanthus</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Standplatz ganzjährig fest am Südfenster. Regenschutz ist zwingend nötig; keine klassische Sommerfrische im Freien durchführen. Substrat: Uhlig Kakteenerde Standard ggf. gemischt mit COMPO CACTEA® und rein mineralischem Substrat 1:1:1 (Düngen nach 8 Wochen).
+                </p>
+            </div>
+        </section>
+
+        <section class="plant" id="notocactus">
+            <img src="pcr_pictures/PCR105_20250529_42828.jpg" alt="Notocactus" class="content-image">
+            <div class="plant-details">
+                <h2>Notocactus</h2>
+                <h3><em>Notocactus ottonis</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Sowohl warme als auch kalte Überwinterung möglich. Standplatz ganzjährig auf der Balkon-Fensterbank. Substrat: Uhlig Kakteenerde Standard.
+                </p>
+                <ul>
+                    <li><strong>24.05.25:</strong> Bei eBay bestellt</li>
+                    <li><strong>28.05.25:</strong> Geliefert und eingetopft</li>
+                    <li><strong>29.05.25:</strong> Foto gemacht</li>
+                    <li><strong>31.05.25:</strong> Erste Wassergabe (Angießen) sowie vermuteter Knospenansatz</li>
+                    <li><strong>02.07.25:</strong> Bildet deutlich sichtbare Kindel aus</li>
+                    <li><strong>23.07.25:</strong> Gedüngt</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="plant" id="rhipsalidopsis">
+            <img src="pcr_pictures/PCR105_20250510_59245.jpg" alt="Rhipsalidopsis" class="content-image">
+            <div class="plant-details">
+                <h2>Rhipsalidopsis</h2>
+                <h3><em>Rhipsalidopsis-Hybride 'Thor Hope'</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Klassischer "Osterkaktus". Geliefert von Uhlig Kakteen. Substrat: Uhlig Epi Erde pur oder gemischt mit COMPO CACTEA® im Verhältnis 2:1 (Epi Erde : COMPO CACTEA®). Erstes Düngen nach 6 Wochen.
+                </p>
+                <ul>
+                    <li><strong>10.05.25:</strong> Bestellt bei Uhlig</li>
+                    <li><strong>17.05.25:</strong> Angekommen</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="plant" id="sedum">
+            <img src="pcr_pictures/PCR105_20241012_48001.jpg" alt="Sedum" class="content-image">
+            <div class="plant-details">
+                <h2>Sedum nussbaumerianum</h2>
+                <h3><em>Sedum nussbaumerianum</em></h3>
+                <p>
+                    <strong>Pflegehinweise & Notizen:</strong><br>
+                    Klassische Fetthenne. Warme oder kalte Überwinterung möglich. Sommerquartier: Balkon, Winterquartier: Südfenster. Substrat: Uhlig Kakteenerde Standard ggf. gemischt mit COMPO CACTEA® und rein mineralischem Substrat 1:1:1 (Düngen nach 8 Wochen).
+                </p>
+                <ul>
+                    <li><strong>10.05.25:</strong> Sommerfrische Balkon</li>
+                    <li><strong>30.09.25:</strong> Ende Sommerfrische</li>
+                    <li><strong>28.05.26:</strong> Auf den Balkon gestellt</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+        
+    <p class="subtext text-center">Sommer 2026</p>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const avatarLink = document.getElementById('avatar-link');
+        if (avatarLink) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const hatWeiterleitungParam = urlParams.get('weiterleitung') === 'ja';
+            const kamDirektVonIndexVoll = document.referrer.includes('index_voll.html');
+
+            if (hatWeiterleitungParam || kamDirektVonIndexVoll) {
+                sessionStorage.setItem('kommtVonIndexVoll', 'true');
+            }
+
+            if (sessionStorage.getItem('kommtVonIndexVoll') === 'true') {
+                avatarLink.href = "index_voll.html";
+            }
+        }
+    });
+
+    const avatarSketch = (p) => {
+        let img;
+        let blinkTimer = 0;
+        let pauseTimer = 0;       
+        let isBlinking = false;
+        let doubleBlinkQueue = false; 
+        let nextBlinkFrame = 200;     
+
+        p.preload = () => {
+            img = p.loadImage('me.jpg'); 
+        };
+
+        p.setup = () => {
+            let canvas = p.createCanvas(350, 350);
+            canvas.parent('avatar-animation-holder');
+        };
+
+        p.draw = () => {
+            p.clear();
+            p.image(img, 0, 0, p.width, p.height);
+
+            if (p.frameCount >= nextBlinkFrame && !isBlinking && pauseTimer <= 0) {
+                isBlinking = true;
+                blinkTimer = 10; 
+                doubleBlinkQueue = p.random(1) < 0.1; 
+                nextBlinkFrame = p.frameCount + p.floor(p.random(200, 250));
+            }
+
+            if (isBlinking) {
+                blinkEyes();
+                blinkTimer--;
+                
+                if (blinkTimer <= 0) {
+                    isBlinking = false;
+                    if (doubleBlinkQueue) {
+                        doubleBlinkQueue = false; 
+                        pauseTimer = 6; 
+                    }
+                }
+            }
+            
+            if (pauseTimer > 0) {
+                pauseTimer--;
+                if (pauseTimer === 0) {
+                    isBlinking = true;
+                    blinkTimer = 10;
+                }
+            }
+               
+            p.stroke(0);          
+            p.strokeWeight(6);    
+            p.fill(183, 189, 189);          
+            p.ellipse(175, 185, 170, 120);
+        };
+
+        function blinkEyes() {
+            p.push(); 
+            p.stroke(0);          
+            p.strokeWeight(6);    
+            p.fill(183, 189, 189);          
+
+            p.ellipse(135, 115, 70, 70); 
+            p.ellipse(205, 115, 75, 75); 
+
+            p.strokeWeight(5);
+            p.line(130, 115, 174, 115); 
+            p.line(176, 115, 220, 115); 
+
+            p.pop(); 
+        }
+    };
+
+    new p5(avatarSketch);
+    </script>
+</body>
+</html>
