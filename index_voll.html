@@ -132,6 +132,71 @@
             margin: 20px auto;     /* 20px Abstand nach oben/unten, "auto" zentriert das Bild */
         }
 
+
+.image-row {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;  
+  margin-bottom: 40px; 
+}
+
+.image-row a {
+  display: block;
+  flex: 1 1 280px;        
+  max-width: 100%;        
+}
+
+.image-row img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* Container für Bild + Text */
+/* Container für Bild + Text im Raster */
+.image-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0; 
+  /* GEÄNDERT: flex-grow auf 0 gesetzt, damit sie nicht unkontrolliert breit werden */
+  flex: 0 1 250px; 
+  width: 100%;
+  max-width: 250px; /* Begrenzt das Item auf die Bildbreite */
+  margin-bottom: 40px;
+}
+
+
+/* Die Links in den Items (Bestimmen die Breite des Bildes) */
+.image-item a {
+  display: block;
+  width: 100%;
+  max-width: 250px; /* Das Bild ist maximal 250px breit */
+}
+
+/* Die Bilder selbst */
+.image-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* Die Bildunterschrift / Überschrift */
+.image-item figcaption {
+  font-size: 0.95rem;       
+  color: var(--fg);           
+  margin-top: 8px;          
+  text-align: left;       
+  width: 100%;
+  /* WICHTIG: Muss exakt dieselbe max-width wie das 'a'-Tag (Bild) haben */
+  max-width: 250px;         
+  line-height: 1.4;
+  font-style: italic; /* Passend zum Stil von .image-figure */
+}
+
         a {
             color: #ff7b00;
             text-decoration: none;
@@ -258,8 +323,12 @@
         
         <div class="highlights-box">
             <h4>Highlights:</h4>
-            <p style="text-align: right;"><a href="#processing">Processing</a><br>
-            <a href="esoterik_und_magie.html">Esoterik &amp; Magie</a></p>
+            <p style="text-align: right;">
+              <a href="#processing">Processing</a><br>
+              <a href="#Cropper Utility">Cropper Utility</a><br>
+            <a href="#memes">Memes</a><br>
+            <!-- <a href="esoterik_und_magie.html">Esoterik &amp; Magie</a> -->
+            </p>
         </div>
        
        <hr style="border: 0; height: 1px; background: #ccc; margin: 40px 0;">
@@ -293,6 +362,15 @@
         </p>
         
         <a href="kakteen_und_andere_sukkulenten.html"> <img src="echinopsis.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';"></a>
+      
+      <!--
+      <p>
+            <a href="https://flickr.com/photos/10824397@N04" target="_blank">Malen und Zeichnen</a><br>
+            Liebhaberei ohne Erfolg, zum Teil wegen Lähmungs&shy;erscheinungen in meinen Händen.
+        </p>
+        
+        <img src="aquarellmarker.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+     -->
        
        <p id="magie">
             <a href="esoterik_und_magie.html">Esoterik und Magie</a><br>
@@ -314,9 +392,9 @@
         <h3 id="processing">Processing</h3>
         <p>Schönes und unnützes.</p>
         <p><a href="https://khz-66.github.io/processing.js/" target="_blank">Strahlenblumen</a> <a href="https://github.com/khz-66/processing.js?tab=readme-ov-file" target="_blank">(Quelltext)</a></p>
-    
-     <p><a href="https://khz-66.github.io/Orbiter-Live-Hintergrund/" target="_blank">Orbiter</a> <a href="https://github.com/khz-66/Orbiter-Live-Hintergrund?tab=readme-ov-file" target="_blank">(Quelltext)</a> - Unter Quelltext liegt die <a href="https://github.com/khz-66/Orbiter-Live-Hintergrund/blob/main/class_orbiter_demo_random_Orbiters.apk">apk-Installationsdatei</a> für einen Android <bc>Live-Hintergrund</bc>. Ich bin als Android Entwickler registriert, aber wahrscheinlich werden bei Installation trotz&shy;dem Warnungen ausgegeben...</p>
-    
+        <p><a href="https://khz-66.github.io/Orbiter-Live-Hintergrund/" target="_blank">Orbiter</a> <a href="https://github.com/khz-66/Orbiter-Live-Hintergrund?tab=readme-ov-file" target="_blank">(Quelltext)</a> - Unter Quelltext liegt die <a href="https://github.com/khz-66/Orbiter-Live-Hintergrund/blob/main/class_orbiter_demo_random_Orbiters.apk">apk-Installationsdatei</a> für einen Android <bc>Live-Hintergrund</bc>. Ich bin als Android Entwickler registriert, aber wahrscheinlich werden bei Installation trotz&shy;dem Warnungen ausgegeben...</p>
+        <p id="Cropper Utility"><a href="https://khz-66.github.io/Cropper/" target="_blank">Cropper</a> beschneidet einfarbige Bildränder!</p>
+        
         <h3>Modellbau</h3>
         <p>
             <a href="papier.html">Papier</a><br>
@@ -325,6 +403,40 @@
         
         
         <a href="papier.html"><img src="impossible.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';"></a>
+     
+     <h3 id="memes">Webgrafik, Memes u. ä.</h3>
+     
+       <div class="image-row">
+      
+      <figure class="image-item">
+        <a href="was ist das schwert.jpg">
+          <img src="was ist das schwert.jpg" alt="" class="frame">
+        </a>
+        <figcaption>image-row 1</figcaption>
+      </figure>
+            
+      <figure class="image-item">
+        <a href="impossible_model.pdf">
+         <img src="quoi.jpg" alt="" class="frame">
+        </a>
+        <figcaption>image-row 2</figcaption>
+      </figure>
+
+      <figure class="image-item">
+        <a href="papervisor.pdf">
+          <img src="bild3.jpg" alt="Papervisor Modell" class="frame">
+        </a>
+        <figcaption>image-row 3</figcaption>
+      </figure>
+
+      <figure class="image-item">
+        <a href="starcopter.pdf">
+          <img src="bild4.jpg" alt="Starcopter Modell" class="frame">
+        </a>
+        <figcaption>image-row 4</figcaption>
+      </figure>
+      
+    </div>
      
      <hr style="border: 0; height: 1px; background: #ccc; margin: 40px 0;">
         
