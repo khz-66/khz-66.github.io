@@ -657,3 +657,7 @@ hr {
         #puzzle-holder canvas {
             display: block;
         }
+
+body {
+    background-color: red !important;
+}
