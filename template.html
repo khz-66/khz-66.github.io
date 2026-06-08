@@ -1,18 +1,8 @@
 <!DOCTYPE html>
-<html class="light" lang="de"> <!-- Dunkles Farbschema; alternativ <html class="light"> für helles Farbschema  -->
-<head>
+<html class="light" lang="de"> <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page Title</title>
-    
-    <!-- Weiterleitung für index.html 
-    <script>
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get('weiterleitung') === 'ja') {
-        window.location.href = "index_voll.html"; // <-- Für Weiterleitung "?weiterleitung=ja" an die Adresse anhängen
-      }
-    </script>
-    -->
     
     <link rel="stylesheet" href="/css/styles.css">
     <script src="p5.min.js"></script>
@@ -20,18 +10,11 @@
 
 <body>
   <div class="avatar-widget-container avatar-bottom-left ">
-    <a href="index.html" id="avatar-link" class="avatar-link-wrapper" style="display: block;">
+    <a href="index.html" id="avatar-link" class="avatar-link-wrapper" style="display: block;"></a>
     <div id="avatar-animation-holder"></div>
   </div>
 
   <div class="container">
-    <!-- Abstand für den Avatar rechts oben
-    <br> 
-    <br>
-    <br>
-    <br>
-    <br>
-    -->
     <h1>Überschrift 1</h1>
     
     <div class="highlights-box">
@@ -189,7 +172,7 @@ Sage hievon auch uns ein weniges, Tochter Kronions.
 <dialog id="orbiterDialog" class="dialog-base dialog-code">
     <button class="closeDialogBtn">&times;</button>
     
-    <iframe src="https://khz-66.github.io/Orbiter-Live-Hintergrund/" style="width: 100%; height: calc(100% - 40px); border: none;"></iframe>
+    <iframe id="orbiterFrame" src="" style="width: 100%; height: calc(100% - 40px); border: none;"></iframe>
 </dialog>
 
 
@@ -269,7 +252,6 @@ Sage hievon auch uns ein weniges, Tochter Kronions.
 
   <hr>
   <p class="subtext-or text-center">Sommer 2026</p>
-    <!-- Abstand für den Avatar links unten -->
     <br> 
     <br>
     <br>
@@ -424,7 +406,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-        // 3. Spezifische Logik für das Code-Popup (Dynamisches Laden gegen das Mini-Quadrat)
+    // Spezifische Logik für das Code-Popup der Strahlenblume
     const codeDialog = document.getElementById('codeDialog');
     const openCodeBtn = document.getElementById('openCodeBtn');
     const iframe = document.getElementById('strahlenblumeFrame');
@@ -432,22 +414,28 @@ document.addEventListener("DOMContentLoaded", () => {
     if (openCodeBtn && codeDialog && iframe) {
         openCodeBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            
-            // 1. Erst den Dialog sichtbar machen
             codeDialog.showModal();
-            
-            // 2. ERST JETZT die URL in das sichtbare Iframe laden!
-            // So erkennt Processing.js sofort die echte, große Auflösung.
             iframe.src = "https://khz-66.github.io/processing.js/";
-            
-                // Ganz einfaches Öffnen ohne Lade-Tricks
-    document.getElementById('openOrbiterBtn').addEventListener('click', (e) => {
-        e.preventDefault();
-        document.getElementById('orbiterDialog').showModal();
-    });
-
         });
     }
+
+    // Spezifische Logik für den Orbiter-Live-Hintergrund
+    const orbiterDialog = document.getElementById('orbiterDialog');
+    const openOrbiterBtn = document.getElementById('openOrbiterBtn');
+    const orbiterFrame = document.getElementById('orbiterFrame');
+
+    if (openOrbiterBtn && orbiterDialog && orbiterFrame) {
+        openOrbiterBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // 1. Erst den Dialog sichtbar machen (Größe wird für den Browser berechenbar)
+            orbiterDialog.showModal();
+            
+            // 2. ERST JETZT die URL in das sichtbare Iframe laden!
+            orbiterFrame.src = "https://khz-66.github.io/Orbiter-Live-Hintergrund/";
+        });
+    }
+
 
 
 }); // Ende des DOMContentLoaded-Blocks
