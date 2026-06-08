@@ -19,7 +19,7 @@ const puzzleSketch = (p) => {
 
   p.preload = () => {
     for (let i = 1; i <= 8; i++) {
-      images.push(p.loadImage(`bild${i}.jpg`)); 
+      images.push(p.loadImage(`puzzle${i}.jpg`)); 
     }
   };
 
