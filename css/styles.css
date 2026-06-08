@@ -16,6 +16,7 @@
 }
 
 body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background: var(--bg);
   color: var(--fg);
 }
@@ -657,7 +658,3 @@ hr {
         #puzzle-holder canvas {
             display: block;
         }
-
-body {
-    background-color: red !important;
-}
