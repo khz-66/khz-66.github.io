@@ -14,7 +14,7 @@
     </script>
     -->
     
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
     <script src="p5.min.js"></script>
 </head>
 
@@ -173,11 +173,27 @@ Sage hievon auch uns ein weniges, Tochter Kronions.
     Hier geht es zu meiner interaktiven <a href="#" id="openCodeBtn">Processing Animation</a>.
   </p>
 
+<p>
+  Hier geht es zu meinem <a href="#" id="openOrbiterBtn">Orbiter Live-Hintergrund</a>.
+</p>
+
+
+
 <dialog id="codeDialog" class="dialog-base dialog-code">
     <button id="closeCodeBtn" class="closeDialogBtn">&times;</button>
     
     <iframe id="strahlenblumeFrame" src="" style="width: 100%; height: calc(100% - 40px); border: none;"></iframe>
 </dialog>
+
+
+<dialog id="orbiterDialog" class="dialog-base dialog-code">
+    <button class="closeDialogBtn">&times;</button>
+    
+    <iframe src="https://khz-66.github.io/Orbiter-Live-Hintergrund/" style="width: 100%; height: calc(100% - 40px); border: none;"></iframe>
+</dialog>
+
+
+
 
 
 <hr>
@@ -423,6 +439,13 @@ document.addEventListener("DOMContentLoaded", () => {
             // 2. ERST JETZT die URL in das sichtbare Iframe laden!
             // So erkennt Processing.js sofort die echte, große Auflösung.
             iframe.src = "https://khz-66.github.io/processing.js/";
+            
+                // Ganz einfaches Öffnen ohne Lade-Tricks
+    document.getElementById('openOrbiterBtn').addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('orbiterDialog').showModal();
+    });
+
         });
     }
 
