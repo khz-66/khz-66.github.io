@@ -1,0 +1,659 @@
+:root {
+  --bg: #343434;
+  --fg: #f5f5f5;
+  --accor: #ffae00;
+  --accbl: #08fcd5;
+  --accmark: #00b196;
+  --bradius: 8px;     /* Eckenradius */
+}
+
+:root.light {
+  --bg: #f5f5f5;
+  --fg: #444444;
+  --accor: #f4a700;
+  --accbl: #00b196;
+  --accmark: #08fcd5;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: linear-gradient(45deg, #ff7b00, #ffae00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1; 
+  hyphens: auto;
+  -webkit-hyphens: auto; /* Für Safari */
+  lang: de; /* WICHTIG: Der Browser muss wissen, dass es Deutsch ist! */
+}
+
+h2 {
+  font-size: 2rem;
+  margin: 40px 0 20px 0;
+  color: var(--accor);
+  line-height: 1.1;
+  hyphens: auto;
+  -webkit-hyphens: auto; /* Für Safari */
+  lang: de; /* WICHTIG: Der Browser muss wissen, dass es Deutsch ist! */
+}
+        
+h3 {
+  font-size: 1.5rem;
+  margin: 40px 0 20px 0;
+  color: var(--accor);
+  line-height: 1.1;
+  hyphens: auto;
+  -webkit-hyphens: auto; /* Für Safari */
+  lang: de; /* WICHTIG: Der Browser muss wissen, dass es Deutsch ist! */
+}
+
+
+
+
+
+
+p {
+ font-size: 1.2rem;
+ color: var(--fg); 
+ margin-bottom: 20px;
+ text-align: left;
+ hyphens: auto;
+ -webkit-hyphens: auto; /* Für Safari */
+ lang: de; /* WICHTIG: Der Browser muss wissen, dass es Deutsch ist! */
+}
+       
+  
+        .subtext-or {
+            font-size: 1.1rem;
+            font-style: italic;
+            letter-spacing: 1px;
+            background: linear-gradient(45deg, #ff7b00, #ffae00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            /*margin-top: 40px;*/
+        }
+        -->
+        
+        .subtext-bl {
+          font-size: 1.1rem;
+          font-style: italic;
+          letter-spacing: 1px;
+    
+          /* Auf deine Variable --accbl (Cyan) geändert */
+          color: var(--accbl); 
+    
+    /* Die Verlaufs-Eigenschaften werden zurückgesetzt, damit das Cyan greift */
+    background: none;
+    -webkit-background-clip: initial;
+    -webkit-text-fill-color: initial;
+    
+    /*margin-top: 40px;*/
+}     
+        
+/* bold colered hervorgehoben */
+.bc {
+  font-weight: bold;
+  color: var(--accbl);
+}
+
+mark {
+  background-color: var(--accmark); /* Nutzt dein Akzent-Orange */
+  color: var(--fg);                 /* Textfarbe im markierten Bereich */
+  padding: 0 4px;                 /* Ein wenig Luft links und rechts */
+  border-radius: 3px;             /* Leicht abgerundete Ecken für den Marker-Look */
+}
+
+        
+.text-center {
+ text-align: center;
+}
+
+a {
+            color: var(--accbl);
+            font-weight: bold;
+            text-decoration: underline;
+            transition: color 0.2s ease;
+            line-height: 0.8;
+        }
+        a:hover {
+            font-weight: bold;
+            text-decoration: underline;
+            
+            color: var(--accbl);
+        }
+
+
+/* 2. Grundaufbau für ALLE <hr> Elemente auf deiner Seite */
+hr {
+  border: none;
+  height: 2px;
+  /* Hier nutzen wir deine Variable als Standardfarbe für den Strich */
+  background-color: var(--accor); 
+}
+
+/* 3. Variante: Zentriert (1/5 Breite) */
+.strich-zentriert {
+  width: 20%;
+  margin: 30px auto;
+}
+
+/* 4. Variante: Linksbündig (1/5 Breite) */
+.strich-links {
+  width: 20%;
+  margin: 30px auto 30px 0;
+}
+
+/* HIGHLIGHTS BOX RECHTECK */
+.highlights-box {
+  background: var(--accor);
+  border-radius: var(--bradius);
+  padding: 20px;
+  margin: 20px auto 30px auto;
+  max-width: 500px;
+  text-align: left;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.highlights-box h5 {
+  font-size: 1rem;
+  color: #ffffff;
+  margin-top: 0; 
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.highlights-box p {
+  font-size: 1rem;
+  color: #ffffff;
+  margin-bottom: 0;
+}
+
+.highlights-box a {
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.highlights-box a:hover {
+  color: #343434;
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   SINGLE IMAGE WITH CAPTION (im Textfluss)
+   ========================================================================== */
+
+.image-figure {
+  max-width: 500px;
+  margin: 40px auto;
+  display: block;
+}
+
+.image-figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--bradius);           /* gleiche Rundung wie Highlights-Box */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;         /* optional: schöner Hover */
+}
+
+.image-figure img:hover {
+  transform: scale(1.02);
+}
+
+/* Bildunterschrift – gleicher Stil wie bei image-row */
+.image-figure figcaption {
+  font-size: 0.95rem;
+  color: var(--fg);
+  margin-top: 10px;
+  text-align: left;
+  line-height: 1.4;
+  font-style: italic;
+}
+
+/* Manuell kleinere Größen */
+.image-figure.small {
+  max-width: 350px;
+}
+
+.image-figure.tiny {
+  max-width: 250px;
+}
+
+/* Optional: zentrierte Unterschrift */
+.image-figure.centered figcaption {
+  text-align: center;
+}
+
+
+.image-row {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;  
+  margin-bottom: 40px; 
+}
+
+.image-row a {
+  display: block;
+  flex: 1 1 280px;        
+  max-width: 100%;        
+}
+
+.image-row img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* Container für Bild + Text */
+/* Container für Bild + Text im Raster */
+.image-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0; 
+  /* GEÄNDERT: flex-grow auf 0 gesetzt, damit sie nicht unkontrolliert breit werden */
+  flex: 0 1 250px; 
+  width: 100%;
+  max-width: 250px; /* Begrenzt das Item auf die Bildbreite */
+  margin-bottom: 40px;
+}
+
+
+/* Die Links in den Items (Bestimmen die Breite des Bildes) */
+.image-item a {
+  display: block;
+  width: 100%;
+  max-width: 250px; /* Das Bild ist maximal 250px breit */
+}
+
+/* Die Bilder selbst */
+.image-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* Die Bildunterschrift / Überschrift */
+.image-item figcaption {
+  font-size: 0.95rem;       
+  color: var(--fg);           
+  margin-top: 8px;          
+  text-align: left;       
+  width: 100%;
+  /* WICHTIG: Muss exakt dieselbe max-width wie das 'a'-Tag (Bild) haben */
+  max-width: 250px;         
+  line-height: 1.4;
+  font-style: italic; /* Passend zum Stil von .image-figure */
+}
+
+
+.image-scroll {
+  display: flex;
+  flex-wrap: nowrap;       /* verhindert den Umbruch der Elemente */
+  overflow-x: auto;        /* aktiviert das horizontale Scrollen */
+  gap: 8px;               /* Abstand zwischen den Bild-Blöcken */
+  padding: 20px 0;         
+  scrollbar-width: thin;   
+  margin-bottom: 40px;
+}
+
+.image-scroll::-webkit-scrollbar {
+  height: 8px;             
+}
+
+.image-scroll::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}
+
+/* NEU: Der Container für Bild + Text in der Scrollleiste */
+/* Der Container für Bild + Text in der Scrollleiste */
+.scroll-item {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;          
+  width: min-content; 
+  margin: 0; /* NEU: Löscht die Standard-Browser-Abstände von <figure> */
+}
+
+
+/* Der Container für Bild + Text in der Scrollleiste */
+.scroll-item {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;          
+  /* NEU: Zwingt den Container, sich exakt an die Breite des Bildes anzupassen */
+  width: min-content; 
+}
+
+/* Anpassung für das Bild im Scroll-Container */
+.scroll-item img {
+  height: 250px;           
+  width: auto;             
+  object-fit: cover;       
+  border-radius: var(--bradius); 
+  border: none;
+  box-shadow: none;
+  /* NEU: Verhindert minimale Layout-Verschiebungen */
+  display: block; 
+}
+
+/* Die Bildunterschrift für die Scroll-Bilder */
+.scroll-item figcaption {
+  font-size: 0.95rem;       
+  color: var(--fg);           
+  margin-top: 8px;          
+  text-align: left;       
+  line-height: 1.4;
+  font-style: italic;
+  
+  /* NEU: Erlaubt dem Text, innerhalb der Bildbreite umzubrechen */
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+
+
+        
+        
+/* ==========================================================================
+   DAS GEMEINSAME FUNDAMENT FÜR ALLE DIALOGE
+   ========================================================================== */
+.dialog-base {
+    border: 2px solid var(--accor); 
+    border-radius: var(--bradius);  
+    background-color: var(--bg);
+    color: var(--fg);
+    box-shadow: none;               
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    width: 90%; /* Standard-Breite für Mobilgeräte */
+    overflow: hidden; 
+}
+
+/* Der gemeinsame Hintergrund beim Öffnen (Standard) */
+.dialog-base::backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+}
+
+/* Der universelle Schließen-Button */
+.closeDialogBtn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    width: auto;
+    background: none;
+    border: none;
+    color: var(--accor);
+    font-size: 28px;
+    cursor: pointer;
+    line-height: 1;
+    z-index: 11;
+    transition: color 0.2s;
+}
+
+.closeDialogBtn:hover {
+    color: var(--fg); /* Wechselt beim Hover dynamisch zur Textfarbe */
+}
+
+
+/* ==========================================================================
+   SPEZIFISCHE GRÖSSEN & BESONDERHEITEN
+   ========================================================================== */
+
+/* 1. INFO-DIALOG (Schmal, Höhe flexibel) */
+.dialog-info {
+    max-width: 450px;
+    padding: 30px 20px 20px 20px;
+}
+
+/* 2. CODE- / PUZZLE-DIALOG (Breit, feste Höhe für Iframes) */
+.dialog-code {
+    max-width: 750px;
+    height: 80vh;
+    padding: 35px 15px 15px 15px;
+}
+
+/* 3. VIDEO-DIALOG (Größe richtet sich nach dem Video) */
+.dialog-video {
+    width: max-content;            
+    max-width: 90vw;               
+    max-height: 85vh;              
+    padding: 35px 20px 20px 20px; 
+}
+
+/* Spezieller Backdrop für das Video (überschreibt den Standard-Backdrop) */
+.dialog-video::backdrop {
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    background-image: radial-gradient(circle, rgba(8, 252, 213, 0.1) 0%, rgba(0,0,0,0) 70%);
+}
+/* ==========================================================================
+   ELEMENT-STYLES INNERHALB DER DIALOGE (REPARIERT)
+   ========================================================================== */
+
+/* Das Iframe bleibt im normalen Fluss, bekommt aber eine feste, große Basis */
+.dialog-code iframe {
+    width: 100%;
+    height: 90%;        /* Nutzt fast die gesamte Höhe des Pop-ups */
+    border: none;
+    background-color: transparent;
+    display: block;
+}
+
+/* Für Bilder (im Info-Dialog) */
+.popup-img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 15px; 
+    border: 1px solid rgba(var(--fg), 0.1);
+}
+
+/* Für das Video-Element selbst */
+.popup-video {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: calc(85vh - 60px); 
+    object-fit: contain; 
+    border-radius: 4px;
+}
+
+/* ==========================================================================
+   FORCE FIT FÜR PROCESSING.JS IM IFRAME
+   ========================================================================== */
+.dialog-code {
+    width: 760px;  /* Bietet genug Platz für die 720px des Iframes + Padding */
+    height: 580px; /* Bietet genug Platz für die 500px des Iframes + X-Button */
+    max-width: 95vw;  /* Sorgt dafür, dass es auf Handys nicht den Bildschirm sprengt */
+    max-height: 90vh;
+    padding: 40px 20px 20px 20px;
+    overflow: hidden;
+}
+.dialog-code {
+    max-width: 750px;
+    width: 90%;
+    height: 80vh;
+    padding: 40px 15px 15px 15px;
+    overflow: hidden;
+}
+
+
+
+
+
+/* ==========================================================================
+   KATALOG-LAYOUT (FLEX & GRID-SYSTEM)
+   ========================================================================== */
+
+/* Mobil: Alles untereinander gestapelt */
+.item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 60px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(var(--fg), 0.1); 
+    text-align: left;
+}
+
+.item:last-of-type {
+    border-bottom: none;
+}
+
+/* Das einzelne Hauptbild links */
+.item .content-image {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: var(--bradius);
+}
+
+/* Der Text- und Galerie-Container */
+.item-details {
+    width: 100%;
+}
+
+.item-details h2 {
+    font-size: 2rem;
+    margin: 0 0 10px 0;
+    color: var(--accor); /* Nutzt deine Akzentfarbe Gold/Orange */
+    line-height: 1.1; 
+}
+
+.item-details h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    font-weight: normal;
+}
+
+.item-details p {
+    font-size: 1.2rem;
+    color: rgba(var(--fg), 0.7); /* Passt sich an helles/dunkles Farbschema an */
+    margin-bottom: 10px;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+}
+
+/* Ergänzender Rahmen für die Bilder innerhalb dieses spezifischen Scrolls */
+.item-details .image-scroll img {
+    border: 2px solid var(--accor);
+    height: 200px;
+    width: auto;
+    object-fit: cover;
+    border-radius: var(--bradius);
+    transition: transform 0.2s ease;
+}
+
+@media (hover: hover) {
+    .item-details .image-scroll img:hover {
+        transform: translateY(-4px);
+    }
+}
+
+/* ==========================================================================
+   DESKTOP-ANSICHT (Ab 700px Breite)
+   ========================================================================== */
+@media (min-width: 700px) { 
+    .item {
+        flex-direction: row; 
+        align-items: start;
+        gap: 35px;
+    }
+
+    /* Fixiert das Hauptbild links auf 300px Breite */
+    .item .content-image {
+        flex: 0 0 300px; 
+        width: 300px;
+    }
+
+    /* Schaltet den Textbereich in ein 2-spaltiges Grid um */
+    .item-details {
+        flex: 1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+    }
+
+    /* Überschriften gehen über beide Textspalten */
+    .item-details h2,
+    .item-details h3 {
+        grid-column: span 2;
+    }
+
+    /* MAGIE HIER: Die Scroll-Galerie spannt über die Textspalten, 
+       bleibt aber exakt rechts neben dem Hauptbild bündig! */
+    .item-details .image-scroll {
+        grid-column: span 2;
+        width: 100%;
+        margin-top: 15px;
+    }
+}
+
+
+
+
+
+
+        /* ==========================================================================
+           3. AVATAR WIDGET (STEUERUNG)
+           ========================================================================== */
+        .avatar-widget-container {
+            width: 120px;
+            height: 120px;
+            z-index: 10;
+            /*ausblenden*/ 
+            /*display:none; */
+        }
+
+        .avatar-top-right {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+        }
+
+        /* OPTION B: Links Unten fixiert */
+        .avatar-bottom-left {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+        }
+
+        #avatar-animation-holder canvas {
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 50%;
+            border: 5px solid #5A6E8F !important; 
+        }
+        
+        #puzzle-holder {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Verhindert, dass das Puzzle-Canvas unschön verzerrt */
+        #puzzle-holder canvas {
+            display: block;
+        }
