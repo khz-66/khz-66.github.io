@@ -260,61 +260,51 @@ hr {
 
 .image-row {
   display: grid;
-  /* Erstellt automatisch so viele Spalten (mind. 160px) wie Platz haben */
+  /* Erstellt Spalten zwischen 160px und maximal der Breite des Inhalts */
   grid-template-columns: repeat(auto-fit, minmax(160px, max-content));
-  
-  /* Zentriert das gesamte Raster auf der Seite */
-  justify-content: center; 
+  justify-content: center; /* Zentriert das gesamte Raster auf der Seite */
   gap: 16px;
-  
-  max-width: 1000px; /* Maximale Breite des gesamten Blocks */
-  margin: 20px auto; /* Zentriert den Block, wenn das Fenster sehr breit ist */
+  max-width: 1000px; 
+  margin: 20px auto; 
   padding: 0 16px;
 }
 
 .image-item {
   margin: 0;
-  text-align: center; /* Zentriert Bildunterschriften innerhalb ihres Quadrats */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Zentriert Inhalt (Bild & Text) sauber im Grid-Feld */
 }
 
-.image-item img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-
-
-
-
-
-/* Die Links in den Items (Bestimmen die Breite des Bildes) */
+/* Die Links umschließen die Bilder und bestimmen die maximale Bildbreite */
 .image-item a {
   display: block;
   width: 100%;
-  max-width: 250px; /* Das Bild ist maximal 250px breit */
+  max-width: 250px; 
+  margin: 0 auto; /* Hält das Bild mittig, falls die Grid-Zelle breiter wird */
 }
 
-/* Die Bilder selbst */
+/* Die Bilder selbst (Zusammengefasst) */
 .image-item img {
   width: 100%;
   height: auto;
+  display: block;
   object-fit: cover;
   border-radius: var(--bradius);
 }
 
-/* Die Bildunterschrift / Überschrift */
+/* Die Bildunterschrift */
 .image-item figcaption {
   font-size: 0.95rem;       
   color: var(--fg);           
   margin-top: 8px;          
-  text-align: left;       
+  text-align: left; /* Text selbst ist linksbündig, sitzt aber unter dem Bild */      
   width: 100%;
-  /* WICHTIG: Muss exakt dieselbe max-width wie das 'a'-Tag (Bild) haben */
-  max-width: 250px;         
+  max-width: 250px; /* Gleiche Breite wie das Bild darüber */
   line-height: 1.4;
-  font-style: italic; /* Passend zum Stil von .image-figure */
+  font-style: italic; 
 }
+
 
 .image-scroll {
   display: flex;
