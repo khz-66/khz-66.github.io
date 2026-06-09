@@ -344,23 +344,15 @@ hr {
 .dialog-base {
     border: 2px solid var(--accor);
     border-radius: var(--bradius);
-    background-color: var(--bg);
-    color: var(--fg);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    
+
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    
-    margin: 0 !important;
-    padding: 0;
-    box-sizing: border-box;
-    overflow: hidden;
-    z-index: 5000;
-    
-    /* Fluid + orientierungs-sensibel */
-    width: min(94vw, 920px);
+
+    min-width: 250px;
+    min-height: 250px;
+
     max-width: 94vw;
     max-height: 94vh;
 }
@@ -417,15 +409,6 @@ hr {
 .dialog-video {
     width: fit-content;
     height: fit-content;
-
-    min-width: 250px;
-    min-height: 250px;
-
-    max-width: 94vw;
-    max-height: 94vh;
-
-    padding: 50px 20px 20px;
-    overflow: auto;
 }
 
 /* Schließen-Button */
@@ -461,11 +444,10 @@ hr {
     width: auto;
     height: auto;
 
-    max-width: calc(94vw - 40px);
+    max-width: min(1200px, calc(94vw - 40px));
     max-height: calc(94vh - 100px);
 
     object-fit: contain;
-    border-radius: var(--bradius);
 }
 
 /* Code-Dialog – besonders wichtig für Animationen */
