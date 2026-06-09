@@ -1,21 +1,59 @@
 :root {
+  --bradius: 8px; 
+
   --bg: #343434;
+  --bg-rgb: 52, 52, 52;
+
   --fg: #f5f5f5;
-  --accor: #ffae00;
+  --fg-rgb: 245, 245, 245;
+
+  --accor: #f9cb6a;
+  --accor-rgb: 249, 203, 106;
+
+  --accgrad: #e59f06;
+  --accgrad-rgb: 229, 159, 6;
+
   --accbl: #08fcd5;
+  --accbl-rgb: 8, 252, 213;
+
   --accmark: #00b196;
-  --bradius: 8px;     /* Eckenradius */
+  --accmark-rgb: 0, 177, 150;
 }
 
 :root.light {
+  --bradius: 8px; 
+    
   --bg: #f5f5f5;
+  --bg-rgb: 245, 245, 245;
+
   --fg: #444444;
-  --accor: #f4a700;
+  --fg-rgb: 68, 68, 68;
+
+  --accor: #e59f06;
+  --accor-rgb: 229, 159, 6;
+
+  --accgrad: #f9cb6a;
+  --accgrad-rgb: 249, 203, 106;
+
   --accbl: #00b196;
+  --accbl-rgb: 0, 177, 150;
+
   --accmark: #08fcd5;
+  --accmark-rgb: 8, 252, 213;
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 20px;
+    text-align: center; 
 }
 
 body {
+  hyphens: auto;
+  -webkit-hyphens: auto;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background: var(--bg);
   color: var(--fg);
@@ -26,13 +64,10 @@ h1 {
   margin-bottom: 20px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  background: linear-gradient(45deg, #ff7b00, #ffae00);
+  background: linear-gradient(45deg, var(--accor), var(--accgrad));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   line-height: 1.1; 
-  hyphens: auto;
-  -webkit-hyphens: auto; /* Für Safari */
-  lang: de; /* WICHTIG: Der Browser muss wissen, dass es Deutsch ist! */
 }
 
 h2 {
@@ -40,9 +75,6 @@ h2 {
   margin: 40px 0 20px 0;
   color: var(--accor);
   line-height: 1.1;
-  hyphens: auto;
-  -webkit-hyphens: auto; /* Für Safari */
-  lang: de; /* WICHTIG: Der Browser muss wissen, dass es Deutsch ist! */
 }
         
 h3 {
@@ -50,53 +82,42 @@ h3 {
   margin: 40px 0 20px 0;
   color: var(--accor);
   line-height: 1.1;
-  hyphens: auto;
-  -webkit-hyphens: auto; /* Für Safari */
-  lang: de; /* WICHTIG: Der Browser muss wissen, dass es Deutsch ist! */
 }
-
-
-
-
-
 
 p {
  font-size: 1.2rem;
  color: var(--fg); 
  margin-bottom: 20px;
  text-align: left;
- hyphens: auto;
- -webkit-hyphens: auto; /* Für Safari */
- lang: de; /* WICHTIG: Der Browser muss wissen, dass es Deutsch ist! */
 }
        
   
-        .subtext-or {
-            font-size: 1.1rem;
-            font-style: italic;
-            letter-spacing: 1px;
-            background: linear-gradient(45deg, #ff7b00, #ffae00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            /*margin-top: 40px;*/
-        }
-        -->
+ .subtext-or {
+    font-size: 1.1rem;
+    font-style: italic;
+    letter-spacing: 1px;
+    color: var(--accor);
+    /*
+    background: linear-gradient(45deg, #ff7b00, #ffae00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    */
+    /*margin-top: 40px;*/
+  }
         
-        .subtext-bl {
-          font-size: 1.1rem;
-          font-style: italic;
-          letter-spacing: 1px;
-    
-          /* Auf deine Variable --accbl (Cyan) geändert */
-          color: var(--accbl); 
-    
+  .subtext-bl {
+    font-size: 1.1rem;
+    font-style: italic;
+    letter-spacing: 1px;
+    color: var(--accbl); 
     /* Die Verlaufs-Eigenschaften werden zurückgesetzt, damit das Cyan greift */
+    /*
     background: none;
     -webkit-background-clip: initial;
     -webkit-text-fill-color: initial;
-    
+    */
     /*margin-top: 40px;*/
-}     
+  }     
         
 /* bold colered hervorgehoben */
 .bc {
@@ -111,41 +132,41 @@ mark {
   border-radius: 3px;             /* Leicht abgerundete Ecken für den Marker-Look */
 }
 
-        
 .text-center {
  text-align: center;
 }
 
 a {
-            color: var(--accbl);
-            font-weight: bold;
-            text-decoration: underline;
-            transition: color 0.2s ease;
-            line-height: 0.8;
-        }
-        a:hover {
-            font-weight: bold;
-            text-decoration: underline;
-            
-            color: var(--accbl);
-        }
+  color: var(--accbl);
+  font-weight: bold;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+  line-height: 0.8;
+}
+a:hover {
+  font-weight: bold;
+  text-decoration: underline;
+  color: var(--accbl);
+}
 
+.header-footer {
+    height: 150px;
+}
 
-/* 2. Grundaufbau für ALLE <hr> Elemente auf deiner Seite */
+/* Grundaufbau für ALLE <hr> Elemente */
 hr {
   border: none;
   height: 2px;
-  /* Hier nutzen wir deine Variable als Standardfarbe für den Strich */
   background-color: var(--accor); 
 }
 
-/* 3. Variante: Zentriert (1/5 Breite) */
+/* Variante: Zentriert (1/5 Breite) */
 .strich-zentriert {
   width: 20%;
   margin: 30px auto;
 }
 
-/* 4. Variante: Linksbündig (1/5 Breite) */
+/* Variante: Linksbündig (1/5 Breite) */
 .strich-links {
   width: 20%;
   margin: 30px auto 30px 0;
@@ -191,7 +212,6 @@ hr {
 /* ==========================================================================
    SINGLE IMAGE WITH CAPTION (im Textfluss)
    ========================================================================== */
-
 .image-figure {
   max-width: 500px;
   margin: 40px auto;
@@ -202,8 +222,10 @@ hr {
   width: 100%;
   height: auto;
   display: block;
-  border-radius: var(--bradius);           /* gleiche Rundung wie Highlights-Box */
+  border-radius: var(--bradius); /* gleiche Rundung wie Highlights-Box */
+  /*
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  */
   transition: transform 0.3s ease;         /* optional: schöner Hover */
 }
 
@@ -221,7 +243,7 @@ hr {
   font-style: italic;
 }
 
-/* Manuell kleinere Größen */
+/* Kleinere Größen */
 .image-figure.small {
   max-width: 350px;
 }
@@ -234,7 +256,6 @@ hr {
 .image-figure.centered figcaption {
   text-align: center;
 }
-
 
 .image-row {
   display: flex;
@@ -257,20 +278,17 @@ hr {
   border-radius: 6px;
 }
 
-/* Container für Bild + Text */
 /* Container für Bild + Text im Raster */
 .image-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 0; 
-  /* GEÄNDERT: flex-grow auf 0 gesetzt, damit sie nicht unkontrolliert breit werden */
   flex: 0 1 250px; 
   width: 100%;
   max-width: 250px; /* Begrenzt das Item auf die Bildbreite */
   margin-bottom: 40px;
 }
-
 
 /* Die Links in den Items (Bestimmen die Breite des Bildes) */
 .image-item a {
@@ -284,7 +302,7 @@ hr {
   width: 100%;
   height: auto;
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: var(--bradius);
 }
 
 /* Die Bildunterschrift / Überschrift */
@@ -299,7 +317,6 @@ hr {
   line-height: 1.4;
   font-style: italic; /* Passend zum Stil von .image-figure */
 }
-
 
 .image-scroll {
   display: flex;
@@ -317,10 +334,9 @@ hr {
 
 .image-scroll::-webkit-scrollbar-thumb {
   background: #555;
-  border-radius: 4px;
+  border-radius: var(--bradius);
 }
 
-/* NEU: Der Container für Bild + Text in der Scrollleiste */
 /* Der Container für Bild + Text in der Scrollleiste */
 .scroll-item {
   display: flex;
@@ -329,7 +345,6 @@ hr {
   width: min-content; 
   margin: 0; /* NEU: Löscht die Standard-Browser-Abstände von <figure> */
 }
-
 
 /* Der Container für Bild + Text in der Scrollleiste */
 .scroll-item {
@@ -366,10 +381,6 @@ hr {
   white-space: normal;
 }
 
-
-
-        
-        
 /* ==========================================================================
    DAS GEMEINSAME FUNDAMENT FÜR ALLE DIALOGE
    ========================================================================== */
@@ -414,18 +425,16 @@ hr {
     color: var(--fg); /* Wechselt beim Hover dynamisch zur Textfarbe */
 }
 
-
 /* ==========================================================================
    SPEZIFISCHE GRÖSSEN & BESONDERHEITEN
    ========================================================================== */
-
 /* 1. INFO-DIALOG (Schmal, Höhe flexibel) */
 .dialog-info {
     max-width: 450px;
     padding: 30px 20px 20px 20px;
 }
 
-/* 2. CODE- / PUZZLE-DIALOG (Breit, feste Höhe für Iframes) */
+/* 2. CODE-DIALOG (Breit, feste Höhe für Iframes) */
 .dialog-code {
     max-width: 750px;
     height: 80vh;
@@ -441,15 +450,16 @@ hr {
 }
 
 /* Spezieller Backdrop für das Video (überschreibt den Standard-Backdrop) */
+/*
 .dialog-video::backdrop {
     background-color: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(4px);
     background-image: radial-gradient(circle, rgba(8, 252, 213, 0.1) 0%, rgba(0,0,0,0) 70%);
 }
+*/
 /* ==========================================================================
    ELEMENT-STYLES INNERHALB DER DIALOGE (REPARIERT)
    ========================================================================== */
-
 /* Das Iframe bleibt im normalen Fluss, bekommt aber eine feste, große Basis */
 .dialog-code iframe {
     width: 100%;
@@ -463,9 +473,9 @@ hr {
 .popup-img {
     width: 100%;
     height: auto;
-    border-radius: 4px;
+    border-radius: var(--bradius);
     margin-bottom: 15px; 
-    border: 1px solid rgba(var(--fg), 0.1);
+    border: 1px solid rgba(var(--fg-rgb), 0.1);
 }
 
 /* Für das Video-Element selbst */
@@ -475,12 +485,13 @@ hr {
     height: auto;
     max-height: calc(85vh - 60px); 
     object-fit: contain; 
-    border-radius: 4px;
+    border-radius: var(--bradius);
 }
 
 /* ==========================================================================
    FORCE FIT FÜR PROCESSING.JS IM IFRAME
    ========================================================================== */
+/* löschen:
 .dialog-code {
     width: 760px;  /* Bietet genug Platz für die 720px des Iframes + Padding */
     height: 580px; /* Bietet genug Platz für die 500px des Iframes + X-Button */
@@ -489,6 +500,8 @@ hr {
     padding: 40px 20px 20px 20px;
     overflow: hidden;
 }
+*/
+
 .dialog-code {
     max-width: 750px;
     width: 90%;
@@ -497,14 +510,9 @@ hr {
     overflow: hidden;
 }
 
-
-
-
-
 /* ==========================================================================
    KATALOG-LAYOUT (FLEX & GRID-SYSTEM)
    ========================================================================== */
-
 /* Mobil: Alles untereinander gestapelt */
 .item {
     display: flex;
@@ -513,7 +521,7 @@ hr {
     gap: 20px;
     margin-bottom: 60px;
     padding-bottom: 40px;
-    border-bottom: 1px solid rgba(var(--fg), 0.1); 
+    border-bottom: 1px solid rgba(var(--fg-rgb), 0.1); 
     text-align: left;
 }
 
@@ -524,7 +532,7 @@ hr {
 /* Das einzelne Hauptbild links */
 .item .content-image {
     width: 100%;
-    max-width: 300px;
+    max-width: 250px;
     height: auto;
     border-radius: var(--bradius);
 }
@@ -548,8 +556,7 @@ hr {
 }
 
 .item-details p {
-    font-size: 1.2rem;
-    color: rgba(var(--fg), 0.7); /* Passt sich an helles/dunkles Farbschema an */
+    color: rgba(var(--fg-rgb), 0.7); /* Passt sich an helles/dunkles Farbschema an */
     margin-bottom: 10px;
     hyphens: auto;
     -webkit-hyphens: auto;
@@ -575,86 +582,81 @@ hr {
    DESKTOP-ANSICHT (Ab 700px Breite)
    ========================================================================== */
 @media (min-width: 700px) { 
-    .item {
-        flex-direction: row; 
-        align-items: start;
-        gap: 35px;
-    }
+  .item {
+    flex-direction: row; 
+    align-items: start;
+    gap: 35px;
+  }
 
-    /* Fixiert das Hauptbild links auf 300px Breite */
-    .item .content-image {
-        flex: 0 0 300px; 
-        width: 300px;
-    }
+  /* Fixiert das Hauptbild links auf 300px Breite */
+  .item .content-image {
+    flex: 0 0 300px; 
+    width: 300px;
+  }
 
-    /* Schaltet den Textbereich in ein 2-spaltiges Grid um */
-    .item-details {
-        flex: 1;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 25px;
-    }
+  /* Schaltet den Textbereich in ein 2-spaltiges Grid um */
+  .item-details {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+  }
 
-    /* Überschriften gehen über beide Textspalten */
-    .item-details h2,
-    .item-details h3 {
-        grid-column: span 2;
-    }
+  /* Überschriften gehen über beide Textspalten */
+  .item-details h2,
+  .item-details h3 {
+    grid-column: span 2;
+  }
 
-    /* MAGIE HIER: Die Scroll-Galerie spannt über die Textspalten, 
-       bleibt aber exakt rechts neben dem Hauptbild bündig! */
-    .item-details .image-scroll {
-        grid-column: span 2;
-        width: 100%;
-        margin-top: 15px;
-    }
+  /* Die Scroll-Galerie spannt über die Textspalten, 
+    bleibt aber exakt rechts neben dem Hauptbild bündig! */
+  .item-details .image-scroll {
+    grid-column: span 2;
+    width: 100%;
+    margin-top: 15px;
+  }
 }
 
+/* ==========================================================================
+   3. AVATAR WIDGET (STEUERUNG)
+   ========================================================================== */
+.avatar-widget-container {
+  width: 120px;
+  height: 120px;
+  z-index: 10;
+  /*ausblenden*/ 
+  /*display:none; */
+}
 
+.avatar-top-right {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
 
+/* OPTION B: Links Unten fixiert */
+.avatar-bottom-left {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+}
 
-
-
-        /* ==========================================================================
-           3. AVATAR WIDGET (STEUERUNG)
-           ========================================================================== */
-        .avatar-widget-container {
-            width: 120px;
-            height: 120px;
-            z-index: 10;
-            /*ausblenden*/ 
-            /*display:none; */
-        }
-
-        .avatar-top-right {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-        }
-
-        /* OPTION B: Links Unten fixiert */
-        .avatar-bottom-left {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-        }
-
-        #avatar-animation-holder canvas {
-            width: 100% !important;
-            height: 100% !important;
-            border-radius: 50%;
-            border: 5px solid #5A6E8F !important; 
-        }
+#avatar-animation-holder canvas {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 50%;
+  border: 5px solid #5A6E8F !important; 
+}
         
-        #puzzle-holder {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
+#puzzle-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 
-        /* Verhindert, dass das Puzzle-Canvas unschön verzerrt */
-        #puzzle-holder canvas {
-            display: block;
-        }
+/* Verhindert, dass das Puzzle-Canvas unschön verzerrt */
+#puzzle-holder canvas {
+  display: block;
+}
