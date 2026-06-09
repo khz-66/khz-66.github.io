@@ -10,7 +10,7 @@
   --accgrad-rgb: 229, 159, 6;
   --accbl: #08fcd5;
   --accbl-rgb: 8, 252, 213;
-  --accmark: #00b196;
+  --accmark: #049e86;
   --accmark-rgb: 0, 177, 150;
 }
 
@@ -24,19 +24,10 @@
   --accor-rgb: 229, 159, 6;
   --accgrad: #f9cb6a;
   --accgrad-rgb: 249, 203, 106;
-  --accbl: #00b196;
+  --accbl: #049e86;
   --accbl-rgb: 0, 177, 150;
   --accmark: #08fcd5;
   --accmark-rgb: 8, 252, 213;
-}
-
-.container {
-    position: relative;
-    z-index: 1;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px 20px;
-    text-align: center; 
 }
 
 body {
@@ -45,6 +36,49 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background: var(--bg);
   color: var(--fg);
+}
+
+/* ==========================================================================
+   SCHWEBENDER THEME-TOGGLE BUTTON (Garantiert immer einfarbig blau)
+   ========================================================================== */
+button#theme-toggle {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 10000 !important; /* Über allen anderen Elementen */
+    
+    /* Festes blaues Design – ignoriert die CSS-Variablen komplett */
+    background-color: #007bff !important; 
+    color: #ffffff !important;
+    
+    padding: 12px 24px !important;
+    font-size: 12px !important;
+    font-weight: bold !important;
+    border: none !important;
+    border-radius: 50px !important; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important; 
+    cursor: pointer !important;
+    transition: transform 0.2s, background-color 0.3s !important;
+}
+
+/* Hover-Effekt bleibt ebenfalls immer dunkelblau */
+button#theme-toggle:hover {
+    transform: scale(1.05) !important;
+    background-color: #0056b3 !important;
+    color: #ffffff !important;
+}
+
+
+/* ==========================================================================
+   LAYOUT & TEXT ELEMENTS
+   ========================================================================== */
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 20px;
+    text-align: center; 
 }
 
 h1 {
@@ -79,45 +113,30 @@ p {
  text-align: left;
 }
        
-  
- .subtext-or {
-    font-size: 1.1rem;
-    font-style: italic;
-    letter-spacing: 1px;
-    color: var(--accor);
-    /*
-    background: linear-gradient(45deg, #ff7b00, #ffae00);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    */
-    /*margin-top: 40px;*/
-  }
+.subtext-or {
+  font-size: 1.1rem;
+  font-style: italic;
+  letter-spacing: 1px;
+  color: var(--accor);
+}
         
-  .subtext-bl {
-    font-size: 1.1rem;
-    font-style: italic;
-    letter-spacing: 1px;
-    color: var(--accbl); 
-    /* Die Verlaufs-Eigenschaften werden zurückgesetzt, damit das Cyan greift */
-    /*
-    background: none;
-    -webkit-background-clip: initial;
-    -webkit-text-fill-color: initial;
-    */
-    /*margin-top: 40px;*/
-  }     
+.subtext-bl {
+  font-size: 1.1rem;
+  font-style: italic;
+  letter-spacing: 1px;
+  color: var(--accbl); 
+}     
         
-/* bold colered hervorgehoben */
 .bc {
   font-weight: bold;
   color: var(--accbl);
 }
 
 mark {
-  background-color: var(--accmark); /* Nutzt dein Akzent-Orange */
-  color: var(--fg);                 /* Textfarbe im markierten Bereich */
-  padding: 0 4px;                 /* Ein wenig Luft links und rechts */
-  border-radius: 3px;             /* Leicht abgerundete Ecken für den Marker-Look */
+  background-color: var(--accmark); 
+  color: var(--fg);                 
+  padding: 0 4px;                 
+  border-radius: 3px;             
 }
 
 .text-center {
@@ -131,36 +150,35 @@ a {
   transition: color 0.2s ease;
   line-height: 0.8;
 }
+
 a:hover {
-  font-weight: bold;
-  text-decoration: underline;
   color: var(--accbl);
+  text-decoration: underline;
 }
 
 .header-footer {
     height: 150px;
 }
 
-/* Grundaufbau für ALLE <hr> Elemente */
 hr {
   border: none;
   height: 2px;
   background-color: var(--accor); 
 }
 
-/* Variante: Zentriert (1/5 Breite) */
 .strich-zentriert {
   width: 20%;
   margin: 30px auto;
 }
 
-/* Variante: Linksbündig (1/5 Breite) */
 .strich-links {
   width: 20%;
   margin: 30px auto 30px 0;
 }
 
-/* HIGHLIGHTS BOX RECHTECK */
+/* ==========================================================================
+   HIGHLIGHTS BOX
+   ========================================================================== */
 .highlights-box {
   background: var(--accor);
   border-radius: var(--bradius);
@@ -168,7 +186,7 @@ hr {
   margin: 20px auto 30px auto;
   max-width: 500px;
   text-align: left;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
 }
 
 .highlights-box h5 {
@@ -198,7 +216,7 @@ hr {
 }
 
 /* ==========================================================================
-   SINGLE IMAGE WITH CAPTION (im Textfluss)
+   IMAGES & GALERIE (GRID & SCROLL)
    ========================================================================== */
 .image-figure {
   max-width: 500px;
@@ -210,18 +228,14 @@ hr {
   width: 100%;
   height: auto;
   display: block;
-  border-radius: var(--bradius); /* gleiche Rundung wie Highlights-Box */
-  /*
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  */
-  transition: transform 0.3s ease;         /* optional: schöner Hover */
+  border-radius: var(--bradius); 
+  transition: transform 0.3s ease;         
 }
 
 .image-figure img:hover {
   transform: scale(1.02);
 }
 
-/* Bildunterschrift – gleicher Stil wie bei image-row */
 .image-figure figcaption {
   font-size: 0.95rem;
   color: var(--fg);
@@ -231,26 +245,14 @@ hr {
   font-style: italic;
 }
 
-/* Kleinere Größen */
-.image-figure.small {
-  max-width: 350px;
-}
-
-.image-figure.tiny {
-  max-width: 250px;
-}
-
-/* Optional: zentrierte Unterschrift */
-.image-figure.centered figcaption {
-  text-align: center;
-}
-
+.image-figure.small { max-width: 350px; }
+.image-figure.tiny { max-width: 250px; }
+.image-figure.centered figcaption { text-align: center; }
 
 .image-row {
   display: grid;
-  /* Erstellt Spalten zwischen 160px und maximal der Breite des Inhalts */
   grid-template-columns: repeat(auto-fit, minmax(160px, max-content));
-  justify-content: center; /* Zentriert das gesamte Raster auf der Seite */
+  justify-content: center; 
   gap: 16px;
   max-width: 1000px; 
   margin: 20px auto; 
@@ -261,18 +263,16 @@ hr {
   margin: 0;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Zentriert Inhalt (Bild & Text) sauber im Grid-Feld */
+  align-items: center; 
 }
 
-/* Die Links umschließen die Bilder und bestimmen die maximale Bildbreite */
 .image-item a {
   display: block;
   width: 100%;
   max-width: 250px; 
-  margin: 0 auto; /* Hält das Bild mittig, falls die Grid-Zelle breiter wird */
+  margin: 0 auto; 
 }
 
-/* Die Bilder selbst (Zusammengefasst) */
 .image-item img {
   width: 100%;
   height: auto;
@@ -281,24 +281,22 @@ hr {
   border-radius: var(--bradius);
 }
 
-/* Die Bildunterschrift */
 .image-item figcaption {
   font-size: 0.95rem;       
   color: var(--fg);           
   margin-top: 8px;          
-  text-align: left; /* Text selbst ist linksbündig, sitzt aber unter dem Bild */      
+  text-align: left;       
   width: 100%;
-  max-width: 250px; /* Gleiche Breite wie das Bild darüber */
+  max-width: 250px; 
   line-height: 1.4;
   font-style: italic; 
 }
 
-
 .image-scroll {
   display: flex;
-  flex-wrap: nowrap;       /* verhindert den Umbruch der Elemente */
-  overflow-x: auto;        /* aktiviert das horizontale Scrollen */
-  gap: 8px;               /* Abstand zwischen den Bild-Blöcken */
+  flex-wrap: nowrap;       
+  overflow-x: auto;        
+  gap: 8px;               
   padding: 20px 0;         
   scrollbar-width: thin;   
   margin-bottom: 40px;
@@ -313,37 +311,22 @@ hr {
   border-radius: var(--bradius);
 }
 
-/* Der Container für Bild + Text in der Scrollleiste */
 .scroll-item {
   display: flex;
   flex-direction: column;
   flex-shrink: 0;          
   width: min-content; 
-  margin: 0; /* NEU: Löscht die Standard-Browser-Abstände von <figure> */
+  margin: 0; 
 }
 
-/* Der Container für Bild + Text in der Scrollleiste */
-.scroll-item {
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;          
-  /* NEU: Zwingt den Container, sich exakt an die Breite des Bildes anzupassen */
-  width: min-content; 
-}
-
-/* Anpassung für das Bild im Scroll-Container */
 .scroll-item img {
   height: 250px;           
   width: auto;             
   object-fit: cover;       
   border-radius: var(--bradius); 
-  border: none;
-  box-shadow: none;
-  /* NEU: Verhindert minimale Layout-Verschiebungen */
   display: block; 
 }
 
-/* Die Bildunterschrift für die Scroll-Bilder */
 .scroll-item figcaption {
   font-size: 0.95rem;       
   color: var(--fg);           
@@ -351,41 +334,72 @@ hr {
   text-align: left;       
   line-height: 1.4;
   font-style: italic;
-  
-  /* NEU: Erlaubt dem Text, innerhalb der Bildbreite umzubrechen */
   word-wrap: break-word;
   white-space: normal;
 }
 
 /* ==========================================================================
-   DAS GEMEINSAME FUNDAMENT FÜR ALLE DIALOGE
+   POP-UPS / DIALOG SYSTEM (PERFEKT FÜR HANDY UND DESKTOP)
    ========================================================================== */
 .dialog-base {
     border: 2px solid var(--accor); 
     border-radius: var(--bradius);  
     background-color: var(--bg);
     color: var(--fg);
-    box-shadow: none;               
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);               
+    
+    /* Absolute Positionierung ohne Browser-Intervention */
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    margin: 0;
-    width: 90%; /* Standard-Breite für Mobilgeräte */
+    
+    /* Setzt alle versteckten Browser-Ränder des Dialogs auf Null */
+    margin: 0 !important;
+    padding: 0; 
+    box-sizing: border-box;
+
+    /* Das Handy-Korsett: Nimmt 100% des sichtbaren Raums und zieht 10px ab */
+    width: calc(100% - 10px) !important;
+    max-width: calc(100vw - 10px) !important;
+    min-width: calc(100vw - 10px) !important;
+    
+    max-height: 85vh;           
+    z-index: 5000;              
     overflow: hidden; 
 }
 
-/* Der gemeinsame Hintergrund beim Öffnen (Standard) */
+
+
 .dialog-base::backdrop {
     background-color: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(4px);
 }
 
-/* Der universelle Schließen-Button */
+/* Spezifische Größen für größere Bildschirme (Desktops/Tablets) */
+@media (min-width: 500px) {
+    .dialog-info {
+        width: 450px;
+    }
+}
+
+@media (min-width: 800px) {
+    .dialog-code {
+        width: 750px;
+        height: 80vh;
+    }
+    
+    .dialog-video {
+        width: max-content;            
+        max-width: 90vw;               
+    }
+}
+
+/* Der universelle Schließen-Button - Unverändert sauber oben rechts */
 .closeDialogBtn {
-    position: absolute;
-    top: 5px;
-    right: 10px;
+    position: absolute; 
+    top: 10px;
+    right: 15px;
     width: auto;
     background: none;
     border: none;
@@ -394,58 +408,39 @@ hr {
     cursor: pointer;
     line-height: 1;
     z-index: 11;
-    transition: color 0.2s;
+    margin: 0;
+    padding: 0;
+    transition: color 0.2s, transform 0.2s;
 }
 
 .closeDialogBtn:hover {
-    color: var(--fg); /* Wechselt beim Hover dynamisch zur Textfarbe */
+    color: var(--fg); 
+    transform: scale(1.1);
 }
 
-/* ==========================================================================
-   SPEZIFISCHE GRÖSSEN & BESONDERHEITEN
-   ========================================================================== */
-/* 1. INFO-DIALOG (Schmal, Höhe flexibel) */
-.dialog-info {
-    max-width: 450px;
-    padding: 30px 20px 20px 20px;
-}
+/* Abstände innerhalb der Dialoge */
+.dialog-info { padding: 45px 20px 20px 20px; }
+.dialog-code { padding: 45px 15px 15px 15px; }
+.dialog-video { padding: 45px 20px 20px 20px; }
 
-/* 2. CODE-DIALOG (Breit, feste Höhe für Iframes) */
-.dialog-code {
-    max-width: 750px;
-    height: 80vh;
-    padding: 35px 15px 15px 15px;
-}
-
-/* 3. VIDEO-DIALOG (Größe richtet sich nach dem Video) */
-.dialog-video {
-    width: max-content;            
-    max-width: 90vw;               
-    max-height: 85vh;              
-    padding: 35px 20px 20px 20px; 
-}
-
-/* Spezieller Backdrop für das Video (überschreibt den Standard-Backdrop) */
-/*
-.dialog-video::backdrop {
-    background-color: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(4px);
-    background-image: radial-gradient(circle, rgba(8, 252, 213, 0.1) 0%, rgba(0,0,0,0) 70%);
-}
-*/
-/* ==========================================================================
-   ELEMENT-STYLES INNERHALB DER DIALOGE (REPARIERT)
-   ========================================================================== */
-/* Das Iframe bleibt im normalen Fluss, bekommt aber eine feste, große Basis */
+/* Inhalte in Dialogen */
 .dialog-code iframe {
     width: 100%;
-    height: 90%;        /* Nutzt fast die gesamte Höhe des Pop-ups */
+    /* Berechnet die perfekte Höhe: 85vh des Popups minus Platz für das Schließen-X */
+    height: calc(85vh - 60px) !important; 
     border: none;
     background-color: transparent;
     display: block;
+    border-radius: calc(var(--bradius) - 2px); /* Verhindert, dass spitze Ecken aus dem Dialog ragen */
 }
 
-/* Für Bilder (im Info-Dialog) */
+/* Falls die Animation direkt als Canvas im Dialog liegt (ohne Iframe) */
+.dialog-code canvas {
+    width: 100% !important;
+    height: calc(85vh - 60px) !important;
+    object-fit: contain; /* Sorgt dafür, dass die Animation im Fenster bleibt, ohne zu verzerren */
+}
+
 .popup-img {
     width: 100%;
     height: auto;
@@ -454,7 +449,6 @@ hr {
     border: 1px solid rgba(var(--fg-rgb), 0.1);
 }
 
-/* Für das Video-Element selbst */
 .popup-video {
     display: block;
     width: 100%;
@@ -464,32 +458,11 @@ hr {
     border-radius: var(--bradius);
 }
 
-/* ==========================================================================
-   FORCE FIT FÜR PROCESSING.JS IM IFRAME
-   ========================================================================== */
-/* löschen:
-.dialog-code {
-    width: 760px;  /* Bietet genug Platz für die 720px des Iframes + Padding */
-    height: 580px; /* Bietet genug Platz für die 500px des Iframes + X-Button */
-    max-width: 95vw;  /* Sorgt dafür, dass es auf Handys nicht den Bildschirm sprengt */
-    max-height: 90vh;
-    padding: 40px 20px 20px 20px;
-    overflow: hidden;
-}
-*/
 
-.dialog-code {
-    max-width: 750px;
-    width: 90%;
-    height: 80vh;
-    padding: 40px 15px 15px 15px;
-    overflow: hidden;
-}
 
 /* ==========================================================================
    KATALOG-LAYOUT (FLEX & GRID-SYSTEM)
    ========================================================================== */
-/* Mobil: Alles untereinander gestapelt */
 .item {
     display: flex;
     flex-direction: column;
@@ -505,16 +478,14 @@ hr {
     border-bottom: none;
 }
 
-/* NEU: Der Container für die Hauptbilder */
 .item .item-images {
     display: flex;
-    flex-direction: column; /* Stapelt die Bilder vertikal */
-    gap: 16px;              /* Abstand zwischen den Hauptbildern */
+    flex-direction: column; 
+    gap: 16px;              
     width: 100%;
-    align-items: center;    /* Zentriert die Bilder auf dem Handy */
+    align-items: center;    
 }
 
-/* Das einzelne Hauptbild */
 .item .content-image {
     width: 100%;
     max-width: 250px;
@@ -522,7 +493,6 @@ hr {
     border-radius: var(--bradius);
 }
 
-/* Der Text- und Galerie-Container */
 .item-details {
     width: 100%;
 }
@@ -547,7 +517,6 @@ hr {
     -webkit-hyphens: auto;
 }
 
-/* Ergänzender Rahmen für die Bilder innerhalb dieses spezifischen Scrolls */
 .item-details .image-scroll img {
     border: 2px solid var(--accor);
     height: 200px;
@@ -563,9 +532,7 @@ hr {
     }
 }
 
-/* ==========================================================================
-   DESKTOP-ANSICHT (Ab 700px Breite)
-   ========================================================================== */
+/* Desktop-Ansicht ab 700px */
 @media (min-width: 700px) { 
   .item {
     flex-direction: row; 
@@ -573,19 +540,16 @@ hr {
     gap: 35px;
   }
 
-  /* NEU: Fixiert die linke Bilder-Spalte komplett auf 300px Breite */
   .item .item-images {
     flex: 0 0 300px; 
     width: 300px;
-    align-items: start; /* Richtet die Bilder im Desktop linksbündig aus */
+    align-items: start; 
   }
 
-  /* Dehnt die Bilder auf die vollen 300px der linken Spalte aus */
   .item .content-image {
     max-width: 300px;
   }
 
-  /* Schaltet den Textbereich in ein 2-spaltiges Grid um */
   .item-details {
     flex: 1;
     display: grid;
@@ -593,14 +557,11 @@ hr {
     gap: 25px;
   }
 
-  /* Überschriften gehen über beide Textspalten */
   .item-details h2,
   .item-details h3 {
     grid-column: span 2;
   }
 
-  /* Die Scroll-Galerie spannt über die Textspalten, 
-    bleibt aber exakt rechts neben dem Hauptbild bündig! */
   .item-details .image-scroll {
     grid-column: span 2;
     width: 100%;
@@ -608,16 +569,13 @@ hr {
   }
 }
 
-
 /* ==========================================================================
-   3. AVATAR WIDGET (STEUERUNG)
+   WIDGETS & CANVAS HOLDER
    ========================================================================== */
 .avatar-widget-container {
   width: 120px;
   height: 120px;
   z-index: 10;
-  /*ausblenden*/ 
-  /*display:none; */
 }
 
 .avatar-top-right {
@@ -626,7 +584,6 @@ hr {
   right: 20px;
 }
 
-/* OPTION B: Links Unten fixiert */
 .avatar-bottom-left {
   position: fixed;
   bottom: 20px;
@@ -638,6 +595,7 @@ hr {
   height: 100% !important;
   border-radius: 50%;
   border: 5px solid #5A6E8F !important; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
 }
         
 #puzzle-holder {
@@ -648,7 +606,6 @@ hr {
   margin-bottom: 20px;
 }
 
-/* Verhindert, dass das Puzzle-Canvas unschön verzerrt */
 #puzzle-holder canvas {
   display: block;
 }
