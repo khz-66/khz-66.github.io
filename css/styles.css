@@ -339,16 +339,19 @@ hr {
 }
 
 /* ==========================================================================
-   POP-UPS / DIALOG SYSTEM (OPTIMIERT FÜR HOCH- & QUERFORMAT)
+   POP-UPS / DIALOG SYSTEM (VAR-BASIERT FÜR HOCH- & QUERFORMAT)
    ========================================================================== */
-.dialog-base {
+.dialog-base,
+.dialog-info,
+.dialog-video {
     border: 2px solid var(--accor);
     border-radius: var(--bradius);
 
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); /* Zentriert das Element exakt */
+    margin: 0;                         /* Hebelt das Standard-Browser-Margin von <dialog> aus */
 
     min-width: 250px;
     min-height: 250px;
@@ -357,10 +360,13 @@ hr {
     max-height: 94vh;
 }
 
+
 /* Querformat (Landscape) – schmaler und höher */
 @media (orientation: landscape) {
-    .dialog-base {
-        max-width: 82vw;           /* deutlich schmaler im Querformat */
+    .dialog-base,
+    .dialog-info,
+    .dialog-video {
+        max-width: 82vw;           
         max-height: 92vh;
         width: min(82vw, 780px);
     }
@@ -368,13 +374,17 @@ hr {
 
 /* Sehr kleine Höhe (z.B. Handy quer) */
 @media (orientation: landscape) and (max-height: 580px) {
-    .dialog-base {
+    .dialog-base,
+    .dialog-info,
+    .dialog-video {
         max-width: 78vw;
         max-height: 88vh;
     }
 }
 
-.dialog-base::backdrop {
+.dialog-base::backdrop,
+.dialog-info::backdrop,
+.dialog-video::backdrop {
     background-color: rgba(0, 0, 0, 0.45);
     backdrop-filter: blur(5px);
 }
@@ -387,9 +397,10 @@ hr {
     max-height: 94vh;
     overflow-y: auto;
     scrollbar-width: thin;
+    box-sizing: border-box; /* Verhindert, dass Padding die Box vergrößert */
 }
 
-/* Info-Dialoge */
+/* Info-Dialoge – sauber zentriert und auf max. 480px begrenzt */
 .dialog-info {
     width: min(480px, 94vw);
     min-width: 250px;
@@ -397,13 +408,48 @@ hr {
 }
 
 /* p5.js-Dialoge */
+/* --- Code-Dialog (unverändert beibehalten) --- */
 .dialog-code {
+    border: 2px solid var(--accor);
+    border-radius: var(--bradius);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 50px 20px 20px 20px;
     width: min(500px, 94vw);
     height: min(500px, 94vh);
-
     min-width: 250px;
     min-height: 250px;
+    max-height: 94vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    box-sizing: border-box;
 }
+
+.dialog-code::backdrop {
+    background-color: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(5px);
+}
+
+/* NEU: Spezifisches Höher-Machen NUR für das Puzzle-Popup.
+   Trifft auf jeden Dialog zu, der den #puzzle-holder beinhaltet.
+*/
+.dialog-info:has(#puzzle-holder),
+.dialog-base:has(#puzzle-holder) {
+    height: 75vh; /* Schaltet von automatischer Höhe auf 75% der Bildschirmhöhe */
+    max-height: 94vh; 
+}
+
+/* Puzzle-Spezifische Canvas-Anpassung */
+#puzzle-holder canvas {
+    max-width: 100% !important;
+    max-height: 68vh !important; /* Von 58vh auf 68vh erhöht, passend zum höheren Popup */
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain;
+}
+
 
 /* Video-Dialoge */
 .dialog-video {
@@ -465,7 +511,6 @@ hr {
     display: block;
 }
 
-/* Puzzle-spezifisch */
 #puzzle-holder canvas {
     max-width: 100% !important;
     max-height: 58vh !important;
