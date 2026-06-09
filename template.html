@@ -154,7 +154,6 @@ Sage hievon auch uns ein weniges, Tochter Kronions.
       <p>Hier steht dein Infotext, der perfekt in das Pop-up passt.</p>
   </dialog>
 
-
   <hr class="strich-zentriert">
    
   <dialog id="videoDialog" class="dialog-base dialog-video">
@@ -166,7 +165,6 @@ Sage hievon auch uns ein weniges, Tochter Kronions.
       </video>
   </dialog>
 
-
   <p>
     Hier geht es zu meiner interaktiven <a href="#" id="openCodeBtn">Processing Animation</a>.
   </p>
@@ -175,52 +173,46 @@ Sage hievon auch uns ein weniges, Tochter Kronions.
   Hier geht es zu meinem <a href="#" id="openOrbiterBtn">Orbiter Live-Hintergrund</a>.
 </p>
 
-
-
 <dialog id="codeDialog" class="dialog-base dialog-code">
     <button id="closeCodeBtn" class="closeDialogBtn">&times;</button>
     
     <iframe id="strahlenblumeFrame" src="" style="width: 100%; height: calc(100% - 40px); border: none;"></iframe>
 </dialog>
 
-
 <dialog id="orbiterDialog" class="dialog-base dialog-code">
-    <button class="closeDialogBtn">&times;</button>
-    
-    <iframe id="orbiterFrame" src="" style="width: 100%; height: calc(100% - 40px); border: none;"></iframe>
+  <button class="closeDialogBtn">&times;</button>
+  <iframe id="orbiterFrame" src="" style="width: 100%; height: calc(100% - 40px); border: none;"></iframe>
 </dialog>
-
-
-
-
 
 <hr>
 
 <h2>Katalog</h2>
 
-
 <section class="item" id="adromischus">
-            <img src="pcr_pictures/PCR105_20241012_65197.jpg" alt="Adromischus" class="content-image">
-            <div class="item-details">
-                <h2>Adromischus</h2>
-                <h3><em>Adromischus cooperi</em></h3>
-                <p>
-                    <strong>Pflegehinweise & Notizen:</strong><br>
-                    Steht bevorzugt warm. Sommerquartier: Küchenfenster, Winterquartier: Treppenhaus. Substrat: Uhlig Kakteenerde Standard ggf. gemischt mit COMPO CACTEA® und rein mineralischem Substrat 1:1:1 (Düngen nach 8 Wochen).
-                </p>
-                <ul>
-                    <li><strong>27.04.25:</strong> Kulturhinweise aktualisiert</li>
-                    <li><strong>08.10.24:</strong> Vom Süd- zum Nordfenster gestellt</li>
-                    <li><strong>13.05.25:</strong> Ans Südfenster gestellt</li>
-                    <li><strong>01.06.25:</strong> Ans Küchenfenster?</li>
-                    <li><strong>01.03.26:</strong> Vertrocknet</li>
-                </ul>
-            </div>
-        </section>
+  <img src="pcr_pictures/PCR105_20241012_65197.jpg" alt="Adromischus" class="content-image">
+  <div class="item-details">
+    <h2>Adromischus</h2>
+    <h3><em>Adromischus cooperi</em></h3>
+    <p>
+      <strong>Pflegehinweise & Notizen:</strong><br>
+      Steht bevorzugt warm. Sommerquartier: Küchenfenster, Winterquartier: Treppenhaus. Substrat: Uhlig Kakteenerde Standard ggf. gemischt mit COMPO CACTEA® und rein mineralischem Substrat 1:1:1 (Düngen nach 8 Wochen).
+    </p>
+    <ul>
+      <li><strong>27.04.25:</strong> Kulturhinweise aktualisiert</li>
+      <li><strong>08.10.24:</strong> Vom Süd- zum Nordfenster gestellt</li>
+      <li><strong>13.05.25:</strong> Ans Südfenster gestellt</li>
+      <li><strong>01.06.25:</strong> Ans Küchenfenster?</li>
+      <li><strong>01.03.26:</strong> Vertrocknet</li>
+    </ul>
+  </div>
+</section>
 
         <section class="item" id="aloe">
-            <img src="pcr_pictures/PCR105_20250523_60406.jpg" alt="Aloe" class="content-image">
-            <div class="item-details">
+             <div class="item-images">
+    <img src="pcr_pictures/PCR105_20250523_60406.jpg" alt="Aloe" class="content-image">
+    <img src="pcr_pictures/PCR105_20250523_60406.jpg" alt="Aloe" class="content-image">
+  </div>
+  <div class="item-details">
                 <h2>Aloe</h2>
                 <h3><em>Aloe vera</em></h3>
                 <p>
@@ -291,11 +283,10 @@ Sage hievon auch uns ein weniges, Tochter Kronions.
         if (istAktiviertFuerSession) {
             avatarLink.href = "index_voll.html";
         }
-    }
-});
+      }
+  });
 
-    
-    const avatarSketch = (p) => {
+  const avatarSketch = (p) => {
   let img;
   let blinkTimer = 0;
   let pauseTimer = 0;       // NEU: Timer für die Pause zwischen den Blinzlern
