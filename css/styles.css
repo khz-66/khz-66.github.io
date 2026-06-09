@@ -415,10 +415,17 @@ hr {
 
 /* Video-Dialoge */
 .dialog-video {
-    width: min(860px, 94vw);
+    width: fit-content;
+    height: fit-content;
 
     min-width: 250px;
     min-height: 250px;
+
+    max-width: 94vw;
+    max-height: 94vh;
+
+    padding: 50px 20px 20px;
+    overflow: auto;
 }
 
 /* Schließen-Button */
@@ -449,13 +456,16 @@ hr {
 /* Bilder & Videos */
 .popup-img,
 .popup-video {
-    width: 100%;
+    display: block;
+
+    width: auto;
     height: auto;
-    max-height: 68vh;
+
+    max-width: calc(94vw - 40px);
+    max-height: calc(94vh - 100px);
+
     object-fit: contain;
     border-radius: var(--bradius);
-    margin: 10px 0 15px 0;
-    border: 1px solid rgba(var(--fg-rgb), 0.15);
 }
 
 /* Code-Dialog – besonders wichtig für Animationen */
