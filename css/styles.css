@@ -271,24 +271,19 @@ hr {
   max-width: 100%;        
 }
 
-.image-row img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 6px;
+.image-row {
+  display: flex;
+  flex-wrap: wrap;       /* Erlaubt den Zeilenumbruch bei kleineren Bildschirmen */
+  justify-content: flex-start; /* Zwingt alle Zeilen (auch die letzte) nach links */
+  gap: 16px;             /* Definiert den Abstand zwischen den Elementen */
 }
 
-/* Container für Bild + Text im Raster */
 .image-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0; 
-  flex: 0 1 250px; 
-  width: 100%;
-  max-width: 250px; /* Begrenzt das Item auf die Bildbreite */
-  margin-bottom: 40px;
+  flex: 0 1 calc(25% - 12px); /* Flex-Basis bei 4 Elementen pro Zeile (Minus Gap-Anteil) */
+  min-width: 150px;           /* Verhindert, dass die Bilder auf dem Smartphone zu quetschen */
+  margin: 0;                  /* Setzt Standard-Browser-Margins von <figure> zurück */
 }
+
 
 /* Die Links in den Items (Bestimmen die Breite des Bildes) */
 .image-item a {
