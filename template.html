@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html class="light" lang="de"> <head>
+<html class="light" lang="de"> <!-- Standart dunkles Theme mit <html>, helles Theme mit <html class="light"> -->
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Page Title</title>
@@ -22,8 +23,12 @@
   <a href="index.html" id="avatar-link" class="avatar-link-wrapper" style="display: block;">
     <div id="avatar-animation-holder"></div>
   </a>
-</div>
+  </div>
 
+  <!-- Bei Avatar rechts oben:
+  <div class="header-footer"></div>
+  -->
+  
   <div class="container">
     <h1>Überschrift 1</h1>
     
@@ -35,8 +40,8 @@
     </div>
     
     <h2>Überschrift 2</h2>
-    <p>Sage mir, <a href="">Muse</a>, die Taten des vielgewanderten Mannes,
-welcher so weit geirrt nach der heiligen <a>Troja</a> Zerstörung,
+    <p>Sage mir, <a href="#">Muse</a>, die Taten des vielgewanderten Mannes,
+welcher so weit geirrt nach der heiligen <a href="#">Troja</a> Zerstörung,
 vieler Menschen Städte gesehn und Sitte gelernt hat,
 und auf dem <span class="bc">Meere</span> so viel unnennbare Leiden erduldet,
 seine Seele zu retten und seiner Freunde Zurückkunft.
@@ -258,21 +263,13 @@ Sage hievon auch uns ein weniges, Tochter Kronions.
             </div>
         </section>
 
-
-
   <hr>
   <p class="subtext-or text-center">Sommer 2026</p>
-    <br> 
-    <br>
-    <br>
-    <br>
-    <br>
-    
-    
+  
+  <!-- Bei Avatar links unten: -->
+  <div class="header-footer"></div>
     
   </div>
-  
-  
   
   <script>
     
@@ -446,10 +443,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-
-
 }); // Ende des DOMContentLoaded-Blocks
-
 
 // 4. UNIVERSAL: Schließen über alle "X"-Buttons (.closeDialogBtn)
 // (Das kann außerhalb stehen, da es document-weit sucht)
@@ -477,8 +471,6 @@ function closeAnyDialog(dialog) {
         video.pause();
     }
 }
-
-
 
     </script>
 
