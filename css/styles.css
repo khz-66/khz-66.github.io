@@ -339,126 +339,158 @@ hr {
 }
 
 /* ==========================================================================
-   POP-UPS / DIALOG SYSTEM (PERFEKT FÜR HANDY UND DESKTOP)
+   POP-UPS / DIALOG SYSTEM (OPTIMIERT FÜR HOCH- & QUERFORMAT)
    ========================================================================== */
 .dialog-base {
-    border: 2px solid var(--accor); 
-    border-radius: var(--bradius);  
+    border: 2px solid var(--accor);
+    border-radius: var(--bradius);
     background-color: var(--bg);
     color: var(--fg);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);               
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     
-    /* Absolute Positionierung ohne Browser-Intervention */
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     
-    /* Setzt alle versteckten Browser-Ränder des Dialogs auf Null */
     margin: 0 !important;
-    padding: 0; 
+    padding: 0;
     box-sizing: border-box;
-
-    /* Das Handy-Korsett: Nimmt 100% des sichtbaren Raums und zieht 10px ab */
-    width: calc(100% - 10px) !important;
-    max-width: calc(100vw - 10px) !important;
-    min-width: calc(100vw - 10px) !important;
+    overflow: hidden;
+    z-index: 5000;
     
-    max-height: 85vh;           
-    z-index: 5000;              
-    overflow: hidden; 
+    /* Fluid + orientierungs-sensibel */
+    width: min(94vw, 920px);
+    max-width: 94vw;
+    max-height: 94vh;
 }
 
+/* Querformat (Landscape) – schmaler und höher */
+@media (orientation: landscape) {
+    .dialog-base {
+        max-width: 82vw;           /* deutlich schmaler im Querformat */
+        max-height: 92vh;
+        width: min(82vw, 780px);
+    }
+}
 
+/* Sehr kleine Höhe (z.B. Handy quer) */
+@media (orientation: landscape) and (max-height: 580px) {
+    .dialog-base {
+        max-width: 78vw;
+        max-height: 88vh;
+    }
+}
 
 .dialog-base::backdrop {
-    background-color: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(4px);
+    background-color: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(5px);
 }
 
-/* Spezifische Größen für größere Bildschirme (Desktops/Tablets) */
-@media (min-width: 500px) {
-    .dialog-info {
-        width: 450px;
-    }
+/* Innenbereich mit Scroll */
+.dialog-info,
+.dialog-code,
+.dialog-video {
+    padding: 50px 20px 20px 20px;
+    max-height: 94vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
 }
 
-@media (min-width: 800px) {
-    .dialog-code {
-        width: 750px;
-        height: 80vh;
-    }
-    
-    .dialog-video {
-        width: max-content;            
-        max-width: 90vw;               
-    }
+/* Spezifische Breiten */
+.dialog-info {
+    width: min(94vw, 480px);
+    max-width: 480px;
 }
 
-/* Der universelle Schließen-Button - Unverändert sauber oben rechts */
+.dialog-code,
+.dialog-video {
+    width: min(94vw, 860px);
+}
+
+@media (orientation: landscape) {
+    .dialog-info { max-width: 460px; }
+    .dialog-code,
+    .dialog-video { max-width: min(78vw, 760px); }
+}
+
+/* Schließen-Button */
 .closeDialogBtn {
-    position: absolute; 
-    top: 10px;
-    right: 15px;
-    width: auto;
+    position: absolute;
+    top: 12px;
+    right: 16px;
     background: none;
     border: none;
     color: var(--accor);
-    font-size: 28px;
+    font-size: 32px;
     cursor: pointer;
     line-height: 1;
     z-index: 11;
-    margin: 0;
-    padding: 0;
-    transition: color 0.2s, transform 0.2s;
+    padding: 4px 8px;
+    border-radius: 50%;
+    transition: all 0.2s;
 }
 
 .closeDialogBtn:hover {
-    color: var(--fg); 
-    transform: scale(1.1);
+    color: var(--fg);
+    transform: scale(1.15);
+    background: rgba(0,0,0,0.2);
 }
 
-/* Abstände innerhalb der Dialoge */
-.dialog-info { padding: 45px 20px 20px 20px; }
-.dialog-code { padding: 45px 15px 15px 15px; }
-.dialog-video { padding: 45px 20px 20px 20px; }
+/* ==================== INHALTE ==================== */
 
-/* Inhalte in Dialogen */
-.dialog-code iframe {
+/* Bilder & Videos */
+.popup-img,
+.popup-video {
     width: 100%;
-    /* Berechnet die perfekte Höhe: 85vh des Popups minus Platz für das Schließen-X */
-    height: calc(85vh - 60px) !important; 
-    border: none;
-    background-color: transparent;
-    display: block;
-    border-radius: calc(var(--bradius) - 2px); /* Verhindert, dass spitze Ecken aus dem Dialog ragen */
+    height: auto;
+    max-height: 68vh;
+    object-fit: contain;
+    border-radius: var(--bradius);
+    margin: 10px 0 15px 0;
+    border: 1px solid rgba(var(--fg-rgb), 0.15);
 }
 
-/* Falls die Animation direkt als Canvas im Dialog liegt (ohne Iframe) */
+/* Code-Dialog – besonders wichtig für Animationen */
+.dialog-code iframe,
 .dialog-code canvas {
     width: 100% !important;
-    height: calc(85vh - 60px) !important;
-    object-fit: contain; /* Sorgt dafür, dass die Animation im Fenster bleibt, ohne zu verzerren */
+    height: calc(100% - 30px) !important;   /* Mehr Platz für Animation/Puzzle */
+    min-height: 380px;                       /* Mindesthöhe */
+    border: none;
+    border-radius: calc(var(--bradius) - 2px);
+    background: transparent;
+    object-fit: contain;
 }
 
-.popup-img {
-    width: 100%;
-    height: auto;
-    border-radius: var(--bradius);
-    margin-bottom: 15px; 
-    border: 1px solid rgba(var(--fg-rgb), 0.1);
+/* Puzzle-spezifisch */
+#puzzle-holder canvas {
+    max-width: 100% !important;
+    max-height: 58vh !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain;
 }
 
-.popup-video {
-    display: block;
-    width: 100%;
-    height: auto;
-    max-height: calc(85vh - 60px); 
-    object-fit: contain; 
-    border-radius: var(--bradius);
+/* Querformat-Optimierung für Code/Puzzle */
+@media (orientation: landscape) {
+    .dialog-code iframe,
+    .dialog-code canvas {
+        min-height: 320px;
+    }
+    
+    #puzzle-holder canvas {
+        max-height: 65vh !important;
+    }
 }
 
-
+/* Sehr kleine Geräte */
+@media (max-height: 620px) {
+    .dialog-code iframe,
+    .dialog-code canvas {
+        min-height: 300px;
+    }
+}
 
 /* ==========================================================================
    KATALOG-LAYOUT (FLEX & GRID-SYSTEM)
