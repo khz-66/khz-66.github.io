@@ -1,43 +1,31 @@
 :root {
   --bradius: 8px; 
-
   --bg: #343434;
   --bg-rgb: 52, 52, 52;
-
   --fg: #f5f5f5;
   --fg-rgb: 245, 245, 245;
-
   --accor: #f9cb6a;
   --accor-rgb: 249, 203, 106;
-
   --accgrad: #e59f06;
   --accgrad-rgb: 229, 159, 6;
-
   --accbl: #08fcd5;
   --accbl-rgb: 8, 252, 213;
-
   --accmark: #00b196;
   --accmark-rgb: 0, 177, 150;
 }
 
 :root.light {
   --bradius: 8px; 
-    
   --bg: #f5f5f5;
   --bg-rgb: 245, 245, 245;
-
   --fg: #444444;
   --fg-rgb: 68, 68, 68;
-
   --accor: #e59f06;
   --accor-rgb: 229, 159, 6;
-
   --accgrad: #f9cb6a;
   --accgrad-rgb: 249, 203, 106;
-
   --accbl: #00b196;
   --accbl-rgb: 0, 177, 150;
-
   --accmark: #08fcd5;
   --accmark-rgb: 8, 252, 213;
 }
@@ -517,7 +505,16 @@ hr {
     border-bottom: none;
 }
 
-/* Das einzelne Hauptbild links */
+/* NEU: Der Container für die Hauptbilder */
+.item .item-images {
+    display: flex;
+    flex-direction: column; /* Stapelt die Bilder vertikal */
+    gap: 16px;              /* Abstand zwischen den Hauptbildern */
+    width: 100%;
+    align-items: center;    /* Zentriert die Bilder auf dem Handy */
+}
+
+/* Das einzelne Hauptbild */
 .item .content-image {
     width: 100%;
     max-width: 250px;
@@ -533,7 +530,7 @@ hr {
 .item-details h2 {
     font-size: 2rem;
     margin: 0 0 10px 0;
-    color: var(--accor); /* Nutzt deine Akzentfarbe Gold/Orange */
+    color: var(--accor); 
     line-height: 1.1; 
 }
 
@@ -544,7 +541,7 @@ hr {
 }
 
 .item-details p {
-    color: rgba(var(--fg-rgb), 0.7); /* Passt sich an helles/dunkles Farbschema an */
+    color: rgba(var(--fg-rgb), 0.7); 
     margin-bottom: 10px;
     hyphens: auto;
     -webkit-hyphens: auto;
@@ -576,10 +573,16 @@ hr {
     gap: 35px;
   }
 
-  /* Fixiert das Hauptbild links auf 300px Breite */
-  .item .content-image {
+  /* NEU: Fixiert die linke Bilder-Spalte komplett auf 300px Breite */
+  .item .item-images {
     flex: 0 0 300px; 
     width: 300px;
+    align-items: start; /* Richtet die Bilder im Desktop linksbündig aus */
+  }
+
+  /* Dehnt die Bilder auf die vollen 300px der linken Spalte aus */
+  .item .content-image {
+    max-width: 300px;
   }
 
   /* Schaltet den Textbereich in ein 2-spaltiges Grid um */
@@ -604,6 +607,7 @@ hr {
     margin-top: 15px;
   }
 }
+
 
 /* ==========================================================================
    3. AVATAR WIDGET (STEUERUNG)
