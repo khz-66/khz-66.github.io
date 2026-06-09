@@ -257,32 +257,35 @@ hr {
   text-align: center;
 }
 
-.image-row {
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-  flex-wrap: wrap;  
-  margin-bottom: 40px; 
-}
-
-.image-row a {
-  display: block;
-  flex: 1 1 280px;        
-  max-width: 100%;        
-}
 
 .image-row {
-  display: flex;
-  flex-wrap: wrap;       /* Erlaubt den Zeilenumbruch bei kleineren Bildschirmen */
-  justify-content: flex-start; /* Zwingt alle Zeilen (auch die letzte) nach links */
-  gap: 16px;             /* Definiert den Abstand zwischen den Elementen */
+  display: grid;
+  /* Erstellt automatisch so viele Spalten (mind. 160px) wie Platz haben */
+  grid-template-columns: repeat(auto-fit, minmax(160px, max-content));
+  
+  /* Zentriert das gesamte Raster auf der Seite */
+  justify-content: center; 
+  gap: 16px;
+  
+  max-width: 1000px; /* Maximale Breite des gesamten Blocks */
+  margin: 20px auto; /* Zentriert den Block, wenn das Fenster sehr breit ist */
+  padding: 0 16px;
 }
 
 .image-item {
-  flex: 0 1 calc(25% - 12px); /* Flex-Basis bei 4 Elementen pro Zeile (Minus Gap-Anteil) */
-  min-width: 150px;           /* Verhindert, dass die Bilder auf dem Smartphone zu quetschen */
-  margin: 0;                  /* Setzt Standard-Browser-Margins von <figure> zurück */
+  margin: 0;
+  text-align: center; /* Zentriert Bildunterschriften innerhalb ihres Quadrats */
 }
+
+.image-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+
+
 
 
 /* Die Links in den Items (Bestimmen die Breite des Bildes) */
