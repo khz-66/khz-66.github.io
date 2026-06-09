@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html class="light" lang="de"> <!-- Standart dunkles Theme mit <html>, helles Theme mit <html class="light"> -->
-<head>
+<html class="light" lang="de"> <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Page Title</title>
@@ -8,15 +7,7 @@
     
   <script src="p5.min.js"></script>
     
-  <!-- Weiterleitung für index.html -> index_voll.html
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('weiterleitung') === 'ja') {
-      window.location.href = "index_voll.html"; // <-- Für Weiterleitung "?weiterleitung=ja" an die Adresse anhängen
-    }
-  </script>
-  -->
-</head>
+  </head>
 
 <body>
   <div class="avatar-widget-container avatar-bottom-left ">
@@ -25,9 +16,20 @@
   </a>
   </div>
 
-  <!-- Bei Avatar rechts oben:
-  <div class="header-footer"></div>
-  -->
+  <button id="theme-toggle">Modus wechseln</button>
+
+    <script>
+        // Den Button im DOM auswählen
+        const button = document.getElementById('theme-toggle');
+
+        // Event-Listener für den Klick hinzufügen
+        button.addEventListener('click', () => {
+            // "toggle" fügt die Klasse hinzu, wenn sie fehlt, 
+            // und entfernt sie, wenn sie schon da ist.
+            document.documentElement.classList.toggle('light');
+        });
+    </script>
+
   
   <div class="container">
     <h1>Überschrift 1</h1>
@@ -169,9 +171,13 @@ Sage hievon auch uns ein weniges, Tochter Kronions.
     Hier geht es zu meiner interaktiven <a href="#" id="openCodeBtn">Processing Animation</a>.
   </p>
 
-<p>
-  Hier geht es zu meinem <a href="#" id="openOrbiterBtn">Orbiter Live-Hintergrund</a>.
-</p>
+  <p>
+    Hier geht es zu meinem <a href="#" id="openOrbiterBtn">Orbiter Live-Hintergrund</a>.
+  </p>
+
+  <p>
+    Hier kannst du das <a href="#" id="openPuzzleBtn">p5.js Puzzle-Spiel starten</a>.
+  </p>
 
 <dialog id="codeDialog" class="dialog-base dialog-code">
     <button id="closeCodeBtn" class="closeDialogBtn">&times;</button>
@@ -182,6 +188,11 @@ Sage hievon auch uns ein weniges, Tochter Kronions.
 <dialog id="orbiterDialog" class="dialog-base dialog-code">
   <button class="closeDialogBtn">&times;</button>
   <iframe id="orbiterFrame" src="" style="width: 100%; height: calc(100% - 40px); border: none;"></iframe>
+</dialog>
+
+<dialog id="puzzleDialog" class="dialog-base dialog-code">
+  <button class="closeDialogBtn">&times;</button>
+  <iframe id="puzzleFrame" src="" style="width: 100%; height: calc(100% - 40px); border: none;"></iframe>
 </dialog>
 
 <hr>
@@ -258,7 +269,6 @@ Sage hievon auch uns ein weniges, Tochter Kronions.
   <hr>
   <p class="subtext-or text-center">Sommer 2026</p>
   
-  <!-- Bei Avatar links unten: -->
   <div class="header-footer"></div>
     
   </div>
@@ -431,6 +441,23 @@ document.addEventListener("DOMContentLoaded", () => {
             
             // 2. ERST JETZT die URL in das sichtbare Iframe laden!
             orbiterFrame.src = "https://khz-66.github.io/Orbiter-Live-Hintergrund/";
+        });
+    }
+
+    // HIER NEU: Spezifische Logik für das Puzzle-Spiel (Lokale puzzle.html)
+    const puzzleDialog = document.getElementById('puzzleDialog');
+    const openPuzzleBtn = document.getElementById('openPuzzleBtn');
+    const puzzleFrame = document.getElementById('puzzleFrame');
+
+    if (openPuzzleBtn && puzzleDialog && puzzleFrame) {
+        openPuzzleBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // 1. Dialog sichtbar machen
+            puzzleDialog.showModal();
+            
+            // 2. puzzle.html in das Iframe laden
+            puzzleFrame.src = "puzzle.html";
         });
     }
 
