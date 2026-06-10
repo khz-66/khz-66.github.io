@@ -186,7 +186,7 @@ hr {
 
 .highlights-box h5 {
   font-size: 1rem;
-  color: #ffffff;
+  color: var(--bg);
   margin-top: 0; 
   margin-bottom: 10px;
   text-transform: uppercase;
@@ -195,18 +195,18 @@ hr {
 
 .highlights-box p {
   font-size: 1rem;
-  color: #ffffff;
+  color: var(--bg);
   margin-bottom: 0;
 }
 
 .highlights-box a {
-  color: #ffffff;
+  color: var(--bg);
   font-weight: bold;
   text-decoration: underline;
 }
 
 .highlights-box a:hover {
-  color: #343434;
+  color: var(--accmark);
   text-decoration: none;
 }
 
