@@ -45,12 +45,9 @@ button#theme-toggle {
     position: fixed !important;
     bottom: 20px !important;
     right: 20px !important;
-    z-index: 10000 !important; /* Über allen anderen Elementen */
-    
-    /* Festes blaues Design – ignoriert die CSS-Variablen komplett */
+    z-index: 10000 !important;
     background-color: #007bff !important; 
     color: #ffffff !important;
-    
     padding: 12px 24px !important;
     font-size: 12px !important;
     font-weight: bold !important;
@@ -61,13 +58,11 @@ button#theme-toggle {
     transition: transform 0.2s, background-color 0.3s !important;
 }
 
-/* Hover-Effekt bleibt ebenfalls immer dunkelblau */
 button#theme-toggle:hover {
     transform: scale(1.05) !important;
     background-color: #0056b3 !important;
     color: #ffffff !important;
 }
-
 
 /* ==========================================================================
    LAYOUT & TEXT ELEMENTS
@@ -339,29 +334,27 @@ hr {
 }
 
 /* ==========================================================================
-   POP-UPS / DIALOG SYSTEM (VAR-BASIERT FÜR HOCH- & QUERFORMAT)
+   POP-UPS / DIALOG SYSTEM (Dynamisch angepasst an das gewählte Theme)
    ========================================================================== */
 .dialog-base,
 .dialog-info,
-.dialog-video {
+.dialog-video,
+.dialog-code {
     border: 2px solid var(--accor);
     border-radius: var(--bradius);
-
+    background-color: var(--bg); /* GEÄNDERT: Nutzt nun die dynamische Hintergrundfarbe */
+    color: var(--fg);            /* GEÄNDERT: Textfarbe passt sich an */
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Zentriert das Element exakt */
-    margin: 0;                         /* Hebelt das Standard-Browser-Margin von <dialog> aus */
-
+    transform: translate(-50%, -50%);
+    margin: 0;
     min-width: 250px;
     min-height: 250px;
-
     max-width: 94vw;
     max-height: 94vh;
 }
 
-
-/* Querformat (Landscape) – schmaler und höher */
 @media (orientation: landscape) {
     .dialog-base,
     .dialog-info,
@@ -372,7 +365,6 @@ hr {
     }
 }
 
-/* Sehr kleine Höhe (z.B. Handy quer) */
 @media (orientation: landscape) and (max-height: 580px) {
     .dialog-base,
     .dialog-info,
@@ -382,14 +374,16 @@ hr {
     }
 }
 
+/* Der abgedunkelte Hintergrund hinter dem Popup passt sich ebenfalls harmonisch an */
 .dialog-base::backdrop,
 .dialog-info::backdrop,
-.dialog-video::backdrop {
-    background-color: rgba(0, 0, 0, 0.45);
+.dialog-video::backdrop,
+.dialog-code::backdrop,
+#puzzleDialog::backdrop {
+    background-color: rgba(var(--bg-rgb), 0.7); /* Nutzt RGB-Werte für saubere Transparenz */
     backdrop-filter: blur(5px);
 }
 
-/* Innenbereich mit Scroll */
 .dialog-info,
 .dialog-code,
 .dialog-video {
@@ -397,67 +391,74 @@ hr {
     max-height: 94vh;
     overflow-y: auto;
     scrollbar-width: thin;
-    box-sizing: border-box; /* Verhindert, dass Padding die Box vergrößert */
+    box-sizing: border-box;
 }
 
-/* Info-Dialoge – sauber zentriert und auf max. 480px begrenzt */
 .dialog-info {
     width: min(480px, 94vw);
     min-width: 250px;
     min-height: 250px;
 }
 
-/* p5.js-Dialoge */
-/* --- Code-Dialog (unverändert beibehalten) --- */
 .dialog-code {
+    padding: 50px 20px 20px 20px;
+    width: min(500px, 94vw);
+    height: min(500px, 94vh);
+}
+
+/* ==========================================================================
+   IFRAME PUZZLE POP-UP (Vollständig dynamisch im Theme-Design)
+   ========================================================================== */
+#puzzleDialog {
     border: 2px solid var(--accor);
     border-radius: var(--bradius);
+    padding: 35px 15px 15px 15px;
+    max-width: 750px; 
+    width: 90%;
+    height: 80vh; 
+    background-color: var(--bg); /* GEÄNDERT: Nimmt nun helles oder dunkles Seiten-Design an */
+    color: var(--fg);
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 50px 20px 20px 20px;
-    width: min(500px, 94vw);
-    height: min(500px, 94vh);
-    min-width: 250px;
-    min-height: 250px;
-    max-height: 94vh;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    box-sizing: border-box;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-.dialog-code::backdrop {
-    background-color: rgba(0, 0, 0, 0.45);
-    backdrop-filter: blur(5px);
+#puzzleDialog iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: transparent; /* GEÄNDERT: Hintergrund scheint durch oder wird im iframe geregelt */
+    border-radius: calc(var(--bradius) - 2px);
 }
 
-/* NEU: Spezifisches Höher-Machen NUR für das Puzzle-Popup.
-   Trifft auf jeden Dialog zu, der den #puzzle-holder beinhaltet.
-*/
-.dialog-info:has(#puzzle-holder),
-.dialog-base:has(#puzzle-holder) {
-    height: 75vh; /* Schaltet von automatischer Höhe auf 75% der Bildschirmhöhe */
-    max-height: 94vh; 
+#closePuzzleBtn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: var(--accor);
+    font-size: 26px;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s, transform 0.2s;
 }
 
-/* Puzzle-Spezifische Canvas-Anpassung */
-#puzzle-holder canvas {
-    max-width: 100% !important;
-    max-height: 68vh !important; /* Von 58vh auf 68vh erhöht, passend zum höheren Popup */
-    width: auto !important;
-    height: auto !important;
-    object-fit: contain;
+#closePuzzleBtn:hover {
+    color: var(--fg);
+    transform: scale(1.1);
 }
 
-
-/* Video-Dialoge */
+/* ==========================================================================
+   POP-UP INHALTE & ALLGEMEINES
+   ========================================================================== */
 .dialog-video {
     width: fit-content;
     height: fit-content;
 }
 
-/* Schließen-Button */
 .closeDialogBtn {
     position: absolute;
     top: 12px;
@@ -477,49 +478,30 @@ hr {
 .closeDialogBtn:hover {
     color: var(--fg);
     transform: scale(1.15);
-    background: rgba(0,0,0,0.2);
+    background: rgba(var(--fg-rgb), 0.1);
 }
 
-/* ==================== INHALTE ==================== */
-
-/* Bilder & Videos */
 .popup-img,
 .popup-video {
     display: block;
-
     width: auto;
     height: auto;
-
     max-width: min(1200px, calc(94vw - 40px));
     max-height: calc(94vh - 100px);
-
     object-fit: contain;
 }
 
-/* Code-Dialog – besonders wichtig für Animationen */
 .dialog-code iframe,
 .dialog-code canvas {
     width: 100% !important;
     height: 100% !important;
-
     min-width: 250px;
     min-height: 250px;
-
     border: none;
     border-radius: calc(var(--bradius) - 2px);
     background: transparent;
     display: block;
 }
-
-#puzzle-holder canvas {
-    max-width: 100% !important;
-    max-height: 58vh !important;
-    width: auto !important;
-    height: auto !important;
-    object-fit: contain;
-}
-
-
 
 /* ==========================================================================
    KATALOG-LAYOUT (FLEX & GRID-SYSTEM)
@@ -593,7 +575,6 @@ hr {
     }
 }
 
-/* Desktop-Ansicht ab 700px */
 @media (min-width: 700px) { 
   .item {
     flex-direction: row; 
@@ -631,7 +612,7 @@ hr {
 }
 
 /* ==========================================================================
-   WIDGETS & CANVAS HOLDER
+   WIDGETS & AVATAR HOLDER
    ========================================================================== */
 .avatar-widget-container {
   width: 120px;
@@ -657,16 +638,4 @@ hr {
   border-radius: 50%;
   border: 5px solid #5A6E8F !important; 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
-}
-        
-#puzzle-holder {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-#puzzle-holder canvas {
-  display: block;
 }
