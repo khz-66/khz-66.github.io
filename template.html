@@ -42,17 +42,22 @@
     </div>
     
     <h2>Überschrift 2</h2>
-    <p>Sage mir, <a href="#">Muse</a>, die Taten des vielgewanderten Mannes,
-welcher so weit geirrt nach der heiligen <a href="#">Troja</a> Zerstörung,
-vieler Menschen Städte gesehn und Sitte gelernt hat,
-und auf dem <span class="bc">Meere</span> so viel unnennbare Leiden erduldet,
-seine Seele zu retten und seiner Freunde Zurückkunft.
+    <p>
+      <a href="#popups">Popups</a> öffnen.
     </p>
-    <p>Aber die Freunde rettet' er nicht, wie eifrig er strebte,
-Denn sie bereiteten selbst <mark>durch Missetat</mark> ihr Verderben:
-Toren! welche die Rinder des hohen Sonnenbeherrschers
-Schlachteten; siehe, der Gott nahm ihnen den Tag der Zurückkunft,
-Sage hievon auch uns ein weniges, Tochter Kronions.
+    <p>
+      Sage mir, <a href="#">Muse</a>, die Taten des vielgewanderten Mannes,
+      welcher so weit geirrt nach der heiligen <a href="#">Troja</a> Zerstörung,
+      vieler Menschen Städte gesehn und Sitte gelernt hat,
+      und auf dem <span class="bc">Meere</span> so viel unnennbare Leiden erduldet,
+      seine Seele zu retten und seiner Freunde Zurückkunft.
+    </p>
+    <p>
+      Aber die Freunde rettet' er nicht, wie eifrig er strebte,
+      Denn sie bereiteten selbst <mark>durch Missetat</mark> ihr Verderben:
+      Toren! welche die Rinder des hohen Sonnenbeherrschers
+      Schlachteten; siehe, der Gott nahm ihnen den Tag der Zurückkunft,
+      Sage hievon auch uns ein weniges, Tochter Kronions.
     </p>
     <p class="subtext-bl">
       Schon in den ersten 20 Zeilen nimmt Homer das Ende der Reise 
@@ -63,6 +68,7 @@ Sage hievon auch uns ein weniges, Tochter Kronions.
       ist nicht mehr nur willkürliche göttliche Fügung; der Mensch trägt 
       durch moralisches Fehlverhalten die direkte Verantwortung.
     </p>
+    
     <h3>Überschrift 3</h3>
 
     <figure id="bild" class="image-figure">
@@ -70,8 +76,8 @@ Sage hievon auch uns ein weniges, Tochter Kronions.
       <figcaption>Bildunterschrift image-figure</figcaption>
     </figure>
 
-<hr class="strich-links">
-
+    <hr class="strich-links">
+    
     <figure class="image-figure small">
       <img src="bild.jpg" alt="Beschreibung" loading="lazy">
       <figcaption>Bildunterschrift image-figure small</figcaption>
@@ -80,7 +86,7 @@ Sage hievon auch uns ein weniges, Tochter Kronions.
 <hr class="strich-links">
 
     <figure class="image-figure tiny">
-      <img src="bild.jpg" alt="Beschreibung" loading="lazy">
+      <a href="bild.jpg"><img src="bild.jpg" alt="Beschreibung" loading="lazy"></a>
       <figcaption>Bildunterschrift image-figure tiny</figcaption>
     </figure>
     
@@ -103,14 +109,14 @@ Sage hievon auch uns ein weniges, Tochter Kronions.
       </figure>
 
       <figure class="image-item">
-        <a href="papervisor.pdf">
+        <a href="bild3.jpg">
           <img src="bild3.jpg" alt="Papervisor Modell" class="frame">
         </a>
         <figcaption>image-row 3</figcaption>
       </figure>
 
       <figure class="image-item">
-        <a href="starcopter.pdf">
+        <a href="bild4.jpg">
           <img src="bild4.jpg" alt="Starcopter Modell" class="frame">
         </a>
         <figcaption>image-row 4</figcaption>
@@ -139,11 +145,11 @@ Sage hievon auch uns ein weniges, Tochter Kronions.
 
   </div>
 
-  <h3>Überschrift 3</h3>
+  <h3 id="popups">Überschrift 3</h3>
   
   <p>
-    Hier findest du weitere <a href="#" id="openInfoBtn">Informationen anzeigen</a> 
-    oder du kannst dir <a href="#" id="openVideoBtn">das Video abspielen</a>.
+    Info-Popup mit <a href="#" id="openInfoBtn">dialog-info</a> oder  
+    Video-Popup mit <a href="#" id="openVideoBtn">video-info</a>.
   </p>
   
   <dialog id="infoDialog" class="dialog-base dialog-info">
@@ -155,8 +161,6 @@ Sage hievon auch uns ein weniges, Tochter Kronions.
       <h3>Wichtige Information</h3>
       <p>Hier steht dein Infotext, der perfekt in das Pop-up passt.</p>
   </dialog>
-
-  <hr class="strich-zentriert">
    
   <dialog id="videoDialog" class="dialog-base dialog-video">
       <button id="closeVideoBtn" class="closeDialogBtn">&times;</button>
@@ -167,21 +171,22 @@ Sage hievon auch uns ein weniges, Tochter Kronions.
       </video>
   </dialog>
 
+  <hr class="strich-zentriert">
+  
   <p>
-    Hier geht es zu meiner interaktiven <a href="#" id="openCodeBtn">Processing Animation</a>.
+    Processing- und p4.js-Animationen über html-Seite: 
+     <a href="#" id="openCodeBtn">Strahlenbkumen</a>,
+    <a href="#" id="openOrbiterBtn">Orbiter</a>.
   </p>
 
+  <hr class="strich-zentriert">
+  
   <p>
-    Hier geht es zu meinem <a href="#" id="openOrbiterBtn">Orbiter Live-Hintergrund</a>.
-  </p>
-
-  <p>
-    Hier kannst du das <a href="#" id="openPuzzleBtn">p5.js Puzzle-Spiel starten</a>.
+    Webseite mit Animation und Text: <a href="#" id="openPuzzleBtn">p5.js Puzzle</a>.
   </p>
 
 <dialog id="codeDialog" class="dialog-base dialog-code">
     <button id="closeCodeBtn" class="closeDialogBtn">&times;</button>
-    
     <iframe id="strahlenblumeFrame" src="" style="width: 100%; height: calc(100% - 40px); border: none;"></iframe>
 </dialog>
 
