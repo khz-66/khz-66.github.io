@@ -16,19 +16,46 @@
   </a>
   </div>
 
-  <button id="theme-toggle">Modus wechseln</button>
+    <button id="theme-toggle">Modus wechseln</button>
 
-    <script>
-        // Den Button im DOM auswählen
-        const button = document.getElementById('theme-toggle');
+  <script>
+    // Den Button im DOM auswählen
+    const button = document.getElementById('theme-toggle');
 
-        // Event-Listener für den Klick hinzufügen
-        button.addEventListener('click', () => {
-            // "toggle" fügt die Klasse hinzu, wenn sie fehlt, 
-            // und entfernt sie, wenn sie schon da ist.
-            document.documentElement.classList.toggle('light');
-        });
-    </script>
+    // Array mit den drei Zuständen definieren
+    const modes = ['dark', 'light', 'spooky'];
+    let currentModeIndex = 0; // Standardmäßig starten wir im Dark-Mode (ohne Klassen)
+
+    // Falls beim Laden bereits <html class="light"> gesetzt ist, Index anpassen
+    if (document.documentElement.classList.contains('light')) {
+        currentModeIndex = 1;
+    }
+
+    // Event-Listener für den Klick hinzufügen
+    button.addEventListener('click', () => {
+        // Index weiterschalten (0 -> 1 -> 2 -> 0 ...)
+        currentModeIndex = (currentModeIndex + 1) % modes.length;
+        const currentMode = modes[currentModeIndex];
+
+        // Zuerst alle alten Design-Klassen sauber entfernen
+        document.documentElement.classList.remove('light');
+        document.body.classList.remove('spooky');
+
+        // Je nach ausgewähltem Modus die passenden Klassen setzen
+        if (currentMode === 'light') {
+            document.documentElement.classList.add('light');
+            button.textContent = "Modus: Hell";
+        } else if (currentMode === 'spooky') {
+            document.body.classList.add('spooky');
+            button.textContent = "Modus: Spooky";
+        } else {
+            // Standard Dark Mode (Keine Klassen auf html oder body)
+            button.textContent = "Modus: Dunkel";
+        }
+    });
+  </script>
+  
+
 
   
   <div class="container">
@@ -56,11 +83,11 @@
       Schlachteten; siehe, der Gott nahm ihnen den Tag der Zurückkunft,
       Sage hievon auch uns ein weniges, Tochter Kronions.
     </p>
-    <p class="subtext-bl">
+    <p class="subtext-bl bullet">
       Schon in den ersten 20 Zeilen nimmt Homer das Ende der Reise 
       vorweg und klärt die Schuldfrage für das Scheitern der Gefährten.
     </p>
-    <p class="subtext-or">
+    <p class="subtext-or bullet">
       Damit etabliert das Proömium ein neues Menschenbild. Das Schicksal 
       ist nicht mehr nur willkürliche göttliche Fügung; der Mensch trägt 
       durch moralisches Fehlverhalten die direkte Verantwortung.

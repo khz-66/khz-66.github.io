@@ -1,496 +1,238 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Esoterik und Magie</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esoterik und Magie</title>
+  
+  <link rel="stylesheet" href="/css/styles.css">
     
-    <style>
-        /* ==========================================================================
-           1. RESET & BASICS
-           ========================================================================== */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        
-        html {
-            /* HIER DEINE HINTERGRUNDFARBE WÄHLEN */
-            background-color: #000000; 
-            scroll-behavior: smooth;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #ffffff;
-            min-height: 100vh;
-            line-height: 1.6;
-            overflow-x: hidden; 
-        }
-
-        /* ==========================================================================
-           2. INHALTS-LAYOUT (HAUPTCONTAINER)
-           ========================================================================== */
-        .container {
-            position: relative;
-            z-index: 1; 
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 60px 20px;
-            text-align: center;
-        }
-        
-        /* Typografie & Standard-Elemente für neue Inhalte */
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            background: linear-gradient(45deg, #ff7b00, #ffae00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1.1;
-        }
-
-        h2 {
-            font-size: 2rem;
-            margin: 40px 0 20px 0;
-            color: #ffae00;
-            line-height: 1.1;
-        }
-        
-        p {
-            font-size: 1.2rem;
-            color: #a0a0a0;
-            margin-bottom: 20px;
-            text-align: left; /* Besser lesbar bei längeren Texten */
-            hyphens: auto;
-    -webkit-hyphens: auto; /* Für Safari */
-    lang: de; /* WICHTIG: Der Browser muss wissen, dass es Deutsch ist! */
-
-        }
-        
-        .text-center {
-            text-align: center;
-        }
-
-
-       bc {
-         font-weight: bold;
-         color: #07dcba;
-       }
-       /* GEÄNDERT: Maximale Breite auf 500px & erzwingt Platzierung UNTER dem Text */
-        .content-image {
-            display: block;        /* Verhält sich wie ein Block, Text muss weichen */
-            max-width: 500px;      /* Begrenzt die Breite auf maximal 500 Pixel */
-            width: 100%;           /* Skaliert sauber runter, falls der Bildschirm kleiner als 500px ist */
-            height: auto;
-            border-radius: 8px;
-            margin: 20px auto;     /* 20px Abstand nach oben/unten, "auto" zentriert das Bild */
-        }
-      
-      img.frame {
-  border: 1px solid rgba(255,255,255,0.7);
-  border-radius: 4px;
-  box-shadow: 0 0 6px rgba(255,255,255,0.15);
-}
-        
-     .image-row {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-}
-
-.image-row img {
-  height: 300px;        /* feste Höhe */
-  width: auto;
-  object-fit: cover;    /* schneidet sauber zu */
-  border-radius: 6px;
-}
-
-.image-scroll {
-  display: flex;
-  flex-wrap: nowrap;       /* verhindert Umbruch */
-  overflow-x: auto;        /* aktiviert horizontales Scrollen */
-  gap: 12px;               /* Abstand zwischen Bildern */
-  padding: 20px 0;         /* Abstand oben und unten */
-  scrollbar-width: thin;   /* Firefox */
-  margin-bottom: 40px;
-}
-
-.image-scroll::-webkit-scrollbar {
-  height: 8px;             /* Höhe der Scrollbar */
-}
-
-.image-scroll::-webkit-scrollbar-thumb {
-  background: #555;
-  border-radius: 4px;
-}
-
-.image-scroll img {
-  height: 300px;           /* einheitliche Höhe bleibt */
-  width: auto;
-  object-fit: cover;       /* sauberer Zuschnitt bleibt */
-  border-radius: 8px;
-  flex-shrink: 0;          /* verhindert Quetschen */
-  
-  /* NEU: Cyanfarbener Rahmen wie beim Pop-up */
-  border: 2px solid #08fcd5; 
-  
-  /* NEU: Dezentes magisches Glühen nach außen */
-  box-shadow: 0 0 10px rgba(8, 252, 213, 0.3);
-  
-  /* NEU: Ein weicher Übergang, falls du später Hover-Effekte nutzt */
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-/* OPTIONAL: Wenn man mit der Maus über die Bilder fährt, 
-   leuchten sie etwas stärker und heben sich leicht an 
-.image-scroll img:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 0 18px rgba(8, 252, 213, 0.6);
-} */
-
-
-        /* Links */
-        a {
-            color: #ff7b00;
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-        a:hover {
-            text-decoration: underline;
-            color: #ffae00;
-        }
-
-        .subtext {
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-            background: linear-gradient(45deg, #ff7b00, #ffae00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-top: 40px;
-        }
-.biblio p {
-  font-size: 0.8rem !important;
-  color: #a0a0a0 !important;
-  margin: 0 0 0.5em 0 !important;
-  padding-left: 2em !important;
-  text-indent: -2em !important;
-  text-align: left !important;
-  line-height: 1.1 !important;
-}
-        /* ==========================================================================
-           3. AVATAR WIDGET (STEUERUNG)
-           ========================================================================== */
-        .avatar-widget-container {
-            width: 120px;
-            height: 120px;
-            z-index: 10;
-        }
-
-        /* OPTION A: Rechts Oben fixiert */
-        .avatar-top-right {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-        }
-
-        /* OPTION B: Links Unten fixiert */
-        .avatar-bottom-left {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-        }
-
-        /* Formatierung des P5-Canvas im Avatar */
-        #avatar-animation-holder canvas {
-            width: 100% !important;
-            height: 100% !important;
-            border-radius: 50%;
-            border: 5px solid #5A6E8F !important; 
-            box-shadow: none !important; 
-        }
-        
-        /* Verhindert Unterstreichung und zeigt den Zeigefinger beim Avatar-Link */
-a.avatar-widget-container {
-    text-decoration: none;
-    cursor: pointer;
-}
-
-#infoDialog {
-    border: 2px solid #08fcd5; /* Dein Cyan-Rahmen */
-    border-radius: 8px;
-    padding: 30px 20px 20px 20px;
-    max-width: 450px; /* Etwas schmaler für reine Info-Karten */
-    width: 90%;
-    background-color: #111;
-    color: #fff;
-    box-shadow: 0 0 25px 5px rgba(8, 252, 213, 0.4);
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-#infoDialog::backdrop {
-    background-color: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(4px);
-}
-
-/* Sorgt dafür, dass das Bild perfekt in das Pop-up passt */
-.popup-img {
-    width: 100%;
-    height: auto;
-    border-radius: 4px;
-    margin-bottom: 15px; /* Abstand zum darunterliegenden Text */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Der Schließen-Button */
-#closeInfoBtn {
-    position: absolute;
-    top: 5px;
-    right: 10px;
-    background: none;
-    border: none;
-    color: #08fcd5;
-    font-size: 28px;
-    cursor: pointer;
-}
-
-
-                /* ==========================================================================
-           4. POP-UP DIALOG (VIDEO) - MIT VERTIKALER & HORIZONTALER ANPASSUNG
-           ========================================================================== */
-               /* ==========================================================================
-           4. POP-UP DIALOG (VIDEO) - KORRIGIERT
-           ========================================================================== */
-                /* ==========================================================================
-           4. POP-UP DIALOG (VIDEO) - PERFEKT FÜR HOCH- & QUERFORMAT
-           ========================================================================== */
-                /* ==========================================================================
-           4. POP-UP DIALOG (VIDEO) - QUERFORMAT-FIX OHNE BLOCKIERENDE BREITE
-           ========================================================================== */
-        #videoDialog {
-            border: 2px solid #08fcd5; /* Cyanfarbener Rahmen */
-            border-radius: 8px;
-            padding: 35px 20px 20px 20px; 
-            
-            /* --- DER TRICK FÜR DIE PERFEKTE ANPASSUNG --- */
-            width: max-content;            /* Der Dialog zieht sich NUR so weit wie das Video */
-            max-width: 90vw;               /* Verhindert, dass er im Hochformat über den Rand bricht */
-            max-height: 85vh;              /* Begrenzt die Höhe im Querformat */
-            
-            background-color: #111;
-            box-shadow: 0 0 25px 5px rgba(8, 252, 213, 0.4); 
-            
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            overflow: hidden; 
-        }
-
-
-        #videoDialog::backdrop {
-            background-color: rgba(0, 0, 0, 0.82);
-            backdrop-filter: blur(4px);
-            background-image: radial-gradient(circle, rgba(8, 252, 213, 0.15) 0%, rgba(0,0,0,0) 70%);
-        }
-
-        #closeVideoBtn {
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            width: auto;
-            background: none;
-            border: none;
-            color: #ffae00;
-            font-size: 28px;
-            cursor: pointer;
-            line-height: 1;
-            z-index: 11;
-            transition: color 0.2s;
-        }
-
-        #closeVideoBtn:hover {
-            color: #ffffff;
-        }
-
-        #popupVideo {
-            display: block;
-            width: 100%;
-            height: auto;
-            max-height: calc(85vh - 60px); 
-            object-fit: contain; 
-            border-radius: 4px;
-        }
-
-
-        
-    </style>
-
-    <script src="p5.min.js"></script>
+  <script src="p5.min.js"></script>
 </head>
 <body>
 
-        <div class="avatar-widget-container avatar-bottom-left">
-        <a href="index.html" id="avatar-link" class="avatar-link-wrapper" style="display: block;">
-            <div id="avatar-animation-holder"></div>
-        </a>
+  <div class="avatar-widget-container avatar-bottom-left">
+    <a href="index.html" id="avatar-link" class="avatar-link-wrapper" style="display: block;">
+      <div id="avatar-animation-holder"></div>
+    </a>
+  </div>
+
+  <button id="theme-toggle">Modus wechseln</button>
+
+  <script>
+    const button = document.getElementById('theme-toggle');
+    const modes = ['dark', 'light', 'spooky'];
+    let currentModeIndex = 0;
+
+    if (document.documentElement.classList.contains('light')) {
+        currentModeIndex = 1;
+    }
+
+    button.addEventListener('click', () => {
+        currentModeIndex = (currentModeIndex + 1) % modes.length;
+        const currentMode = modes[currentModeIndex];
+
+        document.documentElement.classList.remove('light');
+        document.body.classList.remove('spooky');
+
+        if (currentMode === 'light') {
+            document.documentElement.classList.add('light');
+            button.textContent = "Modus: Hell";
+        } else if (currentMode === 'spooky') {
+            document.body.classList.add('spooky');
+            button.textContent = "Modus: Spooky";
+        } else {
+            button.textContent = "Modus: Dunkel";
+        }
+    });
+  </script>
+
+  <div class="container">
+    <h1>Esoterik und Magie</h1>
+    <p>
+      Ein "Sigillen-Player" für Android, der mit Buchstaben, Zahlen, 
+      <span class="bc">Hebräischer Schrift</span> oder mit dem 
+      <span class="bc">Malachim-Alphabet</span> kreisförmige und 
+      Planetenquadrat-<span class="bc">Sigillen</span> zeichnet und animiert.
+    </p> 
+    
+    <video src="sigill_player_hexagramm.mp4" autoplay muted controls loop 
+           style="mix-blend-mode: screen; width: 270px; height: 270px; object-fit: cover;">
+    </video>
+  
+    <div class="popup-link-container">
+        <a href="#" id="openVideoBtn">➔ Zusätzliche Informationen als Kurzvideo ansehen</a>
+    </div>
+    
+    <div style="margin: 15px 0;">
+      <a href="#" id="openInfoBtn">Mehr Infos anzeigen</a>
     </div>
 
-
-    <div class="container">
-        <h1>Esoterik und Magie</h1>
-        <p>Ein "Sigillen-Player" für An&shy;dro&shy;id, der mit Buch&shy;staben, Zahlen, <bc>Hebrä&shy;ischer Schrift</bc> oder mit dem <bc>Malachim-Alphabet</bc> kreis&shy;förmige und Planeten&shy;quadrat-<bc>Sigillen</bc> zeichnet und animiert. </p> 
-        
-        <video src="sigill_player_hexagramm.mp4" autoplay muted controls loop 
-       style="mix-blend-mode: screen; width: 270px; height: 270px; object-fit: cover;">
+    <dialog id="videoDialog" class="dialog-base dialog-video">
+        <button id="closeVideoBtn" class="closeDialogBtn" aria-label="Schließen">&times;</button>
+        <video id="popupVideo" class="popup-video" controls>
+            <source src="primordeal_tarot.mp4" type="video/mp4">
+            Ihr Browser unterstützt dieses Video nicht.
         </video>
-  
-        <div class="popup-link-container">
-            <a href="#" id="openVideoBtn">➔ Zusätzliche Informationen als Kurzvideo ansehen</a>
-        </div>
-
-        <dialog id="videoDialog">
-            <button id="closeVideoBtn" aria-label="Schließen">&times;</button>
-            <video id="popupVideo" controls style="width: 100%; height: auto; display: block; border-radius: 4px;">
-                <source src="primordeal_tarot.mp4" type="video/mp4">
-                Ihr Browser unterstützt dieses Video nicht.
-            </video>
-        </dialog>
-        
-        <a href="#" id="openInfoBtn">Mehr Infos anzeigen</a>
-
-<dialog id="infoDialog">
-    <button id="closeInfoBtn" aria-label="Schließen">&times;</button>
+    </dialog>
     
-    <img src="schnell-laut-gut.jpg" alt="Info Bild" class="popup-img">
-    <h3>Titel der Information</h3>
-    <p>Hier steht der begleitende Text, der zusätzliche Details erklärt.</p>
-</dialog>
+    <dialog id="infoDialog" class="dialog-base dialog-info">
+        <button id="closeInfoBtn" class="closeDialogBtn" aria-label="Schließen">&times;</button>
+        <img src="schnell-laut-gut.jpg" alt="Info Bild" class="popup-img">
+        <h3>Titel der Information</h3>
+        <p>Hier steht der begleitende Text, der zusätzliche Details erklärt.</p>
+    </dialog>
+    
+    <hr class="strich-zentriert">
 
-        
-        <hr style="border: 0; height: 1px; background: #333; margin: 40px 0;">
-
-        <h2>Die modernen Klassiker</h2>
-        <p>Franz Bardon, Karl Spiesberger und H. E. Douval.</p>
-        
-        <div class="image-scroll">
-          <a href="schwarz.html"><img src="bardon_weg.jpg" alt="" class="frame"></a>
-          <a href="schwarz.html"><img src="spiesberger_einweihung.jpg" alt=""  class="frame"></a>
-          <a href="schwarz.html"><img src="spiesberger_praxis.jpg" alt="" class="frame"></a>
-          <a href="schwarz.html"><img src="douval_buecher.jpg" alt="" class="frame"></a>
-        </div>
-        
-        <div class="biblio">
-          <p>Bardon, Franz: <i>Der Weg zum wahren Adepten.</i> Freiburg i. Br.: Bauer, 1994.</p>
-          <p>Spiesberger, Karl: <i>Magische Einweihung.</i> Berlin: Schikowski, o. J.</p>
-          <p>Spiesberger, Karl: <i>Magische Praxis.</i> Berlin: Schikowski, o. J.</p>
-          <p>Douval, H. E.: <i>Bücher der praktischen Magie.</i> Interlaken: Ansata, 8. Aufl.</p>
-        </div>
-        
-         <hr style="border: 0; height: 1px; background: #333; margin: 40px 0;">
-        
-        <h2>Tarot</h2>
-        <p>Meine Lieblings-Tarot&shy;decks. Neben dem Rider-Waite-<bc>Colman-Smith</bc>-Tarot zum Karten&shy;legen am liebsten die intui&shy;tiven Decks von <bc>Toppi</bc> und <bc>Pinter</bc> und auch das eso&shy;teri&shy;sche <bc>Zillich</bc> -Tarot. Das <bc>Botanica</bc>-Tarot wegen der schönen Pflanzembilder und die Decks von <bc>Manara</bc>, <bc>Serpieri</bc> und <bc>Frazetta</bc> eher als Comic- und Fantasy-Fan. Das <bc>Dakini-Orakel</bc>, weil es sehr spiri&shy;tuell ist und das <bc>Shamans Oracle</bc> wegen der schönen und geheim&shy;nis&shy;vollen Höhlen&shy;malereien.</p>
-        
-        <div class="image-scroll">
-          <a href="schwarz.html"><img src="colman-smith-karte.jpg" alt="" class="frame"></a>
-          <a href="schwarz.html"><img src="primordeal_tarot.jpg" alt="" class="frame"></a>
-          <a href="schwarz.html"><img src="pinter_tarot.jpg" alt=""  class="frame"></a>
-          <a href="schwarz.html"><img src="zillich_tarot.png" alt=""></a>
-          <a href="schwarz.html"><img src="botanica_tarot.jpg" alt="" class="frame"></a>
-          <a href="schwarz.html"><img src="manara_tarot.jpg" alt="" class="frame"></a>
-          <a href="schwarz.html"><img src="serpieri_tarot.jpg" alt="" class="frame"></a>
-          <a href="schwarz.html"><img src="frazetta_tarot.jpg" alt="" class="frame"></a>
-          <a href="schwarz.html"><img src="dakini_oracle.jpg" alt="" class="frame"></a>
-          <a href="schwarz.html"><img src="shamans_oracle.jpg" alt="" class="frame"></a>
-          <a href="schwarz.html"><img src="karte79.jpg" alt="" class="frame"></a>
-        </div>
-        
-
- <hr style="border: 0; height: 1px; background: #333; margin: 40px 0;">
-
-<h2>Die Lautformelsprache Ela Vior</h2>
-<p>Lautformelsprache ist keine gesprochene Alltagssprache, sondern ein Instrument der Schwingung und bewussten Resonanz. Diese Sprache dient nicht der Mitteilung, sondern der Wirkung: Sie soll die feinstofflichen Ebenen ansprechen, insbesondere die Elemente und Naturgeister.</p>
-
-        <p>Eine Sprache für magische Formeln und Anrufungen.</p>
-        
-       <a href="ela_vior.html" >Lautformelsprache Ela Vior</a><br>
-     
-     <a href="ela_vior_wortbildung.html">Wortbildung in Ela Vior</a><br>
-  
-  <a href="ela_vior_vokabular.html">Vokabular</a><br>
-  
-         <hr style="border: 0; height: 1px; background: #333; margin: 40px 0;">
-        
-        <p class="subtext text-center">Projekt-Start: Sommer 2026</p>
+    <h2>Die modernen Klassiker</h2>
+    <p>Franz Bardon, Karl Spiesberger und H. E. Douval.</p>
+    
+    <div class="image-scroll">
+      <div class="scroll-item">
+        <a href="schwarz.html"><img src="bardon_weg.jpg" alt=""></a>
+      </div>
+      <div class="scroll-item">
+        <a href="schwarz.html"><img src="spiesberger_einweihung.jpg" alt=""></a>
+      </div>
+      <div class="scroll-item">
+        <a href="schwarz.html"><img src="spiesberger_praxis.jpg" alt=""></a>
+      </div>
+      <div class="scroll-item">
+        <a href="schwarz.html"><img src="douval_buecher.jpg" alt=""></a>
+      </div>
     </div>
-
-    <script>
-      
-      document.addEventListener("DOMContentLoaded", () => {
-    const avatarLink = document.getElementById('avatar-link');
     
-    if (avatarLink) {
-        // 1. Prüfen, ob der URL-Parameter gesetzt ist ODER ob der direkte Referrer index_voll.html ist
-        const urlParams = new URLSearchParams(window.location.search);
-        const hatWeiterleitungParam = urlParams.get('weiterleitung') === 'ja';
-        const kamDirektVonIndexVoll = document.referrer.includes('index_voll.html');
+    <p class="subtext no-hyphen bullet">
+      Bardon, Franz: <i>Der Weg zum wahren Adepten.</i> Freiburg i. Br.: Bauer, 1994.
+    </p>
+    <p class="subtext-bl no-hyphen bullet"> 
+      Spiesberger, Karl: <i>Magische Einweihung.</i> Berlin: Schikowski, o. J.
+    </p>
+    <p class="subtext-bl no-hyphen bullet">
+      Spiesberger, Karl: <i>Magische Praxis.</i> Berlin: Schikowski, o. J.
+    </p>
+    <p class="subtext-bl no-hyphen bullet">
+      Douval, H. E.: <i>Bücher der praktischen Magie.</i> Interlaken: Ansata, 8. Aufl.
+    </p>
+    
+    <hr class="strich-zentriert">
+    
+    <h2>Tarot</h2>
+    <p>
+      Meine Lieblings-Tarotdecks. Neben dem Rider-Waite-<span class="bc">Colman-Smith</span>-Tarot 
+      zum Kartenlegen am liebsten die intuitiven Decks von <span class="bc">Toppi</span> und 
+      <span class="bc">Pinter</span> und auch das esoterische <span class="bc">Zillich</span>-Tarot. 
+      Das <span class="bc">Botanica</span>-Tarot wegen der schönen Pflanzenbilder und die Decks von 
+      <span class="bc">Manara</span>, <span class="bc">Serpieri</span> und <span class="bc">Frazetta</span> 
+      eher als Comic- und Fantasy-Fan. Das <span class="bc">Dakini-Orakel</span>, weil es sehr spirituell 
+      ist und das <span class="bc">Shamans Oracle</span> wegen der schönen und geheimnisvollen Höhlenmalereien.
+    </p>
+    
+    <div class="image-scroll">
+      <div class="scroll-item"><a href="schwarz.html"><img src="colman-smith-karte.jpg" alt=""></a></div>
+      <div class="scroll-item"><a href="schwarz.html"><img src="primordeal_tarot.jpg" alt=""></a></div>
+      <div class="scroll-item"><a href="schwarz.html"><img src="pinter_tarot.jpg" alt=""></a></div>
+      <div class="scroll-item"><a href="schwarz.html"><img src="zillich_tarot.png" alt=""></a></div>
+      <div class="scroll-item"><a href="schwarz.html"><img src="botanica_tarot.jpg" alt=""></a></div>
+      <div class="scroll-item"><a href="schwarz.html"><img src="manara_tarot.jpg" alt=""></a></div>
+      <div class="scroll-item"><a href="schwarz.html"><img src="serpieri_tarot.jpg" alt=""></a></div>
+      <div class="scroll-item"><a href="schwarz.html"><img src="frazetta_tarot.jpg" alt=""></a></div>
+      <div class="scroll-item"><a href="schwarz.html"><img src="dakini_oracle.jpg" alt=""></a></div>
+      <div class="scroll-item"><a href="schwarz.html"><img src="shamans_oracle.jpg" alt=""></a></div>
+      <div class="scroll-item"><a href="schwarz.html"><img src="karte79.jpg" alt=""></a></div>
+    </div>
+    
+    <hr class="strich-zentriert">
 
-        // 2. Wenn eins von beiden zutrifft, merken wir uns das für die gesamte Session
-        if (hatWeiterleitungParam || kamDirektVonIndexVoll) {
-            sessionStorage.setItem('kommtVonIndexVoll', 'true');
+    <h2>Die Lautformelsprache Ela Vior</h2>
+    <p>
+      Lautformelsprache ist keine gesprochene Alltagssprache, sondern ein Instrument der Schwingung 
+      und bewussten Resonanz. Diese Sprache dient nicht der Mitteilung, sondern der Wirkung: Sie soll 
+      die feinstofflichen Ebenen ansprechen, insbesondere die Elemente und Naturgeister.
+    </p>
+    <p>Eine Sprache für magische Formeln und Anrufungen.</p>
+        
+    <p><a href="ela_vior.html">➔ Lautformelsprache Ela Vior</a></p>
+    <p><a href="ela_vior_wortbildung.html">➔ Wortbildung in Ela Vior</a></p>
+    <p><a href="ela_vior_vokabular.html">➔ Vokabular</a></p>
+  
+    <hr class="strich-zentriert">
+    
+    <p class="subtext-or text-center">Projekt-Start: Sommer 2026</p>
+    <div class="header-footer"></div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const avatarLink = document.getElementById('avatar-link');
+        
+        if (avatarLink) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const hatWeiterleitungParam = urlParams.get('weiterleitung') === 'ja';
+            const kamDirektVonIndexVoll = document.referrer.includes('index_voll.html');
+
+            if (hatWeiterleitungParam || kamDirektVonIndexVoll) {
+                sessionStorage.setItem('kommtVonIndexVoll', 'true');
+            }
+
+            const istAktiviertFuerSession = sessionStorage.getItem('kommtVonIndexVoll') === 'true';
+
+            if (istAktiviertFuerSession) {
+                avatarLink.href = "index_voll.html";
+            }
         }
 
-        // 3. Jetzt prüfen wir: Ist das session-Flag gesetzt? (Egal ob jetzt gerade oder von einer Seite zuvor)
-        const istAktiviertFuerSession = sessionStorage.getItem('kommtVonIndexVoll') === 'true';
+        // Pop-up Trigger Verknüpfungen
+        const videoDialog = document.getElementById('videoDialog');
+        const openVideoBtn = document.getElementById('openVideoBtn');
+        const popupVideo = document.getElementById('popupVideo');
 
-        // Wenn ja, Link auf index_voll.html umbiegen
-        if (istAktiviertFuerSession) {
-            avatarLink.href = "index_voll.html";
+        if (openVideoBtn && videoDialog && popupVideo) {
+            openVideoBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                videoDialog.showModal();
+                popupVideo.play();
+            });
         }
-    }
-});
 
+        const infoDialog = document.getElementById('infoDialog');
+        const openInfoBtn = document.getElementById('openInfoBtn');
 
-      
-    // ----------------------------------------------------------------------
-    // Pop-up Dialog Logik
-    // ----------------------------------------------------------------------
-    const videoDialog = document.getElementById('videoDialog');
-    const openVideoBtn = document.getElementById('openVideoBtn');
-    const closeVideoBtn = document.getElementById('closeVideoBtn');
-    const popupVideo = document.getElementById('popupVideo');
-
-    openVideoBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        videoDialog.showModal();
-        popupVideo.play(); // Video startet automatisch beim Öffnen
+        if (openInfoBtn && infoDialog) {
+            openInfoBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                infoDialog.showModal();
+            });
+        }
     });
 
-    function closeDialogAndPauseVideo() {
-        videoDialog.close();
-        popupVideo.pause(); // Verhindert, dass der Ton im Hintergrund weiterläuft
-    }
-
-    closeVideoBtn.addEventListener('click', closeDialogAndPauseVideo);
-
-    // Schließen per Klick auf den abgedunkelten Hintergrund
-    videoDialog.addEventListener('click', (e) => {
-        if (e.target === videoDialog) {
-            closeDialogAndPauseVideo();
-        }
+    // Universal-Buttons zum Schließen abfangen
+    document.querySelectorAll('.closeDialogBtn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const dialog = btn.closest('dialog');
+            if (dialog) closeAnyDialog(dialog);
+        });
     });
 
+    // Klick auf Backdrop schließt Popups
+    document.querySelectorAll('dialog.dialog-base').forEach(dialog => {
+        dialog.addEventListener('click', (e) => {
+            if (e.target === dialog) {
+                closeAnyDialog(dialog);
+            }
+        });
+    });
 
-    // ----------------------------------------------------------------------
-    // P5.js Avatar Sketch
-    // ----------------------------------------------------------------------
+    function closeAnyDialog(dialog) {
+        dialog.close();
+        const video = dialog.querySelector('video');
+        if (video) {
+            video.pause();
+        }
+    }
+
+    // P5.js Avatar Sketch Logic
     const avatarSketch = (p) => {
       let img;
       let blinkTimer = 0;
@@ -515,9 +257,7 @@ a.avatar-widget-container {
         if (p.frameCount >= nextBlinkFrame && !isBlinking && pauseTimer <= 0) {
           isBlinking = true;
           blinkTimer = 10; 
-          
           doubleBlinkQueue = p.random(1) < 0.1; 
-          
           nextBlinkFrame = p.frameCount + p.floor(p.random(200, 250));
         }
 
@@ -527,7 +267,6 @@ a.avatar-widget-container {
           
           if (blinkTimer <= 0) {
             isBlinking = false;
-            
             if (doubleBlinkQueue) {
               doubleBlinkQueue = false; 
               pauseTimer = 6; 
@@ -567,32 +306,6 @@ a.avatar-widget-container {
     };
 
     new p5(avatarSketch);
-    
-    
-   const infoDialog = document.getElementById('infoDialog');
-const openInfoBtn = document.getElementById('openInfoBtn');
-const closeInfoBtn = document.getElementById('closeInfoBtn');
-
-// Öffnen
-openInfoBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    infoDialog.showModal();
-});
-
-// Schließen über das X
-closeInfoBtn.addEventListener('click', () => {
-    infoDialog.close();
-});
-
-// Schließen über Klick auf den Hintergrund
-infoDialog.addEventListener('click', (e) => {
-    if (e.target === infoDialog) {
-        infoDialog.close();
-    }
-});
- 
-    
-    </script>
-
+  </script>
 </body>
 </html>
