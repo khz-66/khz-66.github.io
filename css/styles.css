@@ -12,6 +12,8 @@
   --accbl-rgb: 8, 252, 213;
   --accmark: #049e86;
   --accmark-rgb: 0, 177, 150;
+  --accbull: var(--accor);
+  --bullpnt: "■ ";
 }
 
 :root.light {
@@ -28,7 +30,114 @@
   --accbl-rgb: 0, 177, 150;
   --accmark: #08fcd5;
   --accmark-rgb: 8, 252, 213;
+  --accbull: var(--accor);
+  
 }
+
+/* ==========================================================================
+   SPOOKY THEME (Intensiver Glow & Orange Highlights-Box)
+   ========================================================================== */
+
+/* 1. SEITEN-HINTERGRUND & DIALOG-HINTERGRÜNDE */
+body.spooky,
+body.spooky .dialog-base,
+body.spooky .dialog-info,
+body.spooky .dialog-video,
+body.spooky .dialog-code,
+body.spooky #puzzleDialog {
+  background-color: #000000 !important;
+  color: #aaaaaa !important;
+}
+
+/* WICHTIG: Variablen-Änderungen für den Spooky-Modus 
+   werden am saubersten direkt an den Body gehängt */
+body.spooky {
+  --accbull: var(--accbl); /* Überschreibt die Bullet-Farbe zu Türkis */
+  --bullpnt: "● ";
+}
+
+/* 2. TEXTE INNERHALB VON SPOOKY-BEREICHEN */
+body.spooky p,
+.spooky p {
+  color: #aaaaaa !important;
+}
+
+
+/* 3. HIGHLIGHTS-BOX: ORANGER HINTERGRUND MIT STARKEM ORANGE-GLOW */
+body.spooky .highlights-box,
+.spooky.highlights-box {
+  background: var(--accor) !important; /* Nutzt deinen originalen orangen Hintergrund */
+  border: 2px solid #ffd357 !important;   /* Kontrastreicher Rahmen */
+  /* Doppelter, verstärkter Orange-Glow nach außen und innen */
+  box-shadow: 0 0 25px rgba(249, 203, 106, 0.9), 
+              0 0 10px rgba(225, 159, 6, 0.6),
+              inset 0 0 15px rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Textfarben innerhalb der Highlights-Box zurück auf dein Original (Dunkel auf Orange) */
+body.spooky .highlights-box h5,
+body.spooky .highlights-box p,
+body.spooky .highlights-box a {
+  color: var(--bg) !important;
+}
+
+/* 4. POP-UPS & DIALOGE: SUPER-STARKER TÜRKIS-GLOW */
+body.spooky .dialog-base,
+body.spooky .dialog-info,
+body.spooky .dialog-video,
+body.spooky .dialog-code,
+body.spooky #puzzleDialog,
+.spooky:not(body):not(.highlights-box) {
+  border: 2px solid var(--accbl) !important;
+  /* Multi-Layer-Glow für maximale Leuchtkraft */
+  box-shadow: 0 0 25px rgba(8, 252, 213, 0.8), 
+              0 0 12px rgba(8, 252, 213, 0.5), 
+              inset 0 0 15px rgba(8, 252, 213, 0.4) !important;
+}
+
+/* 5. BILDER & KATALOG-BILDER: INTENSIVER TÜRKIS-GLOW */
+body.spooky .image-figure img,
+body.spooky .image-item img,
+body.spooky .scroll-item img,
+body.spooky .item .content-image,        
+body.spooky .item-details .image-scroll img { 
+  border: 2px solid var(--accbl) !important;
+  /* Gleicher starker Effekt wie bei den Dialogen */
+  box-shadow: 0 0 25px rgba(8, 252, 213, 0.8), 
+              0 0 12px rgba(8, 252, 213, 0.5), 
+              inset 0 0 15px rgba(8, 252, 213, 0.4) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Verstärkter Effekt beim Hovern über die Bilder */
+body.spooky .image-figure img:hover,
+body.spooky .image-item img:hover,
+body.spooky .item .content-image:hover {
+  box-shadow: 0 0 35px rgba(8, 252, 213, 1), 
+              0 0 15px rgba(255, 255, 255, 0.6) !important;
+}
+
+/* 6. SCHLIESSKNÖPFE IN POP-UPS */
+body.spooky .closeDialogBtn,
+body.spooky #closePuzzleBtn {
+  color: var(--accbl) !important;
+}
+
+body.spooky .closeDialogBtn:hover,
+body.spooky #closePuzzleBtn:hover {
+  color: #ffffff !important;
+  text-shadow: 0 0 12px var(--accbl);
+}
+
+/* 7. SUBTEXTE IM SPOOKY-MODUS REFORMIEREN */ 
+body.spooky .subtext-or {
+  color: var(--accor) !important; /* Zwingt beide Subtexte im Spooky-Modus auf Türkis */
+}
+body.spooky .subtext-bl {
+  color: var(--accbl) !important; /* Zwingt beide Subtexte im Spooky-Modus auf Türkis */
+}
+
+
 
 body {
   hyphens: auto;
@@ -107,16 +216,23 @@ p {
  margin-bottom: 20px;
  text-align: left;
 }
+
+.subtext {
+  font-size: 1rem;
+  font-style: italic;
+  letter-spacing: 1px;
+  color: var(--fg);
+}
        
 .subtext-or {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-style: italic;
   letter-spacing: 1px;
   color: var(--accor);
 }
         
 .subtext-bl {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-style: italic;
   letter-spacing: 1px;
   color: var(--accbl); 
@@ -137,6 +253,20 @@ mark {
 .text-center {
  text-align: center;
 }
+
+.no-hyphen {
+  hyphens: none;       /* Deaktiviert die automatische Silbentrennung */
+}
+
+.bullet::before {
+  content: var(--bullpnt) " ";
+  padding-right: 8px;
+  color: var(--accbull);
+  font-style: normal; /* Verhindert, dass das Symbol jemals kursiv wird */
+  display: inline-block; /* Garantiert, dass das 'normal' sauber greift */
+}
+
+
 
 a {
   color: var(--accbl);
@@ -226,11 +356,11 @@ hr {
   border-radius: var(--bradius); 
   transition: transform 0.3s ease;         
 }
-
+/*
 .image-figure img:hover {
   transform: scale(1.02);
 }
-
+*/
 .image-figure figcaption {
   font-size: 0.95rem;
   color: var(--fg);
