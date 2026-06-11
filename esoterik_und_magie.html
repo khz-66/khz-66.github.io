@@ -61,27 +61,28 @@
     </video>
   
     <div class="popup-link-container">
-        <a href="#" id="openVideoBtn">➔ Zusätzliche Informationen als Kurzvideo ansehen</a>
+        <a href="#" id="openVideoBtn"><br>➔ Der Sigillenplayer auf dem Handy</a>
     </div>
     
-    <div style="margin: 15px 0;">
-      <a href="#" id="openInfoBtn">Mehr Infos anzeigen</a>
-    </div>
+    
 
     <dialog id="videoDialog" class="dialog-base dialog-video">
         <button id="closeVideoBtn" class="closeDialogBtn" aria-label="Schließen">&times;</button>
-        <video id="popupVideo" class="popup-video" controls>
+        <video id="popupVideo" class="popup-video" controls loop>
+            <source src="sigill_player_hexagramm.mp4" type="video/mp4">
+            Ihr Browser unterstützt dieses Video nicht.
+        </video>
+    </dialog>
+    
+      <!-- NEU: Das zweite Video-Popup für das Primordial Tarot -->
+    <dialog id="tarotVideoDialog" class="dialog-base dialog-video">
+        <button id="closeTarotVideoBtn" class="closeDialogBtn" aria-label="Schließen">&times;</button>
+        <video id="popupTarotVideo" class="popup-video" controls loop>
             <source src="primordeal_tarot.mp4" type="video/mp4">
             Ihr Browser unterstützt dieses Video nicht.
         </video>
     </dialog>
     
-    <dialog id="infoDialog" class="dialog-base dialog-info">
-        <button id="closeInfoBtn" class="closeDialogBtn" aria-label="Schließen">&times;</button>
-        <img src="schnell-laut-gut.jpg" alt="Info Bild" class="popup-img">
-        <h3>Titel der Information</h3>
-        <p>Hier steht der begleitende Text, der zusätzliche Details erklärt.</p>
-    </dialog>
     
     <hr class="strich-zentriert">
 
@@ -106,13 +107,13 @@
     <p class="subtext no-hyphen bullet">
       Bardon, Franz: <i>Der Weg zum wahren Adepten.</i> Freiburg i. Br.: Bauer, 1994.
     </p>
-    <p class="subtext-bl no-hyphen bullet"> 
+    <p class="subtext no-hyphen bullet"> 
       Spiesberger, Karl: <i>Magische Einweihung.</i> Berlin: Schikowski, o. J.
     </p>
-    <p class="subtext-bl no-hyphen bullet">
+    <p class="subtext no-hyphen bullet">
       Spiesberger, Karl: <i>Magische Praxis.</i> Berlin: Schikowski, o. J.
     </p>
-    <p class="subtext-bl no-hyphen bullet">
+    <p class="subtext no-hyphen bullet">
       Douval, H. E.: <i>Bücher der praktischen Magie.</i> Interlaken: Ansata, 8. Aufl.
     </p>
     
@@ -142,6 +143,20 @@
       <div class="scroll-item"><a href="schwarz.html"><img src="shamans_oracle.jpg" alt=""></a></div>
       <div class="scroll-item"><a href="schwarz.html"><img src="karte79.jpg" alt=""></a></div>
     </div>
+    
+    <h3>Tarot-App</h3>
+      <!-- NEU: Der Trigger-Link für das Tarot-Video -->
+      <p>
+        Eine kleine <span class="bc">Tarot-App für Android</span>, hier mit dem "Primordeal Tarot", das Deck ist leider in der App nicht verfügbar.
+      </p>
+    <div class="popup-link-container" style="margin: 15px 0;">
+        <a href="#" id="openTarotVideoBtn">➔ Tarot-App</a>
+    </div>
+    <p>
+      Durch schütteln des Handys werden ein bis fünf Karten ausgewählt, die nebeneinander angezeigt werden.
+      Langes Drücken blendet Kartenbeschreibungen ein und aus.
+    </p>
+
     
     <hr class="strich-zentriert">
 
@@ -193,6 +208,19 @@
                 e.preventDefault();
                 videoDialog.showModal();
                 popupVideo.play();
+            });
+        }
+
+        // NEU: Logik für das zweite Video-Popup (Tarot)
+        const tarotVideoDialog = document.getElementById('tarotVideoDialog');
+        const openTarotVideoBtn = document.getElementById('openTarotVideoBtn');
+        const popupTarotVideo = document.getElementById('popupTarotVideo');
+
+        if (openTarotVideoBtn && tarotVideoDialog && popupTarotVideo) {
+            openTarotVideoBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                tarotVideoDialog.showModal();
+                popupTarotVideo.play();
             });
         }
 
