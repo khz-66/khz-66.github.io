@@ -87,13 +87,14 @@ body.spooky .dialog-info,
 body.spooky .dialog-video,
 body.spooky .dialog-code,
 body.spooky #puzzleDialog,
-.spooky:not(body):not(.highlights-box) {
+.spooky:not(html):not(body):not(.highlights-box) { /* HIER :not(html) ergänzt */
   border: 2px solid var(--accbl) !important;
   /* Multi-Layer-Glow für maximale Leuchtkraft */
   box-shadow: 0 0 25px rgba(8, 252, 213, 0.8), 
               0 0 12px rgba(8, 252, 213, 0.5), 
               inset 0 0 15px rgba(8, 252, 213, 0.4) !important;
 }
+
 
 /* 5. BILDER & KATALOG-BILDER: INTENSIVER TÜRKIS-GLOW */
 body.spooky .image-figure img,
@@ -136,8 +137,6 @@ body.spooky .subtext-or {
 body.spooky .subtext-bl {
   color: var(--accbl) !important; /* Zwingt beide Subtexte im Spooky-Modus auf Türkis */
 }
-
-
 
 body {
   hyphens: auto;
@@ -266,6 +265,47 @@ mark {
   display: inline-block; /* Garantiert, dass das 'normal' sauber greift */
 }
 
+/* ==========================================================================
+   BLOCKQUOTE (ZITAT-FORMAT)
+   ========================================================================== */
+blockquote {
+  margin: 20px 20px;          /* Rückt das Zitat links und rechts ein */
+  /* padding: 10px 20px;         Abstand zwischen der linken Linie und dem Text */
+  /* border-left: 4px solid var(--fg); Standard-Linie in Vordergrundfarbe */
+  /* font-family: Georgia, serif; Klassische Zitat-Schriftart (optional) */
+  font-style: italic;         /* Macht den Text standardmäßig kursiv */
+  font-size: 1.2rem;
+  /* line-height: 1.6; */
+  text-align: left;
+  /* color: var(--fg);           Standardfarbe */
+}
+
+/* Farbvariante 1: Standard / Foreground (optional, da ohnehin Standard) 
+blockquote.quote-fg {
+  color: var(--fg);
+  border-left-color: var(--fg);
+}
+*/
+/* Farbvariante 2: Orange (accor) */
+blockquote.quote-or {
+  color: var(--accor);
+  border-left-color: var(--accor);
+}
+
+/* Farbvariante 3: Türkis (accbl) */
+blockquote.quote-bl {
+  color: var(--accbl);
+  border-left-color: var(--accbl);
+}
+
+/* Falls du eine Zitatquelle (Autor) hinzufügen möchtest */
+blockquote cite {
+  display: block;
+  font-size: 1rem;
+  font-style: normal;
+  margin-top: 8px;
+  color: var(--fg); /* Im Spooky-Modus gut lesbar */
+}
 
 
 a {
@@ -273,13 +313,20 @@ a {
   font-weight: bold;
   text-decoration: underline;
   transition: color 0.2s ease;
-  line-height: 0.8;
 }
 
 a:hover {
   color: var(--accbl);
   text-decoration: underline;
 }
+
+/* Sorgt dafür, dass die Video-Popup-Links die richtige Größe haben */
+.popup-link-container a {
+  font-size: 1.2rem; /* Gleiche Größe wie deine normalen Absätze */
+  line-height: 1.5;  /* Gibt dem Text nach oben und unten Luft zum Atmen */
+  display: inline-block; /* Aktiviert die saubere Zeilenhöhe */
+}
+
 
 .header-footer {
     height: 150px;
