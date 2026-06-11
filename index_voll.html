@@ -1,490 +1,272 @@
+<!-- Im aktuellen Design -->
+
 <!DOCTYPE html>
-<html lang="de">
+<html class="light" lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage khz Vollversion</title>
-    
-    <style>
-        /* ==========================================================================
-           1. RESET & BASICS
-           ========================================================================== */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        
-        html {
-            background-color: #343434; 
-            scroll-behavior: smooth;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #ffffff; /* GEÄNDERT: Dunkler Text auf hellem Grund */
-            min-height: 100vh;
-            line-height: 1.6;
-            overflow-x: hidden; 
-        }
-
-        /* ==========================================================================
-           2. INHALTS-LAYOUT (HAUPTCONTAINER)
-           ========================================================================== */
-        .container {
-            position: relative;
-            z-index: 1; 
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 60px 20px;
-            text-align: center;
-        }
-        
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            background: linear-gradient(45deg, #ff7b00, #ffae00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1.1; 
-        }
-
-        h2 {
-            font-size: 2rem;
-            margin: 40px 0 20px 0;
-            color: #ffae00;
-            line-height: 1.1;
-        }
-        
-        h3 {
-            font-size: 1.5rem;
-            margin: 40px 0 20px 0;
-            color: #ffae00;
-            line-height: 1.1;
-        }
-        
-        p {
-            font-size: 1.2rem;
-            color: #ffffff; /* GEÄNDERT: Sichtbares Grau statt Hellgrau */
-            margin-bottom: 20px;
-            text-align: left;
-            hyphens: auto;
-    -webkit-hyphens: auto; /* Für Safari */
-    lang: de; /* WICHTIG: Der Browser muss wissen, dass es Deutsch ist! */
-
-        }
-        
-        /* bold colered hervorgehoben */
-        bc {
-         font-weight: bold !important;
-         color: #08fcd5 !important;
-       }
-        
-        .text-center {
-            text-align: center;
-        }
-
-        /* HIGHLIGHTS BOX RECHTECK */
-        .highlights-box {
-            background: #ffae00;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px auto 30px auto;
-            max-width: 500px;
-            text-align: left;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .highlights-box h4 {
-            font-size: 1rem;
-            color: #ffffff;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .highlights-box p {
-            font-size: 1rem;
-            color: #ffffff;
-            margin-bottom: 0;
-        }
-
-        .highlights-box a {
-            color: #ffffff;
-            font-weight: bold;
-            text-decoration: underline;
-        }
-
-        .highlights-box a:hover {
-            color: #343434;
-            text-decoration: none;
-        }
-
-        /* GEÄNDERT: Maximale Breite auf 500px & erzwingt Platzierung UNTER dem Text */
-        .content-image {
-            display: block;        /* Verhält sich wie ein Block, Text muss weichen */
-            max-width: 500px;      /* Begrenzt die Breite auf maximal 500 Pixel */
-            width: 100%;           /* Skaliert sauber runter, falls der Bildschirm kleiner als 500px ist */
-            height: auto;
-            border-radius: 8px;
-            margin: 20px auto;     /* 20px Abstand nach oben/unten, "auto" zentriert das Bild */
-        }
-
-
-.image-row {
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-  flex-wrap: wrap;  
-  margin-bottom: 40px; 
-}
-
-.image-row a {
-  display: block;
-  flex: 1 1 280px;        
-  max-width: 100%;        
-}
-
-.image-row img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 6px;
-}
-
-/* Container für Bild + Text */
-/* Container für Bild + Text im Raster */
-.image-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0; 
-  /* GEÄNDERT: flex-grow auf 0 gesetzt, damit sie nicht unkontrolliert breit werden */
-  flex: 0 1 250px; 
-  width: 100%;
-  max-width: 250px; /* Begrenzt das Item auf die Bildbreite */
-  margin-bottom: 40px;
-}
-
-
-/* Die Links in den Items (Bestimmen die Breite des Bildes) */
-.image-item a {
-  display: block;
-  width: 100%;
-  max-width: 250px; /* Das Bild ist maximal 250px breit */
-}
-
-/* Die Bilder selbst */
-.image-item img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 6px;
-}
-
-/* Die Bildunterschrift / Überschrift */
-.image-item figcaption {
-  font-size: 0.95rem;       
-  color: var(--fg);           
-  margin-top: 8px;          
-  text-align: left;       
-  width: 100%;
-  /* WICHTIG: Muss exakt dieselbe max-width wie das 'a'-Tag (Bild) haben */
-  max-width: 250px;         
-  line-height: 1.4;
-  font-style: italic; /* Passend zum Stil von .image-figure */
-}
-
-        a {
-            color: #ff7b00;
-            text-decoration: none;
-            transition: color 0.2s ease;
-            line-height: 0.8;
-        }
-        a:hover {
-            text-decoration: underline;
-            color: #ffae00;
-        }
-
-        .subtext {
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-            background: linear-gradient(45deg, #ff7b00, #ffae00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            /*margin-top: 40px;*/
-        }
-
-        /* ==========================================================================
-           3. AVATAR WIDGET (STEUERUNG)
-           ========================================================================== */
-        .avatar-widget-container {
-            width: 120px;
-            height: 120px;
-            z-index: 10;
-            /*ausblenden*/ 
-            /*display:none; */
-        }
-
-        .avatar-top-right {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-        }
-
-        /* OPTION B: Links Unten fixiert */
-        .avatar-bottom-left {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-        }
-
-        #avatar-animation-holder canvas {
-            width: 100% !important;
-            height: 100% !important;
-            border-radius: 50%;
-            border: 5px solid #5A6E8F !important; 
-        }
-        
-        #puzzle-holder {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-
-        /* Verhindert, dass das Puzzle-Canvas unschön verzerrt */
-        #puzzle-holder canvas {
-            display: block;
-        }
-
-        /* ==========================================================================
-           5. SCHLICHTES PUZZLE POP-UP (IFRAME)
-           ========================================================================== */
-        #puzzleDialog {
-            border: 2px solid #777777; /* Einfacher, solider grauer Rahmen */
-            border-radius: 6px;
-            padding: 35px 15px 15px 15px; /* Platz für das 'X' oben */
-            max-width: 750px; /* Etwas breiter für das Puzzle-Spielfeld */
-            width: 90%;
-            height: 80vh; /* Nutzt 80% der Bildschirmhöhe */
-            background-color: #111111;
-            box-shadow: none; /* Explizit kein Glühen */
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        #puzzleDialog::backdrop {
-            background-color: rgba(0, 0, 0, 0.8); /* Normaler, dunkler Hintergrund */
-            backdrop-filter: none;
-            background-image: none;
-        }
-
-        #puzzleDialog iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background-color: #000000;
-        }
-
-        #closePuzzleBtn {
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            background: none;
-            border: none;
-            color: #777777; /* Passend zum grauen Rahmen */
-            font-size: 26px;
-            cursor: pointer;
-            line-height: 1;
-        }
-
-        #closePuzzleBtn:hover {
-            color: #ffffff;
-        }
-        
-    </style>
-
-    <script src="p5.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homepage khz Vollversion</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="p5.min.js"></script>
 </head>
+
 <body>
 
-    <div class="avatar-widget-container avatar-bottom-left ">
-        <div id="avatar-animation-holder"></div>
+  <div class="avatar-widget-container avatar-bottom-left">
+    <a href="index.html" id="avatar-link" class="avatar-link-wrapper" style="display: block;">
+      <div id="avatar-animation-holder"></div>
+    </a>
+  </div>
+
+  <button id="theme-toggle">Modus wechseln</button>
+
+  <script>
+    const button = document.getElementById('theme-toggle');
+    const modes = ['dark', 'light', 'spooky'];
+    let currentModeIndex = 0;
+
+    if (document.documentElement.classList.contains('light')) {
+        currentModeIndex = 1;
+    }
+
+    button.addEventListener('click', () => {
+        currentModeIndex = (currentModeIndex + 1) % modes.length;
+        const currentMode = modes[currentModeIndex];
+
+        document.documentElement.classList.remove('light');
+        document.body.classList.remove('spooky');
+
+        if (currentMode === 'light') {
+            document.documentElement.classList.add('light');
+            button.textContent = "Modus: Hell";
+        } else if (currentMode === 'spooky') {
+            document.body.classList.add('spooky');
+            button.textContent = "Modus: Spooky";
+        } else {
+            button.textContent = "Modus: Dunkel";
+        }
+    });
+  </script>
+  
+  <div class="container">
+    <h1>Guten Tag!</h1>
+    
+    <div class="highlights-box">
+      <h5>Highlights:</h5>
+      <p style="text-align: right;">
+        <a href="#processing">Processing</a><br>
+        <b>Online-Tool <b><a href="https://khz-66.github.io/Cropper/" target="_blank">Cropper</a><br>
+        <a href="#memes">Memes</a>
+      </p>
     </div>
-
-    <div class="container">
-        <h1>Guten Tag!</h1>
+    
+    <p><a href="template.html">Template</a></p>
+      
+    <h2>Ich</h2>
         
-        <div class="highlights-box">
-            <h4>Highlights:</h4>
-            <p style="text-align: right;">
-              <a href="#processing">Processing</a><br>
-              <a href="https://khz-66.github.io/Cropper/" target="_blank">Cropper</a><br>
-            <a href="#memes">Memes</a><br>
-            <!-- <a href="esoterik_und_magie.html">Esoterik &amp; Magie</a> -->
-            </p>
-        </div>
+    <figure class="image-figure">
+      <a href="#" id="openPuzzleBtn">
+        <img src="polas.jpg" alt="Neues Bild" loading="lazy" onerror="this.style.display='none';">
+      </a>
+    </figure>
+
+    <dialog id="puzzleDialog" class="dialog-base dialog-code">
+      <button type="button" class="closeDialogBtn" aria-label="Schließen">&times;</button>
+      <iframe id="puzzleFrame" style="width: 100%; height: calc(100% - 40px); border: none;" title="Puzzle"></iframe>
+    </dialog>
+        
+    <p>Ein abgehalfterter Hilfslehrer.</p>
+    
+    <hr class="strich-zentriert">
+        
+    <p>
+      <a href="https://flickr.com/photos/10824397@N04" target="_blank">Flickr Fotografie</a>
+    </p>
+        
+    <p>Unter anderem mit einer für <span class="bc">IR-Fotografie</span> modifizierten Olympus C-100.</p>
+
+    <figure class="image-figure">
+      <a href="https://www.flickr.com/photos/khz66/48225929961" target="_blank">
+        <img src="https://live.staticflickr.com/65535/48225929961_3bcdb577bf.jpg" alt="Neues Bild" loading="lazy" onerror="this.style.display='none';">
+      </a>
+    </figure>
+    
+    <hr class="strich-zentriert">
+        
+    <p>
+      <a href="kakteen_und_andere_sukkulenten.html">Kakteen und andere Sukkulenten</a><br>
+      Unter anderem Brutblätter und einige <span class="bc">Frostharte</span> in Freilandüberwinterung.
+    </p>
+        
+    <figure class="image-figure">
+      <a href="kakteen_und_andere_sukkulenten.html">
+        <img src="echinopsis.jpg" alt="Neues Bild" loading="lazy" onerror="this.style.display='none';">
+      </a>
+    </figure>
+    
+    <hr class="strich-zentriert">
+      
+    <p>
+      <a href="https://flickr.com/photos/10824397@N04" target="_blank">Malen und Zeichnen</a><br>
+      Liebhaberei ohne Erfolg, zum Teil wegen Lähmungserscheinungen in meinen Händen.
+    </p>
+        
+    <figure class="image-figure">
+      <img src="aquarellmarker.jpg" alt="Neues Bild" loading="lazy" onerror="this.style.display='none';">
+    </figure>
+    
+    <hr class="strich-zentriert">
        
-       <hr style="border: 0; height: 1px; background: #ccc; margin: 40px 0;">
-          
-      <a href="template.html">Template</a>
-      
-        <h2>Ich</h2>
+    <p id="magie">
+      <a href="esoterik_und_magie.html">Esoterik und Magie</a><br>
+      Tarot, Steine und die <span class="bc">Lautformelsprache</span> Ela Vior. In der Tradition von Karl Spiesberger, Franz Bardon und der Magie des frühen 20. Jahrhunderts.
+    </p>
         
-        <a href="#" id="openPuzzleBtn">
-            <img src="polas.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
-        </a>
-
-        <dialog id="puzzleDialog">
-            <button id="closePuzzleBtn" aria-label="Schließen">&times;</button>
-            <iframe src="" title="Puzzle"></iframe>
-        </dialog>
-        
-        <p>Ein abgehalfterter Hilfslehrer.</p>
-        
-        <p>
-            <a href="https://flickr.com/photos/10824397@N04" target="_blank">Flickr Fotografie</a>
-        </p>
-        
-        <p>Unter anderem mit einer für <bc>IR-Fotografie</bc> modifizierten Olympus C-100. </p>
-
-        <a href="https://www.flickr.com/photos/khz66/48225929961" target="_blank"> <img src="https://live.staticflickr.com/65535/48225929961_3bcdb577bf.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';"></a>
-        
-        
-        <p>
-            <a href="kakteen_und_andere_sukkulenten.html" >Kakteen und andere Sukkulenten</a><br>
-            Unter anderem Brutblätter und einige <bc>Frostharte</bc> in Frei&shy;land&shy;über&shy;winter&shy;ung.
-        </p>
-        
-        <a href="kakteen_und_andere_sukkulenten.html"> <img src="echinopsis.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';"></a>
-      
-      
-      <p>
-            <a href="https://flickr.com/photos/10824397@N04" target="_blank">Malen und Zeichnen</a><br>
-            Liebhaberei ohne Erfolg, zum Teil wegen Lähmungs&shy;erscheinungen in meinen Händen.
-        </p>
-        
-        <img src="aquarellmarker.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
+    <figure class="image-figure">
+      <a href="esoterik_und_magie.html">
+        <img src="electrickery.jpeg" alt="Neues Bild" loading="lazy" onerror="this.style.display='none';">
+      </a>
+    </figure>
+    
+    <hr class="strich-zentriert">
      
+    <p>
+      <a href="lektüre,_filme_und_musik.html" target="_blank">Lektüre, Filme und Musik</a><br>
+      Was mir gefällt...
+    </p>
+        
+    <figure class="image-figure">
+      <a href="lektüre,_filme_und_musik.html" target="_blank">
+        <img src="buliwyf.jpeg" alt="Neues Bild" loading="lazy" onerror="this.style.display='none';">
+      </a>
+    </figure>
+
+    <hr class="strich-zentriert">
+        
+    <h2>Meine Aktivitäten</h2>
+        
+    <figure class="image-figure">
+      <img src="lampe.png" alt="Neues Bild" loading="lazy" onerror="this.style.display='none';">
+    </figure>
+        
+    <div class="kastentext box-or">
+      Der Deckenfluter hat schlapp gemacht und die Vase ist zerbrochen. Jetzt haben beide ein neues Leben.
+    </div>
        
-       <p id="magie">
-            <a href="esoterik_und_magie.html">Esoterik und Magie</a><br>
-            Tarot, Steine und die <bc>Laut&shy;formel&shy;sprache</bc> Ela Vior. In der Tradition von Karl Spiesberger, Franz Bardon und der Magie des frühen 20. Jahrhunderts.
-        </p>
+    <p>Basteleien aller Art, analog und digital, virtuell und real.</p>
         
-        <a href="esoterik_und_magie.html"><img src="electrickery.jpeg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';"></a>
-     
-        <p>
-            <a href="lektüre,_filme_und_musik.html" target="_blank">Lektüre, Filme und Musik</a><br>
-            Was mir gefällt...
-        </p>
+    <h3 id="processing">Processing</h3>
+    <p>Schönes und unnützes.</p>
+    <p><a href="#" id="openCodeBtn">Strahlenblumen</a> <a href="https://github.com/khz-66/processing.js?tab=readme-ov-file" target="_blank">(Quelltext)</a></p>
+    <hr class="strich-links">
+    <p><a href="#" id="openOrbiterBtn">Orbiter</a> <a href="https://github.com/khz-66/Orbiter-Live-Hintergrund?tab=readme-ov-file" target="_blank">(Quelltext)</a> - Unter Quelltext liegt die <a href="https://github.com/khz-66/Orbiter-Live-Hintergrund/blob/main/class_orbiter_demo_random_Orbiters.apk">apk-Installationsdatei</a> für einen Android <span class="bc">Live-Hintergrund</span>.</p>
+    <p class="subtext-or">Ich bin als Android Entwickler registriert, aber wahrscheinlich werden bei Installation trotzdem Warnungen ausgegeben...</p>
+    <hr class="strich-links">
+    <p id="Cropper Utility"><a href="https://khz-66.github.io/Cropper/" target="_blank">Cropper</a> beschneidet einfarbige Bildränder!</p>
         
-        <a href="lektüre,_filme_und_musik.html" target="_blank"><img src="buliwyf.jpeg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';"></a>
+    <dialog id="codeDialog" class="dialog-base dialog-code">
+        <button type="button" id="closeCodeBtn" class="closeDialogBtn">&times;</button>
+        <iframe id="strahlenblumeFrame" style="width: 100%; height: calc(100% - 40px); border: none;" title="Strahlenblumen"></iframe>
+    </dialog>
 
+    <dialog id="orbiterDialog" class="dialog-base dialog-code">
+      <button type="button" class="closeDialogBtn">&times;</button>
+      <iframe id="orbiterFrame" style="width: 100%; height: calc(100% - 40px); border: none;" title="Orbiter"></iframe>
+    </dialog>
+
+    <h3>Modellbau</h3>
+    <p>
+      <a href="papier.html">Paper</a><br>
+      Ein paar interessante, schöne und ausgefallene Vorlagen.
+    </p>
+        
+    <figure class="image-figure">
+      <a href="papier.html">
+        <img src="impossible.jpg" alt="Neues Bild" loading="lazy" onerror="this.style.display='none';">
+      </a>
+    </figure>
      
-     <hr style="border: 0; height: 1px; background: #ccc; margin: 40px 0;">
-        
-        <h2>Meine Aktivitäten</h2>
-        
-        <img src="lampe.png" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
-        
-        <p class="subtext text-center">Der Deckenfluter hat schlapp gemacht und die Vase ist zerbrochen. Jetzt haben beide ein neues Leben.</p>  
-       
-        <p>Basteleien aller Art, analog und digital, virtuell und real.</p>
-        
-        <h3 id="processing">Processing</h3>
-        <p>Schönes und unnützes.</p>
-        <p><a href="https://khz-66.github.io/processing.js/" target="_blank">Strahlenblumen</a> <a href="https://github.com/khz-66/processing.js?tab=readme-ov-file" target="_blank">(Quelltext)</a></p>
-        <p><a href="https://khz-66.github.io/Orbiter-Live-Hintergrund/" target="_blank">Orbiter</a> <a href="https://github.com/khz-66/Orbiter-Live-Hintergrund?tab=readme-ov-file" target="_blank">(Quelltext)</a> - Unter Quelltext liegt die <a href="https://github.com/khz-66/Orbiter-Live-Hintergrund/blob/main/class_orbiter_demo_random_Orbiters.apk">apk-Installationsdatei</a> für einen Android <bc>Live-Hintergrund</bc>. Ich bin als Android Entwickler registriert, aber wahrscheinlich werden bei Installation trotz&shy;dem Warnungen ausgegeben...</p>
-        <p id="Cropper Utility"><a href="https://khz-66.github.io/Cropper/" target="_blank">Cropper</a> beschneidet einfarbige Bildränder!</p>
-        
-        <h3>Modellbau</h3>
-        <p>
-            <a href="papier.html">Papier</a><br>
-            Ein paar interessante, schöne und ausgefallene Vorlagen.
-        </p>
-        
-        
-        <a href="papier.html"><img src="impossible.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';"></a>
+    <hr class="strich-zentriert">
+    
+    <p>
+      <a href="plastik.html">Plastikmodellbau</a><br>
+        Airfix, Revell usw., wie früher.
+    </p>
+    
+    <figure class="image-figure">   
+      <a href="plastik.html">
+        <img src="yak-21.jpg" alt="Neues Bild" loading="lazy" onerror="this.style.display='none';">
+      </a>
+    </figure>
+    
+    <hr class="strich-zentriert"> 
      
-     <h3 id="memes">Webgrafik, Memes u. ä.</h3>
+    <h3 id="memes">Webgrafik, Memes u.&nbsp;ä.</h3>
      
-       <div class="image-row">
-      
+    <div class="image-row">
       <figure class="image-item">
         <a href="was ist das schwert.jpg">
-          <img src="was ist das schwert.jpg" alt="" class="frame">
+          <img src="was ist das schwert.jpg" alt="" class="frame" loading="lazy">
         </a>
         <figcaption>Thulsa Doom</figcaption>
       </figure>
-            
+      
       <figure class="image-item">
         <a href="quoi.jpg">
-         <img src="quoi.jpg" alt="" class="frame">
+          <img src="quoi.jpg" alt="" class="frame" loading="lazy">
         </a>
         <figcaption>Miss Piggy</figcaption>
       </figure>
-
+      
       <figure class="image-item">
         <a href="gerechtigkeit gebührt jedermann.jpg">
-          <img src="gerechtigkeit gebührt jedermann.jpg" alt="" class="frame">
+          <img src="gerechtigkeit gebührt jedermann.jpg" alt="" class="frame" loading="lazy">
         </a>
-        <figcaption>Isaak von York aus "Ivanhoe, der schwarze Ritter</figcaption>
+        <figcaption>Isaak von York aus "Ivanhoe, der schwarze Ritter"</figcaption>
       </figure>
-
+      
       <figure class="image-item">
         <a href="gewalt.jpg">
-          <img src="gewalt.jpg" alt="Starcopter Modell" class="frame">
+          <img src="gewalt.jpg" alt="Starcopter Modell" class="frame" loading="lazy">
         </a>
         <figcaption>"Kowalski, options!"</figcaption>
       </figure>
       
+      <figure class="image-item">
+        <a href="buliwyf.jpeg">
+          <img src="buliwyf.jpeg" alt="" class="frame" loading="lazy">
+        </a>
+        <figcaption>The viking of approval. (Buliwyf aus "Der 13. Krieger")</figcaption>
+      </figure>
     </div>
      
-     <hr style="border: 0; height: 1px; background: #ccc; margin: 40px 0;">
+    <hr class="strich-zentriert">
         
-        <p class="subtext text-center">Sommer 2026</p>
-    </div>
+    <p class="subtext-or text-center">Sommer 2026</p>
+    <div class="header-footer"></div>
+  </div>
 
-    <script>
+  <script>
     // ----------------------------------------------------------------------
-    // Puzzle Pop-up Logik (iframe)
+    // Session- & Avatar-Link Logik
     // ----------------------------------------------------------------------
-    const puzzleDialog = document.getElementById('puzzleDialog');
-    const openPuzzleBtn = document.getElementById('openPuzzleBtn');
-    const closePuzzleBtn = document.getElementById('closePuzzleBtn');
-    const puzzleIframe = puzzleDialog ? puzzleDialog.querySelector('iframe') : null;
+    document.addEventListener("DOMContentLoaded", () => {
+      const avatarLink = document.getElementById('avatar-link');
+    
+      if (avatarLink) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const hatWeiterleitungParam = urlParams.get('weiterleitung') === 'ja';
+        const kamDirektVonIndexVoll = document.referrer.includes('index_voll.html');
 
-    if (openPuzzleBtn && puzzleDialog && closePuzzleBtn) {
-        openPuzzleBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (puzzleIframe) {
-                puzzleIframe.src = "puzzle.html"; // Setzt die Quelle frisch
-            }
-            puzzleDialog.showModal();
-        });
-
-        function closePuzzleAndClear() {
-            puzzleDialog.close();
-            if (puzzleIframe) {
-                puzzleIframe.src = ""; // Stoppt jegliche Skripte im iframe
-            }
+        if (hatWeiterleitungParam || kamDirektVonIndexVoll) {
+            sessionStorage.setItem('kommtVonIndexVoll', 'true');
         }
 
-        closePuzzleBtn.addEventListener('click', closePuzzleAndClear);
-
-        puzzleDialog.addEventListener('click', (e) => {
-            if (e.target === puzzleDialog) {
-                closePuzzleAndClear();
-            }
-        });
-    }
+        if (sessionStorage.getItem('kommtVonIndexVoll') === 'true') {
+            avatarLink.href = "index_voll.html";
+        }
+      }
+    });
 
     // ----------------------------------------------------------------------
     // P5.js Avatar Sketch
@@ -513,9 +295,7 @@
         if (p.frameCount >= nextBlinkFrame && !isBlinking && pauseTimer <= 0) {
           isBlinking = true;
           blinkTimer = 10; 
-          
           doubleBlinkQueue = p.random(1) < 0.1; 
-          
           nextBlinkFrame = p.frameCount + p.floor(p.random(200, 250));
         }
 
@@ -525,7 +305,6 @@
           
           if (blinkTimer <= 0) {
             isBlinking = false;
-            
             if (doubleBlinkQueue) {
               doubleBlinkQueue = false; 
               pauseTimer = 6; 
@@ -559,13 +338,79 @@
         p.strokeWeight(5);
         p.line(130, 115, 174, 115); 
         p.line(176, 115, 220, 115); 
-
         p.pop(); 
       }
     };
 
     new p5(avatarSketch);
-    </script>
 
+    // ----------------------------------------------------------------------
+    // Universelle Dialog Logik (für Popups)
+    // ----------------------------------------------------------------------
+    document.addEventListener("DOMContentLoaded", () => {
+        const puzzleDialog = document.getElementById('puzzleDialog');
+        const openPuzzleBtn = document.getElementById('openPuzzleBtn');
+        const puzzleFrame = document.getElementById('puzzleFrame');
+
+        if (openPuzzleBtn && puzzleDialog && puzzleFrame) {
+            openPuzzleBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                puzzleDialog.showModal();
+                puzzleFrame.src = "puzzle.html";
+            });
+        }
+
+        // NEU: Logik für das Code-Popup (Strahlenblume)
+        const codeDialog = document.getElementById('codeDialog');
+        const openCodeBtn = document.getElementById('openCodeBtn');
+        const strahlenblumeFrame = document.getElementById('strahlenblumeFrame');
+
+        if (openCodeBtn && codeDialog && strahlenblumeFrame) {
+            openCodeBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                codeDialog.showModal();
+                strahlenblumeFrame.src = "https://khz-66.github.io/processing.js/";
+            });
+        }
+
+        // NEU: Logik für den Orbiter-Dialog
+        const orbiterDialog = document.getElementById('orbiterDialog');
+        const openOrbiterBtn = document.getElementById('openOrbiterBtn');
+        const orbiterFrame = document.getElementById('orbiterFrame');
+
+        if (openOrbiterBtn && orbiterDialog && orbiterFrame) {
+            openOrbiterBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                orbiterDialog.showModal();
+                orbiterFrame.src = "https://khz-66.github.io/Orbiter-Live-Hintergrund/";
+            });
+        }
+
+        // Abfangen des nativen Schließ-Events (z.B. via ESC-Taste oder API)
+        document.querySelectorAll('dialog.dialog-base').forEach(dialog => {
+            dialog.addEventListener('close', () => {
+                const frame = dialog.querySelector('iframe');
+                if (frame) {
+                    frame.src = ""; 
+                }
+            });
+            
+            // Schließen bei Klick auf den abgedunkelten Hintergrund
+            dialog.addEventListener('click', (e) => {
+                if (e.target === dialog) {
+                    dialog.close();
+                }
+            });
+        });
+
+        // Schließen über alle "X"-Buttons (.closeDialogBtn)
+        document.querySelectorAll('.closeDialogBtn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const dialog = btn.closest('dialog');
+                if (dialog) dialog.close();
+            });
+        });
+    });
+  </script>
 </body>
 </html>

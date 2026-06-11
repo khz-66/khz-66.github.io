@@ -1,49 +1,41 @@
 <!-- Im aktuellen Design -->
 
 <!DOCTYPE html>
-<html class="light" lang="de"> <head>
+<html class="light" lang="de">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Page Title</title>
   <link rel="stylesheet" href="/css/styles.css">
-    
   <script src="p5.min.js"></script>
-    
-  </head>
+</head>
 
 <body>
-  <div class="avatar-widget-container avatar-bottom-left ">
-  <a href="index.html" id="avatar-link" class="avatar-link-wrapper" style="display: block;">
-    <div id="avatar-animation-holder"></div>
-  </a>
+
+  <div class="avatar-widget-container avatar-bottom-left">
+    <a href="index.html" id="avatar-link" class="avatar-link-wrapper" style="display: block;">
+      <div id="avatar-animation-holder"></div>
+    </a>
   </div>
 
-    <button id="theme-toggle">Modus wechseln</button>
+  <button id="theme-toggle">Modus wechseln</button>
 
   <script>
-    // Den Button im DOM auswählen
     const button = document.getElementById('theme-toggle');
-
-    // Array mit den drei Zuständen definieren
     const modes = ['dark', 'light', 'spooky'];
-    let currentModeIndex = 0; // Standardmäßig starten wir im Dark-Mode (ohne Klassen)
+    let currentModeIndex = 0;
 
-    // Falls beim Laden bereits <html class="light"> gesetzt ist, Index anpassen
     if (document.documentElement.classList.contains('light')) {
         currentModeIndex = 1;
     }
 
-    // Event-Listener für den Klick hinzufügen
     button.addEventListener('click', () => {
-        // Index weiterschalten (0 -> 1 -> 2 -> 0 ...)
         currentModeIndex = (currentModeIndex + 1) % modes.length;
         const currentMode = modes[currentModeIndex];
 
-        // Zuerst alle alten Design-Klassen sauber entfernen
         document.documentElement.classList.remove('light');
         document.body.classList.remove('spooky');
 
-        // Je nach ausgewähltem Modus die passenden Klassen setzen
         if (currentMode === 'light') {
             document.documentElement.classList.add('light');
             button.textContent = "Modus: Hell";
@@ -51,14 +43,10 @@
             document.body.classList.add('spooky');
             button.textContent = "Modus: Spooky";
         } else {
-            // Standard Dark Mode (Keine Klassen auf html oder body)
             button.textContent = "Modus: Dunkel";
         }
     });
   </script>
-  
-
-
   
   <div class="container">
     <h1>Überschrift 1</h1>
@@ -85,6 +73,7 @@
       Schlachteten; siehe, der Gott nahm ihnen den Tag der Zurückkunft,
       Sage hievon auch uns ein weniges, Tochter Kronions.
     </p>
+    
     <p class="subtext-bl bullet">
       Schon in den ersten 20 Zeilen nimmt Homer das Ende der Reise 
       vorweg und klärt die Schuldfrage für das Scheitern der Gefährten.
@@ -96,8 +85,8 @@
     </p>
     
     <div class="kastentext box-or">
-    Die Odyssee ist nicht nur eine Abenteuergeschichte, sondern auch eine 
-    Reflexion über den hohen Preis des Krieges.
+      Die Odyssee ist nicht nur eine Abenteuergeschichte, sondern auch eine 
+      Reflexion über den hohen Preis des Krieges.
     </div>
     
     <div class="kastentext box-bl">
@@ -119,7 +108,7 @@
       <figcaption>Bildunterschrift image-figure small</figcaption>
     </figure>
 
-<hr class="strich-links">
+    <hr class="strich-links">
 
     <figure class="image-figure tiny">
       <a href="bild.jpg"><img src="bild.jpg" alt="Beschreibung" loading="lazy"></a>
@@ -129,198 +118,177 @@
     <h3>Überschrift 3</h3>
     
     <div class="image-row">
-      
       <figure class="image-item">
-        <a href="bild1.jpg">
-          <img src="bild1.jpg" alt="" class="frame">
-        </a>
+        <a href="bild1.jpg"><img src="bild1.jpg" alt="" class="frame"></a>
         <figcaption>image-row 1</figcaption>
       </figure>
-            
       <figure class="image-item">
-        <a href="impossible_model.pdf">
-         <img src="bild2.jpg" alt="" class="frame">
-        </a>
+        <a href="impossible_model.pdf"><img src="bild2.jpg" alt="" class="frame"></a>
         <figcaption>image-row 2</figcaption>
       </figure>
-
       <figure class="image-item">
-        <a href="bild3.jpg">
-          <img src="bild3.jpg" alt="Papervisor Modell" class="frame">
-        </a>
+        <a href="bild3.jpg"><img src="bild3.jpg" alt="Papervisor Modell" class="frame"></a>
         <figcaption>image-row 3</figcaption>
       </figure>
-
       <figure class="image-item">
-        <a href="bild4.jpg">
-          <img src="bild4.jpg" alt="Starcopter Modell" class="frame">
-        </a>
+        <a href="bild4.jpg"><img src="bild4.jpg" alt="Starcopter Modell" class="frame"></a>
         <figcaption>image-row 4</figcaption>
       </figure>
-      
     </div>
   
     <hr>
 
     <div class="image-scroll">
-
       <figure class="scroll-item">
-      <img src="bild1.jpg" alt="Beschreibung 1">
-      <figcaption>image-scroll 1</figcaption>
-    </figure>
+        <img src="bild1.jpg" alt="Beschreibung 1">
+        <figcaption>image-scroll 1</figcaption>
+      </figure>
+      <figure class="scroll-item">
+        <img src="bild2.jpg" alt="Beschreibung 2">
+        <figcaption>Image scroll 2</figcaption>
+      </figure>
+      <figure class="scroll-item">
+        <img src="bild3.jpg" alt="Beschreibung 3">
+        <figcaption>image-scroll 3</figcaption>
+      </figure>
+    </div>
 
-    <figure class="scroll-item">
-      <img src="bild2.jpg" alt="Beschreibung 2">
-      <figcaption>Image scroll 2</figcaption>
-    </figure>
-
-    <figure class="scroll-item">
-      <img src="bild3.jpg" alt="Beschreibung 3">
-      <figcaption>image-scroll 3</figcaption>
-    </figure>
-
-  </div>
-
-  <h3 id="popups">Überschrift 3</h3>
+    <h3 id="popups">Überschrift 3</h3>
   
-  <p>
-    Info-Popup mit <a href="#" id="openInfoBtn">dialog-info</a> oder  
-    Video-Popup mit <a href="#" id="openVideoBtn">video-info</a>.
-  </p>
-  
-  <dialog id="infoDialog" class="dialog-base dialog-info">
-      <button id="closeInfoBtn" class="closeDialogBtn">&times;</button>
-      <figure class="image-figure tiny">
-      <img src="bild.jpg" alt="Beschreibung" loading="lazy">
-      <figcaption>Bildunterschrift image-figure tiny</figcaption>
-    </figure>
-      <h3>Wichtige Information</h3>
-      <p>Hier steht dein Infotext, der perfekt in das Pop-up passt.</p>
-  </dialog>
-   
-  <dialog id="videoDialog" class="dialog-base dialog-video">
-      <button id="closeVideoBtn" class="closeDialogBtn">&times;</button>
-      
-      <video id="popupVideo" class="popup-video" controls>
-          <source src="dragon.mp4" type="video/mp4">
-          Dein Browser unterstützt das Video-Tag nicht.
-      </video>
-  </dialog>
-
-  <hr class="strich-zentriert">
-  
-  <p>
-    Processing- und p4.js-Animationen über html-Seite: 
-     <a href="#" id="openCodeBtn">Strahlenbkumen</a>,
-    <a href="#" id="openOrbiterBtn">Orbiter</a>.
-  </p>
-
-  <hr class="strich-zentriert">
-  
-  <p>
-    Webseite mit Animation und Text: <a href="#" id="openPuzzleBtn">p5.js Puzzle</a>.
-  </p>
-
-<dialog id="codeDialog" class="dialog-base dialog-code">
-    <button id="closeCodeBtn" class="closeDialogBtn">&times;</button>
-    <iframe id="strahlenblumeFrame" src="" style="width: 100%; height: calc(100% - 40px); border: none;"></iframe>
-</dialog>
-
-<dialog id="orbiterDialog" class="dialog-base dialog-code">
-  <button class="closeDialogBtn">&times;</button>
-  <iframe id="orbiterFrame" src="" style="width: 100%; height: calc(100% - 40px); border: none;"></iframe>
-</dialog>
-
-<dialog id="puzzleDialog" class="dialog-base dialog-code">
-  <button class="closeDialogBtn">&times;</button>
-  <iframe id="puzzleFrame" src="" style="width: 100%; height: calc(100% - 40px); border: none;"></iframe>
-</dialog>
-
-<hr>
-
-<h2>Katalog</h2>
-
-<section class="item" id="adromischus">
-  <img src="pcr_pictures/PCR105_20241012_65197.jpg" alt="Adromischus" class="content-image">
-  <div class="item-details">
-    <h2>Adromischus</h2>
-    <h3><em>Adromischus cooperi</em></h3>
     <p>
-      <strong>Pflegehinweise & Notizen:</strong><br>
-      Steht bevorzugt warm. Sommerquartier: Küchenfenster, Winterquartier: Treppenhaus. Substrat: Uhlig Kakteenerde Standard ggf. gemischt mit COMPO CACTEA® und rein mineralischem Substrat 1:1:1 (Düngen nach 8 Wochen).
+      Info-Popup mit <a href="#" id="openInfoBtn">dialog-info</a> oder  
+      Video-Popup mit <a href="#" id="openVideoBtn">video-info</a>.
     </p>
-    <ul>
-      <li><strong>27.04.25:</strong> Kulturhinweise aktualisiert</li>
-      <li><strong>08.10.24:</strong> Vom Süd- zum Nordfenster gestellt</li>
-      <li><strong>13.05.25:</strong> Ans Südfenster gestellt</li>
-      <li><strong>01.06.25:</strong> Ans Küchenfenster?</li>
-      <li><strong>01.03.26:</strong> Vertrocknet</li>
-    </ul>
-  </div>
-</section>
-
-        <section class="item" id="aloe">
-             <div class="item-images">
-    <img src="pcr_pictures/PCR105_20250523_60406.jpg" alt="Aloe" class="content-image">
-    <img src="pcr_pictures/PCR105_20250523_60406.jpg" alt="Aloe" class="content-image">
-  </div>
-  <div class="item-details">
-                <h2>Aloe</h2>
-                <h3><em>Aloe vera</em></h3>
-                <p>
-                    <strong>Pflegehinweise & Notizen:</strong><br>
-                    Steckling von Mama aus Australien mitgebracht. Substrat: Uhlig Kakteenerde Standard pur oder Uhlig Mix Erde + COMPO CACTEA® 1:1.
-                </p>
-                <ul>
-                    <li><strong>22.05.25:</strong> Von Bärbel erhalten</li>
-                    <li><strong>22.06.25:</strong> Umtopfen</li>
-                    <li><strong>26.06.25:</strong> Angießen</li>
-                    <li><strong>20.09.25:</strong> Sieht schon wieder so schlecht aus 😕</li>
-                    <li><strong>08.11.25:</strong> Vertrocknet ☹️</li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="item" id="brutblatt">
-            <img src="pcr_pictures/PCR105_20250529_91981.jpg" alt="Brutblatt" class="content-image">
-            <div class="item-details">
-                <h2>Brutblatt</h2>
-                <h3><em>Kalanchoe daigremontiana</em></h3>
-                <p>
-                    Mehrere Exemplare, vermehrt sich sehr leicht selbst aus den Jungpflanzen am Blattrand.<br><br>
-                    <strong>Pflegehinweise & Notizen:</strong><br>
-                    Sommerfrische auf dem Balkon. Substrat: Uhlig Kakteenerde Standard oder gemischt mit COMPO CACTEA® und rein mineralischem Substrat 1:1:1 (Düngen nach 8 Wochen).
-                </p>
-                <ul>
-                    <li><strong>15.04.25:</strong> Sommerfrische Balkon</li>
-                    <li><strong>24.05.25:</strong> Umtopfen in 10 cm Topf mit Gemisch</li>
-                    <li><strong>29.05.25:</strong> Gießen</li>
-                    <li><strong>29.09.25:</strong> Ende Sommerfrische</li>
-                    <li><strong>28.05.26:</strong> Ans Westfenster gestellt</li>
-                </ul>
-                
-                <div class="image-scroll">
-                    <img src="pcr_pictures/bild.jpg" alt="Ansicht 1">
-                    <img src="pcr_pictures/bild.jpg" alt="Ansicht 2">
-                    <img src="pcr_pictures/bild.jpg" alt="Ansicht 3">
-                </div>
-            </div>
-        </section>
-
-  <hr>
-  <p class="subtext-or text-center">Sommer 2026</p>
   
-  <div class="header-footer"></div>
-    
+    <dialog id="infoDialog" class="dialog-base dialog-info">
+        <button type="button" id="closeInfoBtn" class="closeDialogBtn">&times;</button>
+        <figure class="image-figure tiny">
+          <img src="bild.jpg" alt="Beschreibung" loading="lazy">
+          <figcaption>Bildunterschrift image-figure tiny</figcaption>
+        </figure>
+        <h3>Wichtige Information</h3>
+        <p>Hier steht dein Infotext, der perfekt in das Pop-up passt.</p>
+    </dialog>
+   
+    <dialog id="videoDialog" class="dialog-base dialog-video">
+        <button type="button" id="closeVideoBtn" class="closeDialogBtn">&times;</button>
+        <video id="popupVideo" class="popup-video" controls>
+            <source src="dragon.mp4" type="video/mp4">
+            Dein Browser unterstützt das Video-Tag nicht.
+        </video>
+    </dialog>
+
+    <hr class="strich-zentriert">
+  
+    <p>
+      Processing- und p5.js-Animationen über html-Seite: 
+      <a href="#" id="openCodeBtn">Strahlenblumen</a>,
+      <a href="#" id="openOrbiterBtn">Orbiter</a>.
+    </p>
+
+    <hr class="strich-zentriert">
+  
+    <p>
+      Webseite mit Animation und Text: <a href="#" id="openPuzzleBtn">p5.js Puzzle</a>.
+    </p>
+
+    <dialog id="codeDialog" class="dialog-base dialog-code">
+        <button type="button" id="closeCodeBtn" class="closeDialogBtn">&times;</button>
+        <iframe id="strahlenblumeFrame" style="width: 100%; height: calc(100% - 40px); border: none;"></iframe>
+    </dialog>
+
+    <dialog id="orbiterDialog" class="dialog-base dialog-code">
+      <button type="button" class="closeDialogBtn">&times;</button>
+      <iframe id="orbiterFrame" style="width: 100%; height: calc(100% - 40px); border: none;"></iframe>
+    </dialog>
+
+    <dialog id="puzzleDialog" class="dialog-base dialog-code">
+      <button type="button" class="closeDialogBtn">&times;</button>
+      <iframe id="puzzleFrame" style="width: 100%; height: calc(100% - 40px); border: none;"></iframe>
+    </dialog>
+
+    <hr>
+
+    <h2>Katalog</h2>
+
+    <section class="item" id="adromischus">
+      <img src="pcr_pictures/PCR105_20241012_65197.jpg" alt="Adromischus" class="content-image">
+      <div class="item-details">
+        <h2>Adromischus</h2>
+        <h3><em>Adromischus cooperi</em></h3>
+        <p>
+          <strong>Pflegehinweise & Notizen:</strong><br>
+          Steht bevorzugt warm. Sommerquartier: Küchenfenster, Winterquartier: Treppenhaus. Substrat: Uhlig Kakteenerde Standard ggf. gemischt mit COMPO CACTEA® und rein mineralischem Substrat 1:1:1 (Düngen nach 8 Wochen).
+        </p>
+        <ul>
+          <li><strong>27.04.25:</strong> Kulturhinweise aktualisiert</li>
+          <li><strong>08.10.24:</strong> Vom Süd- zum Nordfenster gestellt</li>
+          <li><strong>13.05.25:</strong> Ans Südfenster gestellt</li>
+          <li><strong>01.06.25:</strong> Ans Küchenfenster?</li>
+          <li><strong>01.03.26:</strong> Vertrocknet</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="item" id="aloe">
+      <div class="item-images">
+        <img src="pcr_pictures/PCR105_20250523_60406.jpg" alt="Aloe" class="content-image">
+        <img src="pcr_pictures/PCR105_20250523_60406.jpg" alt="Aloe" class="content-image">
+      </div>
+      <div class="item-details">
+        <h2>Aloe</h2>
+        <h3><em>Aloe vera</em></h3>
+        <p>
+          <strong>Pflegehinweise & Notizen:</strong><br>
+          Steckling von Mama aus Australien mitgebracht. Substrat: Uhlig Kakteenerde Standard pur oder Uhlig Mix Erde + COMPO CACTEA® 1:1.
+        </p>
+        <ul>
+          <li><strong>22.05.25:</strong> Von Bärbel erhalten</li>
+          <li><strong>22.06.25:</strong> Umtopfen</li>
+          <li><strong>26.06.25:</strong> Angießen</li>
+          <li><strong>20.09.25:</strong> Sieht schon wieder so schlecht aus 😕</li>
+          <li><strong>08.11.25:</strong> Vertrocknet ☹️</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="item" id="brutblatt">
+      <img src="pcr_pictures/PCR105_20250529_91981.jpg" alt="Brutblatt" class="content-image">
+      <div class="item-details">
+        <h2>Brutblatt</h2>
+        <h3><em>Kalanchoe daigremontiana</em></h3>
+        <p>
+          Mehrere Exemplare, vermehrt sich sehr leicht selbst aus den Jungpflanzen am Blattrand.<br><br>
+          <strong>Pflegehinweise & Notizen:</strong><br>
+          Sommerfrische auf dem Balkon. Substrat: Uhlig Kakteenerde Standard oder gemischt mit COMPO CACTEA® und rein mineralischem Substrat 1:1:1 (Düngen nach 8 Wochen).
+        </p>
+        <ul>
+          <li><strong>15.04.25:</strong> Sommerfrische Balkon</li>
+          <li><strong>24.05.25:</strong> Umtopfen in 10 cm Topf mit Gemisch</li>
+          <li><strong>29.05.25:</strong> Gießen</li>
+          <li><strong>29.09.25:</strong> Ende Sommerfrische</li>
+          <li><strong>28.05.26:</strong> Ans Westfenster gestellt</li>
+        </ul>
+        
+        <div class="image-scroll">
+          <img src="pcr_pictures/bild.jpg" alt="Ansicht 1">
+          <img src="pcr_pictures/bild.jpg" alt="Ansicht 2">
+          <img src="pcr_pictures/bild.jpg" alt="Ansicht 3">
+        </div>
+      </div>
+    </section>
+
+    <hr>
+    <p class="subtext-or text-center">Sommer 2026</p>
+  
+    <div class="header-footer"></div>
   </div>
   
   <script>
-    
     document.addEventListener("DOMContentLoaded", () => {
-    const avatarLink = document.getElementById('avatar-link');
+      const avatarLink = document.getElementById('avatar-link');
     
-    // NUR ausführen, wenn das Element 'avatar-link' auch wirklich existiert!
-    if (avatarLink) {
+      if (avatarLink) {
         const urlParams = new URLSearchParams(window.location.search);
         const hatWeiterleitungParam = urlParams.get('weiterleitung') === 'ja';
         const kamDirektVonIndexVoll = document.referrer.includes('index_voll.html');
@@ -329,209 +297,179 @@
             sessionStorage.setItem('kommtVonIndexVoll', 'true');
         }
 
-        const istAktiviertFuerSession = sessionStorage.getItem('kommtVonIndexVoll') === 'true';
-
-        if (istAktiviertFuerSession) {
+        if (sessionStorage.getItem('kommtVonIndexVoll') === 'true') {
             avatarLink.href = "index_voll.html";
         }
       }
-  });
+    });
 
-  const avatarSketch = (p) => {
-  let img;
-  let blinkTimer = 0;
-  let pauseTimer = 0;       // NEU: Timer für die Pause zwischen den Blinzlern
-  let isBlinking = false;
-  let doubleBlinkQueue = false; 
-  let nextBlinkFrame = 200;     
+    const avatarSketch = (p) => {
+      let img;
+      let blinkTimer = 0;
+      let pauseTimer = 0;       
+      let isBlinking = false;
+      let doubleBlinkQueue = false; 
+      let nextBlinkFrame = 200;     
 
-  p.preload = () => {
-    img = p.loadImage('me.jpg'); 
-  };
+      p.preload = () => {
+        img = p.loadImage('me.jpg'); 
+      };
 
-  p.setup = () => {
-    let canvas = p.createCanvas(350, 350);
-    canvas.parent('avatar-animation-holder');
-  };
+      p.setup = () => {
+        let canvas = p.createCanvas(350, 350);
+        canvas.parent('avatar-animation-holder');
+      };
 
-  p.draw = () => {
-    p.clear();
-    p.image(img, 0, 0, p.width, p.height);
+      p.draw = () => {
+        p.clear();
+        p.image(img, 0, 0, p.width, p.height);
 
-    // Wenn der Ziel-Frame erreicht ist und gerade absolut gar nichts passiert
-    if (p.frameCount >= nextBlinkFrame && !isBlinking && pauseTimer <= 0) {
-      isBlinking = true;
-      blinkTimer = 10; 
-      
-      // Zu 10% Wahrscheinlichkeit folgt ein Doppelblinzeln
-      doubleBlinkQueue = p.random(1) < 0.1; 
-      
-      // Nächstes Standard-Intervall festlegen
-      nextBlinkFrame = p.frameCount + p.floor(p.random(200, 250));
-    }
-
-    // 1. Logik für das Blinzeln (geschlossene Augen)
-    if (isBlinking) {
-      blinkEyes();
-      blinkTimer--;
-      
-      if (blinkTimer <= 0) {
-        isBlinking = false;
-        
-        // Wenn ein Doppelblinzeln ansteht, aktivieren wir die Pause
-        if (doubleBlinkQueue) {
-          doubleBlinkQueue = false; 
-          pauseTimer = 6; // 6 Frames lang bleiben die Augen jetzt offen
+        if (p.frameCount >= nextBlinkFrame && !isBlinking && pauseTimer <= 0) {
+          isBlinking = true;
+          blinkTimer = 10; 
+          doubleBlinkQueue = p.random(1) < 0.1; 
+          nextBlinkFrame = p.frameCount + p.floor(p.random(200, 250));
         }
-      }
-    }
+
+        if (isBlinking) {
+          blinkEyes();
+          blinkTimer--;
+          
+          if (blinkTimer <= 0) {
+            isBlinking = false;
+            if (doubleBlinkQueue) {
+              doubleBlinkQueue = false; 
+              pauseTimer = 6; 
+            }
+          }
+        }
     
-    // 2. Logik für die Pause (Augen offen, Timer läuft ab)
-    if (pauseTimer > 0) {
-      pauseTimer--;
-      // Wenn die Pause vorbei ist, wird das zweite Blinzeln ausgelöst
-      if (pauseTimer === 0) {
-        isBlinking = true;
-        blinkTimer = 10;
-      }
-    }
-       
-    // Brille / Hintergrundelemente des Avatars
-    p.stroke(0);          
-    p.strokeWeight(6);    
-    p.fill(183, 189, 189);          
-    p.ellipse(175, 185, 170, 120);
-  };
-
-  function blinkEyes() {
-    p.push(); 
-    p.stroke(0);          
-    p.strokeWeight(6);    
-    p.fill(183, 189, 189);          
-
-    p.ellipse(135, 115, 70, 70); 
-    p.ellipse(205, 115, 75, 75); 
-
-    p.strokeWeight(5);
-    p.line(130, 115, 174, 115); 
-    p.line(176, 115, 220, 115); 
-
-    p.pop(); 
-  }
-};
-
-new p5(avatarSketch);
-
-
-// ----------------------------------------------------------------------
-// Universelle Dialog Logik (für alle Dialoge)
-// ----------------------------------------------------------------------
-
-// WICHTIG: Wir packen das Öffnen der Dialoge in ein DOMContentLoaded-Event,
-// damit der Browser die Buttons auch sicher im HTML findet!
-document.addEventListener("DOMContentLoaded", () => {
-
-    // 1. Spezifische Logik für das Video (Öffnen & Play)
-    const videoDialog = document.getElementById('videoDialog');
-    const openVideoBtn = document.getElementById('openVideoBtn');
-    const popupVideo = document.getElementById('popupVideo');
-
-    if (openVideoBtn && videoDialog && popupVideo) {
-        openVideoBtn.addEventListener('click', (e) => {
-            e.preventDefault(); // Verhindert das Springen der Seite
-            videoDialog.showModal();
-            popupVideo.play();
-        });
-    }
-
-    // 2. Spezifische Logik für die Info (Öffnen)
-    const infoDialog = document.getElementById('infoDialog');
-    const openInfoBtn = document.getElementById('openInfoBtn');
-
-    if (openInfoBtn && infoDialog) {
-        openInfoBtn.addEventListener('click', (e) => {
-            e.preventDefault(); // Verhindert das Springen der Seite
-            infoDialog.showModal();
-        });
-    }
-
-    // Spezifische Logik für das Code-Popup der Strahlenblume
-    const codeDialog = document.getElementById('codeDialog');
-    const openCodeBtn = document.getElementById('openCodeBtn');
-    const iframe = document.getElementById('strahlenblumeFrame');
-
-    if (openCodeBtn && codeDialog && iframe) {
-        openCodeBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            codeDialog.showModal();
-            iframe.src = "https://khz-66.github.io/processing.js/";
-        });
-    }
-
-    // Spezifische Logik für den Orbiter-Live-Hintergrund
-    const orbiterDialog = document.getElementById('orbiterDialog');
-    const openOrbiterBtn = document.getElementById('openOrbiterBtn');
-    const orbiterFrame = document.getElementById('orbiterFrame');
-
-    if (openOrbiterBtn && orbiterDialog && orbiterFrame) {
-        openOrbiterBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            
-            // 1. Erst den Dialog sichtbar machen (Größe wird für den Browser berechenbar)
-            orbiterDialog.showModal();
-            
-            // 2. ERST JETZT die URL in das sichtbare Iframe laden!
-            orbiterFrame.src = "https://khz-66.github.io/Orbiter-Live-Hintergrund/";
-        });
-    }
-
-    // HIER NEU: Spezifische Logik für das Puzzle-Spiel (Lokale puzzle.html)
-    const puzzleDialog = document.getElementById('puzzleDialog');
-    const openPuzzleBtn = document.getElementById('openPuzzleBtn');
-    const puzzleFrame = document.getElementById('puzzleFrame');
-
-    if (openPuzzleBtn && puzzleDialog && puzzleFrame) {
-        openPuzzleBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            
-            // 1. Dialog sichtbar machen
-            puzzleDialog.showModal();
-            
-            // 2. puzzle.html in das Iframe laden
-            puzzleFrame.src = "puzzle.html";
-        });
-    }
-
-}); // Ende des DOMContentLoaded-Blocks
-
-// 4. UNIVERSAL: Schließen über alle "X"-Buttons (.closeDialogBtn)
-// (Das kann außerhalb stehen, da es document-weit sucht)
-document.querySelectorAll('.closeDialogBtn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const dialog = btn.closest('dialog');
-        if (dialog) closeAnyDialog(dialog);
-    });
-});
-
-// 5. UNIVERSAL: Schließen bei Klick auf den abgedunkelten Hintergrund
-document.querySelectorAll('dialog.dialog-base').forEach(dialog => {
-    dialog.addEventListener('click', (e) => {
-        if (e.target === dialog) {
-            closeAnyDialog(dialog);
+        if (pauseTimer > 0) {
+          pauseTimer--;
+          if (pauseTimer === 0) {
+            isBlinking = true;
+            blinkTimer = 10;
+          }
         }
+       
+        // Brücke/Brille
+        p.stroke(0);          
+        p.strokeWeight(6);    
+        p.fill(183, 189, 189);          
+        p.ellipse(175, 185, 170, 120);
+      };
+
+      function blinkEyes() {
+        p.push(); 
+        p.stroke(0);          
+        p.strokeWeight(6);    
+        p.fill(183, 189, 189);          
+
+        p.ellipse(135, 115, 70, 70); 
+        p.ellipse(205, 115, 75, 75); 
+
+        p.strokeWeight(5);
+        p.line(130, 115, 174, 115); 
+        p.line(176, 115, 220, 115); 
+        p.pop(); 
+      }
+    };
+
+    new p5(avatarSketch);
+
+    // ----------------------------------------------------------------------
+    // Universelle Dialog Logik (optimiert für Event-Abfangung)
+    // ----------------------------------------------------------------------
+    document.addEventListener("DOMContentLoaded", () => {
+
+        const videoDialog = document.getElementById('videoDialog');
+        const openVideoBtn = document.getElementById('openVideoBtn');
+        const popupVideo = document.getElementById('popupVideo');
+
+        if (openVideoBtn && videoDialog && popupVideo) {
+            openVideoBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                videoDialog.showModal();
+                popupVideo.play();
+            });
+        }
+
+        const infoDialog = document.getElementById('infoDialog');
+        const openInfoBtn = document.getElementById('openInfoBtn');
+
+        if (openInfoBtn && infoDialog) {
+            openInfoBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                infoDialog.showModal();
+            });
+        }
+
+        const codeDialog = document.getElementById('codeDialog');
+        const openCodeBtn = document.getElementById('openCodeBtn');
+        const iframe = document.getElementById('strahlenblumeFrame');
+
+        if (openCodeBtn && codeDialog && iframe) {
+            openCodeBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                codeDialog.showModal();
+                iframe.src = "https://khz-66.github.io/processing.js/";
+            });
+        }
+
+        const orbiterDialog = document.getElementById('orbiterDialog');
+        const openOrbiterBtn = document.getElementById('openOrbiterBtn');
+        const orbiterFrame = document.getElementById('orbiterFrame');
+
+        if (openOrbiterBtn && orbiterDialog && orbiterFrame) {
+            openOrbiterBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                orbiterDialog.showModal();
+                orbiterFrame.src = "https://khz-66.github.io/Orbiter-Live-Hintergrund/";
+            });
+        }
+
+        const puzzleDialog = document.getElementById('puzzleDialog');
+        const openPuzzleBtn = document.getElementById('openPuzzleBtn');
+        const puzzleFrame = document.getElementById('puzzleFrame');
+
+        if (openPuzzleBtn && puzzleDialog && puzzleFrame) {
+            openPuzzleBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                puzzleDialog.showModal();
+                puzzleFrame.src = "puzzle.html";
+            });
+        }
+
+        // Event-Listener für das native Schließen (z. B. via ESC-Taste)
+        document.querySelectorAll('dialog.dialog-base').forEach(dialog => {
+            dialog.addEventListener('close', () => {
+                const video = dialog.querySelector('video');
+                if (video) {
+                    video.pause();
+                }
+                // Optionale Bereinigung von Iframes beim Schließen:
+                const frame = dialog.querySelector('iframe');
+                if (frame) {
+                    frame.src = ""; 
+                }
+            });
+            
+            // Klick auf abgedunkelten Hintergrund
+            dialog.addEventListener('click', (e) => {
+                if (e.target === dialog) {
+                    dialog.close();
+                }
+            });
+        });
+
+        // Schließen über alle "X"-Buttons
+        document.querySelectorAll('.closeDialogBtn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const dialog = btn.closest('dialog');
+                if (dialog) dialog.close();
+            });
+        });
     });
-});
-
-// Zentrale Hilfsfunktion zum Schließen
-function closeAnyDialog(dialog) {
-    dialog.close();
-    const video = dialog.querySelector('video');
-    if (video) {
-        video.pause();
-    }
-}
-
-    </script>
-
+  </script>
 </body>
 </html>
