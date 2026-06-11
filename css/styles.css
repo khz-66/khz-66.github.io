@@ -307,6 +307,34 @@ blockquote cite {
   color: var(--fg); /* Im Spooky-Modus gut lesbar */
 }
 
+/* ==========================================================================
+   KASTENTEXT (HIGHLIGHT-BOXEN)
+   ========================================================================== */
+.kastentext {
+  margin: 20px 0;
+  padding: 15px 20px;
+  border-radius: 4px;       /* Leicht abgerundete Ecken passend zum Design */
+  font-size: 1rem;          /* Exakt die Schriftgröße deines Subtexts */
+  font-style: normal;       /* Explizit nicht kursiv */
+  text-align: justify;
+  line-height: 1.5;
+  color: var(--fg);         /* Textfarbe bleibt im gut lesbaren Vordergrund */
+}
+
+/* Variante 1: Hintergrund Orange (accor) mit dunklem Text für optimalen Kontrast */
+.box-or {
+  background-color: var(--accor);
+  color: var(--bg);          /* Dunkler Text auf Orange ist im Spooky-Modus extrem gut lesbar */
+  font-weight: bold; 
+}
+
+/* Variante 2: Hintergrund Türkis (accbl) mit dunklem Text */
+.box-bl {
+  background-color: var(--accbl);
+  color: var(--bg);       /*     Dunkler Text auf hellem Türkis verhindert Augenkrebs */
+  font-weight: bold; 
+}
+
 
 a {
   color: var(--accbl);
