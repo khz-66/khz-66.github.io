@@ -1,8 +1,16 @@
 <!-- Im aktuellen Design -->
 
 <!DOCTYPE html>
-<html class="light" lang="de">
+<html lang="de">
 <head>
+  
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('weiterleitung') === 'ja') {
+      window.location.href = "index_voll.html"; // <-- Für Weiterleitung "?weiterleitung=ja" an die Adresse anhängen
+    }
+  </script>
+  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Homepage khz Vollversion</title>
@@ -60,6 +68,15 @@
       </p>
     </div>
     
+    <div id="puzzle-holder">
+            <script src="puzzle.js"></script>
+        </div>
+        
+        <p class="subtext-or">Ich bin grade dabei, mich zu sortieren. Zum puzzeln Kacheln anklicken, für Hilfe Doppelklick ins schwarze Quadrat!</p> 
+         
+        <hr style="border: 0; height: 1px; background: #ccc; margin: 40px 0;">
+
+    
     <p><a href="template.html">Template</a></p>
       
     <h2>Ich</h2>
@@ -107,12 +124,12 @@
     <hr class="strich-zentriert">
       
     <p>
-      <a href="https://flickr.com/photos/10824397@N04" target="_blank">Malen und Zeichnen</a><br>
+      <a href="malen_und_zeichnen.html" target="_blank">Malen und Zeichnen</a><br>
       Liebhaberei ohne Erfolg, zum Teil wegen Lähmungserscheinungen in meinen Händen.
     </p>
         
     <figure class="image-figure">
-      <img src="aquarellmarker.jpg" alt="Neues Bild" loading="lazy" onerror="this.style.display='none';">
+      <a href="malen_und_zeichnen.html" target="_blank"><img src="aquarellmarker.jpg" alt="Neues Bild" loading="lazy" onerror="this.style.display='none';"></a>
     </figure>
     
     <hr class="strich-zentriert">
@@ -189,12 +206,12 @@
     <hr class="strich-zentriert">
     
     <p>
-      <a href="plastik.html">Plastikmodellbau</a><br>
+      <a href="plastikmodellbau.html">Plastikmodellbau</a><br>
         Airfix, Revell usw., wie früher.
     </p>
     
     <figure class="image-figure">   
-      <a href="plastik.html">
+      <a href="plastikmodellbau.html">
         <img src="yak-21.jpg" alt="Neues Bild" loading="lazy" onerror="this.style.display='none';">
       </a>
     </figure>
@@ -411,6 +428,39 @@
             });
         });
     });
+    
+    
+
+function syncPuzzleTheme() {
+    const iframe = document.querySelector("#puzzleDialog iframe");
+    if (!iframe) return;
+
+    iframe.addEventListener("load", () => {
+        const mainRoot = document.documentElement;
+        const mainBody = document.body;
+
+        const iframeDoc = iframe.contentDocument;
+        const iframeRoot = iframeDoc.documentElement;
+        const iframeBody = iframeDoc.body;
+
+        // 1. CSS-Variablen kopieren
+        const styles = getComputedStyle(mainRoot);
+        for (let i = 0; i < styles.length; i++) {
+            const prop = styles[i];
+            if (prop.startsWith("--")) {
+                iframeRoot.style.setProperty(prop, styles.getPropertyValue(prop));
+            }
+        }
+
+        // 2. Theme-Klasse vom BODY spiegeln (WICHTIG!)
+        iframeBody.className = mainBody.className;
+    });
+}
+
+syncPuzzleTheme();
+document.addEventListener("themeChanged", syncPuzzleTheme);
+
+    
   </script>
 </body>
 </html>

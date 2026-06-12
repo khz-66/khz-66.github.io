@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minimal</title>
+    <title>Puzzle</title>
+
+    <!-- Externe CSS -->
+    <link rel="stylesheet" href="css/styles.css">
 
     <style>
         * {
@@ -13,7 +16,7 @@
         }
 
         html {
-            background-color: #343434;
+            background-color: var(--bg);
         }
 
         body {
@@ -34,12 +37,10 @@
             -webkit-text-fill-color: transparent;
         }
 
-p {
-    hyphens: auto;
-    -webkit-hyphens: auto; /* Für Safari */
-    lang: de; /* WICHTIG: Der Browser muss wissen, dass es Deutsch ist! */
-}
-
+        p {
+            hyphens: auto;
+            -webkit-hyphens: auto;
+        }
 
         #puzzle-holder {
             display: flex;
@@ -59,15 +60,17 @@ p {
 
     <script src="p5.min.js"></script>
 </head>
-<body>
 
-    
+<body>
 
     <div id="puzzle-holder">
         <script src="puzzle.js"></script>
     </div>
 
-    <p class="subtext">Ich bin grade dabei, mich zu sortieren. Zum puzzeln Kacheln anklicken, für Hilfe Doppelklick ins schwarze Quadrat!</p>
+    <p class="subtext">
+        Ich bin grade dabei, mich zu sortieren.  
+        Zum Puzzeln Kacheln anklicken, für Hilfe Doppelklick ins schwarze Quadrat!
+    </p>
 
 </body>
 </html>
