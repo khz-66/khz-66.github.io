@@ -1,5 +1,3 @@
-<!-- Im aktuellen Design -->
-
 <!DOCTYPE html>
 <html class="spooky" lang="de">
 <head>
@@ -19,38 +17,6 @@
     </a>
   </div>
   
-  <!--
-  <button id="theme-toggle">Modus wechseln</button>
-
-  <script>
-    const button = document.getElementById('theme-toggle');
-    const modes = ['dark', 'light', 'spooky'];
-    let currentModeIndex = 0;
-
-    if (document.documentElement.classList.contains('light')) {
-        currentModeIndex = 1;
-    }
-
-    button.addEventListener('click', () => {
-        currentModeIndex = (currentModeIndex + 1) % modes.length;
-        const currentMode = modes[currentModeIndex];
-
-        document.documentElement.classList.remove('light');
-        document.body.classList.remove('spooky');
-
-        if (currentMode === 'light') {
-            document.documentElement.classList.add('light');
-            button.textContent = "Modus: Hell";
-        } else if (currentMode === 'spooky') {
-            document.body.classList.add('spooky');
-            button.textContent = "Modus: Spooky";
-        } else {
-            button.textContent = "Modus: Dunkel";
-        }
-    });
-  </script>
-  -->
-  
   <div class="container">
     <h1>Esoterik und Magie</h1>
     <p>
@@ -67,26 +33,6 @@
     <div class="popup-link-container">
         <a href="#" id="openVideoBtn"><br>➔ Der Sigillenplayer auf dem Handy</a>
     </div>
-    
-    
-
-    <dialog id="videoDialog" class="dialog-base dialog-video">
-        <button id="closeVideoBtn" class="closeDialogBtn" aria-label="Schließen">&times;</button>
-        <video id="popupVideo" class="popup-video" controls loop>
-            <source src="sigill_player_hexagramm.mp4" type="video/mp4">
-            Ihr Browser unterstützt dieses Video nicht.
-        </video>
-    </dialog>
-    
-      <!-- NEU: Das zweite Video-Popup für das Primordial Tarot -->
-    <dialog id="tarotVideoDialog" class="dialog-base dialog-video">
-        <button id="closeTarotVideoBtn" class="closeDialogBtn" aria-label="Schließen">&times;</button>
-        <video id="popupTarotVideo" class="popup-video" controls loop>
-            <source src="primordeal_tarot.mp4" type="video/mp4">
-            Ihr Browser unterstützt dieses Video nicht.
-        </video>
-    </dialog>
-    
     
     <hr class="strich-zentriert">
 
@@ -165,7 +111,6 @@
       <p class="subtext-bl">
         (Aber dies ist nur ein Bildschirmvideo zur Demonstration!)
       </p>
-
     <hr class="strich-zentriert">
 
     <h2>Die Lautformelsprache Ela Vior</h2>
@@ -176,27 +121,66 @@
     </p>
     
     <div class="kastentext box-bl" style="text-align: left;">
-      Eine Sprache für magische Formeln und Anrufungen.</span>
+      Eine Sprache für magische Formeln und Anrufungen.
     </div>
+    
+    <p><a href="ela_vior_vokabular.html">➔ Vokabular</a></p>
+
+    <figure class="image-figure">
+      <a href="lektüre,_filme_und_musik.html" target="_blank">
+        <img src="excalibur_merlin.jpg" alt="Neues Bild" loading="lazy" onerror="this.style.display='none';">
+      </a>
+    </figure>
+    
     <p>
-      Der <span class="bc">"Charm of Making"</span> aus dem Film "Excalibur" (1981) in Ela Vior:<br>
+      Der <a href="#" id="openCharmBtn" class="bc" style="text-decoration: underline;">"Charm of Making"</a> aus dem Film "Excalibur" (1981) in Ela Vior:<br>
     </p>
     <blockquote class="quote-or">
       "Ruach Vioran<br>
       Othir Shal Betan<br>
       Do Chiel djenvé"
     </blockquote>
-    <!-- 
-    <p><a href="ela_vior.html">➔ Lautformelsprache Ela Vior</a></p>
-    <p><a href="ela_vior_wortbildung.html">➔ Wortbildung in Ela Vior</a></p>
-    -->
-    <p><a href="ela_vior_vokabular.html">➔ Vokabular</a></p>
-  
+
     <hr class="strich-zentriert">
     
     <p class="subtext-or text-center">Sommer 2026</p>
     <div class="header-footer"></div>
   </div>
+
+  <dialog id="videoDialog" class="dialog-base dialog-video">
+      <button id="closeVideoBtn" class="closeDialogBtn" aria-label="Schließen">&times;</button>
+      <video id="popupVideo" class="popup-video" controls loop>
+          <source src="sigill_player_hexagramm.mp4" type="video/mp4">
+          Ihr Browser unterstützt dieses Video nicht.
+      </video>
+  </dialog>
+  
+  <dialog id="tarotVideoDialog" class="dialog-base dialog-video">
+      <button id="closeTarotVideoBtn" class="closeDialogBtn" aria-label="Schließen">&times;</button>
+      <video id="popupTarotVideo" class="popup-video" controls loop>
+          <source src="primordeal_tarot.mp4" type="video/mp4">
+          Ihr Browser unterstützt dieses Video nicht.
+      </video>
+  </dialog>
+
+  <dialog id="charmDialog" class="dialog-base" style="padding: 20px; color: #fff; background: #1a1a1a; border: 2px solid #ffaa00; border-radius: 8px; width: 66vw; height: 35vh; box-sizing: border-box;">
+      
+      <style>
+        #charmDialog[open] {
+            display: flex !important;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+      </style>
+
+      <button id="closeCharmBtn" class="closeDialogBtn" aria-label="Schließen" style="position: absolute; top: 10px; right: 15px; background: none; border: none; color: #ffaa00; font-size: 24px; cursor: pointer;">&times;</button>
+      
+      <p class="subtext-or" style="font-size: 1.2rem; font-style: italic; line-height: 1.5; margin: 0; text-align: center;">
+        Original im Film:<br>„Anál nathrach, ortha bháis's bethad, do chél dénmha.“
+      </p>
+  </dialog>
+
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -218,7 +202,7 @@
             }
         }
 
-        // Pop-up Trigger Verknüpfungen
+        // 1. Sigillenplayer Video-Popup
         const videoDialog = document.getElementById('videoDialog');
         const openVideoBtn = document.getElementById('openVideoBtn');
         const popupVideo = document.getElementById('popupVideo');
@@ -231,7 +215,7 @@
             });
         }
 
-        // NEU: Logik für das zweite Video-Popup (Tarot)
+        // 2. Tarot Video-Popup
         const tarotVideoDialog = document.getElementById('tarotVideoDialog');
         const openTarotVideoBtn = document.getElementById('openTarotVideoBtn');
         const popupTarotVideo = document.getElementById('popupTarotVideo');
@@ -244,13 +228,14 @@
             });
         }
 
-        const infoDialog = document.getElementById('infoDialog');
-        const openInfoBtn = document.getElementById('openInfoBtn');
+        // 3. Charm of Making Text-Popup
+        const charmDialog = document.getElementById('charmDialog');
+        const openCharmBtn = document.getElementById('openCharmBtn');
 
-        if (openInfoBtn && infoDialog) {
-            openInfoBtn.addEventListener('click', (e) => {
+        if (openCharmBtn && charmDialog) {
+            openCharmBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                infoDialog.showModal();
+                charmDialog.showModal();
             });
         }
     });
