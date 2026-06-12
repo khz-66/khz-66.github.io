@@ -1,669 +1,485 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ela Vior Vokabular</title>
-    
-    <style>
-        /* ==========================================================================
-           1. RESET & BASICS
-           ========================================================================== */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        
-        html {
-            /* HIER DEINE HINTERGRUNDFARBE WÄHLEN */
-            background-color: #000000; 
-            scroll-behavior: smooth;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #ffffff;
-            min-height: 100vh;
-            line-height: 1.6;
-            overflow-x: hidden; 
-        }
-
-        /* ==========================================================================
-           2. INHALTS-LAYOUT (HAUPTCONTAINER)
-           ========================================================================== */
-        .container {
-            position: relative;
-            z-index: 1; 
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 60px 20px;
-            text-align: center;
-        }
-        
-        /* Typografie & Standard-Elemente für neue Inhalte */
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            background: linear-gradient(45deg, #ff7b00, #ffae00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            
-            line-height: 1.1;
-        }
-
-        h2 {
-            font-size: 2rem;
-            margin: 40px 0 20px 0;
-            color: #ffae00;
-        }
-        
-        p {
-            font-size: 1.2rem;
-            color: #a0a0a0;
-            margin-bottom: 20px;
-            text-align: left; /* Besser lesbar bei längeren Texten */
-            hyphens: auto;
-    -webkit-hyphens: auto; /* Für Safari */
-    lang: de; /* WICHTIG: Der Browser muss wissen, dass es Deutsch ist! */
-
-        }
-        
-        .text-center {
-            text-align: center;
-        }
-
-bc {
-         font-weight: bold;
-         color: #08fcd5;
-       }
-
-        /* Platzhalter für neue Bilder */
-        .content-image {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin: 20px 0;
-            border: none !important;
-            box-shadow: none !important;
-        }
-
-        /* Links */
-        a {
-            color: #ff7b00;
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-        a:hover {
-            text-decoration: underline;
-            color: #ffae00;
-        }
-
-        .subtext {
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-            background: linear-gradient(45deg, #ff7b00, #ffae00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-top: 40px;
-        }
-
-        /* ==========================================================================
-           3. AVATAR WIDGET (STEUERUNG)
-           ========================================================================== */
-        .avatar-widget-container {
-            width: 120px;
-            height: 120px;
-            z-index: 10;
-        }
-
-        /* OPTION A: Rechts Oben fixiert */
-        .avatar-top-right {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-        }
-
-        /* OPTION B: Links Unten fixiert */
-        .avatar-bottom-left {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-        }
-
-        /* Formatierung des P5-Canvas im Avatar */
-        #avatar-animation-holder canvas {
-            width: 100% !important;
-            height: 100% !important;
-            border-radius: 50%;
-            border: 5px solid #5A6E8F !important; 
-            box-shadow: none !important; 
-        }
-        
-        /* Verhindert Unterstreichung und zeigt den Zeigefinger beim Avatar-Link */
-a.avatar-widget-container {
-    text-decoration: none;
-    cursor: pointer;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ela Vior Vokabular</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="p5.min.js"></script>
+  <style>
+/* Spezifische Tabellen-Formatierungen für das Vokabular im Spooky-Modus */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 30px 0;
+  text-align: left;
+  /* Kleinerer Tabellentext analog zum Subtext-Stil */
+  font-size: 0.9rem; 
 }
 
-        
-        table, th, td {
-  border: 1px solid #fff;
+th, td {
+  padding: 10px 12px; /* Leicht reduziertes Padding für kompaktere Zeilen */
   vertical-align: top;
-  
-  
 }
 
+/* Deutlich sichtbare horizontale Linien, keine vertikalen Linien */
+th {
+  border-bottom: 2px solid var(--accor);
+  font-weight: bold;
+}
 
+tr {
+  border-bottom: 1px solid var(--accor);
+}
 
+/* Erste Spalte barrierefrei markiert mit der Akzentfarbe */
 tbody tr td:first-child {
-    /* font-weight: bold; */
-     color: #08fcd5;
-    /* background-color: #f8f9fa; */
+  color: var(--accent-color, #08fcd5);
+  font-weight: bold;
 }
 
 
-        
-    </style>
-
-    <script src="p5.min.js"></script>
-</head>
-<body>
-
-            <div class="avatar-widget-container avatar-bottom-left">
-        <a href="index.html" id="avatar-link" class="avatar-link-wrapper" style="display: block;">
-            <div id="avatar-animation-holder"></div>
-        </a>
-    </div>
-
-
-
-    <div class="container">
-       
-        
-        
-         <h1>Ela Vior Vokabular</h1>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Wort</th>
-        <th>Bedeutung</th>
-        <th>Assoziation / Kontext</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Amávi</strong></td>
-        <td>Heimkehr, Einkehr, Rückführung in die eigene Sphäre</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><strong>Aráhna</strong></td>
-        <td>Naturintelligenz, Wesenheit</td>
-        <td>Weberin, von „Spinne“, nach Ela: Arahne wg besserem Klang</td>
-      </tr>
-      <tr>
-        <td><strong>As</strong></td>
-        <td>so wie, Entsprechung, Gerechtigkeit, Verbindung</td>
-        <td>nicht abgeleitet</td>
-      </tr>
-      <tr>
-        <td><strong>Ascha</strong></td>
-        <td>Kreis, Schutz, Harmonie, rituellen Raum</td>
-        <td>Luft + Erde</td>
-      </tr>
-      <tr>
-        <td><strong>Aschai</strong></td>
-        <td>Keim des Schutzes / werdende Harmonie</td>
-        <td>Ableitung aus asch- + ai</td>
-      </tr>
-      <tr>
-        <td><strong>Aschve</strong></td>
-        <td>schützende Wirkung</td>
-        <td>Ableitung aus asch- + ve</td>
-      </tr>
-      <tr>
-        <td><strong>Aur</strong></td>
-        <td>Kraft, Stärke</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><strong>Aurem</strong></td>
-        <td><strong>Feuerelement</strong></td>
-        <td>Ableitung aus aur + em</td>
-      </tr>
-      <tr>
-        <td><strong>Aureth</strong></td>
-        <td>Abwehr, Schutz</td>
-        <td>Ableitung aus Aur + Suffix -eth: „Versiegelte Kraft“</td>
-      </tr>
-      <tr>
-        <td><strong>Bethai</strong></td>
-        <td>Keim des Lebens, neu erwachtes Sein</td>
-        <td>Bethán + ai</td>
-      </tr>
-      <tr>
-        <td><strong>Bethán</strong></td>
-        <td>Leben, Sein, Entfaltung</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><strong>Chiél</strong></td>
-        <td>Form</td>
-        <td>rituellen oder metaphysische Struktur</td>
-      </tr>
-      <tr>
-        <td><strong>Djenvé</strong></td>
-        <td>Wirkung, logische Folge, bewirkte Manifestation</td>
-        <td>Imperativkontext</td>
-      </tr>
-      <tr>
-        <td><strong>Do</strong></td>
-        <td>Befehl, Impuls (Imperativpartikel)</td>
-        <td>z. B. „Do chiel djenve“</td>
-      </tr>
-      <tr>
-        <td><strong>Ela</strong></td>
-        <td>Ruf, Kontakt, Anrede, Empfänglichkeit</td>
-        <td>Akasha, weiblich, sanft</td>
-      </tr>
-      <tr>
-        <td><strong>Eleth</strong></td>
-        <td>Ende der Anrufung, Rückführung zur Ordnung</td>
-        <td>Ableitung aus el(a) + -eth</td>
-      </tr>
-      <tr>
-        <td><strong>Kalun</strong></td>
-        <td>Wurzelkraft, Erdverbindung</td>
-        <td>Erde, Stabilität</td>
-      </tr>
-      <tr>
-        <td><strong>Liva</strong></td>
-        <td>kommt herbei (sanftes Imperativ an mehrere)</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><strong>Lun</strong></td>
-        <td>Mond (Wurzel)</td>
-        <td>siehe Ableitungen</td>
-      </tr>
-      <tr>
-        <td><strong>Lunar</strong></td>
-        <td>astral, feinstofflich als Qualität des Mondes; Sphäre</td>
-        <td>Adjektivform</td>
-      </tr>
-      <tr>
-        <td><strong>Lunem</strong></td>
-        <td>fließen als Essenz des Mondes, <strong>Wasserelement</strong></td>
-        <td>Essenzform</td>
-      </tr>
-      <tr>
-        <td><strong>Luneth</strong></td>
-        <td>astrale Versiegelung, Rückkehr zur Ordnung</td>
-        <td>abgeschlossener Zustand, Ableitung</td>
-      </tr>
-      <tr>
-        <td><strong>Lunai</strong></td>
-        <td>Mondkeim, astrales Potenzial</td>
-        <td>Ableitung Keimform</td>
-      </tr>
-      <tr>
-        <td><strong>Miren</strong></td>
-        <td>spiegeln, zurückwerfen</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><strong>Mi</strong></td>
-        <td>Bild, Abbild, Gestalt</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><strong>Mivar</strong></td>
-        <td>Statue, Figur, Bildnis</td>
-        <td>Ableitung aus Mi + Var „Bild-Gefäß“</td>
-      </tr>
-      <tr>
-        <td><strong>Orá</strong></td>
-        <td>Quelle, Ursprung (meist am Satzende)</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><strong>Oran</strong></td>
-        <td>Vogel (Singular)</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><strong>Orun</strong></td>
-        <td>Unterkörper</td>
-        <td>nach -or „Ursprung“</td>
-      </tr>
-      <tr>
-        <td><strong>Verun</strong></td>
-        <td>Oberkörper</td>
-        <td>nach -ve „Folge“</td>
-      </tr>
-      <tr>
-        <td><strong>Orven</strong></td>
-        <td>Vögel (Plural)</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><strong>Othar</strong></td>
-        <td>Herzoffenheit, Ehre, Respekt</td>
-        <td>Ableitung? Feuer + Herz</td>
-      </tr>
-      <tr>
-        <td><strong>Othir</strong></td>
-        <td>Abschiedsgruß, im übertragenen Sinne Zauber</td>
-        <td>z. B. in Abschiedsformel, Ableitung?</td>
-      </tr>
-      <tr>
-        <td><strong>Ruách</strong></td>
-        <td>Geist, Atem, belebender Hauch</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><strong>Sedil</strong></td>
-        <td>Eintritt, Schwelle, Bereitschaft</td>
-        <td>keine Ableitung! Luft + Akasha</td>
-      </tr>
-      <tr>
-        <td><strong>Sedáma</strong></td>
-        <td>stille Bindung, Verbundenheit ohne Festhalten</td>
-        <td>z. B. in „lunar sedáma“</td>
-      </tr>
-      <tr>
-        <td><strong>Shal</strong></td>
-        <td>Tod, Leere, Ruhe</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><strong>Silun</strong></td>
-        <td>stille, innere Kraft</td>
-        <td>keine Ableitung</td>
-      </tr>
-      <tr>
-        <td><strong>Sil</strong></td>
-        <td><strong>Luftelement</strong></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><strong>Tavem!</strong></td>
-        <td>„Es falle!“ als kurze Anschlussformel für Flüche</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><strong>Tavon</strong></td>
-        <td><strong>Erdeelement</strong></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><strong>Tem</strong></td>
-        <td>Ort, Platz, hier lokalisiert</td>
-        <td>keine Ableitung</td>
-      </tr>
-      <tr>
-        <td><strong>temir</strong></td>
-        <td>wohnen, bewohnen</td>
-        <td>Ableitung von Tem + Suffix -ir, „Handlung des Ortes“</td>
-      </tr>
-      <tr>
-        <td><strong>Tilos</strong></td>
-        <td>Offenbarung, Sichtbarwerden</td>
-        <td>keine Ableitung! Feuer + Luft</td>
-      </tr>
-      <tr>
-        <td><strong>Tivan</strong></td>
-        <td>Entlassung, Trennung</td>
-        <td>keine Ableitung</td>
-      </tr>
-      <tr>
-        <td><strong>Tivar</strong></td>
-        <td>Ziel, z. B. für einen Fluch</td>
-        <td>verwandt mit Tivan?</td>
-      </tr>
-      <tr>
-        <td><strong>Thara</strong></td>
-        <td>lösen, auflösen</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><strong>Tharai</strong></td>
-        <td>Keim der Auflösung / befreiende Potenzial</td>
-        <td>Ableitung</td>
-      </tr>
-      <tr>
-        <td><strong>Uvel</strong></td>
-        <td>liebende Aufmerksamkeit</td>
-        <td>Venusisch, magnetisch</td>
-      </tr>
-      <tr>
-        <td><strong>Var</strong></td>
-        <td>Gefäß, Träger</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><strong>Valem</strong></td>
-        <td>Gabe, Geschenk</td>
-        <td>keine Ableitung</td>
-      </tr>
-      <tr>
-        <td><strong>Viai</strong></td>
-        <td>öffne (Befehl)</td>
-        <td>Ableitung „Keim des Wegs“</td>
-      </tr>
-      <tr>
-        <td><strong>Viala</strong></td>
-        <td>Nahrung, Geschenk der Erde</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><strong>Vián</strong></td>
-        <td>Weg, Pfad, Verbindung</td>
-        <td>keine Ableitung durch Endsilbe</td>
-      </tr>
-      <tr>
-        <td><strong>Vior</strong></td>
-        <td>Lebensfluss, Pflanzensaft</td>
-        <td>Ableitung, Wasser + Erde</td>
-      </tr>
-      <tr>
-        <td><strong>Viorán</strong></td>
-        <td>Schlange, lebendige Urkraft</td>
-        <td>Vior + oran „Lebensvogel“</td>
-      </tr>
-      <tr>
-        <td><strong>Vir</strong></td>
-        <td>senden</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-
-<!--
-  <h2 class="removed-title">Entfernt aus dem Vokabular</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Wort</th>
-        <th>Bedeutung</th>
-        <th>Assoziation / Kontext</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><del><strong>Mirai</strong></del></td>
-        <td><del>Lichtkeim, Potenzial</del></td>
-        <td><del>Luft + Feuer</del> – ersetzt durch <strong>Elai</strong></td>
-      </tr>
-      <tr>
-        <td><del><strong>Dasun</strong></del></td>
-        <td><del>Lichtwesen, Lichtkraft</del></td>
-        <td><del>vermutlich „Licht“ + Wesen / Quelle</del></td>
-      </tr>
-      <tr>
-        <td><del><strong>Noria</strong></del></td>
-        <td><del>fließende Weisheit, Wasserkraft</del></td>
-        <td><del>Wasser, spiritueller Strom</del></td>
-      </tr>
-      <tr>
-        <td><del><strong>Tharim</strong></del></td>
-        <td><del>Stille Kraft, Sanftheit mit Tiefe</del></td>
-        <td><del>Erde, verborgenes Feuer</del></td>
-      </tr>
-      <tr>
-        <td><del><strong>Elen</strong></del></td>
-        <td><del>Rückführung zur Ordnung oder Quelle</del></td>
-        <td><del>keine Ableitung</del></td>
-      </tr>
-      <tr>
-        <td><del><strong>Elor</strong></del></td>
-        <td><del>Lichtursprung, strahlende Quelle</del></td>
-        <td><del>Ableitung aus El(a) + -or</del></td>
-      </tr>
-      <tr>
-        <td><del><strong>Elai</strong></del></td>
-        <td><del>Lichtkeim, Potenzial</del></td>
-        <td><del>Luft + Feuer</del></td>
-      </tr>
-      <tr>
-        <td><del><strong>Elve</strong></del></td>
-        <td><del>Lichtwirkung</del></td>
-        <td><del>Ableitung aus Ela + -ve</del></td>
-      </tr>
-    </tbody>
-  </table>
--->
-
-  <p>Siehe auch: Lautformelsprache <a href="ela_vior.html"> Ela Vior</a>, rituelle <a href="ela_vior_wortbildung.html">Wortbildung</a> in Ela Vior.</p>
-
-        
-        <hr style="border: 0; height: 1px; background: #333; margin: 40px 0;">
-
-        
-        
-        <p class="subtext text-center">Projekt-Start: Sommer 2026</p>
-    </div>
-
-    <script>
-      
-      
-      document.addEventListener("DOMContentLoaded", () => {
-    const avatarLink = document.getElementById('avatar-link');
     
-    if (avatarLink) {
-        // 1. Prüfen, ob der URL-Parameter gesetzt ist ODER ob der direkte Referrer index_voll.html ist
+  </style>
+</head>
+
+<body class="spooky">
+
+  <div class="avatar-widget-container avatar-bottom-left">
+    <a href="index.html" id="avatar-link" class="avatar-link-wrapper" style="display: block;">
+      <div id="avatar-animation-holder"></div>
+    </a>
+  </div>
+
+  <!--
+  <button id="theme-toggle">Modus wechseln</button>
+
+  <script>
+    const button = document.getElementById('theme-toggle');
+    const modes = ['dark', 'light', 'spooky'];
+    let currentModeIndex = 2; // Direkt auf Spooky initialisiert
+
+    button.addEventListener('click', () => {
+        currentModeIndex = (currentModeIndex + 1) % modes.length;
+        const currentMode = modes[currentModeIndex];
+
+        document.documentElement.classList.remove('light');
+        document.body.classList.remove('spooky');
+
+        if (currentMode === 'light') {
+            document.documentElement.classList.add('light');
+            button.textContent = "Modus: Hell";
+        } else if (currentMode === 'spooky') {
+            document.body.classList.add('spooky');
+            button.textContent = "Modus: Spooky";
+        } else {
+            button.textContent = "Modus: Dunkel";
+        }
+    });
+  </script>
+  -->
+  
+  <div class="container">
+    <h1>Ela Vior Vokabular</h1>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Wort</th>
+          <th>Bedeutung</th>
+          <th>Assoziation / Kontext</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Amávi</td>
+          <td>Heimkehr, Einkehr, Rückführung in die eigene Sphäre</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Aráhna</td>
+          <td>Naturintelligenz, Wesenheit</td>
+          <td>Weberin, von „Spinne“, nach Ela: Arahne wg besserem Klang</td>
+        </tr>
+        <tr>
+          <td>As</td>
+          <td>so wie, Entsprechung, Gerechtigkeit, Verbindung</td>
+          <td>nicht abgeleitet</td>
+        </tr>
+        <tr>
+          <td>Ascha</td>
+          <td>Kreis, Schutz, Harmonie, rituellen Raum</td>
+          <td>Luft + Erde</td>
+        </tr>
+        <tr>
+          <td>Aschai</td>
+          <td>Keim des Schutzes / werdende Harmonie</td>
+          <td>Ableitung aus asch- + ai</td>
+        </tr>
+        <tr>
+          <td>Aschve</td>
+          <td>schützende Wirkung</td>
+          <td>Ableitung aus asch- + ve</td>
+        </tr>
+        <tr>
+          <td>Aur</td>
+          <td>Kraft, Stärke</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Aurem</td>
+          <td><strong>Feuerelement</strong></td>
+          <td>Ableitung aus aur + em</td>
+        </tr>
+        <tr>
+          <td>Aureth</td>
+          <td>Abwehr, Schutz</td>
+          <td>Ableitung aus Aur + Suffix -eth: „Versiegelte Kraft“</td>
+        </tr>
+        <tr>
+          <td>Bethai</td>
+          <td>Keim des Lebens, neu erwachtes Sein</td>
+          <td>Bethán + ai</td>
+        </tr>
+        <tr>
+          <td>Bethán</td>
+          <td>Leben, Sein, Entfaltung</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Chiél</td>
+          <td>Form</td>
+          <td>rituellen oder metaphysische Struktur</td>
+        </tr>
+        <tr>
+          <td>Djenvé</td>
+          <td>Wirkung, logische Folge, bewirkte Manifestation</td>
+          <td>Imperativkontext</td>
+        </tr>
+        <tr>
+          <td>Do</td>
+          <td>Befehl, Impuls (Imperativpartikel)</td>
+          <td>z. B. „Do chiel djenve“</td>
+        </tr>
+        <tr>
+          <td>Ela</td>
+          <td>Ruf, Kontakt, Anrede, Empfänglichkeit</td>
+          <td>Akasha, weiblich, sanft</td>
+        </tr>
+        <tr>
+          <td>Eleth</td>
+          <td>Ende der Anrufung, Rückführung zur Ordnung</td>
+          <td>Ableitung aus el(a) + -eth</td>
+        </tr>
+        <tr>
+          <td>Kalun</td>
+          <td>Wurzelkraft, Erdverbindung</td>
+          <td>Erde, Stabilität</td>
+        </tr>
+        <tr>
+          <td>Liva</td>
+          <td>kommt herbei (sanftes Imperativ an mehrere)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Lun</td>
+          <td>Mond (Wurzel)</td>
+          <td>siehe Ableitungen</td>
+        </tr>
+        <tr>
+          <td>Lunar</td>
+          <td>astral, feinstofflich als Qualität des Mondes; Sphäre</td>
+          <td>Adjektivform</td>
+        </tr>
+        <tr>
+          <td>Lunem</td>
+          <td>fließen als Essenz des Mondes, <strong>Wasserelement</strong></td>
+          <td>Essenzform</td>
+        </tr>
+        <tr>
+          <td>Luneth</td>
+          <td>astrale Versiegelung, Rückkehr zur Ordnung</td>
+          <td>abgeschlossener Zustand, Ableitung</td>
+        </tr>
+        <tr>
+          <td>Lunai</td>
+          <td>Mondkeim, astrales Potenzial</td>
+          <td>Ableitung Keimform</td>
+        </tr>
+        <tr>
+          <td>Miren</td>
+          <td>spiegeln, zurückwerfen</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Mi</td>
+          <td>Bild, Abbild, Gestalt</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Mivar</td>
+          <td>Statue, Figur, Bildnis</td>
+          <td>Ableitung aus Mi + Var „Bild-Gefäß“</td>
+        </tr>
+        <tr>
+          <td>Orá</td>
+          <td>Quelle, Ursprung (meist am Satzende)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Oran</td>
+          <td>Vogel (Singular)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Orun</td>
+          <td>Unterkörper</td>
+          <td>nach -or „Ursprung“</td>
+        </tr>
+        <tr>
+          <td>Verun</td>
+          <td>Oberkörper</td>
+          <td>nach -ve „Folge“</td>
+        </tr>
+        <tr>
+          <td>Orven</td>
+          <td>Vögel (Plural)</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Othar</td>
+          <td>Herzoffenheit, Ehre, Respekt</td>
+          <td>Ableitung? Feuer + Herz</td>
+        </tr>
+        <tr>
+          <td>Othir</td>
+          <td>Abschiedsgruß, im übertragenen Sinne Zauber</td>
+          <td>z. B. in Abschiedsformel, Ableitung?</td>
+        </tr>
+        <tr>
+          <td>Ruách</td>
+          <td>Geist, Atem, belebender Hauch</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Sedil</td>
+          <td>Eintritt, Schwelle, Bereitschaft</td>
+          <td>keine Ableitung! Luft + Akasha</td>
+        </tr>
+        <tr>
+          <td>Sedáma</td>
+          <td>stille Bindung, Verbundenheit ohne Festhalten</td>
+          <td>z. B. in „lunar sedáma“</td>
+        </tr>
+        <tr>
+          <td>Shal</td>
+          <td>Tod, Leere, Ruhe</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Silun</td>
+          <td>stille, innere Kraft</td>
+          <td>keine Ableitung</td>
+        </tr>
+        <tr>
+          <td>Sil</td>
+          <td><strong>Luftelement</strong></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Tavem!</td>
+          <td>„Es falle!“ als kurze Anschlussformel für Flüche</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Tavon</td>
+          <td><strong>Erdeelement</strong></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Tem</td>
+          <td>Ort, Platz, hier lokalisiert</td>
+          <td>keine Ableitung</td>
+        </tr>
+        <tr>
+          <td>temir</td>
+          <td>wohnen, bewohnen</td>
+          <td>Ableitung von Tem + Suffix -ir, „Handlung des Ortes“</td>
+        </tr>
+        <tr>
+          <td>Tilos</td>
+          <td>Offenbarung, Sichtbarwerden</td>
+          <td>keine Ableitung! Feuer + Luft</td>
+        </tr>
+        <tr>
+          <td>Tivan</td>
+          <td>Entlassung, Trennung</td>
+          <td>keine Ableitung</td>
+        </tr>
+        <tr>
+          <td>Tivar</td>
+          <td>Ziel, z. B. für einen Fluch</td>
+          <td>verwandt mit Tivan?</td>
+        </tr>
+        <tr>
+          <td>Thara</td>
+          <td>lösen, auflösen</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Tharai</td>
+          <td>Keim der Auflösung / befreiende Potenzial</td>
+          <td>Ableitung</td>
+        </tr>
+        <tr>
+          <td>Uvel</td>
+          <td>liebende Aufmerksamkeit</td>
+          <td>Venusisch, magnetisch</td>
+        </tr>
+        <tr>
+          <td>Var</td>
+          <td>Gefäß, Träger</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Valem</td>
+          <td>Gabe, Geschenk</td>
+          <td>keine Ableitung</td>
+        </tr>
+        <tr>
+          <td>Viai</td>
+          <td>öffne (Befehl)</td>
+          <td>Ableitung „Keim des Wegs“</td>
+        </tr>
+        <tr>
+          <td>Viala</td>
+          <td>Nahrung, Geschenk der Erde</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Vián</td>
+          <td>Weg, Pfad, Verbindung</td>
+          <td>keine Ableitung durch Endsilbe</td>
+        </tr>
+        <tr>
+          <td>Vior</td>
+          <td>Lebensfluss, Pflanzensaft</td>
+          <td>Ableitung, Wasser + Erde</td>
+        </tr>
+        <tr>
+          <td>Viorán</td>
+          <td>Schlange, lebendige Urkraft</td>
+          <td>Vior + oran „Lebensvogel“</td>
+        </tr>
+        <tr>
+          <td>Vir</td>
+          <td>senden</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr>
+    
+    <p>Siehe auch: Lautformelsprache <a href="ela_vior.html"> Ela Vior</a>, rituelle <a href="ela_vior_wortbildung.html">Wortbildung</a> in Ela Vior.</p>
+
+    <hr>
+    <p class="subtext-or text-center">Sommer 2026</p>
+  
+    <div class="header-footer"></div>
+  </div>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const avatarLink = document.getElementById('avatar-link');
+    
+      if (avatarLink) {
         const urlParams = new URLSearchParams(window.location.search);
         const hatWeiterleitungParam = urlParams.get('weiterleitung') === 'ja';
         const kamDirektVonIndexVoll = document.referrer.includes('index_voll.html');
 
-        // 2. Wenn eins von beiden zutrifft, merken wir uns das für die gesamte Session
         if (hatWeiterleitungParam || kamDirektVonIndexVoll) {
             sessionStorage.setItem('kommtVonIndexVoll', 'true');
         }
 
-        // 3. Jetzt prüfen wir: Ist das session-Flag gesetzt? (Egal ob jetzt gerade oder von einer Seite zuvor)
-        const istAktiviertFuerSession = sessionStorage.getItem('kommtVonIndexVoll') === 'true';
-
-        // Wenn ja, Link auf index_voll.html umbiegen
-        if (istAktiviertFuerSession) {
+        if (sessionStorage.getItem('kommtVonIndexVoll') === 'true') {
             avatarLink.href = "index_voll.html";
         }
-    }
-});
+      }
+    });
 
-
-      
     const avatarSketch = (p) => {
-  let img;
-  let blinkTimer = 0;
-  let pauseTimer = 0;       // NEU: Timer für die Pause zwischen den Blinzlern
-  let isBlinking = false;
-  let doubleBlinkQueue = false; 
-  let nextBlinkFrame = 200;     
+      let img;
+      let blinkTimer = 0;
+      let pauseTimer = 0;       
+      let isBlinking = false;
+      let doubleBlinkQueue = false; 
+      let nextBlinkFrame = 200;     
 
-  p.preload = () => {
-    img = p.loadImage('me.jpg'); 
-  };
+      p.preload = () => {
+        img = p.loadImage('him.jpg'); 
+      };
 
-  p.setup = () => {
-    let canvas = p.createCanvas(350, 350);
-    canvas.parent('avatar-animation-holder');
-  };
+      p.setup = () => {
+        let canvas = p.createCanvas(350, 350);
+        canvas.parent('avatar-animation-holder');
+      };
 
-  p.draw = () => {
-    p.clear();
-    p.image(img, 0, 0, p.width, p.height);
+      p.draw = () => {
+        p.clear();
+        p.image(img, 0, 0, p.width, p.height);
 
-    // Wenn der Ziel-Frame erreicht ist und gerade absolut gar nichts passiert
-    if (p.frameCount >= nextBlinkFrame && !isBlinking && pauseTimer <= 0) {
-      isBlinking = true;
-      blinkTimer = 10; 
-      
-      // Zu 10% Wahrscheinlichkeit folgt ein Doppelblinzeln
-      doubleBlinkQueue = p.random(1) < 0.1; 
-      
-      // Nächstes Standard-Intervall festlegen
-      nextBlinkFrame = p.frameCount + p.floor(p.random(200, 250));
-    }
-
-    // 1. Logik für das Blinzeln (geschlossene Augen)
-    if (isBlinking) {
-      blinkEyes();
-      blinkTimer--;
-      
-      if (blinkTimer <= 0) {
-        isBlinking = false;
-        
-        // Wenn ein Doppelblinzeln ansteht, aktivieren wir die Pause
-        if (doubleBlinkQueue) {
-          doubleBlinkQueue = false; 
-          pauseTimer = 6; // 6 Frames lang bleiben die Augen jetzt offen
+        if (p.frameCount >= nextBlinkFrame && !isBlinking && pauseTimer <= 0) {
+          isBlinking = true;
+          blinkTimer = 10; 
+          doubleBlinkQueue = p.random(1) < 0.1; 
+          nextBlinkFrame = p.frameCount + p.floor(p.random(200, 250));
         }
-      }
-    }
+
+        if (isBlinking) {
+          blinkEyes();
+          blinkTimer--;
+          
+          if (blinkTimer <= 0) {
+            isBlinking = false;
+            if (doubleBlinkQueue) {
+              doubleBlinkQueue = false; 
+              pauseTimer = 6; 
+            }
+          }
+        }
     
-    // 2. Logik für die Pause (Augen offen, Timer läuft ab)
-    if (pauseTimer > 0) {
-      pauseTimer--;
-      // Wenn die Pause vorbei ist, wird das zweite Blinzeln ausgelöst
-      if (pauseTimer === 0) {
-        isBlinking = true;
-        blinkTimer = 10;
-      }
-    }
+        if (pauseTimer > 0) {
+          pauseTimer--;
+          if (pauseTimer === 0) {
+            isBlinking = true;
+            blinkTimer = 10;
+          }
+        }
        
-    // Brille / Hintergrundelemente des Avatars
-    p.stroke(0);          
-    p.strokeWeight(6);    
-    p.fill(183, 189, 189);          
-    p.ellipse(175, 185, 170, 120);
-  };
+        p.stroke(0);          
+        p.strokeWeight(6);    
+        p.fill(183, 189, 189);          
+        p.ellipse(175, 185, 170, 120);
+      };
 
-  function blinkEyes() {
-    p.push(); 
-    p.stroke(0);          
-    p.strokeWeight(6);    
-    p.fill(183, 189, 189);          
+      function blinkEyes() {
+        p.push(); 
+        p.stroke(0);          
+        p.strokeWeight(6);    
+        p.fill(183, 189, 189);          
 
-    p.ellipse(135, 115, 70, 70); 
-    p.ellipse(205, 115, 75, 75); 
+        p.ellipse(135, 115, 70, 70); 
+        p.ellipse(205, 115, 75, 75); 
 
-    p.strokeWeight(5);
-    p.line(130, 115, 174, 115); 
-    p.line(176, 115, 220, 115); 
+        p.strokeWeight(5);
+        p.line(130, 115, 174, 115); 
+        p.line(176, 115, 220, 115); 
+        p.pop(); 
+      }
+    };
 
-    p.pop(); 
-  }
-};
-
-new p5(avatarSketch);
-
-
-    </script>
-
+    new p5(avatarSketch);
+  </script>
 </body>
 </html>
