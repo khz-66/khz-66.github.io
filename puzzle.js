@@ -11,11 +11,11 @@ const puzzleSketch = (p) => {
   let lastSolveTime = 0;      
   const solveDelay = 1500;     
 
-  // Variablen für den Überstrahl-Effekt (An- und Abschwellen)
+  // Variablen für den Überstrahl-Effekt
   let isSolved = false;
   let solvedAnimFrame = 0;
-  const maxAnimFrames = 60; // Gesamtdauer der Animation (ca. 1 Sekunde bei 60fps)
-  const peakFrame = 55;     // Der Moment, in dem der Blitz am hellsten ist
+  const maxAnimFrames = 60; 
+  const peakFrame = 55;     
 
   p.preload = () => {
     for (let i = 1; i <= 8; i++) {
@@ -76,6 +76,37 @@ const puzzleSketch = (p) => {
     return true;
   }
 
+  // Rekursive Funktion, um den Droste-Effekt direkt auf den Canvas zu zeichnen
+  function drawDrostePuzzle(x, y, currentW, currentH, currentDepth, maxDepth) {
+    let localW = currentW / cols;
+    let localH = currentH / rows;
+    let idx = 0;
+
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        let tileX = x + c * localW;
+        let tileY = y + r * localH;
+
+        if (!(r === 2 && c === 0)) {
+          // Zeichne die normalen Kacheln passend herunterskaliert
+          p.image(images[idx], tileX, tileY, localW, localH);
+          idx++;
+        } else {
+          // Wir sind unten links angekommen
+          if (currentDepth < maxDepth) {
+            // Rekursiver Aufruf: Zeichne das GANZE Puzzle verkleinert in diese Kachel
+            drawDrostePuzzle(tileX, tileY, localW, localH, currentDepth + 1, maxDepth);
+          } else {
+            // Letzte Ebene: Einfach weiß füllen
+            p.fill(255);
+            p.noStroke();
+            p.rect(tileX, tileY, localW, localH);
+          }
+        }
+      }
+    }
+  }
+
   p.draw = () => {
     if (isSolving) {
       let currentTime = p.millis();
@@ -95,14 +126,13 @@ const puzzleSketch = (p) => {
       }
     }
 
-    // Hintergrund bleibt weiß, wenn gelöst
     if (isSolved) {
       p.background(255); 
     } else {
       p.background(0);   
     }
 
-    // Tiles zeichnen
+    // Normales Spielfeld zeichnen
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
         let imgIndex = board[r][c];
@@ -110,8 +140,13 @@ const puzzleSketch = (p) => {
         if (imgIndex !== -1) {
           p.image(images[imgIndex], c * w, r * h, w, h);
         } else {
-          p.fill(isSolved ? 255 : 0);
-          p.rect(c * w, r * h, w, h);
+          if (isSolved) {
+            // Wenn gelöst: Starte den Droste-Effekt (4 Ebenen tief ist gestochen scharf)
+            drawDrostePuzzle(c * w, r * h, w, h, 1, 4);
+          } else {
+            p.fill(0);
+            p.rect(c * w, r * h, w, h);
+          }
         }
 
         // Standard-Gitterlinien (ausgeblendet, wenn gelöst)
@@ -123,27 +158,22 @@ const puzzleSketch = (p) => {
       }
     }
 
-    // --- ANIMATION: AUFBLITZEN & ÜBERSTRAHLEN (Anschwellen & Abschwellen) ---
+    // --- ANIMATION: AUFBLITZEN & ÜBERSTRAHLEN ---
     if (isSolved) {
       if (solvedAnimFrame > 0) {
         let progress = 0;
         
-        // Phase 1: Schnelles Anschwellen (von maxAnimFrames bis peakFrame)
         if (solvedAnimFrame > peakFrame) {
           progress = p.map(solvedAnimFrame, maxAnimFrames, peakFrame, 0, 1);
-        } 
-        // Phase 2: Sanftes Abschwellen (von peakFrame bis 0)
-        else {
+        } else {
           progress = p.map(solvedAnimFrame, peakFrame, 0, 1, 0);
         }
 
-        // 1. Das Überstrahlen des Bildes (Weißer Schleier)
         let flashAlpha = p.map(progress, 0, 1, 0, 200); 
         p.fill(255, flashAlpha);
         p.noStroke();
         p.rect(0, 0, p.width, p.height);
 
-        // 2. Der glühende Rahmen (Mehrere Ebenen für Weichheit)
         p.noFill();
         for (let i = 1; i <= 6; i++) {
           let glowWeight = i * 8 * progress; 
@@ -154,20 +184,18 @@ const puzzleSketch = (p) => {
           p.rect(0, 0, p.width, p.height);
         }
         
-        // Kern des Rahmens (Die scharfe weiße Innenkante)
         p.stroke(255);
         p.strokeWeight(1 + 5 * progress);
         p.rect(0, 0, p.width, p.height);
 
-        solvedAnimFrame--; // Countdown
+        solvedAnimFrame--; 
       } else {
-        // Permanenter Zustand nach der Animation: Weißer, cleaner Rahmen
         p.stroke(255);
         p.strokeWeight(4);
         p.noFill();
         p.rect(0, 0, p.width, p.height);
       }
-      p.strokeWeight(1); // Reset für nachfolgende Berechnungen
+      p.strokeWeight(1); 
     }
   };
 
