@@ -19,7 +19,7 @@
   
   <div class="container">
     <h1>Esoterik und Magie</h1>
-    <p>
+    <p id="sigill">
       Ein "Sigillen-Player" für Android, der mit Buchstaben, Zahlen, 
       <span class="bc">Hebräischer Schrift</span> oder mit dem 
       <span class="bc">Malachim-Alphabet</span> kreisförmige und 
@@ -31,12 +31,12 @@
     </video>
   
     <div class="popup-link-container">
-        <a href="#" id="openVideoBtn"><br>➔ Der Sigillenplayer auf dem Handy</a>
+        <a href="#" id="openInfoBtn"><br>➔ Der Sigillenplayer auf dem Handy</a>
     </div>
     
     <hr class="strich-zentriert">
 
-    <h2>Die modernen Klassiker</h2>
+    <h2 id="klassiker">Die modernen Klassiker</h2>
     <p>Franz Bardon, Karl Spiesberger und H. E. Douval.</p>
     
     <div class="image-scroll">
@@ -69,7 +69,7 @@
     
     <hr class="strich-zentriert">
     
-    <h2>Tarot</h2>
+    <h2 id="tarot">Tarot</h2>
     <p>
       Meine Lieblings-Tarotdecks. Neben dem Rider-Waite-<span class="bc">Colman-Smith</span>-Tarot 
       zum Kartenlegen am liebsten die intuitiven Decks von <span class="bc">Toppi</span> und 
@@ -82,7 +82,7 @@
     
     <div class="image-scroll">
       <div class="scroll-item"><img src="colman-smith-karte.jpg" alt=""></div>
-      <div class="scroll-item"><img src="primordeal_tarot.jpg" alt=""></div>
+      <div class="scroll-item"><img src="primordeal_tarot.jpg" id="openTarotImgBtn" alt=""></div>
       <div class="scroll-item"><img src="pinter_tarot.jpg" alt=""></div>
       <div class="scroll-item"><img src="zillich_tarot.png" alt=""></div>
       <div class="scroll-item"><img src="botanica_tarot.jpg" alt=""></div>
@@ -95,7 +95,6 @@
     </div>
     
     <h3>Tarot-App</h3>
-      <!-- NEU: Der Trigger-Link für das Tarot-Video -->
       <p>
         Eine kleine <span class="bc">Tarot-App für Android</span>, hier mit dem "Primordial Tarot", das Deck ist leider in der App nicht verfügbar.
       </p>
@@ -113,7 +112,7 @@
       </p>
     <hr class="strich-zentriert">
 
-    <h2>Die Lautformelsprache Ela Vior</h2>
+    <h2 id="elavior">Die Lautformelsprache Ela Vior</h2>
     <p>
       Lautformelsprache ist keine gesprochene Alltagssprache, sondern ein <span class="bc">Instrument der Schwingung</span> 
       und bewussten Resonanz. Diese Sprache dient nicht der Mitteilung, sondern der <span class="bc">Wirkung</span>: Sie soll 
@@ -124,7 +123,9 @@
       Eine Sprache für magische Formeln und Anrufungen.
     </div>
     
-    <p><a href="ela_vior_vokabular.html">➔ Vokabular</a></p>
+    <p id="elavior_links">
+      <a href="ela_vior_vokabular.html">➔ Vokabular</a><
+    /p>
 
     <figure class="image-figure">
       <a href="lektüre,_filme_und_musik.html" target="_blank">
@@ -153,12 +154,23 @@
     <div class="header-footer"></div>
   </div>
 
-  <dialog id="videoDialog" class="dialog-base dialog-video">
-      <button id="closeVideoBtn" class="closeDialogBtn" aria-label="Schließen">&times;</button>
-      <video id="popupVideo" class="popup-video" controls loop>
-          <source src="sigill_player_hexagramm.mp4" type="video/mp4">
-          Ihr Browser unterstützt dieses Video nicht.
-      </video>
+  <dialog id="infoDialog" class="dialog-base" style="padding: 30px 20px; color: #fff; background: #1a1a1a; border: 2px solid #ffaa00; border-radius: 8px; max-width: 80vw; max-height: 85vh; box-sizing: border-box; overflow-y: auto;">
+      <style>
+        #infoDialog[open] {
+            display: flex !important;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 20px;
+        }
+      </style>
+      <button id="closeInfoBtn" class="closeDialogBtn" aria-label="Schließen" style="position: absolute; top: 10px; right: 15px; background: none; border: none; color: #ffaa00; font-size: 24px; cursor: pointer; z-index: 10;">&times;</button>
+      
+      <img src="screenshot_sigil_player.jpg" alt="Sigillenplayer Screenshot" style="max-width: 100%; max-height: 55vh; object-fit: contain; border-radius: 4px; flex-shrink: 0;">
+      
+      <p class="subtext">
+        Der Sigillenplayer in der Android-Ansicht.
+      </p>
   </dialog>
   
   <dialog id="tarotVideoDialog" class="dialog-base dialog-video">
@@ -170,7 +182,6 @@
   </dialog>
 
   <dialog id="charmDialog" class="dialog-base" style="padding: 20px; color: #fff; background: #1a1a1a; border: 2px solid #ffaa00; border-radius: 8px; width: 66vw; height: 35vh; box-sizing: border-box;">
-      
       <style>
         #charmDialog[open] {
             display: flex !important;
@@ -179,14 +190,41 @@
             align-items: center;
         }
       </style>
-
       <button id="closeCharmBtn" class="closeDialogBtn" aria-label="Schließen" style="position: absolute; top: 10px; right: 15px; background: none; border: none; color: #ffaa00; font-size: 24px; cursor: pointer;">&times;</button>
-      
       <p class="subtext-or" style="font-size: 1.2rem; font-style: italic; line-height: 1.5; margin: 0; text-align: center;">
         Original im Film:<br>„Anál nathrach, ortha bháis's bethad, do chél dénmha.“
       </p>
   </dialog>
 
+  <dialog id="tarotImgDialog" class="dialog-base" style="padding: 30px 20px; color: #fff; background: #1a1a1a; border: 2px solid #ffaa00; border-radius: 8px; max-width: 80vw; max-height: 85vh; box-sizing: border-box; overflow-y: auto;">
+      <style>
+        #tarotImgDialog[open] {
+            display: flex !important;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 20px;
+        }
+      </style>
+      <button id="closeTarotImgBtn" class="closeDialogBtn" aria-label="Schließen" style="position: absolute; top: 10px; right: 15px; background: none; border: none; color: #ffaa00; font-size: 24px; cursor: pointer; z-index: 10;">&times;</button>
+      
+      <img src="primordial_cards.png" alt="Primordial Tarot" style="max-width: 100%; max-height: 55vh; object-fit: contain; border-radius: 4px; flex-shrink: 0;">
+      
+      <p class="subtext">
+        Mein Lieblings-Tarot!  
+      </p>
+      <blockquote class="quote-bl" style="font-size: 1rem;">
+      &quot;The images on the cards are a little disturbing 
+      when you first look at them, but after a quick read 
+      of the LWB, any fear is dissipated and replaced with respect. 
+      At first I was afraid that the lack of a multitude of colour 
+      would be limiting and I was very pleased to find that it isn't. 
+      The drawings create the depth that many other decks use colour to achieve.&quot;
+      </blockquote>
+      <p class="subtext">
+        (Review auf <a href="https://www.aeclectic.net/tarot/">Aeclectic Tarot</a>)
+      </p>
+  </dialog>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -208,16 +246,14 @@
             }
         }
 
-        // 1. Sigillenplayer Video-Popup
-        const videoDialog = document.getElementById('videoDialog');
-        const openVideoBtn = document.getElementById('openVideoBtn');
-        const popupVideo = document.getElementById('popupVideo');
+        // 1. NEU: Sigillenplayer Bild-Popup Logik
+        const infoDialog = document.getElementById('infoDialog');
+        const openInfoBtn = document.getElementById('openInfoBtn');
 
-        if (openVideoBtn && videoDialog && popupVideo) {
-            openVideoBtn.addEventListener('click', (e) => {
+        if (openInfoBtn && infoDialog) {
+            openInfoBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                videoDialog.showModal();
-                popupVideo.play();
+                infoDialog.showModal();
             });
         }
 
@@ -245,6 +281,17 @@
             });
         }
     });
+
+    // 4. Primordial Tarot Bild-Popup
+    const tarotImgDialog = document.getElementById('tarotImgDialog');
+    const openTarotImgBtn = document.getElementById('openTarotImgBtn');
+
+    if (openTarotImgBtn && tarotImgDialog) {
+        openTarotImgBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            tarotImgDialog.showModal();
+        });
+    }
 
     // Universal-Buttons zum Schließen abfangen
     document.querySelectorAll('.closeDialogBtn').forEach(btn => {
