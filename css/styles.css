@@ -6,11 +6,11 @@
   --fg-rgb: 245, 245, 245;
   --accor: #ffae00;
   --accor-rgb: 249, 203, 106;
-  --accgrad:#ff7b00;
+  --accgrad:#dd6c03;
   --accgrad-rgb: 229, 159, 6;
   --accbl: #08fcd5;
   --accbl-rgb: 8, 252, 213;
-  --accmark: #049e86;
+  --accmark: #008974;
   --accmark-rgb: 0, 177, 150;
   --accbull: var(--accor);
   --bullpnt: "■ ";
@@ -22,11 +22,11 @@
   --bg-rgb: 245, 245, 245;
   --fg: #444444;
   --fg-rgb: 68, 68, 68;
-  --accor: #ff7b00;
+  --accor: #dd6c03;
   --accor-rgb: 229, 159, 6;
   --accgrad: #ffae00;
   --accgrad-rgb: 249, 203, 106;
-  --accbl: #049e86;
+  --accbl: #008974;
   --accbl-rgb: 0, 177, 150;
   --accmark: #08fcd5;
   --accmark-rgb: 8, 252, 213;
@@ -219,6 +219,7 @@ p {
 .subtext {
   font-size: 1rem;
   font-style: italic;
+  <!-- font-weight: bold; -->
   letter-spacing: 1px;
   color: var(--fg);
 }
@@ -226,6 +227,7 @@ p {
 .subtext-or {
   font-size: 1rem;
   font-style: italic;
+  <!  font-weight: bold; x-->
   letter-spacing: 1px;
   color: var(--accor);
 }
@@ -233,6 +235,7 @@ p {
 .subtext-bl {
   font-size: 1rem;
   font-style: italic;
+  <!-- font-weight: bold; -->
   letter-spacing: 1px;
   color: var(--accbl); 
 }     
@@ -333,6 +336,10 @@ blockquote cite {
   background-color: var(--accbl);
   color: var(--bg);       /*     Dunkler Text auf hellem Türkis verhindert Augenkrebs */
   font-weight: bold; 
+}
+
+.clear-all {
+  clear: both; /* Beendet den Umfluss von links UND rechts gefloateten Bildern */
 }
 
 
@@ -448,7 +455,33 @@ hr {
 
 .image-figure.small { max-width: 350px; }
 .image-figure.tiny { max-width: 250px; }
+.image-figure.tn { max-width: 100px; }
 .image-figure.centered figcaption { text-align: center; }
+
+/* ==========================================================================
+   BILDUMFLUSS (FLOATING) FÜR IMAGE-FIGURE
+   ========================================================================== */
+
+/* Linksbündig, Text fließt rechts vorbei */
+.image-figure.float-left {
+  float: left;
+  display: inline-block; /* Überschreibt das block-Layout */
+  margin: 10px 20px 20px 0; /* Abstand: Oben, Rechts (zum Text), Unten, Links */
+}
+
+/* Rechtsbündig, Text fließt links vorbei */
+.image-figure.float-right {
+  float: right;
+  display: inline-block; /* Überschreibt das block-Layout */
+  margin: 10px 0 20px 20px; /* Abstand: Oben, Rechts, Unten, Links (zum Text) */
+}
+
+/* Wichtig: Verhindert, dass nachfolgende Elemente (z.B. neue Überschriften) 
+   ungewollt mitfließen, wenn der Text zu kurz ist */
+.clear-fix {
+  clear: both;
+}
+
 
 .image-row {
   display: grid;
