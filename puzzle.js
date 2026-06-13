@@ -278,7 +278,7 @@ const puzzleSketch = (p) => {
     let containerWidth = container ? container.clientWidth : p.windowWidth;
     if (containerWidth === 0) containerWidth = p.windowWidth;
 
-    let canvasSize = p.min(600, containerWidth);
+    let canvasSize = p.min(300, containerWidth);
     p.resizeCanvas(canvasSize, canvasSize);
     calculateGrid();
   };
