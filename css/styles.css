@@ -256,6 +256,10 @@ mark {
  text-align: center;
 }
 
+.text-right {
+  text-align: right;
+}
+
 .no-hyphen {
   hyphens: none;       /* Deaktiviert die automatische Silbentrennung */
 }
@@ -277,7 +281,7 @@ blockquote {
   /* border-left: 4px solid var(--fg); Standard-Linie in Vordergrundfarbe */
   /* font-family: Georgia, serif; Klassische Zitat-Schriftart (optional) */
   font-style: italic;         /* Macht den Text standardmäßig kursiv */
-  font-size: 1.2rem;
+  font-size: 1.0rem;
   /* line-height: 1.6; */
   text-align: left;
   /* color: var(--fg);           Standardfarbe */
