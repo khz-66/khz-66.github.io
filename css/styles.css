@@ -702,6 +702,125 @@ hr {
   word-wrap: break-word;
   white-space: normal;
 }
+/* ==========================================================================
+   PLAY-BUTTON OVERLAY (Ebenensichere Flex-Zentrierung)
+   ========================================================================== */
+
+/* 1. Basis-Kontext aktivieren */
+.has-play,
+.image-row .image-item.has-play,
+.image-scroll .has-play,
+a.has-play {
+  position: relative !important;
+}
+
+/* 2. Pseudo-Elemente universal vorbereiten */
+.has-play::before,
+a.has-play::before,
+.has-play::after,
+a.has-play::after {
+  content: "" !important;
+  position: absolute !important;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   SCHICHT 1: Das schwarze Quadrat
+   -------------------------------------------------------------------------- */
+.has-play::before,
+a.has-play::before {
+  width: 36px !important;
+  height: 36px !important;
+  background-color: rgba(0, 0, 0, 0.85) !important;
+  border-radius: 4px !important;
+  border: 3px solid #fbc052 !important;
+  box-sizing: border-box !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4) !important;
+  
+  /* WICHTIG: Niedrigere Ebene als das Dreieck, aber über dem Bild */
+  z-index: 99990 !important; 
+
+  /* Flexbox für die perfekte Zentrierung */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* --------------------------------------------------------------------------
+   SCHICHT 2: Das orangefarbene Dreieck
+   -------------------------------------------------------------------------- */
+.has-play::after,
+a.has-play::after {
+  /* KORREKTUR: Wir lösen das Dreieck aus den starren Fesseln und zwingen es,
+     sich relativ zum Flex-Quadrat zu bewegen, behalten aber absolute Priorität */
+  position: absolute !important;
+  z-index: 99999 !important; /* KNALLHART GANZ OBEN drauf */
+  
+  /* Dreieck-Konstruktion */
+  width: 0 !important;
+  height: 0 !important;
+  border-top: 7px solid transparent !important;
+  border-bottom: 7px solid transparent !important;
+  border-left: 12px solid #fbc052 !important;
+  
+  /* Optischer Ausgleich nach rechts */
+  margin-left: 2px !important;
+}
+
+/* ==========================================================================
+   POSITIONIERUNG (NUR FÜR DAS QUADRAT - DREIECK REIST NATIVE MIT)
+   ========================================================================== */
+
+/* --- TYP 1: GERAHMTE BILDER (.bordered / .all-bordered) --- */
+.bordered::before,
+.all-bordered .has-play::before,
+.all-bordered .scroll-item.has-play::before {
+  top: 23px !important;
+  left: 23px !important;
+}
+/* KORREKTUR: Das Dreieck wird exakt in die Mitte des Quadrats gezwungen */
+.bordered::after, 
+.all-bordered .has-play::after, 
+.all-bordered .scroll-item.has-play::after {
+  top: 32px !important; /* Exakte Mitte der 36px Box bei 23px Start (23 + 18 - 9) */
+  left: 36px !important;
+}
+
+/* --- TYP 2: UNGERAHMTE BILDER (Standard & .noborder) --- */
+.noborder::before,
+:not(.bordered):not(.all-bordered) > .has-play::before,
+.image-scroll:not(.all-bordered) .has-play::before {
+  top: 12px !important;
+  left: 12px !important;
+}
+/* KORREKTUR: Das Dreieck wird exakt in die Mitte des Quadrats gezwungen */
+.noborder::after, 
+:not(.bordered):not(.all-bordered) > .has-play::after, 
+.image-scroll:not(.all-bordered) .has-play::after {
+  top: 21px !important; /* Exakte Mitte der 36px Box bei 12px Start (12 + 18 - 9) */
+  left: 25px !important;
+}
+
+/* ==========================================================================
+   DEAKTIVIERUNG IM SPOOKY-MODUS
+   ========================================================================== 
+.spooky .has-play::before, .spooky .has-play::after,
+.spooky a.has-play::before, .spooky a.has-play::after {
+  display: none !important;
+} */
+
+
+
+/* ==========================================================================
+   DEAKTIVIERUNG IM SPOOKY-MODUS
+   ========================================================================== 
+.spooky .has-play::before, .spooky .has-play::after,
+.spooky a.has-play::before, .spooky a.has-play::after {
+  display: none !important;
+}
+*/
+
+
 
 /* ==========================================================================
    POP-UPS / DIALOG SYSTEM (Dynamisch angepasst an das gewählte Theme)
