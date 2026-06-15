@@ -184,6 +184,46 @@ button#theme-toggle:hover {
     text-align: center; 
 }
 
+/* Das fixierte Absperrband */
+        .absperrband {
+            position: fixed;   /* Bleibt beim Scrollen fest stehen */
+            top: 1vh;          /* 5% Abstand zur Oberkante */
+            left: 0;
+            width: 100%;       /* Volle Breite */
+            height: 5vh;       /* 5% der Seitenhöhe */
+            z-index: 9999;     /* Sorgt dafür, dass es über allem anderen liegt */
+            
+            /* Rot-weiße Streifen */
+            background: linear-gradient(
+                135deg,
+                #d32f2f, #d32f2f 25%,
+                #ffffff 25%, #ffffff 50%,
+                #d32f2f 50%, #d32f2f 75%,
+                #ffffff 75%, #ffffff 100%
+            );
+            background-size: 70px 70px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            
+            /* Flexbox, um den Text perfekt in der Mitte des Bandes zu zentrieren */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Der "Under Construction" Text */
+        .bau-text {
+            color: #ffffff;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background-color: rgba(0, 0, 0, 0.75); /* Dunkler Kasten für bessere Lesbarkeit */
+            padding: 2px 15px;
+            border-radius: 4px;
+            font-size: 2vh; /* Schriftgröße skaliert passend zur Bandhöhe */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+    
+
 h1 {
   font-size: 3rem;
   margin-bottom: 20px;
