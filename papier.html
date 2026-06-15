@@ -1,274 +1,66 @@
+<!-- Im aktuellen Design -->
+
 <!DOCTYPE html>
-<html lang="de">
+<html class="light" lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Papiermodelle</title>
-    
-    <style>
-        /* ==========================================================================
-           1. RESET & BASICS
-           ========================================================================== */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        
-        html {
-            background-color: whitesmoke; 
-            scroll-behavior: smooth;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #222222; 
-            min-height: 100vh;
-            line-height: 1.6;
-            overflow-x: hidden; 
-        }
-
-        /* ==========================================================================
-           2. INHALTS-LAYOUT (HAUPTCONTAINER)
-           ========================================================================== */
-        .container {
-            position: relative;
-            z-index: 1; 
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 60px 20px;
-            text-align: center;
-        }
-        
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            background: linear-gradient(45deg, #ff7b00, #ffae00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1.1; 
-        }
-
-        h2 {
-            font-size: 2rem;
-            margin: 40px 0 20px 0;
-            color: #ffae00;
-        }
-        
-        p {
-            font-size: 1.2rem;
-            color: #4a4a3a;
-            margin-bottom: 20px;
-            text-align: left;
-            hyphens: auto;
-            -webkit-hyphens: auto; 
-            lang: de; 
-        }
-        
-        .text-center {
-            text-align: center;
-        }
-
-        bc {
-            font-weight: bold;
-            color: #07dcba;
-        }
-
-        .content-image {
-            display: block;        
-            max-width: 500px;      
-            width: 100%;           
-            height: auto;
-            border-radius: 8px;
-            margin: 20px auto;     
-        }
-
-        img.frame {
-            border: 1px solid rgba(255,255,255,0.7);
-            border-radius: 4px;
-            box-shadow: 0 0 6px rgba(255,255,255,0.15);
-        }
-        
-        .image-row {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;        
-            margin-bottom: 40px;
-        }
-
-        .image-row a {
-            display: block;
-            flex: 1 1 280px;        
-            max-width: 100%;        
-        }
-
-        .image-row img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-            border-radius: 6px;
-        }
-
-        /* Container für Bild + Text */
-        .image-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 0; 
-            width: 100%;
-            flex: 1 1 280px; 
-            max-width: 100%; 
-        }
-
-        /* Die Links in den Items */
-        .image-item a {
-            display: block;
-            width: 100%;
-            max-width: 500px; 
-        }
-
-        /* Die Bilder selbst */
-        .image-item img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-            border-radius: 6px;
-        }
-
-        /* Die Bildunterschrift / Überschrift */
-        .image-item figcaption {
-            font-size: 0.95rem;       
-            color: #555555;           
-            margin-top: 8px;          
-            text-align: left;       
-            width: 100%;
-            max-width: 500px;         
-        }
-
-        .image-scroll {
-            display: flex;
-            flex-wrap: nowrap;       
-            overflow-x: auto;        
-            gap: 12px;               
-            padding: 20px 0;         
-            scrollbar-width: thin;   
-            margin-bottom: 40px;
-        }
-
-        .image-scroll::-webkit-scrollbar {
-            height: 8px;             
-        }
-
-        .image-scroll::-webkit-scrollbar-thumb {
-            background: #555;
-            border-radius: 4px;
-        }
-
-        .image-scroll img {
-            height: 300px;           
-            width: auto;
-            object-fit: cover;       
-            border-radius: 8px;
-            flex-shrink: 0;          
-        }
-
-        a {
-            color: #ff7b00;
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-        a:hover {
-            text-decoration: underline;
-            color: #ffae00;
-        }
-
-        .subtext {
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-            background: linear-gradient(45deg, #ff7b00, #ffae00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-top: 40px;
-        }
-
-        /* ==========================================================================
-           3. AVATAR WIDGET (STEUERUNG)
-           ========================================================================== */
-        .avatar-widget-container {
-            width: 120px;
-            height: 120px;
-            z-index: 10;
-        }
-
-        .avatar-bottom-left {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-        }
-
-        #avatar-animation-holder canvas {
-            width: 100% !important;
-            height: 100% !important;
-            border-radius: 50%;
-            border: 5px solid #5A6E8F !important; 
-            box-shadow: none !important; 
-        }
-        
-        /* ID hinzugefügt, um den Link gezielt per JS anzusprechen */
-        a.avatar-link-wrapper {
-            text-decoration: none;
-            cursor: pointer;
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%; 
-            height: 0;
-            overflow: hidden;
-        }
-
-        /* Container für den PDF-Viewer */
-        .pdf-viewer-container {
-            width: 100%;
-            max-width: 900px;
-            height: 600px;
-            margin: 20px auto;
-            border: 1px solid #ccc;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        }
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-    </style>
-
-    <script src="p5.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Title</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="p5.min.js"></script>
 </head>
+
 <body>
 
-    <div class="avatar-widget-container avatar-bottom-left">
-        <!-- ID "avatar-link" vergeben, damit wir den Link dynamisch ändern können -->
-        <a href="index.html#papier" id="avatar-link" class="avatar-link-wrapper">
-            <div id="avatar-animation-holder"></div>
-        </a>
-    </div>
+  <div class="avatar-widget-container avatar-bottom-left">
+    <a href="index.html#papier" id="avatar-link" class="avatar-link-wrapper" style="display: block;">
+      <div id="avatar-animation-holder"></div>
+    </a>
+  </div>
+
+  <button id="theme-toggle">Modus wechseln</button>
+
+  <script>
+    const button = document.getElementById('theme-toggle');
+    const modes = ['dark', 'light', 'spooky'];
+    let currentModeIndex = 0;
+
+    if (document.documentElement.classList.contains('light')) {
+        currentModeIndex = 1;
+    }
+
+    button.addEventListener('click', () => {
+        currentModeIndex = (currentModeIndex + 1) % modes.length;
+        const currentMode = modes[currentModeIndex];
+
+        document.documentElement.classList.remove('light');
+        document.body.classList.remove('spooky');
+
+        if (currentMode === 'light') {
+            document.documentElement.classList.add('light');
+            button.textContent = "Modus: Hell";
+        } else if (currentMode === 'spooky') {
+            document.body.classList.add('spooky');
+            button.textContent = "Modus: Spooky";
+        } else {
+            button.textContent = "Modus: Dunkel";
+        }
+    });
+  </script>
 
     <div class="container">
         <h1>Papier&shy;modelle</h1>
       
-        <img src="impossible.jpg" alt="Neues Bild" class="content-image" onerror="this.style.display='none';">
-      
+        
+        <figure id="bild" class="image-figure">
+      <img src="impossible.jpg" alt="Neues Bild" onerror="this.style.display='none';">
+      <figcaption>Bildunterschrift image-figure</figcaption>
+    </figure>
         <p>Die Modellbögen dürften größten&shy;teils selbst&shy;erklärend sein. Zum down&shy;loaden auf das Bild klicken.</p> 
         
-        <div class="image-row">
-            <figure class="image-item">
+       
+        <div class="image-row all-bordered">
+            <figure class="image-item noborder">
                 <figcaption>Unmögliche Figur - Durch die Per&shy;spek&shy;tive wird sie möglich!</figcaption>
                 <img src="impossible_solution.jpg" alt="" class="frame">
             </figure>
@@ -294,7 +86,7 @@
                 </a>
             </figure>
             
-            <figure class="image-item">
+            <figure class="image-item noborder">
                 <figcaption>Ein Frosch von <bc>Canon Creative Park</bc>.</figcaption>
                 <img src="frosch.jpg" alt="" class="frame">
             </figure>
@@ -312,110 +104,223 @@
         <p class="subtext text-center">Sommer 2026</p>
     </div>
 
-
-    <script>
-document.addEventListener("DOMContentLoaded", () => {
-    const avatarLink = document.getElementById('avatar-link');
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const avatarLink = document.getElementById('avatar-link');
     
-    if (avatarLink) {
-        // 1. Prüfen, ob der URL-Parameter gesetzt ist ODER ob der direkte Referrer index_voll.html ist
+      if (avatarLink) {
         const urlParams = new URLSearchParams(window.location.search);
         const hatWeiterleitungParam = urlParams.get('weiterleitung') === 'ja';
         const kamDirektVonIndexVoll = document.referrer.includes('index_voll.html');
 
-        // 2. Wenn eins von beiden zutrifft, merken wir uns das für die gesamte Session
         if (hatWeiterleitungParam || kamDirektVonIndexVoll) {
             sessionStorage.setItem('kommtVonIndexVoll', 'true');
         }
 
-        // 3. Jetzt prüfen wir: Ist das session-Flag gesetzt? (Egal ob jetzt gerade oder von einer Seite zuvor)
-        const istAktiviertFuerSession = sessionStorage.getItem('kommtVonIndexVoll') === 'true';
-
-        // Wenn ja, Link auf index_voll.html umbiegen
-        if (istAktiviertFuerSession) {
+        if (sessionStorage.getItem('kommtVonIndexVoll') === 'true') {
             avatarLink.href = "index_voll.html#papier";
         }
-    }
-});
+      }
+    });
 
-
-    // ==========================================================================
-    // P5 SKETCH FÜR DEN AVATAR
-    // ==========================================================================
     const avatarSketch = (p) => {
-        let img;
-        let blinkTimer = 0;
-        let pauseTimer = 0;       
-        let isBlinking = false;
-        let doubleBlinkQueue = false; 
-        let nextBlinkFrame = 200;     
+      let img;
+      let blinkTimer = 0;
+      let pauseTimer = 0;       
+      let isBlinking = false;
+      let doubleBlinkQueue = false; 
+      let nextBlinkFrame = 200;     
 
-        p.preload = () => {
-            img = p.loadImage('me.jpg'); 
-        };
+      p.preload = () => {
+        img = p.loadImage('me.jpg'); 
+      };
 
-        p.setup = () => {
-            let canvas = p.createCanvas(350, 350);
-            canvas.parent('avatar-animation-holder');
-        };
+      p.setup = () => {
+        let canvas = p.createCanvas(350, 350);
+        canvas.parent('avatar-animation-holder');
+      };
 
-        p.draw = () => {
-            p.clear();
-            p.image(img, 0, 0, p.width, p.height);
+      p.draw = () => {
+        p.clear();
+        p.image(img, 0, 0, p.width, p.height);
 
-            if (p.frameCount >= nextBlinkFrame && !isBlinking && pauseTimer <= 0) {
-                isBlinking = true;
-                blinkTimer = 10; 
-                doubleBlinkQueue = p.random(1) < 0.1; 
-                nextBlinkFrame = p.frameCount + p.floor(p.random(200, 250));
-            }
-
-            if (isBlinking) {
-                blinkEyes();
-                blinkTimer--;
-                
-                if (blinkTimer <= 0) {
-                    isBlinking = false;
-                    if (doubleBlinkQueue) {
-                        doubleBlinkQueue = false; 
-                        pauseTimer = 6; 
-                    }
-                }
-            }
-            
-            if (pauseTimer > 0) {
-                pauseTimer--;
-                if (pauseTimer === 0) {
-                    isBlinking = true;
-                    blinkTimer = 10;
-                }
-            }
-               
-            p.stroke(0);          
-            p.strokeWeight(6);    
-            p.fill(183, 189, 189);          
-            p.ellipse(175, 185, 170, 120);
-        };
-
-        function blinkEyes() {
-            p.push(); 
-            p.stroke(0);          
-            p.strokeWeight(6);    
-            p.fill(183, 189, 189);          
-
-            p.ellipse(135, 115, 70, 70); 
-            p.ellipse(205, 115, 75, 75); 
-
-            p.strokeWeight(5);
-            p.line(130, 115, 174, 115); 
-            p.line(176, 115, 220, 115); 
-
-            p.pop(); 
+        if (p.frameCount >= nextBlinkFrame && !isBlinking && pauseTimer <= 0) {
+          isBlinking = true;
+          blinkTimer = 10; 
+          doubleBlinkQueue = p.random(1) < 0.1; 
+          nextBlinkFrame = p.frameCount + p.floor(p.random(200, 250));
         }
+
+        if (isBlinking) {
+          blinkEyes();
+          blinkTimer--;
+          
+          if (blinkTimer <= 0) {
+            isBlinking = false;
+            if (doubleBlinkQueue) {
+              doubleBlinkQueue = false; 
+              pauseTimer = 6; 
+            }
+          }
+        }
+    
+        if (pauseTimer > 0) {
+          pauseTimer--;
+          if (pauseTimer === 0) {
+            isBlinking = true;
+            blinkTimer = 10;
+          }
+        }
+       
+        // Brücke/Brille
+        p.stroke(0);          
+        p.strokeWeight(6);    
+        p.fill(183, 189, 189);          
+        p.ellipse(175, 185, 170, 120);
+      };
+
+      function blinkEyes() {
+        p.push(); 
+        p.stroke(0);          
+        p.strokeWeight(6);    
+        p.fill(183, 189, 189);          
+
+        p.ellipse(135, 115, 70, 70); 
+        p.ellipse(205, 115, 75, 75); 
+
+        p.strokeWeight(5);
+        p.line(130, 115, 174, 115); 
+        p.line(176, 115, 220, 115); 
+        p.pop(); 
+      }
     };
 
     new p5(avatarSketch);
-    </script>
 
+    // ----------------------------------------------------------------------
+    // Universelle Dialog Logik (optimiert für Event-Abfangung)
+    // ----------------------------------------------------------------------
+    document.addEventListener("DOMContentLoaded", () => {
+
+        const videoDialog = document.getElementById('videoDialog');
+        const openVideoBtn = document.getElementById('openVideoBtn');
+        const popupVideo = document.getElementById('popupVideo');
+
+        if (openVideoBtn && videoDialog && popupVideo) {
+            openVideoBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                videoDialog.showModal();
+                popupVideo.play();
+            });
+        }
+
+        const infoDialog = document.getElementById('infoDialog');
+        const openInfoBtn = document.getElementById('openInfoBtn');
+
+        if (openInfoBtn && infoDialog) {
+            openInfoBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                infoDialog.showModal();
+            });
+        }
+
+        const codeDialog = document.getElementById('codeDialog');
+        const openCodeBtn = document.getElementById('openCodeBtn');
+        const iframe = document.getElementById('strahlenblumeFrame');
+
+        if (openCodeBtn && codeDialog && iframe) {
+            openCodeBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                codeDialog.showModal();
+                iframe.src = "https://khz-66.github.io/processing.js/";
+            });
+        }
+
+        const orbiterDialog = document.getElementById('orbiterDialog');
+        const openOrbiterBtn = document.getElementById('openOrbiterBtn');
+        const orbiterFrame = document.getElementById('orbiterFrame');
+
+        if (openOrbiterBtn && orbiterDialog && orbiterFrame) {
+            openOrbiterBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                orbiterDialog.showModal();
+                orbiterFrame.src = "https://khz-66.github.io/Orbiter-Live-Hintergrund/";
+            });
+        }
+
+        const puzzleDialog = document.getElementById('puzzleDialog');
+        const openPuzzleBtn = document.getElementById('openPuzzleBtn');
+        const puzzleFrame = document.getElementById('puzzleFrame');
+
+        if (openPuzzleBtn && puzzleDialog && puzzleFrame) {
+            openPuzzleBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                puzzleDialog.showModal();
+                puzzleFrame.src = "puzzle.html";
+            });
+        }
+
+        // Event-Listener für das native Schließen (z. B. via ESC-Taste)
+        document.querySelectorAll('dialog.dialog-base').forEach(dialog => {
+            dialog.addEventListener('close', () => {
+                const video = dialog.querySelector('video');
+                if (video) {
+                    video.pause();
+                }
+                // Optionale Bereinigung von Iframes beim Schließen:
+                const frame = dialog.querySelector('iframe');
+                if (frame) {
+                    frame.src = ""; 
+                }
+            });
+            
+            // Klick auf abgedunkelten Hintergrund
+            dialog.addEventListener('click', (e) => {
+                if (e.target === dialog) {
+                    dialog.close();
+                }
+            });
+        });
+
+        // Schließen über alle "X"-Buttons
+        document.querySelectorAll('.closeDialogBtn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const dialog = btn.closest('dialog');
+                if (dialog) dialog.close();
+            });
+        });
+    });
+    
+    function syncPuzzleTheme() {
+    const iframe = document.querySelector("#puzzleDialog iframe");
+    if (!iframe) return;
+
+    iframe.addEventListener("load", () => {
+        const mainRoot = document.documentElement;
+        const mainBody = document.body;
+
+        const iframeDoc = iframe.contentDocument;
+        const iframeRoot = iframeDoc.documentElement;
+        const iframeBody = iframeDoc.body;
+
+        // 1. CSS-Variablen kopieren
+        const styles = getComputedStyle(mainRoot);
+        for (let i = 0; i < styles.length; i++) {
+            const prop = styles[i];
+            if (prop.startsWith("--")) {
+                iframeRoot.style.setProperty(prop, styles.getPropertyValue(prop));
+            }
+        }
+
+        // 2. Theme-Klasse vom BODY spiegeln (WICHTIG!)
+        iframeBody.className = mainBody.className;
+    });
+}
+
+syncPuzzleTheme();
+document.addEventListener("themeChanged", syncPuzzleTheme);
+
+    
+  </script>
 </body>
 </html>
