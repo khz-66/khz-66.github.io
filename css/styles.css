@@ -530,6 +530,133 @@ hr {
   font-style: italic; 
 }
 
+/* ==========================================================================
+   1. GEMEINSAME BASIS-EINSTELLUNGEN & TRANSITIONS
+   ========================================================================== */
+.image-row .image-item,
+.image-figure,
+.image-scroll img,
+.image-scroll .scroll-item {
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+/* Symmetrie-Korrektur für umrandete Elemente */
+.bordered img, 
+.all-bordered img,
+.image-item.bordered a,
+.all-bordered .image-item a {
+  display: block;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   2. RAHMEN-STEUERUNG (AUSSEN)
+   ========================================================================== */
+
+/* EINZEL-MODIFIKATOR: .bordered (Orangefarbener Rahmen für ein Element) */
+.image-item.bordered,
+.image-figure.bordered,
+.image-scroll .scroll-item.bordered,
+.image-scroll img.bordered {
+  border: 3px solid #ffa500;
+  border-radius: 0 !important; /* Kasten bleibt eckig */
+  padding: 8px;
+}
+
+/* MASSEN-MODIFIKATOR: .all-bordered (Rahmen für alle Kinder im Container) */
+.all-bordered .image-item:not(.noborder),
+.all-bordered .scroll-item:not(.noborder),
+.all-bordered img:not(.noborder) {
+  border: 3px solid var(--accor, #ffa500);
+  border-radius: 0 !important; /* Kasten bleibt eckig */
+  padding: 8px;
+  background-color: transparent;
+}
+
+/* RAHMEN EXPLIZIT AUSSCHALTEN: .noborder & UNGERAHMTE BILDER */
+/* KORREKTUR: Erzeugt einen unsichtbaren Ausgleichsrahmen, damit die Höhe exakt übereinstimmt */
+.image-item.noborder,
+.image-figure.noborder,
+.image-scroll .scroll-item.noborder,
+.image-scroll img.noborder,
+.image-scroll:not(.all-bordered) img {
+  border: 3px solid transparent !important; /* Gleiche Rahmenbreite, aber unsichtbar */
+  border-radius: 0 !important;
+  padding: 8px !important; /* Gleicher Innenabstand wie die gerahmten Bilder */
+}
+
+
+/* ==========================================================================
+   3. DOPPELTE LINIEN VERHINDERN (INNERER RAHMEN)
+   ========================================================================== */
+.bordered img,
+.bordered .frame,
+.all-bordered .frame,
+.image-scroll.all-bordered img,
+.image-scroll.all-bordered .frame {
+  border-image: none !important;
+  border-style: none !important; /* Entfernt die Linie von .frame im Rahmen */
+  box-shadow: none !important;
+}
+
+/* ==========================================================================
+   4. AUTOMATISCHE BILD-RUNDUNG (Das neue Kern-Design)
+   ========================================================================== */
+
+/* Regel 1: WENN das Bild oder sein Container einen Rahmen hat -> IMMER SCHARFKANTIG */
+.bordered img,
+.bordered .frame,
+.all-bordered img,
+.all-bordered .frame,
+.image-item.bordered img,
+.image-scroll.all-bordered img {
+  border-radius: 0 !important;
+}
+
+/* Regel 2: WENN das Bild KEINEN Rahmen hat (Normalzustand oder .noborder) -> IMMER ABRUNDEN */
+/* Betrifft die Standard-Bilder, image-scroll ohne all-bordered und Elemente mit .noborder */
+.image-row .image-item:not(.bordered) img,
+.image-row .image-item:not(.bordered) .frame,
+.image-row .image-item.noborder img,
+.image-row .image-item.noborder .frame,
+.image-scroll:not(.all-bordered) img,
+.image-scroll .noborder,
+.image-figure:not(.bordered) img,
+.image-figure.noborder img {
+  border-radius: 6px !important; /* Hier dein gewünschter Standard-Radius für ungerahmte Bilder */
+}
+
+/* ==========================================================================
+   SPOOKY-MODUS: Komplette Deaktivierung der Rahmen-Steuerung
+   ========================================================================== */
+
+/* Wenn die Klasse .spooky aktiv ist (z.B. <body class="spooky"> oder <div class="image-row all-bordered spooky">) */
+.spooky .image-item,
+.spooky .image-figure,
+.spooky .scroll-item,
+.spooky img,
+.spooky .frame,
+.spooky .image-item a {
+  /* 1. Alle Rahmen und Linien spurlos löschen */
+  border: none !important;
+  border-image: none !important;
+  border-style: none !important;
+  box-shadow: none !important;
+
+  /* 2. Sämtliche Paddings auf 0 setzen, damit kein Versatz entsteht */
+  padding: 0 !important;
+}
+
+/* 3. Im Spooky-Modus sollen alle Bilder wieder einheitlich abgerundet sein */
+.spooky img,
+.spooky .frame {
+  border-radius: 6px !important; /* Oder dein gewünschter Standard-Radius */
+}
+
+
 .image-scroll {
   display: flex;
   flex-wrap: nowrap;       
