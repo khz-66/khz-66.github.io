@@ -1,5 +1,3 @@
-<!-- Im aktuellen Design -->
-
 <!DOCTYPE html>
 <html class="light" lang="de">
 <head>
@@ -29,6 +27,28 @@
         currentModeIndex = 1;
     }
 
+    // Globale Variablen für die p5-Instanzen zur Steuerung im Button-Event
+    let currentP5Instance = null;
+
+    function switchAvatarAnimation(mode) {
+      // Bestehende Animation sauber entfernen
+      if (currentP5Instance) {
+        currentP5Instance.remove();
+        currentP5Instance = null;
+      }
+      
+      // Animations-Holder leeren (sichert sauberen Wechsel)
+      const holder = document.getElementById('avatar-animation-holder');
+      if (holder) holder.innerHTML = '';
+
+      // Je nach Modus die passende Animation starten
+      if (mode === 'spooky') {
+        currentP5Instance = new p5(hypnoBlackSketch);
+      } else {
+        currentP5Instance = new p5(avatarSketch);
+      }
+    }
+
     button.addEventListener('click', () => {
         currentModeIndex = (currentModeIndex + 1) % modes.length;
         const currentMode = modes[currentModeIndex];
@@ -45,6 +65,9 @@
         } else {
             button.textContent = "Modus: Dunkel";
         }
+
+        // Trigger den visuellen Animationswechsel
+        switchAvatarAnimation(currentMode);
     });
   </script>
   
@@ -54,7 +77,6 @@
         <span class="bau-text">Under Construction</span>
     </div>
 
-    
     <h1>Überschrift 1</h1>
     
     <div class="highlights-box">
@@ -86,7 +108,6 @@
       </a>
     </figure>
 
-    
     <p>
       Aber die Freunde rettet' er nicht, wie eifrig er strebte,
     </p>
@@ -103,7 +124,7 @@
       vorweg und klärt die Schuldfrage für das Scheitern der Gefährten.
     </p>
     <p class="subtext-or bullet">
-      Damit etabliert das Proömium ein neues Menschenbild. Das Schicksal 
+      Damit etablisher das Proömium ein neues Menschenbild. Das Schicksal 
       ist nicht mehr nur willkürliche göttliche Fügung; der Mensch trägt 
       durch moralisches Fehlverhalten die direkte Verantwortung.
     </p>
@@ -325,8 +346,13 @@
             avatarLink.href = "index_voll.html";
         }
       }
+
+      // Initialisiert den richtigen Avatar beim ersten Laden der Seite
+      const initialMode = document.body.classList.contains('spooky') ? 'spooky' : (document.documentElement.classList.contains('light') ? 'light' : 'dark');
+      switchAvatarAnimation(initialMode);
     });
 
+    // --- ANIMATION 1: Standard-Avatar (Instanzmodus) ---
     const avatarSketch = (p) => {
       let img;
       let blinkTimer = 0;
@@ -376,7 +402,6 @@
           }
         }
        
-        // Brücke/Brille
         p.stroke(0);          
         p.strokeWeight(6);    
         p.fill(183, 189, 189);          
@@ -399,13 +424,91 @@
       }
     };
 
-    new p5(avatarSketch);
+    // --- ANIMATION 2: Hypno Black Avatar (Instanzmodus) ---
+    const hypnoBlackSketch = (p) => {
+      let img;
+      let cBlue, cGreen, cYellow;
+      const CYCLE_DURATION = 1500; 
+      const THRESHOLD = 60; 
+
+      p.preload = () => {
+        img = p.loadImage('him.jpg'); 
+      };
+
+      p.setup = () => {
+        let canvas = p.createCanvas(350, 350);
+        canvas.parent('avatar-animation-holder');
+        
+        cBlue = p.color(0, 162, 232);
+        cGreen = p.color(0, 255, 0);
+        cYellow = p.color(255, 255, 0);
+        p.frameRate(60);
+      };
+
+      p.draw = () => {
+        p.clear();
+
+        let progress = (p.millis() % CYCLE_DURATION) / CYCLE_DURATION;
+        let virtualPhase = progress * 3;
+        let currentPhase = p.floor(virtualPhase); 
+        let amt = virtualPhase % 1;             
+
+        let smoothAmt = (1 - p.cos(amt * p.PI)) / 2;
+        let currentInnerColor, currentOuterColor;
+
+        if (currentPhase === 0) {
+            currentInnerColor = p.lerpColor(cBlue, cYellow, smoothAmt);
+            currentOuterColor = p.lerpColor(cGreen, cBlue, smoothAmt);
+        } else if (currentPhase === 1) {
+            currentInnerColor = p.lerpColor(cYellow, cGreen, smoothAmt);
+            currentOuterColor = p.lerpColor(cBlue, cYellow, smoothAmt);
+        } else {
+            currentInnerColor = p.lerpColor(cGreen, cBlue, smoothAmt);
+            currentOuterColor = p.lerpColor(cYellow, cGreen, smoothAmt);
+        }
+
+        let currentImg = img.get();
+        currentImg.loadPixels();
+
+        let targetInnerR = p.red(currentInnerColor);
+        let targetInnerG = p.green(currentInnerColor);
+        let targetInnerB = p.blue(currentInnerColor);
+
+        let targetOuterR = p.red(currentOuterColor);
+        let targetOuterG = p.green(currentOuterColor);
+        let targetOuterB = p.blue(currentOuterColor);
+
+        for (let i = 0; i < currentImg.pixels.length; i += 4) {
+            let r = currentImg.pixels[i];
+            let g = currentImg.pixels[i + 1];
+            let b = currentImg.pixels[i + 2];
+
+            if (colorMatch(r, g, b, 0, 162, 232)) {
+                currentImg.pixels[i]     = targetInnerR;
+                currentImg.pixels[i + 1] = targetInnerG;
+                currentImg.pixels[i + 2] = targetInnerB;
+            }
+            else if (colorMatch(r, g, b, 0, 255, 0)) {
+                currentImg.pixels[i]     = targetOuterR;
+                currentImg.pixels[i + 1] = targetOuterG;
+                currentImg.pixels[i + 2] = targetOuterB;
+            }
+        }
+
+        currentImg.updatePixels();
+        p.image(currentImg, 0, 0, p.width, p.height);
+      };
+
+      function colorMatch(r, g, b, tr, tg, tb) {
+          let d = p.dist(r, g, b, tr, tg, tb);
+          return d < THRESHOLD;
+      }
+    };
 
     // ----------------------------------------------------------------------
-    // Universelle Dialog Logik (optimiert für Event-Abfangung)
+    // Universelle Dialog Logik
     // ----------------------------------------------------------------------
     document.addEventListener("DOMContentLoaded", () => {
-
         const videoDialog = document.getElementById('videoDialog');
         const openVideoBtn = document.getElementById('openVideoBtn');
         const popupVideo = document.getElementById('popupVideo');
@@ -464,29 +567,19 @@
             });
         }
 
-        // Event-Listener für das native Schließen (z. B. via ESC-Taste)
         document.querySelectorAll('dialog.dialog-base').forEach(dialog => {
             dialog.addEventListener('close', () => {
                 const video = dialog.querySelector('video');
-                if (video) {
-                    video.pause();
-                }
-                // Optionale Bereinigung von Iframes beim Schließen:
+                if (video) video.pause();
                 const frame = dialog.querySelector('iframe');
-                if (frame) {
-                    frame.src = ""; 
-                }
+                if (frame) frame.src = ""; 
             });
             
-            // Klick auf abgedunkelten Hintergrund
             dialog.addEventListener('click', (e) => {
-                if (e.target === dialog) {
-                    dialog.close();
-                }
+                if (e.target === dialog) dialog.close();
             });
         });
 
-        // Schließen über alle "X"-Buttons
         document.querySelectorAll('.closeDialogBtn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const dialog = btn.closest('dialog');
@@ -496,35 +589,30 @@
     });
     
     function syncPuzzleTheme() {
-    const iframe = document.querySelector("#puzzleDialog iframe");
-    if (!iframe) return;
+        const iframe = document.querySelector("#puzzleDialog iframe");
+        if (!iframe) return;
 
-    iframe.addEventListener("load", () => {
-        const mainRoot = document.documentElement;
-        const mainBody = document.body;
+        iframe.addEventListener("load", () => {
+            const mainRoot = document.documentElement;
+            const mainBody = document.body;
 
-        const iframeDoc = iframe.contentDocument;
-        const iframeRoot = iframeDoc.documentElement;
-        const iframeBody = iframeDoc.body;
+            const iframeDoc = iframe.contentDocument;
+            const iframeRoot = iframeDoc.documentElement;
+            const iframeBody = iframeDoc.body;
 
-        // 1. CSS-Variablen kopieren
-        const styles = getComputedStyle(mainRoot);
-        for (let i = 0; i < styles.length; i++) {
-            const prop = styles[i];
-            if (prop.startsWith("--")) {
-                iframeRoot.style.setProperty(prop, styles.getPropertyValue(prop));
+            const styles = getComputedStyle(mainRoot);
+            for (let i = 0; i < styles.length; i++) {
+                const prop = styles[i];
+                if (prop.startsWith("--")) {
+                    iframeRoot.style.setProperty(prop, styles.getPropertyValue(prop));
+                }
             }
-        }
+            iframeBody.className = mainBody.className;
+        });
+    }
 
-        // 2. Theme-Klasse vom BODY spiegeln (WICHTIG!)
-        iframeBody.className = mainBody.className;
-    });
-}
-
-syncPuzzleTheme();
-document.addEventListener("themeChanged", syncPuzzleTheme);
-
-    
+    syncPuzzleTheme();
+    document.addEventListener("themeChanged", syncPuzzleTheme);
   </script>
 </body>
 </html>
