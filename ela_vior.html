@@ -1,302 +1,176 @@
 <!DOCTYPE html>
-<html lang="de">
+<html class="spooky" lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lautformelsprache Ela Vior</title>
-    
-    <style>
-        /* ==========================================================================
-           1. RESET & BASICS
-           ========================================================================== */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        
-        html {
-            /* HIER DEINE HINTERGRUNDFARBE WÄHLEN */
-            background-color: #000000; 
-            scroll-behavior: smooth;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #ffffff;
-            min-height: 100vh;
-            line-height: 1.6;
-            overflow-x: hidden; 
-        }
-
-        /* ==========================================================================
-           2. INHALTS-LAYOUT (HAUPTCONTAINER)
-           ========================================================================== */
-        .container {
-            position: relative;
-            z-index: 1; 
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 60px 20px;
-            text-align: center;
-        }
-        
-        /* Typografie & Standard-Elemente für neue Inhalte */
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            background: linear-gradient(45deg, #ff7b00, #ffae00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            
-            line-height: 1.1;
-        }
-
-        h2 {
-            font-size: 2rem;
-            margin: 40px 0 20px 0;
-            color: #ffae00;
-        }
-        
-        p {
-            font-size: 1.2rem;
-            color: #a0a0a0;
-            margin-bottom: 20px;
-            text-align: left; /* Besser lesbar bei längeren Texten */
-            hyphens: auto;
-    -webkit-hyphens: auto; /* Für Safari */
-    lang: de; /* WICHTIG: Der Browser muss wissen, dass es Deutsch ist! */
-
-          
-        }
-        
-        .text-center {
-            text-align: center;
-        }
-
-        /* Platzhalter für neue Bilder */
-        .content-image {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin: 20px 0;
-            border: none !important;
-            box-shadow: none !important;
-        }
-
-        /* Links */
-        a {
-            color: #ff7b00;
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-        a:hover {
-            text-decoration: underline;
-            color: #ffae00;
-        }
-
-        .subtext {
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-            background: linear-gradient(45deg, #ff7b00, #ffae00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-top: 40px;
-        }
-
-        /* ==========================================================================
-           3. AVATAR WIDGET (STEUERUNG)
-           ========================================================================== */
-        .avatar-widget-container {
-            width: 120px;
-            height: 120px;
-            z-index: 10;
-        }
-
-        /* OPTION A: Rechts Oben fixiert */
-        .avatar-top-right {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-        }
-
-        /* OPTION B: Links Unten fixiert */
-        .avatar-bottom-left {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-        }
-
-        /* Formatierung des P5-Canvas im Avatar */
-        #avatar-animation-holder canvas {
-            width: 100% !important;
-            height: 100% !important;
-            border-radius: 50%;
-            border: 5px solid #5A6E8F !important; 
-            box-shadow: none !important; 
-        }
-        
-        /* Verhindert Unterstreichung und zeigt den Zeigefinger beim Avatar-Link */
-a.avatar-widget-container {
-    text-decoration: none;
-    cursor: pointer;
-}
-
-        
-        table, th, td {
-  border: 1px solid #fff;
-  color: #a0a0a0;
-}
-        
-    </style>
-
-    <script src="p5.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/styles.css">
+  <title>Ela Vior – Einführung</title>
 </head>
-<body>
 
-            <div class="avatar-widget-container avatar-bottom-left">
-        <a href="index.html" id="avatar-link" class="avatar-link-wrapper" style="display: block;">
-            <div id="avatar-animation-holder"></div>
-        </a>
+<body class="spooky">
+
+<div class="container">
+    <h1>Ela Vior</h1>
+    
+    <p>
+        Ela Vior ist eine magische Lautformelsprache, 
+        die auf Klang, Intention und Intuition basiert. Sie dient 
+        der Verständigung durch Resonanz mit feinstofflichen Ebenen.
+    </p>
+    
+    <h2>Magische Sprachen</h2>
+    
+    <p>
+      Eine magische Sprache, die verwendet wird, um mit göttlichen 
+      oder übernatürlichen Kräften in Kontakt zu treten, kann
+      eine echte alte Sprache sein (z. B. Hebräisch, Griechisch, Ägyptisch), 
+      oder eigens für magische Zwecke geschaffen werden, wobei die Klänge selbst 
+      als wirksam gelten.
+    </p>
+    
+    <p>
+      Es gibt mehrere bekannte künstlich geschaffene magische oder ritualsprachliche Systeme, 
+      die nicht als natürliche Alltagssprachen entstanden sind:
+    </p>
+    
+    <blockquote class="bullet">
+      John Dees Enochisch<br>
+      Dee und sein Medium Edward Kelley behaupteten, 
+      die Sprache von Engeln empfangen zu haben. 
+      Enochisch besitzt ein eigenes Alphabet, 
+      Vokabular und teilweise Grammatik.
+    </blockquote>
+    
+    <blockquote class="bullet">
+      Die barbarischen Namen der Antike
+      In den griechisch-ägyptischen Zauberpapyri finden sich 
+      lange Reihen geheimnisvoller Wörter und Namen. 
+      Viele sind Mischungen aus verschiedenen Sprachen 
+      oder reine Klangformeln. Sie werden oft als Vorläufer 
+      späterer magischer Kunstsprachen betrachtet.
+    </blockquote>
+    
+    <blockquote class="bullet">
+      Moderne magische Kunstsprachen
+      Viele heutige Magier entwickeln eigene Ritualsprachen. 
+      Dabei werden bestimmte Lautfolgen mit festgelegten Bedeutungen 
+      verbunden, oft ähnlich wie bei Mantras. 
+      Die Ela Vior-Sprache gehört in diese Kategorie: eine bewusst geschaffene Sprache, 
+      deren Wörter nicht nur Begriffe bezeichnen, sondern auch als Träger magischer Intention dienen.
+    </blockquote>
+    
+    <blockquote class="bullet">
+      Die Lichtsprache
+      Unter Lichtsprache versteht man eine energetische, nonverbale Kommunikationsform 
+      aus der spirituellen Praxis. Sie basiert auf heiliger Geometrie und Farbschwingungen, 
+      um Botschaften an das Universum zu senden und das eigene Leben bewusst zu gestalten
+    </blockquote>
+    
+    <blockquote class="bullet">
+      Die Sprache der Engel von Agrippa
+      Agrippa von Nettesheimb verwendete verschiedene magische Alphabete. Zwar keine vollständige 
+      Kunstsprache, aber ein wichtiger Schritt zur Idee einer heiligen Ritualsprache.
+    </blockquote>
+    
+    <blockquote class="bullet">
+      Die meisten historischen Magier glaubten nicht, 
+      eine magische Sprache müsse grammatikalisch perfekt sein. 
+      Oft galten Klang, Rhythmus und symbolische Zuordnung als wichtiger 
+      als linguistische Korrektheit. Deshalb bestehen viele magische Sprachen 
+      eher aus Formeln, Namen und Lautmustern als aus vollständigen Alltagsvokabular.
+    </blockquote>
+
+    <h2 id="grundprinzipien">Grundprinzipien</h2>
+
+    <h3>Dreifache Wirkung</h3>
+    <ul class="list-bl">
+        <li><strong>Mental:</strong> Gedanke, Absicht, Vorstellung</li>
+        <li><strong>Astral:</strong> Gefühl, Farbe, Visualisation</li>
+        <li><strong>Physisch:</strong> Laut, Ton, Stimme</li>
+    </ul>
+
+    <h3>Elemente der Vokale</h3>
+    <ul class="list-bl">
+        <li><strong>A</strong> – Feuer (Ordnung, Leuchtkraft)</li>
+        <li><strong>E</strong> – Akasha (Ursprung, Allbewusstsein)</li>
+        <li><strong>I</strong> – Luft (Bewegung, Leichtigkeit)</li>
+        <li><strong>O</strong> – Erde (Stabilität, Form)</li>
+        <li><strong>U</strong> – Wasser (Gefühl, Magnetismus)</li>
+    </ul>
+
+    <p>
+        Silben wie <em>ela</em>, <em>vior</em>, <em>ascha</em> oder <em>lunem</em> sind keine Wörter im klassischen Sinn,
+        sondern <strong>Schwingungsgebilde</strong>.
+    </p>
+
+    <h2 id="formel-erschaffen">Wie erschafft man eine Ela‑Vior‑Formel?</h2>
+
+    <h3>1. Ziel bestimmen</h3>
+    <p>Beispiele:</p>
+    <ul class="list-bl">
+        <li>Pflanzenkontakt</li>
+        <li>Schutz</li>
+        <li>Klarheit</li>
+        <li>Heilung</li>
+    </ul>
+
+    <h3>2. Klangträger wählen</h3>
+    <ul class="list-bl">
+        <li><strong>Vokale:</strong> Elementekraft</li>
+        <li><strong>Konsonanten:</strong> Richtung, Dynamik</li>
+        <li><strong>Silben:</strong> intuitive Bedeutung</li>
+    </ul>
+
+    <h3>3. Formel bilden</h3>
+    <p>3–7 Silben, rhythmisch, organisch, archaisch.</p>
+
+    <h3>4. Sprechen – Fühlen – Visualisieren</h3>
+    <ul class="list-bl">
+        <li>Langsam und bewusst sprechen</li>
+        <li>Schwingung im Körper fühlen</li>
+        <li>Farbe oder Element visualisieren</li>
+    </ul>
+
+    <h3>5. Ritual oder Meditation</h3>
+    <ul class="list-bl">
+        <li>Kerze oder Pflanze als Fokus</li>
+        <li>Formel 3‑ oder 7‑mal sprechen</li>
+        <li>Stille nachklingen lassen</li>
+    </ul>
+
+    <h2 id="beispiel-formel">Beispielformel</h2>
+
+    <div class="kastentext box-bl" style="text-align: left;">
+        <h6>Formel</h6>
+        Kalun vior ascha tharim – sedil uvel othar.
     </div>
 
+    <blockquote class="quote-bl">
+        „Wurzelkraft und Lebensfluss im Schutz der Stille – ich trete mit Liebe und Achtung ein.“
+    </blockquote>
 
+    <h3>Anwendungsideen</h3>
+    <ul class="list-bl">
+        <li>Formel 3‑mal sprechen und die Pflanze visualisieren</li>
+        <li>Silben einzeln intonieren</li>
+        <li>Formel mit Pflanzenfarbe schreiben und unter den Topf legen</li>
+    </ul>
 
-    <div class="container">
-       
-        
-        
-         <h1>Laut&shy;formel&shy;sprache Ela Vior</h1>
+    <h2 id="herkunft">Herkunft & Tradition</h2>
 
-<p>Seiteninhalt</p>
+    <p>Ela Vior steht in der Linie verschiedener Lautmagie‑Traditionen:</p>
 
-  <p>Siehe auch: Rituelle <a href="ela_vior_wortbildung.html"> Wortbildung</a> in Ela Vior, <a href="ela_vior_vokabular.html">Vokabular</a>.</p>
+    <ul class="list-bl">
+        <li><strong>Franz Bardon:</strong> Quabbalah, magische Buchstaben</li>
+        <li><strong>Karl Spiesberger:</strong> Runen‑ und Lautmagie</li>
+        <li><strong>Enochische Sprache:</strong> Anrufung geistiger Kräfte</li>
+        <li><strong>Moderne Lichtsprache:</strong> intuitive Klangsprachen</li>
+    </ul>
 
-        
-        <hr style="border: 0; height: 1px; background: #333; margin: 40px 0;">
-
-        
-        
-        <p class="subtext text-center">Projekt-Start: Sommer 2026</p>
-    </div>
-
-    <script>
-      
-      document.addEventListener("DOMContentLoaded", () => {
-    const avatarLink = document.getElementById('avatar-link');
     
-    if (avatarLink) {
-        // 1. Prüfen, ob der URL-Parameter gesetzt ist ODER ob der direkte Referrer index_voll.html ist
-        const urlParams = new URLSearchParams(window.location.search);
-        const hatWeiterleitungParam = urlParams.get('weiterleitung') === 'ja';
-        const kamDirektVonIndexVoll = document.referrer.includes('index_voll.html');
-
-        // 2. Wenn eins von beiden zutrifft, merken wir uns das für die gesamte Session
-        if (hatWeiterleitungParam || kamDirektVonIndexVoll) {
-            sessionStorage.setItem('kommtVonIndexVoll', 'true');
-        }
-
-        // 3. Jetzt prüfen wir: Ist das session-Flag gesetzt? (Egal ob jetzt gerade oder von einer Seite zuvor)
-        const istAktiviertFuerSession = sessionStorage.getItem('kommtVonIndexVoll') === 'true';
-
-        // Wenn ja, Link auf index_voll.html umbiegen
-        if (istAktiviertFuerSession) {
-            avatarLink.href = "index_voll.html";
-        }
-    }
-});
 
 
-      
-    const avatarSketch = (p) => {
-  let img;
-  let blinkTimer = 0;
-  let pauseTimer = 0;       // NEU: Timer für die Pause zwischen den Blinzlern
-  let isBlinking = false;
-  let doubleBlinkQueue = false; 
-  let nextBlinkFrame = 200;     
-
-  p.preload = () => {
-    img = p.loadImage('me.jpg'); 
-  };
-
-  p.setup = () => {
-    let canvas = p.createCanvas(350, 350);
-    canvas.parent('avatar-animation-holder');
-  };
-
-  p.draw = () => {
-    p.clear();
-    p.image(img, 0, 0, p.width, p.height);
-
-    // Wenn der Ziel-Frame erreicht ist und gerade absolut gar nichts passiert
-    if (p.frameCount >= nextBlinkFrame && !isBlinking && pauseTimer <= 0) {
-      isBlinking = true;
-      blinkTimer = 10; 
-      
-      // Zu 10% Wahrscheinlichkeit folgt ein Doppelblinzeln
-      doubleBlinkQueue = p.random(1) < 0.1; 
-      
-      // Nächstes Standard-Intervall festlegen
-      nextBlinkFrame = p.frameCount + p.floor(p.random(200, 250));
-    }
-
-    // 1. Logik für das Blinzeln (geschlossene Augen)
-    if (isBlinking) {
-      blinkEyes();
-      blinkTimer--;
-      
-      if (blinkTimer <= 0) {
-        isBlinking = false;
-        
-        // Wenn ein Doppelblinzeln ansteht, aktivieren wir die Pause
-        if (doubleBlinkQueue) {
-          doubleBlinkQueue = false; 
-          pauseTimer = 6; // 6 Frames lang bleiben die Augen jetzt offen
-        }
-      }
-    }
-    
-    // 2. Logik für die Pause (Augen offen, Timer läuft ab)
-    if (pauseTimer > 0) {
-      pauseTimer--;
-      // Wenn die Pause vorbei ist, wird das zweite Blinzeln ausgelöst
-      if (pauseTimer === 0) {
-        isBlinking = true;
-        blinkTimer = 10;
-      }
-    }
-       
-    // Brille / Hintergrundelemente des Avatars
-    p.stroke(0);          
-    p.strokeWeight(6);    
-    p.fill(183, 189, 189);          
-    p.ellipse(175, 185, 170, 120);
-  };
-
-  function blinkEyes() {
-    p.push(); 
-    p.stroke(0);          
-    p.strokeWeight(6);    
-    p.fill(183, 189, 189);          
-
-    p.ellipse(135, 115, 70, 70); 
-    p.ellipse(205, 115, 75, 75); 
-
-    p.strokeWeight(5);
-    p.line(130, 115, 174, 115); 
-    p.line(176, 115, 220, 115); 
-
-    p.pop(); 
-  }
-};
-
-new p5(avatarSketch);
-
-
-    </script>
+</div>
 
 </body>
 </html>
