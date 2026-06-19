@@ -5,9 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/styles.css">
   <title>Ela Vior – Einführung</title>
+  <script src="p5.min.js"></script>
 </head>
 
 <body class="spooky">
+
+<div class="avatar-widget-container avatar-bottom-left">
+    <a href="index.html" id="avatar-link" class="avatar-link-wrapper" style="display: block;">
+      <div id="avatar-animation-holder"></div>
+    </a>
+  </div>
 
 <div class="container">
     <h1>Ela Vior</h1>
@@ -167,10 +174,84 @@
         <li><strong>Moderne Lichtsprache:</strong> intuitive Klangsprachen</li>
     </ul>
 
-    
-
-
 </div>
+
+<script>
+// P5.js Avatar Sketch Logic
+    const avatarSketch = (p) => {
+      let img;
+      let blinkTimer = 0;
+      let pauseTimer = 0;       
+      let isBlinking = false;
+      let doubleBlinkQueue = false; 
+      let nextBlinkFrame = 200;     
+
+      p.preload = () => {
+        img = p.loadImage('him.jpg'); 
+      };
+
+      p.setup = () => {
+        let canvas = p.createCanvas(350, 350);
+        canvas.parent('avatar-animation-holder');
+      };
+
+      p.draw = () => {
+        p.clear();
+        p.image(img, 0, 0, p.width, p.height);
+
+        if (p.frameCount >= nextBlinkFrame && !isBlinking && pauseTimer <= 0) {
+          isBlinking = true;
+          blinkTimer = 10; 
+          doubleBlinkQueue = p.random(1) < 0.1; 
+          nextBlinkFrame = p.frameCount + p.floor(p.random(200, 250));
+        }
+
+        if (isBlinking) {
+          blinkEyes();
+          blinkTimer--;
+          
+          if (blinkTimer <= 0) {
+            isBlinking = false;
+            if (doubleBlinkQueue) {
+              doubleBlinkQueue = false; 
+              pauseTimer = 6; 
+            }
+          }
+        }
+        
+        if (pauseTimer > 0) {
+          pauseTimer--;
+          if (pauseTimer === 0) {
+            isBlinking = true;
+            blinkTimer = 10;
+          }
+        }
+           
+        p.stroke(0);          
+        p.strokeWeight(6);    
+        p.fill(183, 189, 189);          
+        p.ellipse(175, 185, 170, 120);
+      };
+
+      function blinkEyes() {
+        p.push(); 
+        p.stroke(0);          
+        p.strokeWeight(6);    
+        p.fill(183, 189, 189);          
+
+        p.ellipse(135, 115, 70, 70); 
+        p.ellipse(205, 115, 75, 75); 
+
+        p.strokeWeight(5);
+        p.line(130, 115, 174, 115); 
+        p.line(176, 115, 220, 115); 
+
+        p.pop(); 
+      }
+    };
+
+    new p5(avatarSketch);
+</script>
 
 </body>
 </html>
