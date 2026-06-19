@@ -138,6 +138,29 @@ body.spooky .subtext-bl {
   color: var(--accbl) !important; /* Zwingt beide Subtexte im Spooky-Modus auf Türkis */
 }
 
+/* Verhindert, dass der Spooky-Modus die Kastentexte schwarz färbt */
+body.spooky .kastentext.box-or,
+body.spooky .kastentext.box-bl {
+  background-color: var(--accor) !important; /* bzw. var(--accbl) für box-bl */
+}
+
+body.spooky .kastentext.box-bl {
+  background-color: var(--accbl) !important;
+}
+
+/* Zwingt ALLE Texte und Überschriften (h1-h6, p, etc.) im Kasten auf das dunkle Original-Design */
+body.spooky .kastentext h1,
+body.spooky .kastentext h2,
+body.spooky .kastentext h3,
+body.spooky .kastentext h4,
+body.spooky .kastentext h5,
+body.spooky .kastentext h6,
+body.spooky .kastentext p,
+body.spooky .kastentext {
+  color: #000000 !important; /* Überschreibt das helle Grau/Orange mit Schwarz für optimalen Kontrast */
+}
+
+
 body {
   hyphens: auto;
   -webkit-hyphens: auto;
@@ -305,12 +328,23 @@ mark {
 }
 
 .bullet::before {
-  content: var(--bullpnt) " ";
-  padding-right: 8px;
-  color: var(--accbull);
-  font-style: normal; /* Verhindert, dass das Symbol jemals kursiv wird */
-  display: inline-block; /* Garantiert, dass das 'normal' sauber greift */
+  content: var(--bullpnt); /* Das Leerzeichen " " entfernen wir hier, das lösen wir sauberer über margin/padding */
+  padding-right: 4px !important;
+  color: var(--accbull) !important;
+  font-style: normal !important;
+  
+  /* --- HIER SIND DIE RELEVANTEN GEÄNDERTEN ZEILEN --- */
+  display: inline-flex;    /* Macht das Symbol zu einer eigenen kleinen Flexbox */
+  align-items: center;     /* Zentriert den Inhalt (das Zeichen) in sich selbst */
+  vertical-align: middle;  /* Richtet diese Box mittig zur Schrifthöhe des Textes aus */
+  line-height: 1;          /* Verhindert, dass die Zeilenhöhe des Textes das Symbol nach unten drückt */
+  
+  /* Falls das Symbol immer noch minimal zu hoch oder tief wirkt, 
+     kannst du es hier haargenau nachjustieren (z.B. -1px schiebt es leicht nach unten): */
+  position: relative;
+  top: -3px; 
 }
+
 
 /* ==========================================================================
    BLOCKQUOTE (ZITAT-FORMAT)
@@ -368,6 +402,16 @@ blockquote cite {
   color: var(--fg);         /* Textfarbe bleibt im gut lesbaren Vordergrund */
 }
 
+.kastentext h6 {
+  font-size: 1rem;
+  color: var(--fg);
+  margin-top: 0; 
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+
 /* Variante 1: Hintergrund Orange (accor) mit dunklem Text für optimalen Kontrast */
 .box-or {
   background-color: var(--accor);
@@ -380,6 +424,48 @@ blockquote cite {
   background-color: var(--accbl);
   color: var(--bg);       /*     Dunkler Text auf hellem Türkis verhindert Augenkrebs */
   font-weight: bold; 
+}
+
+
+/* ==========================================================================
+   EIGENE LISTEN-STILE (Linksbündig & Farbige Aufzählungszeichen)
+   ========================================================================== */
+
+/* Basis-Einstellung für alle unstrukturierten Listen */
+ul {
+  text-align: left;           /* Behebt die Zentrierung aus dem Container */
+  list-style: none;           /* Entfernt die Standard-Punkte des Browsers */
+  padding-left: 30px;         /* Platz für die eigenen Aufzählungszeichen */
+  margin-bottom: 20px;
+}
+
+/* Der Standard-Listenpunkt (erhält automatisch dein Standard-Umfeld-Design) */
+ul li {
+  position: relative;
+  margin-bottom: 8px;
+  font-size: 1.2rem;          /* Passt sich deinen p-Absätzen an */
+  line-height: 1.2;
+}
+
+/* Konstruktion des eigenen Aufzählungszeichens per Pseudo-Element */
+ul li::before {
+  content: var(--bullpnt);    /* Nutzt dein "■ " oder Spooky-"● " */
+  position: absolute;
+  left: -30px;                /* Schiebt das Zeichen in den linken Padding-Bereich */
+  color: var(--fg);           /* Standardfarbe fällt auf Textfarbe zurück */
+  font-style: normal;
+}
+
+/* --- FARB-VARIANTEN --- */
+
+/* Variante 1: Orange (accor) */
+ul.list-or li::before {
+  color: var(--accor);
+}
+
+/* Variante 2: Türkis/Blau (accbl) */
+ul.list-bl li::before {
+  color: var(--accbl);
 }
 
 .clear-all {
