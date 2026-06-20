@@ -12,6 +12,13 @@
   --accbl-rgb: 8, 252, 213;
   --accmark: #008974;
   --accmark-rgb: 0, 177, 150;
+  
+  --ffeuer: var(--fg);
+  --fwasser: var(--fg);
+  --fluft: var(--fg);
+  --ferde: var(--fg);
+  --fakasha: var(--fg);
+  
   --accbull: var(--accor);
   --bullpnt: "■ ";
 }
@@ -47,6 +54,14 @@ body.spooky .dialog-code,
 body.spooky #puzzleDialog {
   background-color: #000000 !important;
   color: #aaaaaa !important;
+}
+
+.spooky{
+  --ffeuer: #ff4141;
+  --fwasser: #14c202;
+  --fluft: #17d5fe;
+  --ferde: #fbde02;
+  --fakasha: #e09cfc;
 }
 
 /* WICHTIG: Variablen-Änderungen für den Spooky-Modus 
@@ -284,7 +299,7 @@ p {
   font-style: italic;
   <!-- font-weight: bold; -->
   letter-spacing: 1px;
-  color: var(--fg);
+  color: currentColor;
 }
        
 .subtext-or {
@@ -435,7 +450,8 @@ blockquote cite {
 ul {
   text-align: left;           /* Behebt die Zentrierung aus dem Container */
   list-style: none;           /* Entfernt die Standard-Punkte des Browsers */
-  padding-left: 30px;         /* Platz für die eigenen Aufzählungszeichen */
+  padding-left: 20px;         /* Platz für die eigenen Aufzählungszeichen */
+  margin: 20px;
   margin-bottom: 20px;
 }
 
@@ -443,7 +459,7 @@ ul {
 ul li {
   position: relative;
   margin-bottom: 8px;
-  font-size: 1.2rem;          /* Passt sich deinen p-Absätzen an */
+  font-size: 1.0rem;          /* Passt sich deinen p-Absätzen an */
   line-height: 1.2;
 }
 
@@ -451,8 +467,9 @@ ul li {
 ul li::before {
   content: var(--bullpnt);    /* Nutzt dein "■ " oder Spooky-"● " */
   position: absolute;
-  left: -30px;                /* Schiebt das Zeichen in den linken Padding-Bereich */
-  color: var(--fg);           /* Standardfarbe fällt auf Textfarbe zurück */
+  left: -20px;                /* Schiebt das Zeichen in den linken Padding-Bereich */
+  top: -1px;
+  color: currentColor;           /* Standardfarbe fällt auf Textfarbe zurück */
   font-style: normal;
 }
 
@@ -494,7 +511,7 @@ a:hover {
 
 
 .header-footer {
-    height: 150px;
+    height: 100px;
 }
 
 hr {
@@ -885,9 +902,9 @@ a.has-play::after {
   /* Dreieck-Konstruktion */
   width: 0 !important;
   height: 0 !important;
-  border-top: 7px solid transparent !important;
+  border-top: 9px solid transparent !important;
   border-bottom: 7px solid transparent !important;
-  border-left: 12px solid #fbc052 !important;
+  border-left: 8px solid #fbc052 !important;
   
   /* Optischer Ausgleich nach rechts */
   margin-left: 2px !important;
