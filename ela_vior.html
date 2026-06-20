@@ -192,6 +192,26 @@
 </div>
 
 <script>
+  document.addEventListener("DOMContentLoaded", () => {
+      const avatarLink = document.getElementById('avatar-link');
+    
+      if (avatarLink) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const hatWeiterleitungParam = urlParams.get('weiterleitung') === 'ja';
+        const kamDirektVonIndexVoll = document.referrer.includes('index_voll.html');
+
+        if (hatWeiterleitungParam || kamDirektVonIndexVoll) {
+            sessionStorage.setItem('kommtVonIndexVoll', 'true');
+        }
+
+        if (sessionStorage.getItem('kommtVonIndexVoll') === 'true') {
+            avatarLink.href = "index_voll.html";
+        }
+      }
+    });
+
+  
+  
 // P5.js Avatar Sketch Logic
     const avatarSketch = (p) => {
       let img;
