@@ -9,7 +9,11 @@ const puzzleSketch = (p) => {
   let moveHistory = [];       
   let isSolving = false;      
   let lastSolveTime = 0;      
-  const solveDelay = 1500;     
+  const solveDelay = 500;     
+
+  // Timer für den präzisen Doppelklick-Schutz
+  let lastClickTime = 0;
+  const doubleClickThreshold = 250; // Zeitfenster in ms für Doppelklick
 
   // Variablen für den Überstrahl-Effekt
   let isSolved = false;
@@ -76,7 +80,6 @@ const puzzleSketch = (p) => {
     return true;
   }
 
-  // Rekursive Funktion, um den Droste-Effekt direkt auf den Canvas zu zeichnen
   function drawDrostePuzzle(x, y, currentW, currentH, currentDepth, maxDepth) {
     let localW = currentW / cols;
     let localH = currentH / rows;
@@ -88,16 +91,12 @@ const puzzleSketch = (p) => {
         let tileY = y + r * localH;
 
         if (!(r === 2 && c === 0)) {
-          // Zeichne die normalen Kacheln passend herunterskaliert
           p.image(images[idx], tileX, tileY, localW, localH);
           idx++;
         } else {
-          // Wir sind unten links angekommen
           if (currentDepth < maxDepth) {
-            // Rekursiver Aufruf: Zeichne das GANZE Puzzle verkleinert in diese Kachel
             drawDrostePuzzle(tileX, tileY, localW, localH, currentDepth + 1, maxDepth);
           } else {
-            // Letzte Ebene: Einfach weiß füllen
             p.fill(255);
             p.noStroke();
             p.rect(tileX, tileY, localW, localH);
@@ -132,7 +131,6 @@ const puzzleSketch = (p) => {
       p.background(0);   
     }
 
-    // Normales Spielfeld zeichnen
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
         let imgIndex = board[r][c];
@@ -141,7 +139,6 @@ const puzzleSketch = (p) => {
           p.image(images[imgIndex], c * w, r * h, w, h);
         } else {
           if (isSolved) {
-            // Wenn gelöst: Starte den Droste-Effekt (4 Ebenen tief ist gestochen scharf)
             drawDrostePuzzle(c * w, r * h, w, h, 1, 4);
           } else {
             p.fill(0);
@@ -149,7 +146,6 @@ const puzzleSketch = (p) => {
           }
         }
 
-        // Standard-Gitterlinien (ausgeblendet, wenn gelöst)
         if (!isSolved) {
           p.stroke(255, 50);
           p.noFill();
@@ -158,7 +154,6 @@ const puzzleSketch = (p) => {
       }
     }
 
-    // --- ANIMATION: AUFBLITZEN & ÜBERSTRAHLEN ---
     if (isSolved) {
       if (solvedAnimFrame > 0) {
         let progress = 0;
@@ -199,14 +194,47 @@ const puzzleSketch = (p) => {
     }
   };
 
+  // Zusammengeführte Klick-Logik für präzisere Kontrolle
   p.mousePressed = () => {
-    if (isSolving || isSolved) return; 
+    // Falls das Spiel schon fertig gelöst ist, startet jeder Klick neu
+    if (isSolved) {
+      startNewGame();
+      return;
+    }
 
+    // Erneuter Klick stoppt die automatische Lösung (egal wo im Puzzle geklickt wird)
+    if (isSolving) {
+      isSolving = false;
+      return; 
+    }
+
+    // Prüfen, ob der Klick innerhalb des Canvas liegt
     if (p.mouseX >= 0 && p.mouseX <= p.width && p.mouseY >= 0 && p.mouseY <= p.height) {
       let c = p.floor(p.mouseX / w);
       let r = p.floor(p.mouseY / h);
 
       if (c >= 0 && c < cols && r >= 0 && r < rows) {
+        let currentTime = p.millis();
+
+        // Überprüfung auf Doppelklick im schwarzen (leeren) Quadrat
+        if (r === emptySlot.r && c === emptySlot.c) {
+          if (currentTime - lastClickTime < doubleClickThreshold) {
+            // Doppelklick erfolgreich registriert
+            if (checkIsSolved()) {
+              startNewGame();
+            } else if (moveHistory.length > 0) {
+              isSolving = true;
+              lastSolveTime = p.millis();
+            }
+            lastClickTime = 0; // Timer zurücksetzen
+            return;
+          }
+          lastClickTime = currentTime;
+          return; // Einzelklick im leeren Feld blockieren
+        }
+
+        // Normaler Kachel-Zug (wenn nicht das leere Feld geklickt wurde)
+        lastClickTime = 0; // Timer zurücksetzen bei Klick auf andere Kacheln
         if (isAdjacent(r, c, emptySlot.r, emptySlot.c)) {
           moveTile(r, c, false);
           
@@ -214,29 +242,6 @@ const puzzleSketch = (p) => {
             isSolved = true;
             solvedAnimFrame = maxAnimFrames; 
           }
-        }
-      }
-    }
-  };
-
-  p.doubleClicked = () => {
-    if (isSolved) {
-      startNewGame();
-      return;
-    }
-    
-    if (isSolving) return;
-
-    if (p.mouseX >= 0 && p.mouseX <= p.width && p.mouseY >= 0 && p.mouseY <= p.height) {
-      let c = p.floor(p.mouseX / w);
-      let r = p.floor(p.mouseY / h);
-
-      if (r === emptySlot.r && c === emptySlot.c) {
-        if (checkIsSolved()) {
-          startNewGame();
-        } else if (moveHistory.length > 0) {
-          isSolving = true;
-          lastSolveTime = p.millis();
         }
       }
     }
