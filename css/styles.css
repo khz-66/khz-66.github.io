@@ -34,18 +34,15 @@
   --accgrad: #ffae00;
   --accgrad-rgb: 249, 203, 106;
   --accbl: #008974;
-  --accbl-rgb: 0, 177, 150;
   --accmark: #08fcd5;
   --accmark-rgb: 8, 252, 213;
   --accbull: var(--accor);
-  
 }
 
 /* ==========================================================================
    SPOOKY THEME (Intensiver Glow & Orange Highlights-Box)
    ========================================================================== */
 
-/* 1. SEITEN-HINTERGRUND & DIALOG-HINTERGRÜNDE */
 body.spooky,
 body.spooky .dialog-base,
 body.spooky .dialog-info,
@@ -56,7 +53,12 @@ body.spooky #puzzleDialog {
   color: #aaaaaa !important;
 }
 
-.spooky{
+/* Zwingt die Bildunterschrift im Spooky-Modus auf die gewünschte Schreibfarbe */
+body.spooky .image-figure figcaption {
+  color: currentColor !important; /* Hier kannst du jede gewünschte Farbe eintragen */
+}
+
+.spooky {
   --ffeuer: #ff4141;
   --fwasser: #14c202;
   --fluft: #17d5fe;
@@ -64,76 +66,63 @@ body.spooky #puzzleDialog {
   --fakasha: #e09cfc;
 }
 
-/* WICHTIG: Variablen-Änderungen für den Spooky-Modus 
-   werden am saubersten direkt an den Body gehängt */
 body.spooky {
-  --accbull: var(--accbl); /* Überschreibt die Bullet-Farbe zu Türkis */
+  --accbull: var(--accbl); 
   --bullpnt: "● ";
 }
 
-/* 2. TEXTE INNERHALB VON SPOOKY-BEREICHEN */
 body.spooky p,
 .spooky p {
   color: #aaaaaa !important;
 }
 
-
-/* 3. HIGHLIGHTS-BOX: ORANGER HINTERGRUND MIT STARKEM ORANGE-GLOW */
 body.spooky .highlights-box,
 .spooky.highlights-box {
-  background: var(--accor) !important; /* Nutzt deinen originalen orangen Hintergrund */
-  border: 2px solid #ffd357 !important;   /* Kontrastreicher Rahmen */
-  /* Doppelter, verstärkter Orange-Glow nach außen und innen */
+  background: var(--accor) !important; 
+  border: 2px solid #ffd357 !important;   
   box-shadow: 0 0 25px rgba(249, 203, 106, 0.9), 
               0 0 10px rgba(225, 159, 6, 0.6),
               inset 0 0 15px rgba(255, 255, 255, 0.5) !important;
 }
 
-/* Textfarben innerhalb der Highlights-Box zurück auf dein Original (Dunkel auf Orange) */
 body.spooky .highlights-box h5,
 body.spooky .highlights-box p,
 body.spooky .highlights-box a {
   color: var(--bg) !important;
 }
 
-/* 4. POP-UPS & DIALOGE: SUPER-STARKER TÜRKIS-GLOW */
 body.spooky .dialog-base,
 body.spooky .dialog-info,
 body.spooky .dialog-video,
 body.spooky .dialog-code,
 body.spooky #puzzleDialog,
-.spooky:not(html):not(body):not(.highlights-box) { /* HIER :not(html) ergänzt */
+.spooky:not(html):not(body):not(.highlights-box) { 
   border: 2px solid var(--accbl) !important;
-  /* Multi-Layer-Glow für maximale Leuchtkraft */
   box-shadow: 0 0 25px rgba(8, 252, 213, 0.8), 
               0 0 12px rgba(8, 252, 213, 0.5), 
               inset 0 0 15px rgba(8, 252, 213, 0.4) !important;
 }
 
-
-/* 5. BILDER & KATALOG-BILDER: INTENSIVER TÜRKIS-GLOW */
-body.spooky .image-figure img,
-body.spooky .image-item img,
-body.spooky .scroll-item img,
-body.spooky .item .content-image,        
-body.spooky .item-details .image-scroll img { 
+/* KORREKTUR: Glow greift nicht bei noborder */
+body.spooky .image-figure:not(.noborder) img,
+body.spooky .image-item:not(.noborder) img,
+body.spooky .scroll-item:not(.noborder) img,
+body.spooky .item:not(.noborder) .content-image,        
+body.spooky .item-details .image-scroll:not(.noborder) img { 
   border: 2px solid var(--accbl) !important;
-  /* Gleicher starker Effekt wie bei den Dialogen */
   box-shadow: 0 0 25px rgba(8, 252, 213, 0.8), 
               0 0 12px rgba(8, 252, 213, 0.5), 
               inset 0 0 15px rgba(8, 252, 213, 0.4) !important;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Verstärkter Effekt beim Hovern über die Bilder */
-body.spooky .image-figure img:hover,
-body.spooky .image-item img:hover,
-body.spooky .item .content-image:hover {
+body.spooky .image-figure:not(.noborder) img:hover,
+body.spooky .image-item:not(.noborder) img:hover,
+body.spooky .item:not(.noborder) .content-image:hover {
   box-shadow: 0 0 35px rgba(8, 252, 213, 1), 
               0 0 15px rgba(255, 255, 255, 0.6) !important;
 }
 
-/* 6. SCHLIESSKNÖPFE IN POP-UPS */
 body.spooky .closeDialogBtn,
 body.spooky #closePuzzleBtn {
   color: var(--accbl) !important;
@@ -145,25 +134,22 @@ body.spooky #closePuzzleBtn:hover {
   text-shadow: 0 0 12px var(--accbl);
 }
 
-/* 7. SUBTEXTE IM SPOOKY-MODUS REFORMIEREN */ 
 body.spooky .subtext-or {
-  color: var(--accor) !important; /* Zwingt beide Subtexte im Spooky-Modus auf Türkis */
+  color: var(--accor) !important; 
 }
 body.spooky .subtext-bl {
-  color: var(--accbl) !important; /* Zwingt beide Subtexte im Spooky-Modus auf Türkis */
+  color: var(--accbl) !important; 
 }
 
-/* Verhindert, dass der Spooky-Modus die Kastentexte schwarz färbt */
 body.spooky .kastentext.box-or,
 body.spooky .kastentext.box-bl {
-  background-color: var(--accor) !important; /* bzw. var(--accbl) für box-bl */
+  background-color: var(--accor) !important; 
 }
 
 body.spooky .kastentext.box-bl {
   background-color: var(--accbl) !important;
 }
 
-/* Zwingt ALLE Texte und Überschriften (h1-h6, p, etc.) im Kasten auf das dunkle Original-Design */
 body.spooky .kastentext h1,
 body.spooky .kastentext h2,
 body.spooky .kastentext h3,
@@ -172,9 +158,8 @@ body.spooky .kastentext h5,
 body.spooky .kastentext h6,
 body.spooky .kastentext p,
 body.spooky .kastentext {
-  color: #000000 !important; /* Überschreibt das helle Grau/Orange mit Schwarz für optimalen Kontrast */
+  color: #000000 !important; 
 }
-
 
 body {
   hyphens: auto;
@@ -184,9 +169,6 @@ body {
   color: var(--fg);
 }
 
-/* ==========================================================================
-   SCHWEBENDER THEME-TOGGLE BUTTON (Garantiert immer einfarbig blau)
-   ========================================================================== */
 button#theme-toggle {
     position: fixed !important;
     bottom: 20px !important;
@@ -210,9 +192,6 @@ button#theme-toggle:hover {
     color: #ffffff !important;
 }
 
-/* ==========================================================================
-   LAYOUT & TEXT ELEMENTS
-   ========================================================================== */
 .container {
     position: relative;
     z-index: 1;
@@ -222,45 +201,38 @@ button#theme-toggle:hover {
     text-align: center; 
 }
 
-/* Das fixierte Absperrband */
-        .absperrband {
-            position: fixed;   /* Bleibt beim Scrollen fest stehen */
-            top: 1vh;          /* 5% Abstand zur Oberkante */
-            left: 0;
-            width: 100%;       /* Volle Breite */
-            height: 5vh;       /* 5% der Seitenhöhe */
-            z-index: 9999;     /* Sorgt dafür, dass es über allem anderen liegt */
-            
-            /* Rot-weiße Streifen */
-            background: linear-gradient(
-                135deg,
-                #d32f2f, #d32f2f 25%,
-                #ffffff 25%, #ffffff 50%,
-                #d32f2f 50%, #d32f2f 75%,
-                #ffffff 75%, #ffffff 100%
-            );
-            background-size: 70px 70px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            
-            /* Flexbox, um den Text perfekt in der Mitte des Bandes zu zentrieren */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+.absperrband {
+    position: fixed;   
+    top: 1vh;          
+    left: 0;
+    width: 100%;       
+    height: 5vh;       
+    z-index: 9999;     
+    background: linear-gradient(
+        135deg,
+        #d32f2f, #d32f2f 25%,
+        #ffffff 25%, #ffffff 50%,
+        #d32f2f 50%, #d32f2f 75%,
+        #ffffff 75%, #ffffff 100%
+    );
+    background-size: 70px 70px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        /* Der "Under Construction" Text */
-        .bau-text {
-            color: #ffffff;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            background-color: rgba(0, 0, 0, 0.75); /* Dunkler Kasten für bessere Lesbarkeit */
-            padding: 2px 15px;
-            border-radius: 4px;
-            font-size: 2vh; /* Schriftgröße skaliert passend zur Bandhöhe */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-    
+.bau-text {
+    color: #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background-color: rgba(0, 0, 0, 0.75); 
+    padding: 2px 15px;
+    border-radius: 4px;
+    font-size: 2vh; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
 
 h1 {
   font-size: 3rem;
@@ -297,7 +269,6 @@ p {
 .subtext {
   font-size: 1rem;
   font-style: italic;
-  <!-- font-weight: bold; -->
   letter-spacing: 1px;
   color: currentColor;
 }
@@ -305,7 +276,6 @@ p {
 .subtext-or {
   font-size: 1rem;
   font-style: italic;
-  <!  font-weight: bold; x-->
   letter-spacing: 1px;
   color: var(--accor);
 }
@@ -313,7 +283,6 @@ p {
 .subtext-bl {
   font-size: 1rem;
   font-style: italic;
-  <!-- font-weight: bold; -->
   letter-spacing: 1px;
   color: var(--accbl); 
 }     
@@ -330,91 +299,57 @@ mark {
   border-radius: 3px;             
 }
 
-.text-center {
- text-align: center;
-}
-
-.text-right {
-  text-align: right;
-}
-
-.no-hyphen {
-  hyphens: none;       /* Deaktiviert die automatische Silbentrennung */
-}
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.no-hyphen { hyphens: none; }
 
 .bullet::before {
-  content: var(--bullpnt); /* Das Leerzeichen " " entfernen wir hier, das lösen wir sauberer über margin/padding */
+  content: var(--bullpnt); 
   padding-right: 4px !important;
   color: var(--accbull) !important;
   font-style: normal !important;
-  
-  /* --- HIER SIND DIE RELEVANTEN GEÄNDERTEN ZEILEN --- */
-  display: inline-flex;    /* Macht das Symbol zu einer eigenen kleinen Flexbox */
-  align-items: center;     /* Zentriert den Inhalt (das Zeichen) in sich selbst */
-  vertical-align: middle;  /* Richtet diese Box mittig zur Schrifthöhe des Textes aus */
-  line-height: 1;          /* Verhindert, dass die Zeilenhöhe des Textes das Symbol nach unten drückt */
-  
-  /* Falls das Symbol immer noch minimal zu hoch oder tief wirkt, 
-     kannst du es hier haargenau nachjustieren (z.B. -1px schiebt es leicht nach unten): */
+  display: inline-flex;    
+  align-items: center;     
+  vertical-align: middle;  
+  line-height: 1;          
   position: relative;
   top: -3px; 
 }
 
-
-/* ==========================================================================
-   BLOCKQUOTE (ZITAT-FORMAT)
-   ========================================================================== */
 blockquote {
-  margin: 20px 20px;          /* Rückt das Zitat links und rechts ein */
-  /* padding: 10px 20px;         Abstand zwischen der linken Linie und dem Text */
-  /* border-left: 4px solid var(--fg); Standard-Linie in Vordergrundfarbe */
-  /* font-family: Georgia, serif; Klassische Zitat-Schriftart (optional) */
-  font-style: italic;         /* Macht den Text standardmäßig kursiv */
+  margin: 20px 20px;          
+  font-style: italic;         
   font-size: 1.0rem;
-  /* line-height: 1.6; */
   text-align: left;
-  /* color: var(--fg);           Standardfarbe */
 }
 
-/* Farbvariante 1: Standard / Foreground (optional, da ohnehin Standard) 
-blockquote.quote-fg {
-  color: var(--fg);
-  border-left-color: var(--fg);
-}
-*/
-/* Farbvariante 2: Orange (accor) */
 blockquote.quote-or {
   color: var(--accor);
   border-left-color: var(--accor);
 }
 
-/* Farbvariante 3: Türkis (accbl) */
 blockquote.quote-bl {
   color: var(--accbl);
   border-left-color: var(--accbl);
 }
 
-/* Falls du eine Zitatquelle (Autor) hinzufügen möchtest */
 blockquote cite {
   display: block;
   font-size: 1rem;
   font-style: normal;
   margin-top: 8px;
-  color: var(--fg); /* Im Spooky-Modus gut lesbar */
+  color: var(--fg); 
 }
 
-/* ==========================================================================
-   KASTENTEXT (HIGHLIGHT-BOXEN)
-   ========================================================================== */
 .kastentext {
   margin: 20px 0;
   padding: 15px 20px;
-  border-radius: 4px;       /* Leicht abgerundete Ecken passend zum Design */
-  font-size: 1rem;          /* Exakt die Schriftgröße deines Subtexts */
-  font-style: normal;       /* Explizit nicht kursiv */
+  border-radius: 4px;       
+  font-size: 1rem;          
+  font-style: normal;       
   text-align: justify;
   line-height: 1.5;
-  color: var(--fg);         /* Textfarbe bleibt im gut lesbaren Vordergrund */
+  color: var(--fg);         
 }
 
 .kastentext h6 {
@@ -426,69 +361,45 @@ blockquote cite {
   letter-spacing: 1px;
 }
 
-
-/* Variante 1: Hintergrund Orange (accor) mit dunklem Text für optimalen Kontrast */
 .box-or {
   background-color: var(--accor);
-  color: var(--bg);          /* Dunkler Text auf Orange ist im Spooky-Modus extrem gut lesbar */
+  color: var(--bg);          
   font-weight: bold; 
 }
 
-/* Variante 2: Hintergrund Türkis (accbl) mit dunklem Text */
 .box-bl {
   background-color: var(--accbl);
-  color: var(--bg);       /*     Dunkler Text auf hellem Türkis verhindert Augenkrebs */
+  color: var(--bg);       
   font-weight: bold; 
 }
 
-
-/* ==========================================================================
-   EIGENE LISTEN-STILE (Linksbündig & Farbige Aufzählungszeichen)
-   ========================================================================== */
-
-/* Basis-Einstellung für alle unstrukturierten Listen */
 ul {
-  text-align: left;           /* Behebt die Zentrierung aus dem Container */
-  list-style: none;           /* Entfernt die Standard-Punkte des Browsers */
-  padding-left: 20px;         /* Platz für die eigenen Aufzählungszeichen */
+  text-align: left;           
+  list-style: none;           
+  padding-left: 20px;         
   margin: 20px;
   margin-bottom: 20px;
 }
 
-/* Der Standard-Listenpunkt (erhält automatisch dein Standard-Umfeld-Design) */
 ul li {
   position: relative;
   margin-bottom: 8px;
-  font-size: 1.0rem;          /* Passt sich deinen p-Absätzen an */
+  font-size: 1.0rem;          
   line-height: 1.2;
 }
 
-/* Konstruktion des eigenen Aufzählungszeichens per Pseudo-Element */
 ul li::before {
-  content: var(--bullpnt);    /* Nutzt dein "■ " oder Spooky-"● " */
+  content: var(--bullpnt);    
   position: absolute;
-  left: -20px;                /* Schiebt das Zeichen in den linken Padding-Bereich */
+  left: -20px;                
   top: -1px;
-  color: currentColor;           /* Standardfarbe fällt auf Textfarbe zurück */
+  color: currentColor;           
   font-style: normal;
 }
 
-/* --- FARB-VARIANTEN --- */
-
-/* Variante 1: Orange (accor) */
-ul.list-or li::before {
-  color: var(--accor);
-}
-
-/* Variante 2: Türkis/Blau (accbl) */
-ul.list-bl li::before {
-  color: var(--accbl);
-}
-
-.clear-all {
-  clear: both; /* Beendet den Umfluss von links UND rechts gefloateten Bildern */
-}
-
+ul.list-or li::before { color: var(--accor); }
+ul.list-bl li::before { color: var(--accbl); }
+.clear-all { clear: both; }
 
 a {
   color: var(--accbl);
@@ -502,17 +413,13 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Sorgt dafür, dass die Video-Popup-Links die richtige Größe haben */
 .popup-link-container a {
-  font-size: 1.2rem; /* Gleiche Größe wie deine normalen Absätze */
-  line-height: 1.5;  /* Gibt dem Text nach oben und unten Luft zum Atmen */
-  display: inline-block; /* Aktiviert die saubere Zeilenhöhe */
+  font-size: 1.2rem; 
+  line-height: 1.5;  
+  display: inline-block; 
 }
 
-
-.header-footer {
-    height: 100px;
-}
+.header-footer { height: 100px; }
 
 hr {
   border: none;
@@ -530,9 +437,6 @@ hr {
   margin: 30px auto 30px 0;
 }
 
-/* ==========================================================================
-   HIGHLIGHTS BOX
-   ========================================================================== */
 .highlights-box {
   background: var(--accor);
   border-radius: var(--bradius);
@@ -570,9 +474,6 @@ hr {
   text-decoration: none;
 }
 
-/* ==========================================================================
-   IMAGES & GALERIE (GRID & SCROLL)
-   ========================================================================== */
 .image-figure {
   max-width: 500px;
   margin: 40px auto;
@@ -586,11 +487,7 @@ hr {
   border-radius: var(--bradius); 
   transition: transform 0.3s ease;         
 }
-/*
-.image-figure img:hover {
-  transform: scale(1.02);
-}
-*/
+
 .image-figure figcaption {
   font-size: 0.95rem;
   color: var(--fg);
@@ -605,30 +502,19 @@ hr {
 .image-figure.tn { max-width: 100px; }
 .image-figure.centered figcaption { text-align: center; }
 
-/* ==========================================================================
-   BILDUMFLUSS (FLOATING) FÜR IMAGE-FIGURE
-   ========================================================================== */
-
-/* Linksbündig, Text fließt rechts vorbei */
 .image-figure.float-left {
   float: left;
-  display: inline-block; /* Überschreibt das block-Layout */
-  margin: 10px 20px 20px 0; /* Abstand: Oben, Rechts (zum Text), Unten, Links */
+  display: inline-block; 
+  margin: 10px 20px 20px 0; 
 }
 
-/* Rechtsbündig, Text fließt links vorbei */
 .image-figure.float-right {
   float: right;
-  display: inline-block; /* Überschreibt das block-Layout */
-  margin: 10px 0 20px 20px; /* Abstand: Oben, Rechts, Unten, Links (zum Text) */
+  display: inline-block; 
+  margin: 10px 0 20px 20px; 
 }
 
-/* Wichtig: Verhindert, dass nachfolgende Elemente (z.B. neue Überschriften) 
-   ungewollt mitfließen, wenn der Text zu kurz ist */
-.clear-fix {
-  clear: both;
-}
-
+.clear-fix { clear: both; }
 
 .image-row {
   display: grid;
@@ -673,9 +559,6 @@ hr {
   font-style: italic; 
 }
 
-/* ==========================================================================
-   1. GEMEINSAME BASIS-EINSTELLUNGEN & TRANSITIONS
-   ========================================================================== */
 .image-row .image-item,
 .image-figure,
 .image-scroll img,
@@ -684,7 +567,6 @@ hr {
   transition: border-color 0.3s ease;
 }
 
-/* Symmetrie-Korrektur für umrandete Elemente */
 .bordered img, 
 .all-bordered img,
 .image-item.bordered a,
@@ -699,38 +581,33 @@ hr {
    2. RAHMEN-STEUERUNG (AUSSEN)
    ========================================================================== */
 
-/* EINZEL-MODIFIKATOR: .bordered (Orangefarbener Rahmen für ein Element) */
 .image-item.bordered,
 .image-figure.bordered,
 .image-scroll .scroll-item.bordered,
 .image-scroll img.bordered {
   border: 3px solid #ffa500;
-  border-radius: 0 !important; /* Kasten bleibt eckig */
+  border-radius: 0 !important; 
   padding: 8px;
 }
 
-/* MASSEN-MODIFIKATOR: .all-bordered (Rahmen für alle Kinder im Container) */
 .all-bordered .image-item:not(.noborder),
 .all-bordered .scroll-item:not(.noborder),
 .all-bordered img:not(.noborder) {
   border: 3px solid var(--accor, #ffa500);
-  border-radius: 0 !important; /* Kasten bleibt eckig */
+  border-radius: 0 !important; 
   padding: 8px;
   background-color: transparent;
 }
 
-/* RAHMEN EXPLIZIT AUSSCHALTEN: .noborder & UNGERAHMTE BILDER */
-/* KORREKTUR: Erzeugt einen unsichtbaren Ausgleichsrahmen, damit die Höhe exakt übereinstimmt */
 .image-item.noborder,
 .image-figure.noborder,
 .image-scroll .scroll-item.noborder,
 .image-scroll img.noborder,
 .image-scroll:not(.all-bordered) img {
-  border: 3px solid transparent !important; /* Gleiche Rahmenbreite, aber unsichtbar */
+  border: 3px solid transparent !important; 
   border-radius: 0 !important;
-  padding: 8px !important; /* Gleicher Innenabstand wie die gerahmten Bilder */
+  padding: 8px !important; 
 }
-
 
 /* ==========================================================================
    3. DOPPELTE LINIEN VERHINDERN (INNERER RAHMEN)
@@ -741,15 +618,13 @@ hr {
 .image-scroll.all-bordered img,
 .image-scroll.all-bordered .frame {
   border-image: none !important;
-  border-style: none !important; /* Entfernt die Linie von .frame im Rahmen */
+  border-style: none !important; 
   box-shadow: none !important;
 }
 
 /* ==========================================================================
-   4. AUTOMATISCHE BILD-RUNDUNG (Das neue Kern-Design)
+   4. AUTOMATISCHE BILD-RUNDUNG
    ========================================================================== */
-
-/* Regel 1: WENN das Bild oder sein Container einen Rahmen hat -> IMMER SCHARFKANTIG */
 .bordered img,
 .bordered .frame,
 .all-bordered img,
@@ -759,8 +634,6 @@ hr {
   border-radius: 0 !important;
 }
 
-/* Regel 2: WENN das Bild KEINEN Rahmen hat (Normalzustand oder .noborder) -> IMMER ABRUNDEN */
-/* Betrifft die Standard-Bilder, image-scroll ohne all-bordered und Elemente mit .noborder */
 .image-row .image-item:not(.bordered) img,
 .image-row .image-item:not(.bordered) .frame,
 .image-row .image-item.noborder img,
@@ -769,37 +642,43 @@ hr {
 .image-scroll .noborder,
 .image-figure:not(.bordered) img,
 .image-figure.noborder img {
-  border-radius: 6px !important; /* Hier dein gewünschter Standard-Radius für ungerahmte Bilder */
+  border-radius: 6px !important; 
 }
 
 /* ==========================================================================
    SPOOKY-MODUS: Komplette Deaktivierung der Rahmen-Steuerung
    ========================================================================== */
 
-/* Wenn die Klasse .spooky aktiv ist (z.B. <body class="spooky"> oder <div class="image-row all-bordered spooky">) */
-.spooky .image-item,
-.spooky .image-figure,
-.spooky .scroll-item,
-.spooky img,
-.spooky .frame,
-.spooky .image-item a {
-  /* 1. Alle Rahmen und Linien spurlos löschen */
+.spooky .image-item:not(.noborder),
+.spooky .image-figure:not(.noborder),
+.spooky .scroll-item:not(.noborder),
+.spooky img:not(.noborder),
+.spooky .frame:not(.noborder),
+.spooky .image-item:not(.noborder) a {
   border: none !important;
   border-image: none !important;
   border-style: none !important;
   box-shadow: none !important;
-
-  /* 2. Sämtliche Paddings auf 0 setzen, damit kein Versatz entsteht */
   padding: 0 !important;
 }
 
-/* 3. Im Spooky-Modus sollen alle Bilder wieder einheitlich abgerundet sein */
-.spooky img,
-.spooky .frame {
-  border-radius: 6px !important; /* Oder dein gewünschter Standard-Radius */
+/* SPEZIALFALL: noborder im Spooky-Modus behält sein Ausgleichs-Padding */
+.spooky .noborder,
+.spooky .noborder img,
+.spooky .image-item.noborder a {
+  border: 3px solid transparent !important;
+  box-shadow: none !important;
+  padding: 8px !important;
 }
 
+.spooky img,
+.spooky .frame {
+  border-radius: 6px !important; 
+}
 
+/* ==========================================================================
+   IMAGE SCROLL & POP-UPS weiterhin normal
+   ========================================================================== */
 .image-scroll {
   display: flex;
   flex-wrap: nowrap;       
@@ -810,10 +689,7 @@ hr {
   margin-bottom: 40px;
 }
 
-.image-scroll::-webkit-scrollbar {
-  height: 8px;             
-}
-
+.image-scroll::-webkit-scrollbar { height: 8px; }
 .image-scroll::-webkit-scrollbar-thumb {
   background: #555;
   border-radius: var(--bradius);
@@ -845,11 +721,7 @@ hr {
   word-wrap: break-word;
   white-space: normal;
 }
-/* ==========================================================================
-   PLAY-BUTTON OVERLAY (Ebenensichere Flex-Zentrierung)
-   ========================================================================== */
 
-/* 1. Basis-Kontext aktivieren */
 .has-play,
 .image-row .image-item.has-play,
 .image-scroll .has-play,
@@ -857,7 +729,6 @@ a.has-play {
   position: relative !important;
 }
 
-/* 2. Pseudo-Elemente universal vorbereiten */
 .has-play::before,
 a.has-play::before,
 .has-play::after,
@@ -867,9 +738,6 @@ a.has-play::after {
   pointer-events: none;
 }
 
-/* --------------------------------------------------------------------------
-   SCHICHT 1: Das schwarze Quadrat
-   -------------------------------------------------------------------------- */
 .has-play::before,
 a.has-play::before {
   width: 36px !important;
@@ -879,103 +747,58 @@ a.has-play::before {
   border: 3px solid #fbc052 !important;
   box-sizing: border-box !important;
   box-shadow: 0 2px 6px rgba(0,0,0,0.4) !important;
-  
-  /* WICHTIG: Niedrigere Ebene als das Dreieck, aber über dem Bild */
   z-index: 99990 !important; 
-
-  /* Flexbox für die perfekte Zentrierung */
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
 }
 
-/* --------------------------------------------------------------------------
-   SCHICHT 2: Das orangefarbene Dreieck
-   -------------------------------------------------------------------------- */
 .has-play::after,
 a.has-play::after {
-  /* KORREKTUR: Wir lösen das Dreieck aus den starren Fesseln und zwingen es,
-     sich relativ zum Flex-Quadrat zu bewegen, behalten aber absolute Priorität */
   position: absolute !important;
-  z-index: 99999 !important; /* KNALLHART GANZ OBEN drauf */
-  
-  /* Dreieck-Konstruktion */
+  z-index: 99999 !important; 
   width: 0 !important;
   height: 0 !important;
   border-top: 9px solid transparent !important;
   border-bottom: 7px solid transparent !important;
   border-left: 8px solid #fbc052 !important;
-  
-  /* Optischer Ausgleich nach rechts */
   margin-left: 2px !important;
 }
 
-/* ==========================================================================
-   POSITIONIERUNG (NUR FÜR DAS QUADRAT - DREIECK REIST NATIVE MIT)
-   ========================================================================== */
-
-/* --- TYP 1: GERAHMTE BILDER (.bordered / .all-bordered) --- */
 .bordered::before,
 .all-bordered .has-play::before,
 .all-bordered .scroll-item.has-play::before {
   top: 23px !important;
   left: 23px !important;
 }
-/* KORREKTUR: Das Dreieck wird exakt in die Mitte des Quadrats gezwungen */
 .bordered::after, 
 .all-bordered .has-play::after, 
 .all-bordered .scroll-item.has-play::after {
-  top: 32px !important; /* Exakte Mitte der 36px Box bei 23px Start (23 + 18 - 9) */
+  top: 32px !important; 
   left: 36px !important;
 }
 
-/* --- TYP 2: UNGERAHMTE BILDER (Standard & .noborder) --- */
 .noborder::before,
 :not(.bordered):not(.all-bordered) > .has-play::before,
 .image-scroll:not(.all-bordered) .has-play::before {
   top: 12px !important;
   left: 12px !important;
 }
-/* KORREKTUR: Das Dreieck wird exakt in die Mitte des Quadrats gezwungen */
 .noborder::after, 
 :not(.bordered):not(.all-bordered) > .has-play::after, 
 .image-scroll:not(.all-bordered) .has-play::after {
-  top: 21px !important; /* Exakte Mitte der 36px Box bei 12px Start (12 + 18 - 9) */
+  top: 21px !important; 
   left: 25px !important;
 }
 
-/* ==========================================================================
-   DEAKTIVIERUNG IM SPOOKY-MODUS
-   ========================================================================== 
-.spooky .has-play::before, .spooky .has-play::after,
-.spooky a.has-play::before, .spooky a.has-play::after {
-  display: none !important;
-} */
-
-
-
-/* ==========================================================================
-   DEAKTIVIERUNG IM SPOOKY-MODUS
-   ========================================================================== 
-.spooky .has-play::before, .spooky .has-play::after,
-.spooky a.has-play::before, .spooky a.has-play::after {
-  display: none !important;
-}
-*/
-
-
-
-/* ==========================================================================
-   POP-UPS / DIALOG SYSTEM (Dynamisch angepasst an das gewählte Theme)
-   ========================================================================== */
 .dialog-base,
 .dialog-info,
 .dialog-video,
 .dialog-code {
     border: 2px solid var(--accor);
     border-radius: var(--bradius);
-    background-color: var(--bg); /* GEÄNDERT: Nutzt nun die dynamische Hintergrundfarbe */
-    color: var(--fg);            /* GEÄNDERT: Textfarbe passt sich an */
+    background-color: var(--bg); 
+    color: var(--fg);            
     position: fixed;
     top: 50%;
     left: 50%;
@@ -1006,13 +829,12 @@ a.has-play::after {
     }
 }
 
-/* Der abgedunkelte Hintergrund hinter dem Popup passt sich ebenfalls harmonisch an */
 .dialog-base::backdrop,
 .dialog-info::backdrop,
 .dialog-video::backdrop,
 .dialog-code::backdrop,
 #puzzleDialog::backdrop {
-    background-color: rgba(var(--bg-rgb), 0.7); /* Nutzt RGB-Werte für saubere Transparenz */
+    background-color: rgba(var(--bg-rgb), 0.7); 
     backdrop-filter: blur(5px);
 }
 
@@ -1038,9 +860,6 @@ a.has-play::after {
     height: min(500px, 94vh);
 }
 
-/* ==========================================================================
-   IFRAME PUZZLE POP-UP (Vollständig dynamisch im Theme-Design)
-   ========================================================================== */
 #puzzleDialog {
     border: 2px solid var(--accor);
     border-radius: var(--bradius);
@@ -1048,7 +867,7 @@ a.has-play::after {
     max-width: 750px; 
     width: 90%;
     height: 80vh; 
-    background-color: var(--bg); /* GEÄNDERT: Nimmt nun helles oder dunkles Seiten-Design an */
+    background-color: var(--bg); 
     color: var(--fg);
     position: fixed;
     top: 50%;
@@ -1061,7 +880,7 @@ a.has-play::after {
     width: 100%;
     height: 100%;
     border: none;
-    background-color: transparent; /* GEÄNDERT: Hintergrund scheint durch oder wird im iframe geregelt */
+    background-color: transparent; 
     border-radius: calc(var(--bradius) - 2px);
 }
 
@@ -1083,9 +902,6 @@ a.has-play::after {
     transform: scale(1.1);
 }
 
-/* ==========================================================================
-   POP-UP INHALTE & ALLGEMEINES
-   ========================================================================== */
 .dialog-video {
     width: fit-content;
     height: fit-content;
@@ -1135,9 +951,6 @@ a.has-play::after {
     display: block;
 }
 
-/* ==========================================================================
-   KATALOG-LAYOUT (FLEX & GRID-SYSTEM)
-   ========================================================================== */
 .item {
     display: flex;
     flex-direction: column;
@@ -1149,9 +962,7 @@ a.has-play::after {
     text-align: left;
 }
 
-.item:last-of-type {
-    border-bottom: none;
-}
+.item:last-of-type { border-bottom: none; }
 
 .item .item-images {
     display: flex;
@@ -1168,9 +979,7 @@ a.has-play::after {
     border-radius: var(--bradius);
 }
 
-.item-details {
-    width: 100%;
-}
+.item-details { width: 100%; }
 
 .item-details h2 {
     font-size: 2rem;
@@ -1220,9 +1029,7 @@ a.has-play::after {
     align-items: start; 
   }
 
-  .item .content-image {
-    max-width: 300px;
-  }
+  .item .content-image { max-width: 300px; }
 
   .item-details {
     flex: 1;
@@ -1243,9 +1050,6 @@ a.has-play::after {
   }
 }
 
-/* ==========================================================================
-   WIDGETS & AVATAR HOLDER
-   ========================================================================== */
 .avatar-widget-container {
   width: 120px;
   height: 120px;
@@ -1271,3 +1075,5 @@ a.has-play::after {
   border: 5px solid #5A6E8F !important; 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
 }
+
+
