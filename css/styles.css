@@ -259,6 +259,15 @@ h3 {
   line-height: 1.1;
 }
 
+
+h4 {
+  font-size: 1.2rem;
+  /* font-style: italic; */
+  margin: 40px 0 20px 0;
+  color: var(--accor);
+  line-height: 1.1;
+}
+
 p {
  font-size: 1.2rem;
  color: var(--fg); 
@@ -473,6 +482,22 @@ hr {
   color: var(--accmark);
   text-decoration: none;
 }
+
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto; /* Erlaubt horizontales Scrollen NUR innerhalb der Tabelle */
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 1.5rem;
+}
+
+table {
+  max-width: 100%;
+  width: 100%;
+  table-layout: auto; /* Verhindert, dass Zellen unendlich breit werden */
+}
+
+
 
 .image-figure {
   max-width: 500px;
