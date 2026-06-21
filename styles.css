@@ -1,0 +1,1104 @@
+:root {
+  --bradius: 8px; 
+  --bg: #343434;
+  --bg-rgb: 52, 52, 52;
+  --fg: #f5f5f5;
+  --fg-rgb: 245, 245, 245;
+  --accor: #ffae00;
+  --accor-rgb: 249, 203, 106;
+  --accgrad:#dd6c03;
+  --accgrad-rgb: 229, 159, 6;
+  --accbl: #08fcd5;
+  --accbl-rgb: 8, 252, 213;
+  --accmark: #008974;
+  --accmark-rgb: 0, 177, 150;
+  
+  --ffeuer: var(--fg);
+  --fwasser: var(--fg);
+  --fluft: var(--fg);
+  --ferde: var(--fg);
+  --fakasha: var(--fg);
+  
+  --accbull: var(--accor);
+  --bullpnt: "■ ";
+}
+
+:root.light {
+  --bradius: 8px; 
+  --bg: #f5f5f5;
+  --bg-rgb: 245, 245, 245;
+  --fg: #444444;
+  --fg-rgb: 68, 68, 68;
+  --accor: #dd6c03;
+  --accor-rgb: 229, 159, 6;
+  --accgrad: #ffae00;
+  --accgrad-rgb: 249, 203, 106;
+  --accbl: #008974;
+  --accmark: #08fcd5;
+  --accmark-rgb: 8, 252, 213;
+  --accbull: var(--accor);
+}
+
+/* ==========================================================================
+   SPOOKY THEME (Intensiver Glow & Orange Highlights-Box)
+   ========================================================================== */
+
+body.spooky,
+body.spooky .dialog-base,
+body.spooky .dialog-info,
+body.spooky .dialog-video,
+body.spooky .dialog-code,
+body.spooky #puzzleDialog {
+  background-color: #000000 !important;
+  color: #aaaaaa !important;
+}
+
+/* Zwingt die Bildunterschrift im Spooky-Modus auf die gewünschte Schreibfarbe */
+body.spooky .image-figure figcaption {
+  color: currentColor !important; /* Hier kannst du jede gewünschte Farbe eintragen */
+}
+
+.spooky {
+  --ffeuer: #ff4141;
+  --fwasser: #14c202;
+  --fluft: #17d5fe;
+  --ferde: #fbde02;
+  --fakasha: #e09cfc;
+}
+
+body.spooky {
+  --accbull: var(--accbl); 
+  --bullpnt: "● ";
+}
+
+body.spooky p,
+.spooky p {
+  color: #aaaaaa !important;
+}
+
+body.spooky .highlights-box,
+.spooky.highlights-box {
+  background: var(--accor) !important; 
+  border: 2px solid #ffd357 !important;   
+  box-shadow: 0 0 25px rgba(249, 203, 106, 0.9), 
+              0 0 10px rgba(225, 159, 6, 0.6),
+              inset 0 0 15px rgba(255, 255, 255, 0.5) !important;
+}
+
+body.spooky .highlights-box h5,
+body.spooky .highlights-box p,
+body.spooky .highlights-box a {
+  color: var(--bg) !important;
+}
+
+body.spooky .dialog-base,
+body.spooky .dialog-info,
+body.spooky .dialog-video,
+body.spooky .dialog-code,
+body.spooky #puzzleDialog,
+.spooky:not(html):not(body):not(.highlights-box) { 
+  border: 2px solid var(--accbl) !important;
+  box-shadow: 0 0 25px rgba(8, 252, 213, 0.8), 
+              0 0 12px rgba(8, 252, 213, 0.5), 
+              inset 0 0 15px rgba(8, 252, 213, 0.4) !important;
+}
+
+/* KORREKTUR: Glow greift nicht bei noborder */
+body.spooky .image-figure:not(.noborder) img,
+body.spooky .image-item:not(.noborder) img,
+body.spooky .scroll-item:not(.noborder) img,
+body.spooky .item:not(.noborder) .content-image,        
+body.spooky .item-details .image-scroll:not(.noborder) img { 
+  border: 2px solid var(--accbl) !important;
+  box-shadow: 0 0 25px rgba(8, 252, 213, 0.8), 
+              0 0 12px rgba(8, 252, 213, 0.5), 
+              inset 0 0 15px rgba(8, 252, 213, 0.4) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.spooky .image-figure:not(.noborder) img:hover,
+body.spooky .image-item:not(.noborder) img:hover,
+body.spooky .item:not(.noborder) .content-image:hover {
+  box-shadow: 0 0 35px rgba(8, 252, 213, 1), 
+              0 0 15px rgba(255, 255, 255, 0.6) !important;
+}
+
+body.spooky .closeDialogBtn,
+body.spooky #closePuzzleBtn {
+  color: var(--accbl) !important;
+}
+
+body.spooky .closeDialogBtn:hover,
+body.spooky #closePuzzleBtn:hover {
+  color: #ffffff !important;
+  text-shadow: 0 0 12px var(--accbl);
+}
+
+body.spooky .subtext-or {
+  color: var(--accor) !important; 
+}
+body.spooky .subtext-bl {
+  color: var(--accbl) !important; 
+}
+
+body.spooky .kastentext.box-or,
+body.spooky .kastentext.box-bl {
+  background-color: var(--accor) !important; 
+}
+
+body.spooky .kastentext.box-bl {
+  background-color: var(--accbl) !important;
+}
+
+body.spooky .kastentext h1,
+body.spooky .kastentext h2,
+body.spooky .kastentext h3,
+body.spooky .kastentext h4,
+body.spooky .kastentext h5,
+body.spooky .kastentext h6,
+body.spooky .kastentext p,
+body.spooky .kastentext {
+  color: #000000 !important; 
+}
+
+body {
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+button#theme-toggle {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 10000 !important;
+    background-color: #007bff !important; 
+    color: #ffffff !important;
+    padding: 12px 24px !important;
+    font-size: 12px !important;
+    font-weight: bold !important;
+    border: none !important;
+    border-radius: 50px !important; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important; 
+    cursor: pointer !important;
+    transition: transform 0.2s, background-color 0.3s !important;
+}
+
+button#theme-toggle:hover {
+    transform: scale(1.05) !important;
+    background-color: #0056b3 !important;
+    color: #ffffff !important;
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px 20px;
+    text-align: center; 
+}
+
+.absperrband {
+    position: fixed;   
+    top: 1vh;          
+    left: 0;
+    width: 100%;       
+    height: 5vh;       
+    z-index: 9999;     
+    background: linear-gradient(
+        135deg,
+        #d32f2f, #d32f2f 25%,
+        #ffffff 25%, #ffffff 50%,
+        #d32f2f 50%, #d32f2f 75%,
+        #ffffff 75%, #ffffff 100%
+    );
+    background-size: 70px 70px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bau-text {
+    color: #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background-color: rgba(0, 0, 0, 0.75); 
+    padding: 2px 15px;
+    border-radius: 4px;
+    font-size: 2vh; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: linear-gradient(45deg, var(--accor), var(--accgrad));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1; 
+}
+
+h2 {
+  font-size: 2rem;
+  margin: 40px 0 20px 0;
+  color: var(--accor);
+  line-height: 1.1;
+}
+        
+h3 {
+  font-size: 1.5rem;
+  margin: 40px 0 20px 0;
+  color: var(--accor);
+  line-height: 1.1;
+}
+
+
+h4 {
+  font-size: 1.2rem;
+  /* font-style: italic; */
+  margin: 40px 0 20px 0;
+  color: var(--accor);
+  line-height: 1.1;
+}
+
+p {
+ font-size: 1.2rem;
+ color: var(--fg); 
+ margin-bottom: 20px;
+ text-align: left;
+}
+
+.subtext {
+  font-size: 1rem;
+  font-style: italic;
+  letter-spacing: 1px;
+  color: currentColor;
+}
+       
+.subtext-or {
+  font-size: 1rem;
+  font-style: italic;
+  letter-spacing: 1px;
+  color: var(--accor);
+}
+        
+.subtext-bl {
+  font-size: 1rem;
+  font-style: italic;
+  letter-spacing: 1px;
+  color: var(--accbl); 
+}     
+        
+.bc {
+  font-weight: bold;
+  color: var(--accbl);
+}
+
+mark {
+  background-color: var(--accmark); 
+  color: var(--fg);                 
+  padding: 0 4px;                 
+  border-radius: 3px;             
+}
+
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.no-hyphen { hyphens: none; }
+
+.bullet::before {
+  content: var(--bullpnt); 
+  padding-right: 4px !important;
+  color: var(--accbull) !important;
+  font-style: normal !important;
+  display: inline-flex;    
+  align-items: center;     
+  vertical-align: middle;  
+  line-height: 1;          
+  position: relative;
+  top: -3px; 
+}
+
+blockquote {
+  margin: 20px 20px;          
+  font-style: italic;         
+  font-size: 1.0rem;
+  text-align: left;
+}
+
+blockquote.quote-or {
+  color: var(--accor);
+  border-left-color: var(--accor);
+}
+
+blockquote.quote-bl {
+  color: var(--accbl);
+  border-left-color: var(--accbl);
+}
+
+blockquote cite {
+  display: block;
+  font-size: 1rem;
+  font-style: normal;
+  margin-top: 8px;
+  color: var(--fg); 
+}
+
+.kastentext {
+  margin: 20px 0;
+  padding: 15px 20px;
+  border-radius: 4px;       
+  font-size: 1rem;          
+  font-style: normal;       
+  text-align: justify;
+  line-height: 1.5;
+  color: var(--fg);         
+}
+
+.kastentext h6 {
+  font-size: 1rem;
+  color: var(--fg);
+  margin-top: 0; 
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.box-or {
+  background-color: var(--accor);
+  color: var(--bg);          
+  font-weight: bold; 
+}
+
+.box-bl {
+  background-color: var(--accbl);
+  color: var(--bg);       
+  font-weight: bold; 
+}
+
+ul {
+  text-align: left;           
+  list-style: none;           
+  padding-left: 20px;         
+  margin: 20px;
+  margin-bottom: 20px;
+}
+
+ul li {
+  position: relative;
+  margin-bottom: 8px;
+  font-size: 1.0rem;          
+  line-height: 1.2;
+}
+
+ul li::before {
+  content: var(--bullpnt);    
+  position: absolute;
+  left: -20px;                
+  top: -1px;
+  color: currentColor;           
+  font-style: normal;
+}
+
+ul.list-or li::before { color: var(--accor); }
+ul.list-bl li::before { color: var(--accbl); }
+.clear-all { clear: both; }
+
+a {
+  color: var(--accbl);
+  font-weight: bold;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--accbl);
+  text-decoration: underline;
+}
+
+.popup-link-container a {
+  font-size: 1.2rem; 
+  line-height: 1.5;  
+  display: inline-block; 
+}
+
+.header-footer { height: 100px; }
+
+hr {
+  border: none;
+  height: 2px;
+  background-color: var(--accor); 
+}
+
+.strich-zentriert {
+  width: 20%;
+  margin: 30px auto;
+}
+
+.strich-links {
+  width: 20%;
+  margin: 30px auto 30px 0;
+}
+
+.highlights-box {
+  background: var(--accor);
+  border-radius: var(--bradius);
+  padding: 20px;
+  margin: 20px auto 30px auto;
+  max-width: 500px;
+  text-align: left;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+}
+
+.highlights-box h5 {
+  font-size: 1rem;
+  color: var(--bg);
+  margin-top: 0; 
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.highlights-box p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--bg);
+  margin-bottom: 0;
+}
+
+.highlights-box a {
+  color: var(--bg);
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.highlights-box a:hover {
+  color: var(--accmark);
+  text-decoration: none;
+}
+
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto; /* Erlaubt horizontales Scrollen NUR innerhalb der Tabelle */
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 1.5rem;
+}
+
+table {
+  max-width: 100%;
+  width: 100%;
+  table-layout: auto; /* Verhindert, dass Zellen unendlich breit werden */
+}
+
+
+
+.image-figure {
+  max-width: 500px;
+  margin: 40px auto;
+  display: block;
+}
+
+.image-figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--bradius); 
+  transition: transform 0.3s ease;         
+}
+
+.image-figure figcaption {
+  font-size: 0.95rem;
+  color: var(--fg);
+  margin-top: 10px;
+  text-align: left;
+  line-height: 1.4;
+  font-style: italic;
+}
+
+.image-figure.small { max-width: 350px; }
+.image-figure.tiny { max-width: 250px; }
+.image-figure.tn { max-width: 100px; }
+.image-figure.centered figcaption { text-align: center; }
+
+.image-figure.float-left {
+  float: left;
+  display: inline-block; 
+  margin: 10px 20px 20px 0; 
+}
+
+.image-figure.float-right {
+  float: right;
+  display: inline-block; 
+  margin: 10px 0 20px 20px; 
+}
+
+.clear-fix { clear: both; }
+
+.image-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, max-content));
+  justify-content: center; 
+  gap: 16px;
+  max-width: 1000px; 
+  margin: 20px auto; 
+  padding: 0 16px;
+}
+
+.image-item {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
+
+.image-item a {
+  display: block;
+  width: 100%;
+  max-width: 250px; 
+  margin: 0 auto; 
+}
+
+.image-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: var(--bradius);
+}
+
+.image-item figcaption {
+  font-size: 0.95rem;       
+  color: var(--fg);           
+  margin-top: 8px;          
+  text-align: left;       
+  width: 100%;
+  max-width: 250px; 
+  line-height: 1.4;
+  font-style: italic; 
+}
+
+.image-row .image-item,
+.image-figure,
+.image-scroll img,
+.image-scroll .scroll-item {
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.bordered img, 
+.all-bordered img,
+.image-item.bordered a,
+.all-bordered .image-item a {
+  display: block;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   2. RAHMEN-STEUERUNG (AUSSEN)
+   ========================================================================== */
+
+.image-item.bordered,
+.image-figure.bordered,
+.image-scroll .scroll-item.bordered,
+.image-scroll img.bordered {
+  border: 3px solid #ffa500;
+  border-radius: 0 !important; 
+  padding: 8px;
+}
+
+.all-bordered .image-item:not(.noborder),
+.all-bordered .scroll-item:not(.noborder),
+.all-bordered img:not(.noborder) {
+  border: 3px solid var(--accor, #ffa500);
+  border-radius: 0 !important; 
+  padding: 8px;
+  background-color: transparent;
+}
+
+.image-item.noborder,
+.image-figure.noborder,
+.image-scroll .scroll-item.noborder,
+.image-scroll img.noborder,
+.image-scroll:not(.all-bordered) img {
+  border: 3px solid transparent !important; 
+  border-radius: 0 !important;
+  padding: 8px !important; 
+}
+
+/* ==========================================================================
+   3. DOPPELTE LINIEN VERHINDERN (INNERER RAHMEN)
+   ========================================================================== */
+.bordered img,
+.bordered .frame,
+.all-bordered .frame,
+.image-scroll.all-bordered img,
+.image-scroll.all-bordered .frame {
+  border-image: none !important;
+  border-style: none !important; 
+  box-shadow: none !important;
+}
+
+/* ==========================================================================
+   4. AUTOMATISCHE BILD-RUNDUNG
+   ========================================================================== */
+.bordered img,
+.bordered .frame,
+.all-bordered img,
+.all-bordered .frame,
+.image-item.bordered img,
+.image-scroll.all-bordered img {
+  border-radius: 0 !important;
+}
+
+.image-row .image-item:not(.bordered) img,
+.image-row .image-item:not(.bordered) .frame,
+.image-row .image-item.noborder img,
+.image-row .image-item.noborder .frame,
+.image-scroll:not(.all-bordered) img,
+.image-scroll .noborder,
+.image-figure:not(.bordered) img,
+.image-figure.noborder img {
+  border-radius: 6px !important; 
+}
+
+/* ==========================================================================
+   SPOOKY-MODUS: Komplette Deaktivierung der Rahmen-Steuerung
+   ========================================================================== */
+
+.spooky .image-item:not(.noborder),
+.spooky .image-figure:not(.noborder),
+.spooky .scroll-item:not(.noborder),
+.spooky img:not(.noborder),
+.spooky .frame:not(.noborder),
+.spooky .image-item:not(.noborder) a {
+  border: none !important;
+  border-image: none !important;
+  border-style: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* SPEZIALFALL: noborder im Spooky-Modus behält sein Ausgleichs-Padding */
+.spooky .noborder,
+.spooky .noborder img,
+.spooky .image-item.noborder a {
+  border: 3px solid transparent !important;
+  box-shadow: none !important;
+  padding: 8px !important;
+}
+
+.spooky img,
+.spooky .frame {
+  border-radius: 6px !important; 
+}
+
+/* ==========================================================================
+   IMAGE SCROLL & POP-UPS weiterhin normal
+   ========================================================================== */
+.image-scroll {
+  display: flex;
+  flex-wrap: nowrap;       
+  overflow-x: auto;        
+  gap: 8px;               
+  padding: 20px 0;         
+  scrollbar-width: thin;   
+  margin-bottom: 40px;
+}
+
+.image-scroll::-webkit-scrollbar { height: 8px; }
+.image-scroll::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: var(--bradius);
+}
+
+.scroll-item {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;          
+  width: min-content; 
+  margin: 0; 
+}
+
+.scroll-item img {
+  height: 250px;           
+  width: auto;             
+  object-fit: cover;       
+  border-radius: var(--bradius); 
+  display: block; 
+}
+
+.scroll-item figcaption {
+  font-size: 0.95rem;       
+  color: var(--fg);           
+  margin-top: 8px;          
+  text-align: left;       
+  line-height: 1.4;
+  font-style: italic;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.has-play,
+.image-row .image-item.has-play,
+.image-scroll .has-play,
+a.has-play {
+  position: relative !important;
+}
+
+.has-play::before,
+a.has-play::before,
+.has-play::after,
+a.has-play::after {
+  content: "" !important;
+  position: absolute !important;
+  pointer-events: none;
+}
+
+.has-play::before,
+a.has-play::before {
+  width: 36px !important;
+  height: 36px !important;
+  background-color: rgba(0, 0, 0, 0.85) !important;
+  border-radius: 4px !important;
+  border: 3px solid #fbc052 !important;
+  box-sizing: border-box !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4) !important;
+  z-index: 99990 !important; 
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.has-play::after,
+a.has-play::after {
+  position: absolute !important;
+  z-index: 99999 !important; 
+  width: 0 !important;
+  height: 0 !important;
+  border-top: 9px solid transparent !important;
+  border-bottom: 7px solid transparent !important;
+  border-left: 8px solid #fbc052 !important;
+  margin-left: 2px !important;
+}
+
+.bordered::before,
+.all-bordered .has-play::before,
+.all-bordered .scroll-item.has-play::before {
+  top: 23px !important;
+  left: 23px !important;
+}
+.bordered::after, 
+.all-bordered .has-play::after, 
+.all-bordered .scroll-item.has-play::after {
+  top: 32px !important; 
+  left: 36px !important;
+}
+
+.noborder::before,
+:not(.bordered):not(.all-bordered) > .has-play::before,
+.image-scroll:not(.all-bordered) .has-play::before {
+  top: 12px !important;
+  left: 12px !important;
+}
+.noborder::after, 
+:not(.bordered):not(.all-bordered) > .has-play::after, 
+.image-scroll:not(.all-bordered) .has-play::after {
+  top: 21px !important; 
+  left: 25px !important;
+}
+
+.dialog-base,
+.dialog-info,
+.dialog-video,
+.dialog-code {
+    border: 2px solid var(--accor);
+    border-radius: var(--bradius);
+    background-color: var(--bg); 
+    color: var(--fg);            
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    min-width: 250px;
+    min-height: 250px;
+    max-width: 94vw;
+    max-height: 94vh;
+}
+
+@media (orientation: landscape) {
+    .dialog-base,
+    .dialog-info,
+    .dialog-video {
+        max-width: 82vw;           
+        max-height: 92vh;
+        width: min(82vw, 780px);
+    }
+}
+
+@media (orientation: landscape) and (max-height: 580px) {
+    .dialog-base,
+    .dialog-info,
+    .dialog-video {
+        max-width: 78vw;
+        max-height: 88vh;
+    }
+}
+
+.dialog-base::backdrop,
+.dialog-info::backdrop,
+.dialog-video::backdrop,
+.dialog-code::backdrop,
+#puzzleDialog::backdrop {
+    background-color: rgba(var(--bg-rgb), 0.7); 
+    backdrop-filter: blur(5px);
+}
+
+.dialog-info,
+.dialog-code,
+.dialog-video {
+    padding: 50px 20px 20px 20px;
+    max-height: 94vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    box-sizing: border-box;
+}
+
+.dialog-info {
+    width: min(480px, 94vw);
+    min-width: 250px;
+    min-height: 250px;
+}
+
+.dialog-code {
+    padding: 50px 20px 20px 20px;
+    width: min(500px, 94vw);
+    height: min(500px, 94vh);
+}
+
+#puzzleDialog {
+    border: 2px solid var(--accor);
+    border-radius: var(--bradius);
+    padding: 35px 15px 15px 15px;
+    max-width: 750px; 
+    width: 90%;
+    height: 80vh; 
+    background-color: var(--bg); 
+    color: var(--fg);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+#puzzleDialog iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: transparent; 
+    border-radius: calc(var(--bradius) - 2px);
+}
+
+#closePuzzleBtn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: var(--accor);
+    font-size: 26px;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s, transform 0.2s;
+}
+
+#closePuzzleBtn:hover {
+    color: var(--fg);
+    transform: scale(1.1);
+}
+
+.dialog-video {
+    width: fit-content;
+    height: fit-content;
+}
+
+.closeDialogBtn {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: var(--accor);
+    font-size: 32px;
+    cursor: pointer;
+    line-height: 1;
+    z-index: 11;
+    padding: 4px 8px;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.closeDialogBtn:hover {
+    color: var(--fg);
+    transform: scale(1.15);
+    background: rgba(var(--fg-rgb), 0.1);
+}
+
+.popup-img,
+.popup-video {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: min(1200px, calc(94vw - 40px));
+    max-height: calc(94vh - 100px);
+    object-fit: contain;
+}
+
+.dialog-code iframe,
+.dialog-code canvas {
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 250px;
+    min-height: 250px;
+    border: none;
+    border-radius: calc(var(--bradius) - 2px);
+    background: transparent;
+    display: block;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 60px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(var(--fg-rgb), 0.1); 
+    text-align: left;
+}
+
+.item:last-of-type { border-bottom: none; }
+
+.item .item-images {
+    display: flex;
+    flex-direction: column; 
+    gap: 16px;              
+    width: 100%;
+    align-items: center;    
+}
+
+.item .content-image {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    border-radius: var(--bradius);
+}
+
+.item-details { width: 100%; }
+
+.item-details h2 {
+    font-size: 2rem;
+    margin: 0 0 10px 0;
+    color: var(--accor); 
+    line-height: 1.1; 
+}
+
+.item-details h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    font-weight: normal;
+}
+
+.item-details p {
+    color: rgba(var(--fg-rgb), 0.7); 
+    margin-bottom: 10px;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+}
+
+.item-details .image-scroll img {
+    border: 2px solid var(--accor);
+    height: 200px;
+    width: auto;
+    object-fit: cover;
+    border-radius: var(--bradius);
+    transition: transform 0.2s ease;
+}
+
+@media (hover: hover) {
+    .item-details .image-scroll img:hover {
+        transform: translateY(-4px);
+    }
+}
+
+@media (min-width: 700px) { 
+  .item {
+    flex-direction: row; 
+    align-items: start;
+    gap: 35px;
+  }
+
+  .item .item-images {
+    flex: 0 0 300px; 
+    width: 300px;
+    align-items: start; 
+  }
+
+  .item .content-image { max-width: 300px; }
+
+  .item-details {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+  }
+
+  .item-details h2,
+  .item-details h3 {
+    grid-column: span 2;
+  }
+
+  .item-details .image-scroll {
+    grid-column: span 2;
+    width: 100%;
+    margin-top: 15px;
+  }
+}
+
+.avatar-widget-container {
+  width: 120px;
+  height: 120px;
+  z-index: 10;
+}
+
+.avatar-top-right {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
+.avatar-bottom-left {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+}
+
+#avatar-animation-holder canvas {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 50%;
+  border: 5px solid #5A6E8F !important; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+}
+
+
