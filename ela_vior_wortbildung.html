@@ -1,301 +1,298 @@
 <!DOCTYPE html>
-<html lang="de">
+<html class="spooky" lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ela Vior Wortbildung</title>
-    
-    <style>
-        /* ==========================================================================
-           1. RESET & BASICS
-           ========================================================================== */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        
-        html {
-            /* HIER DEINE HINTERGRUNDFARBE WÄHLEN */
-            background-color: #000000; 
-            scroll-behavior: smooth;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #ffffff;
-            min-height: 100vh;
-            line-height: 1.6;
-            overflow-x: hidden; 
-        }
-
-        /* ==========================================================================
-           2. INHALTS-LAYOUT (HAUPTCONTAINER)
-           ========================================================================== */
-        .container {
-            position: relative;
-            z-index: 1; 
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 60px 20px;
-            text-align: center;
-        }
-        
-        /* Typografie & Standard-Elemente für neue Inhalte */
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            background: linear-gradient(45deg, #ff7b00, #ffae00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            
-            line-height: 1.1;
-        }
-
-        h2 {
-            font-size: 2rem;
-            margin: 40px 0 20px 0;
-            color: #ffae00;
-        }
-        
-        p {
-            font-size: 1.2rem;
-            color: #a0a0a0;
-            margin-bottom: 20px;
-            text-align: left; /* Besser lesbar bei längeren Texten */
-            hyphens: auto;
-    -webkit-hyphens: auto; /* Für Safari */
-    lang: de; /* WICHTIG: Der Browser muss wissen, dass es Deutsch ist! */
-
-        }
-        
-        .text-center {
-            text-align: center;
-        }
-
-        /* Platzhalter für neue Bilder */
-        .content-image {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin: 20px 0;
-            border: none !important;
-            box-shadow: none !important;
-        }
-
-        /* Links */
-        a {
-            color: #ff7b00;
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-        a:hover {
-            text-decoration: underline;
-            color: #ffae00;
-        }
-
-        .subtext {
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-            background: linear-gradient(45deg, #ff7b00, #ffae00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-top: 40px;
-        }
-
-        /* ==========================================================================
-           3. AVATAR WIDGET (STEUERUNG)
-           ========================================================================== */
-        .avatar-widget-container {
-            width: 120px;
-            height: 120px;
-            z-index: 10;
-        }
-
-        /* OPTION A: Rechts Oben fixiert */
-        .avatar-top-right {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-        }
-
-        /* OPTION B: Links Unten fixiert */
-        .avatar-bottom-left {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-        }
-
-        /* Formatierung des P5-Canvas im Avatar */
-        #avatar-animation-holder canvas {
-            width: 100% !important;
-            height: 100% !important;
-            border-radius: 50%;
-            border: 5px solid #5A6E8F !important; 
-            box-shadow: none !important; 
-        }
-        
-        /* Verhindert Unterstreichung und zeigt den Zeigefinger beim Avatar-Link */
-a.avatar-widget-container {
-    text-decoration: none;
-    cursor: pointer;
-}
-
-        
-        table, th, td {
-  border: 1px solid #fff;
-  color: #a0a0a0;
-}
-        
-    </style>
-
-    <script src="p5.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/styles.css">
+  <title>Ela Vior – Einführung</title>
+  <script src="p5.min.js"></script>
+  
+  
 </head>
-<body>
 
-            <div class="avatar-widget-container avatar-bottom-left">
-        <a href="index.html" id="avatar-link" class="avatar-link-wrapper" style="display: block;">
-            <div id="avatar-animation-holder"></div>
-        </a>
-    </div>
+<body class="spooky">
+
+<div class="avatar-widget-container avatar-bottom-left">
+    <a href="index.html" id="avatar-link" class="avatar-link-wrapper" style="display: block;">
+      <div id="avatar-animation-holder"></div>
+    </a>
+  </div>
+
+<div class="container">
+  <h1>Ela Vior</h1>
+  
+  <div class="kastentext box-bl" style="text-align: left;">
+    In der Sprache Ela Vior tragen Wortendungen wie -a, -ar, -em und -an 
+    jeweils unterschiedliche Bedeutungen.  
+  </div>
+  
+  <p class="subtext">
+    Diese spiegeln nicht grammatische Funktionen, 
+    sondern rituell-magische Konzepte: Wie ein Begriff wirkt, 
+    sich manifestiert oder wozu er aufgerufen wird.
+  </p>
+  
+  
+  
+  <h2 id="funktion-der-wortendungen">Funktion der Wortendungen</h2>
+
+  <p>
+    In Ela Vior wird die Bedeutung, Funktion und Wirkung eines Begriffs 
+    durch seine Endung bestimmt.
+  </p>
+
+<table>
+<thead>
+<tr><th style="text-align: left; vertical-align: top;">Endung</th><th style="text-align: left; vertical-align: top;">Funktion</th><th style="text-align: left; vertical-align: top;">Bedeutung</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left; vertical-align: top;">-a</td><td style="text-align: left; vertical-align: top;">Prinzip</td><td style="text-align: left; vertical-align: top;">abstrakt, archetypisch</td></tr>
+<tr><td style="text-align: left; vertical-align: top;">-ar</td><td style="text-align: left; vertical-align: top;">Qualität</td><td style="text-align: left; vertical-align: top;">adjektivisch, „&#8209;haft“</td></tr>
+<tr><td style="text-align: left; vertical-align: top;">-em</td><td style="text-align: left; vertical-align: top;">Essenz</td><td style="text-align: left; vertical-align: top;">innerer Zustand, Verbindung</td></tr>
+<tr><td style="text-align: left; vertical-align: top;">-eth</td><td style="text-align: left; vertical-align: top;">Versiegelung</td><td style="text-align: left; vertical-align: top;">Abschluss, Versiegelung</td></tr>
+<tr><td style="text-align: left; vertical-align: top;">-il</td><td style="text-align: left; vertical-align: top;">Schwelle</td><td style="text-align: left; vertical-align: top;">Eintritt, Bereitschaft</td></tr>
+<tr><td style="text-align: left; vertical-align: top;">-an / -án</td><td style="text-align: left; vertical-align: top;">Wesenheit</td><td style="text-align: left; vertical-align: top;">Verkörperung</td></tr>
+<tr><td style="text-align: left; vertical-align: top;">-ir</td><td style="text-align: left; vertical-align: top;">Handlung</td><td style="text-align: left; vertical-align: top;">magischer Akt</td></tr>
+<tr><td style="text-align: left; vertical-align: top;">-im</td><td style="text-align: left; vertical-align: top;">Kraft</td><td style="text-align: left; vertical-align: top;">konzentrierte Kraft</td></tr>
+<tr><td style="text-align: left; vertical-align: top;">-or</td><td style="text-align: left; vertical-align: top;">Ursprung</td><td style="text-align: left; vertical-align: top;">Quelle, Ursprung, Fluss</td></tr>
+<tr><td style="text-align: left; vertical-align: top;">-ve</td><td style="text-align: left; vertical-align: top;">Wirconung</td><td style="text-align: left; vertical-align: top;">Folge, Ergebnis</td></tr>
+<tr><td style="text-align: left; vertical-align: top;">-ai</td><td style="text-align: left; vertical-align: top;">Potenzial</td><td style="text-align: left; vertical-align: top;">Keim, Möglichkeit</td></tr>
+<tr><td style="text-align: left; vertical-align: top;">-os</td><td style="text-align: left; vertical-align: top;">Manifestation</td><td style="text-align: left; vertical-align: top;">Offenbarung, Sichtbarwerden</td></tr>
+</tbody>
+</table>
 
 
 
-    <div class="container">
-       
-        
-        
-         <h1>Wort&shy;bildung in Ela Vior</h1>
+<h3 id="begriffserklärung-der-bedeutungsebenen-prinzip-qualität-und-essenz-sowie-wesenheit">Begriffserklärung Prinzip, Qualität und Essenz sowie Wesenheit</h2>
 
-<p>Seiteninhalt</p>
+<p class="subtext">
+  <strong class="bc">-a:</strong> Prinzip. Das abstrakte, archetypische Urbild.
+</p>
 
-  <p>Siehe auch: Lautformelsprache <a href="ela_vior.html"> Ela Vior</a>, <a href="ela_vior_vokabular.html">Vokabular</a>.</p>
+<p class="subtext">
+  <strong class="bc">-ar:</strong> Qualität. Bringt eine Eigenschaft oder einen Einfluss zum Ausdruck 
+  und erzeugt im Raum eine bestimmte Schwingung
+  oder Atmosphäre.
+</p>
 
-        
-        <hr style="border: 0; height: 1px; background: #333; margin: 40px 0;">
+<p class="subtext">
+  <strong class="bc">-em:</strong>Essenz eines Begriffs. Beschreibt 
+  das Wesen eines Prinzips und wie dieses im erlebt wird, 
+  z.B. in der Meditation.
+</p>
 
-        
-        
-        <p class="subtext text-center">Projekt-Start: Sommer 2026</p>
-    </div>
+<p class="subtext">
+  <strong class="bc">-an:</strong>Wesenheit. Steht für die 
+  personifizierte Form des Prinzips für Anrufung 
+  und direkte Interaktion.
+</p>
 
-    <script>
-      
-      document.addEventListener("DOMContentLoaded", () => {
-    const avatarLink = document.getElementById('avatar-link');
+<h2 id="wortendung-nach-ritueller-anwendung">Wortendung nach ritueller Anwendung</h2>
+<table>
+<thead>
+<tr><th style="text-align: left; vertical-align: top;">Ziel</th><th style="text-align: left; vertical-align: top;">Endung(en)</th><th style="text-align: left; vertical-align: top;">Beispiel</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left; vertical-align: top;">Aufruf eines Prinzips</td><td style="text-align: left; vertical-align: top;">-a</td><td style="text-align: left; vertical-align: top;">Ascha, Ela, Thara</td></tr>
+<tr><td style="text-align: left; vertical-align: top;">Qualität beschreiben / Klang öffnen</td><td style="text-align: left; vertical-align: top;">-ar</td><td style="text-align: left; vertical-align: top;">Lunar, Othar, Viar</td></tr>
+<tr><td style="text-align: left; vertical-align: top;">Kontakt zur inneren Essenz / Meditation</td><td style="text-align: left; vertical-align: top;">-em</td><td style="text-align: left; vertical-align: top;">Lunem, Aschem, Viem</td></tr>
+<tr><td style="text-align: left; vertical-align: top;">Ein Wesen anrufen oder darstellen</td><td style="text-align: left; vertical-align: top;">-an</td><td style="text-align: left; vertical-align: top;">Elan, Bethan, Viren</td></tr>
+<tr><td style="text-align: left; vertical-align: top;">Eine Wirkung bewirken oder senden</td><td style="text-align: left; vertical-align: top;">-ve</td><td style="text-align: left; vertical-align: top;">Djenve, Elve, Uvelve</td></tr>
+<tr><td style="text-align: left; vertical-align: top;">Etwas in die Zukunft keimen lassen</td><td style="text-align: left; vertical-align: top;">-ai</td><td style="text-align: left; vertical-align: top;">Mirai, Elai, Tharai</td></tr>
+</tbody>
+</table>
+<h2 id="beispiele">Beispiele</h2>
+<table>
+<thead>
+<tr><th style="text-align: left; vertical-align: top;"><strong>Wurzel</strong></th><th style="text-align: left; vertical-align: top;">Bedeutung</th><th style="text-align: left; vertical-align: top;"><code>-a</code> (Prinzip)</th><th style="text-align: left; vertical-align: top;"><code>-ar</code> (Qualität)</th><th style="text-align: left; vertical-align: top;"><code>-em</code> (Essenz)</th><th style="text-align: left; vertical-align: top;"><code>-an</code> (Wesenheit)</th><th style="text-align: left; vertical-align: top;"><code>-ve</code> (Wirkung)</th><th style="text-align: left; vertical-align: top;"><code>-ai</code> (Keim, Potenzial)</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left; vertical-align: top;"><strong>Ela</strong></td><td style="text-align: left; vertical-align: top;">Licht, Ruf, Empfänglichkeit</td><td style="text-align: left; vertical-align: top;">Ela</td><td style="text-align: left; vertical-align: top;">Elar</td><td style="text-align: left; vertical-align: top;">Elem</td><td style="text-align: left; vertical-align: top;">Elan</td><td style="text-align: left; vertical-align: top;">Elve</td><td style="text-align: left; vertical-align: top;">Elai</td></tr>
+<tr><td style="text-align: left; vertical-align: top;"><strong>Lun</strong></td><td style="text-align: left; vertical-align: top;">Mond, Intuition, Übergang</td><td style="text-align: left; vertical-align: top;">Luna</td><td style="text-align: left; vertical-align: top;">Lunar</td><td style="text-align: left; vertical-align: top;">Lunem</td><td style="text-align: left; vertical-align: top;">Lunan</td><td style="text-align: left; vertical-align: top;">Lunve</td><td style="text-align: left; vertical-align: top;">Lunai</td></tr>
+<tr><td style="text-align: left; vertical-align: top;"><strong>Vi / Vior</strong></td><td style="text-align: left; vertical-align: top;">Lebensfluss, Verbindung</td><td style="text-align: left; vertical-align: top;">Via</td><td style="text-align: left; vertical-align: top;">Viar</td><td style="text-align: left; vertical-align: top;">Viem</td><td style="text-align: left; vertical-align: top;">Vian</td><td style="text-align: left; vertical-align: top;">Vive</td><td style="text-align: left; vertical-align: top;">Viai</td></tr>
+<tr><td style="text-align: left; vertical-align: top;"><strong>Asch</strong></td><td style="text-align: left; vertical-align: top;">Schutz, Harmonie</td><td style="text-align: left; vertical-align: top;">Ascha</td><td style="text-align: left; vertical-align: top;">Aschar</td><td style="text-align: left; vertical-align: top;">Aschem</td><td style="text-align: left; vertical-align: top;">Aschan</td><td style="text-align: left; vertical-align: top;">Aschve</td><td style="text-align: left; vertical-align: top;">Aschai</td></tr>
+<tr><td style="text-align: left; vertical-align: top;"><strong>Tilo</strong></td><td style="text-align: left; vertical-align: top;">Offenbarung, Sichtbarwerden</td><td style="text-align: left; vertical-align: top;">Tiloa</td><td style="text-align: left; vertical-align: top;">Tilar</td><td style="text-align: left; vertical-align: top;">Tilem</td><td style="text-align: left; vertical-align: top;">Tilan</td><td style="text-align: left; vertical-align: top;">Tilve</td><td style="text-align: left; vertical-align: top;">Tilai</td></tr>
+<tr><td style="text-align: left; vertical-align: top;"><strong>Chiél</strong></td><td style="text-align: left; vertical-align: top;">Form</td><td style="text-align: left; vertical-align: top;">Chiela</td><td style="text-align: left; vertical-align: top;">Chielar</td><td style="text-align: left; vertical-align: top;">Chielem</td><td style="text-align: left; vertical-align: top;">Chielan</td><td style="text-align: left; vertical-align: top;">Chielve</td><td style="text-align: left; vertical-align: top;">Chielai</td></tr>
+<tr><td style="text-align: left; vertical-align: top;"><strong>Uvel</strong></td><td style="text-align: left; vertical-align: top;">Liebende Aufmerksamkeit</td><td style="text-align: left; vertical-align: top;">Uvela</td><td style="text-align: left; vertical-align: top;">Uvelar</td><td style="text-align: left; vertical-align: top;">Uvelem</td><td style="text-align: left; vertical-align: top;">Uvelan</td><td style="text-align: left; vertical-align: top;">Uvelve</td><td style="text-align: left; vertical-align: top;">Uvelai</td></tr>
+<tr><td style="text-align: left; vertical-align: top;"><strong>Thar</strong></td><td style="text-align: left; vertical-align: top;">Lösung, Entlassung</td><td style="text-align: left; vertical-align: top;">Thara</td><td style="text-align: left; vertical-align: top;">Tharar</td><td style="text-align: left; vertical-align: top;">Tharem</td><td style="text-align: left; vertical-align: top;">Tharan</td><td style="text-align: left; vertical-align: top;">Tharve</td><td style="text-align: left; vertical-align: top;">Tharai</td></tr>
+<tr><td style="text-align: left; vertical-align: top;"><strong>Beth</strong></td><td style="text-align: left; vertical-align: top;">Leben, Entfaltung</td><td style="text-align: left; vertical-align: top;">Betha</td><td style="text-align: left; vertical-align: top;">Bethar</td><td style="text-align: left; vertical-align: top;">Bethem</td><td style="text-align: left; vertical-align: top;">Bethan</td><td style="text-align: left; vertical-align: top;">Bethve</td><td style="text-align: left; vertical-align: top;">Bethai</td></tr>
+</tbody>
+</table>
+<h2 id="ausführliche-rituelle-wortbildung-beispiele">Ausführliche Rituelle Wortbildung Beispiele</h2>
+
+
+
+<h3 id="beispiel-1-lun-mond-intuition">Beispiel 1: Lun (Mond, Intuition)</h2>
+<p>|Wortform	|Bedeutung|
+|&ndash;|&mdash;|
+|Luna (Prinzip)|	Der Mond als Urbild – das intuitive Prinzip des Zyklus und Überigangs.|
+|Lunar (Qualität)	|„Mondhaft“, astral oder allgemein feinstofflich|
+|Lunem (Essenz)	| Zyklizität, fließen.|
+|Lunan (Wesen)|	Ein „Mondwesen“ oder ein spiritueller Aspekt, der als entitäthaftes Gegenüber erscheint.|</p>
+<h4 id="beispiel-im-ritual">Beispiel im Ritual:</h3>
+<p>Luna rufst du an, wenn du das kosmische Prinzip des Wandels einlädst.</p>
+<p>Lunar beschreibt z. B. das Licht, den Raum oder das Verhalten während des Rituals.</p>
+<p>Lunem wird meditiert oder gefühlt – etwa als innerer Strom oder Stimme.</p>
+<p>Lunan kann ein spirituelles Gegenüber sein: ein Hüter, eine Führung, ein Deva.</p>
+<hr />
+<h3 id="beispiel-2--vior-lebensfluss-pflanzensaft">Beispiel 2 : Vior (Lebensfluss, Pflanzensaft)</h2>
+<table>
+<thead>
+<tr><th style="text-align: left; vertical-align: top;">Wortform</th><th style="text-align: left; vertical-align: top;">Bedeutung</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left; vertical-align: top;">Viora (Prinzip)</td><td style="text-align: left; vertical-align: top;">Das urhafte Prinzip von Wachstum, movement und Verbindung.</td></tr>
+<tr><td style="text-align: left; vertical-align: top;">Viorar (Qualität)</td><td style="text-align: left; vertical-align: top;">Fließend, lebendig – etwa ein Ritualraum mit flüssiger, durchströmter Energie.</td></tr>
+<tr><td style="text-align: left; vertical-align: top;">Vioem / Viem (Essenz)</td><td style="text-align: left; vertical-align: top;">Das innere Gefühl des Lebensflusses – tief im Körper oder in der Natur.</td></tr>
+<tr><td style="text-align: left; vertical-align: top;">Viorán (Wesen)</td><td style="text-align: left; vertical-align: top;">Die verkörperte Lebensenergie, oft symbolisiert durch die Ur-Schlange.</td></tr>
+</tbody>
+</table>
+<h4 id="beispiel-im-ritual-1">Beispiel im Ritual:</h3>
+<p>Viora ruft die Lebenskraft als solare oder organische Bewegung.</p>
+<p>Viorar beschreibt eine bestimmte energetische Qualität im Körper oder Ort.</p>
+<p>Viem erfährst du im inneren Lauschen oder beim Spüren des „Pflanzensafts“.</p>
+<p>Viorán kannst du als symbolische Verkörperung der Lebenskraft visualisieren.</p>
+<hr />
+<h3 id="beispiel-3-asch-kreis-schutz-harmonie">Beispiel 3.: Asch (Kreis, Schutz, Harmonie)</h2>
+<table>
+<thead>
+<tr><th style="text-align: left; vertical-align: top;">Wortform</th><th style="text-align: left; vertical-align: top;">Bedeutung</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left; vertical-align: top;">Ascha (Prinzip)</td><td style="text-align: left; vertical-align: top;">Der Kreis als Schutzform, als Archetyp der Harmonie.</td></tr>
+<tr><td style="text-align: left; vertical-align: top;">Aschar (Qualität)</td><td style="text-align: left; vertical-align: top;">Schützend, ausgleichend – etwa eine Geste oder Klangfarbe.</td></tr>
+<tr><td style="text-align: left; vertical-align: top;">Aschem (Essenz)</td><td style="text-align: left; vertical-align: top;">Die innere Wahrnehmung des geschützten Raums – z. B. im Herzen.</td></tr>
+<tr><td style="text-align: left; vertical-align: top;">Aschan (Wesen)</td><td style="text-align: left; vertical-align: top;">Hüterkraft, z. B. ein Wächter des Kreises oder ein Schutzgeist.</td></tr>
+</tbody>
+</table>
+<h4 id="beispiel-im-ritual-2">Beispiel im Ritual:</h3>
+<p>Ascha öffnet den Kreis rituell, wie ein Grundton.</p>
+<p>Aschar kann sich in Bewegungen oder Klang ausdrücken.</p>
+<p>Aschem wird gefühlt, wenn man „im Kreis ruht“.</p>
+<p>Aschan ruft eine Wesenheit des Schutzes herbei.</p>
+<hr />
+<h3 id="zusammengefasst">Zusammengefasst:</h2>
+<table>
+<thead>
+<tr><th style="text-align: left; vertical-align: top;">Ebene</th><th style="text-align: left; vertical-align: top;">Frage</th><th style="text-align: left; vertical-align: top;">Wirkung</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left; vertical-align: top;">Prinzip (-a)</td><td style="text-align: left; vertical-align: top;">Was ist das Urbild?</td><td style="text-align: left; vertical-align: top;">Abstrakte Quelle</td></tr>
+<tr><td style="text-align: left; vertical-align: top;">Qualität (-ar)</td><td style="text-align: left; vertical-align: top;">Wie wirkt es?</td><td style="text-align: left; vertical-align: top;">Schwingung, Atmosphäre</td></tr>
+<tr><td style="text-align: left; vertical-align: top;">Essenz (-em)</td><td style="text-align: left; vertical-align: top;">Wie fühlt es sich an?</td><td style="text-align: left; vertical-align: top;">Innenerleben</td></tr>
+<tr><td style="text-align: left; vertical-align: top;">Wesen (-an)</td><td style="text-align: left; vertical-align: top;">Wer oder was verkörpert es?</td><td style="text-align: left; vertical-align: top;">Ansprechbare Entität</td></tr>
+</tbody>
+</table>
+
+
     
-    if (avatarLink) {
-        // 1. Prüfen, ob der URL-Parameter gesetzt ist ODER ob der direkte Referrer index_voll.html ist
+  
+   
+ <hr> 
+    
+    <p class="subtext-or text-center">Sommer 2026</p>
+    <div class="header-footer"></div>
+  
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+      const avatarLink = document.getElementById('avatar-link');
+    
+      if (avatarLink) {
         const urlParams = new URLSearchParams(window.location.search);
         const hatWeiterleitungParam = urlParams.get('weiterleitung') === 'ja';
         const kamDirektVonIndexVoll = document.referrer.includes('index_voll.html');
 
-        // 2. Wenn eins von beiden zutrifft, merken wir uns das für die gesamte Session
         if (hatWeiterleitungParam || kamDirektVonIndexVoll) {
             sessionStorage.setItem('kommtVonIndexVoll', 'true');
         }
 
-        // 3. Jetzt prüfen wir: Ist das session-Flag gesetzt? (Egal ob jetzt gerade oder von einer Seite zuvor)
-        const istAktiviertFuerSession = sessionStorage.getItem('kommtVonIndexVoll') === 'true';
-
-        // Wenn ja, Link auf index_voll.html umbiegen
-        if (istAktiviertFuerSession) {
+        if (sessionStorage.getItem('kommtVonIndexVoll') === 'true') {
             avatarLink.href = "index_voll.html";
         }
-    }
-});
+      }
+    });
 
-
-      
+  
+  
+// P5.js Avatar Sketch Logic
     const avatarSketch = (p) => {
-  let img;
-  let blinkTimer = 0;
-  let pauseTimer = 0;       // NEU: Timer für die Pause zwischen den Blinzlern
-  let isBlinking = false;
-  let doubleBlinkQueue = false; 
-  let nextBlinkFrame = 200;     
+      let img;
+      let blinkTimer = 0;
+      let pauseTimer = 0;       
+      let isBlinking = false;
+      let doubleBlinkQueue = false; 
+      let nextBlinkFrame = 200;     
 
-  p.preload = () => {
-    img = p.loadImage('me.jpg'); 
-  };
+      p.preload = () => {
+        img = p.loadImage('him.jpg'); 
+      };
 
-  p.setup = () => {
-    let canvas = p.createCanvas(350, 350);
-    canvas.parent('avatar-animation-holder');
-  };
+      p.setup = () => {
+        let canvas = p.createCanvas(350, 350);
+        canvas.parent('avatar-animation-holder');
+      };
 
-  p.draw = () => {
-    p.clear();
-    p.image(img, 0, 0, p.width, p.height);
+      p.draw = () => {
+        p.clear();
+        p.image(img, 0, 0, p.width, p.height);
 
-    // Wenn der Ziel-Frame erreicht ist und gerade absolut gar nichts passiert
-    if (p.frameCount >= nextBlinkFrame && !isBlinking && pauseTimer <= 0) {
-      isBlinking = true;
-      blinkTimer = 10; 
-      
-      // Zu 10% Wahrscheinlichkeit folgt ein Doppelblinzeln
-      doubleBlinkQueue = p.random(1) < 0.1; 
-      
-      // Nächstes Standard-Intervall festlegen
-      nextBlinkFrame = p.frameCount + p.floor(p.random(200, 250));
-    }
-
-    // 1. Logik für das Blinzeln (geschlossene Augen)
-    if (isBlinking) {
-      blinkEyes();
-      blinkTimer--;
-      
-      if (blinkTimer <= 0) {
-        isBlinking = false;
-        
-        // Wenn ein Doppelblinzeln ansteht, aktivieren wir die Pause
-        if (doubleBlinkQueue) {
-          doubleBlinkQueue = false; 
-          pauseTimer = 6; // 6 Frames lang bleiben die Augen jetzt offen
+        if (p.frameCount >= nextBlinkFrame && !isBlinking && pauseTimer <= 0) {
+          isBlinking = true;
+          blinkTimer = 10; 
+          doubleBlinkQueue = p.random(1) < 0.1; 
+          nextBlinkFrame = p.frameCount + p.floor(p.random(200, 250));
         }
+
+        if (isBlinking) {
+          blinkEyes();
+          blinkTimer--;
+          
+          if (blinkTimer <= 0) {
+            isBlinking = false;
+            if (doubleBlinkQueue) {
+              doubleBlinkQueue = false; 
+              pauseTimer = 6; 
+            }
+          }
+        }
+        
+        if (pauseTimer > 0) {
+          pauseTimer--;
+          if (pauseTimer === 0) {
+            isBlinking = true;
+            blinkTimer = 10;
+          }
+        }
+           
+        p.stroke(0);          
+        p.strokeWeight(6);    
+        p.fill(183, 189, 189);          
+        p.ellipse(175, 185, 170, 120);
+      };
+
+      function blinkEyes() {
+        p.push(); 
+        p.stroke(0);          
+        p.strokeWeight(6);    
+        p.fill(183, 189, 189);          
+
+        p.ellipse(135, 115, 70, 70); 
+        p.ellipse(205, 115, 75, 75); 
+
+        p.strokeWeight(5);
+        p.line(130, 115, 174, 115); 
+        p.line(176, 115, 220, 115); 
+
+        p.pop(); 
       }
-    }
-    
-    // 2. Logik für die Pause (Augen offen, Timer läuft ab)
-    if (pauseTimer > 0) {
-      pauseTimer--;
-      // Wenn die Pause vorbei ist, wird das zweite Blinzeln ausgelöst
-      if (pauseTimer === 0) {
-        isBlinking = true;
-        blinkTimer = 10;
-      }
-    }
-       
-    // Brille / Hintergrundelemente des Avatars
-    p.stroke(0);          
-    p.strokeWeight(6);    
-    p.fill(183, 189, 189);          
-    p.ellipse(175, 185, 170, 120);
-  };
+    };
 
-  function blinkEyes() {
-    p.push(); 
-    p.stroke(0);          
-    p.strokeWeight(6);    
-    p.fill(183, 189, 189);          
-
-    p.ellipse(135, 115, 70, 70); 
-    p.ellipse(205, 115, 75, 75); 
-
-    p.strokeWeight(5);
-    p.line(130, 115, 174, 115); 
-    p.line(176, 115, 220, 115); 
-
-    p.pop(); 
-  }
-};
-
-new p5(avatarSketch);
+    new p5(avatarSketch);
+</script>
 
 
-    </script>
 
 </body>
 </html>
