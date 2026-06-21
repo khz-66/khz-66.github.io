@@ -262,31 +262,43 @@ const puzzleSketch = (p) => {
     emptySlot = { r: r, c: c };
   }
 
-  function shuffleBoard() {
+    function shuffleBoard() {
+    let lastMovedTileValue = -1; // Hier merken wir uns, WELCHE Kachel geschoben wurde
+
     for (let i = 0; i < 40; i++) {
       let validMoves = [];
       let r = emptySlot.r;
       let c = emptySlot.c;
 
+      // Wir sammeln alle Nachbarn...
       if (r > 0) validMoves.push({ r: r - 1, c: c });
       if (r < rows - 1) validMoves.push({ r: r + 1, c: c });
       if (c > 0) validMoves.push({ r: r, c: c - 1 });
       if (c < cols - 1) validMoves.push({ r: r, c: c + 1 });
 
+      // ...und filtern jetzt die Kachel heraus, deren Wert mit der letzten übereinstimmt!
+      validMoves = validMoves.filter(move => {
+        let tileValue = board[move.r][move.c];
+        return tileValue !== lastMovedTileValue; 
+      });
+
+      // Falls (in einer Ecke) nur die letzte Kachel als Zug übrig bliebe: Sicherheitsnetz
+      if (validMoves.length === 0) {
+        if (r > 0) validMoves.push({ r: r - 1, c: c });
+        if (r < rows - 1) validMoves.push({ r: r + 1, c: c });
+        if (c > 0) validMoves.push({ r: r, c: c - 1 });
+        if (c < cols - 1) validMoves.push({ r: r, c: c + 1 });
+      }
+
       let randomMove = p.random(validMoves);
+      
+      // Bevor wir schieben, merken wir uns, welchen Wert diese Kachel hat
+      lastMovedTileValue = board[randomMove.r][randomMove.c];
+
       moveTile(randomMove.r, randomMove.c, true);
     }
   }
 
-  p.windowResized = () => {
-    let container = document.getElementById('puzzle-holder');
-    let containerWidth = container ? container.clientWidth : p.windowWidth;
-    if (containerWidth === 0) containerWidth = p.windowWidth;
-
-    let canvasSize = p.min(300, containerWidth);
-    p.resizeCanvas(canvasSize, canvasSize);
-    calculateGrid();
-  };
 
   function calculateGrid() {
     w = p.width / cols;
