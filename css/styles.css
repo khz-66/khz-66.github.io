@@ -495,7 +495,30 @@ table {
   max-width: 100%;
   width: 100%;
   table-layout: auto; /* Verhindert, dass Zellen unendlich breit werden */
+  border-collapse: collapse; /* Sorgt dafür, dass die Linien sauber geschlossen sind */
 }
+
+/* Linien zwischen den Zeilen */
+table tr {
+  border-bottom: 1px solid var(--accor);
+}
+
+/* Optional: Verhindert eine doppelte Linie ganz unten am Tabellenende */
+table tbody tr:last-child {
+  border-bottom: none;
+}
+
+/* Optional: Falls du den Tabellenkopf (th) optisch etwas dicker trennen willst */
+table th {
+  border-bottom: 2px solid var(--accor);
+  padding-bottom: 8px;
+}
+
+/* Sorgt für etwas Abstand zum Text, damit die Linien nicht kleben */
+table td, table th {
+  padding: 10px 12px;
+}
+
 
 
 
