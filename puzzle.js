@@ -9,7 +9,7 @@ const puzzleSketch = (p) => {
   let solvePath = [];         
   let isSolving = false;      
   let lastSolveTime = 0;      
-  const solveDelay = 70;      
+  const solveDelay = 250;      
 
   let lastClickTime = 0;
   const doubleClickThreshold = 250;
