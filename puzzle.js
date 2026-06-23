@@ -9,7 +9,7 @@ const puzzleSketch = (p) => {
   let solvePath = [];         
   let isSolving = false;      
   let lastSolveTime = 0;      
-  const solveDelay = 250;      
+  const solveDelay = 120;     
 
   let lastClickTime = 0;
   const doubleClickThreshold = 250;
@@ -19,7 +19,8 @@ const puzzleSketch = (p) => {
   const maxAnimFrames = 60; 
   const peakFrame = 55;     
 
-  let isThinking = false;     // Neuer Zustand für Nachdenken
+  let isThinking = false;
+  
 
   p.preload = () => {
     for (let i = 1; i <= 8; i++) {
@@ -73,7 +74,6 @@ const puzzleSketch = (p) => {
     return true;
   }
 
-  // ==================== BFS SOLVER ====================
   function boardToString(b) {
     return b.flat().join(',');
   }
@@ -132,7 +132,6 @@ const puzzleSketch = (p) => {
     }
     return [];
   }
-  // ====================================================
 
   function drawDrostePuzzle(x, y, currentW, currentH, currentDepth, maxDepth) {
     let localW = currentW / cols;
@@ -184,40 +183,39 @@ const puzzleSketch = (p) => {
       }
     }
 
-    // Nachdenken Animation
-    if (isThinking) {
-      let dots = ".".repeat(Math.floor(p.frameCount / 10) % 4);
-      p.fill(255, 240);
+    // === SEä ===
+    
+
+    if (isThinking) {0
+      
+      
       p.textAlign(p.CENTER, p.CENTER);
-      p.textSize(32);
+      p.textSize(34);
       p.textStyle(p.BOLD);
-      p.text("Nachdenken" + dots, p.width/2, p.height/2 - 10);
+
+      p.stroke(0);
+      p.strokeWeight(4);
+      p.fill(255);
+      p.text("Nachdenken...", p.width/2, p.height/2);
     }
 
-    // Glow bei gelöstem Puzzle
     if (isSolved) {
       if (solvedAnimFrame > 0) {
         let prog = solvedAnimFrame > peakFrame 
           ? p.map(solvedAnimFrame, maxAnimFrames, peakFrame, 0, 1)
           : p.map(solvedAnimFrame, peakFrame, 0, 1, 0);
 
-        for (let i = 1; i <= 10; i++) {
-          let alpha = p.map(prog, 0, 1, 0, 120 / (i * 0.8));
+        for (let i = 1; i <= 8; i++) {
+          let alpha = p.map(prog, 0, 1, 0, 100 / i);
           p.stroke(255, alpha);
-          p.strokeWeight(4 + i * 4.5 * prog);
+          p.strokeWeight(5 + i * 3 * prog);
           p.noFill();
           p.rect(0, 0, p.width, p.height);
         }
-
-        p.stroke(255, 220 * prog);
-        p.strokeWeight(5);
-        p.noFill();
-        p.rect(0, 0, p.width, p.height);
-
         solvedAnimFrame--;
       } else {
-        p.stroke(255, 100);
-        p.strokeWeight(5);
+        p.stroke(255, 120);
+        p.strokeWeight(6);
         p.noFill();
         p.rect(0, 0, p.width, p.height);
       }
@@ -227,7 +225,11 @@ const puzzleSketch = (p) => {
 
   p.mousePressed = () => {
     if (isSolved) { startNewGame(); return; }
-    if (isSolving || isThinking) { isSolving = false; isThinking = false; return; }
+    if (isSolving || isThinking) { 
+      isSolving = false; 
+      isThinking = false; 
+      return; 
+    }
 
     if (p.mouseX < 0 || p.mouseX > p.width || p.mouseY < 0 || p.mouseY > p.height) return;
 
@@ -236,14 +238,11 @@ const puzzleSketch = (p) => {
 
     if (c < 0 || c >= cols || r < 0 || r >= rows) return;
 
-    let now = p.millis();
-
     if (r === emptySlot.r && c === emptySlot.c) {
-      if (now - lastClickTime < doubleClickThreshold) {
-        isThinking = true;                    // Nachdenken aktivieren
+      if (p.millis() - lastClickTime < doubleClickThreshold) {
+        isThinking = true;
         lastClickTime = 0;
 
-        // Kurze Verzögerung damit "Nachdenken" sichtbar wird
         setTimeout(() => {
           let solution = solvePuzzle(board);
           isThinking = false;
@@ -252,15 +251,15 @@ const puzzleSketch = (p) => {
             isSolving = true;
             lastSolveTime = p.millis();
           }
-        }, 80); // kurze Pause für die Anzeige
+        }, 50);
 
         return;
       }
-      lastClickTime = now;
+      lastClickTime = p.millis();
       return;
     }
 
-    lastClickTime = 0;
+    lastClickTime = p.millis();
 
     if (isAdjacent(r, c, emptySlot.r, emptySlot.c)) {
       moveTile(r, c);
