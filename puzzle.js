@@ -1,296 +1,311 @@
-        const puzzleSketch = (p) => {
-            let images = [];
-            let board = [];
-            const cols = 3;
-            const rows = 3;
-            let w, h;
-            let emptySlot = { r: 2, c: 0 }; 
+const puzzleSketch = (p) => {
+  let images = [];
+  let board = [];
+  const cols = 3;
+  const rows = 3;
+  let w, h;
+  let emptySlot = { r: 2, c: 0 }; 
 
-            let moveHistory = [];       
-            let isSolving = false;      
-            let lastSolveTime = 0;      
-            const solveDelay = 500;     
+  let solvePath = [];         
+  let isSolving = false;      
+  let lastSolveTime = 0;      
+  const solveDelay = 70;      
 
-            // Timer für den präzisen Doppelklick-Schutz
-            let lastClickTime = 0;
-            const doubleClickThreshold = 250;
+  let lastClickTime = 0;
+  const doubleClickThreshold = 250;
 
-            // Variablen für den Überstrahl-Effekt
-            let isSolved = false;
-            let solvedAnimFrame = 0;
-            const maxAnimFrames = 60; 
-            const peakFrame = 55;     
+  let isSolved = false;
+  let solvedAnimFrame = 0;
+  const maxAnimFrames = 60; 
+  const peakFrame = 55;     
 
-            p.preload = () => {
-                for (let i = 1; i <= 8; i++) {
-                    images.push(p.loadImage(`puzzle${i}.jpg`)); 
-                }
-            };
+  let isThinking = false;     // Neuer Zustand für Nachdenken
 
-            p.setup = () => {
-                let container = document.getElementById('puzzle-holder');
-                let containerWidth = container ? container.clientWidth : p.windowWidth;
-                if (containerWidth === 0) containerWidth = p.windowWidth;
+  p.preload = () => {
+    for (let i = 1; i <= 8; i++) {
+      images.push(p.loadImage(`puzzle${i}.jpg`)); 
+    }
+  };
 
-                let canvasSize = p.min(300, containerWidth);
-                let canvas = p.createCanvas(canvasSize, canvasSize);
-                canvas.parent('puzzle-holder');
-                
-                calculateGrid();
-                startNewGame();
-            };
+  p.setup = () => {
+    let container = document.getElementById('puzzle-holder');
+    let containerWidth = container ? container.clientWidth : p.windowWidth;
+    if (containerWidth === 0) containerWidth = p.windowWidth;
 
-            function startNewGame() {
-                resetToSolved();
-                shuffleBoard();
-                isSolved = false; 
-                solvedAnimFrame = 0;
+    let canvasSize = p.min(300, containerWidth);
+    let canvas = p.createCanvas(canvasSize, canvasSize);
+    canvas.parent('puzzle-holder');
+    
+    calculateGrid();
+    startNewGame();
+  };
+
+  function startNewGame() {
+    resetToSolved();
+    shuffleBoard();
+    isSolved = false; 
+    solvedAnimFrame = 0;
+  }
+
+  function resetToSolved() {
+    let index = 0;
+    for (let r = 0; r < rows; r++) {
+      board[r] = [];
+      for (let c = 0; c < cols; c++) {
+        board[r][c] = (r === 2 && c === 0) ? -1 : index++;
+      }
+    }
+    emptySlot = { r: 2, c: 0 };
+    solvePath = [];
+    isSolving = false;
+    isThinking = false;
+  }
+
+  function checkIsSolved(b = board) {
+    let index = 0;
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        if (r === 2 && c === 0) {
+          if (b[r][c] !== -1) return false;
+        } else if (b[r][c] !== index++) return false;
+      }
+    }
+    return true;
+  }
+
+  // ==================== BFS SOLVER ====================
+  function boardToString(b) {
+    return b.flat().join(',');
+  }
+
+  function findEmpty(b) {
+    for (let r = 0; r < rows; r++)
+      for (let c = 0; c < cols; c++)
+        if (b[r][c] === -1) return {r, c};
+  }
+
+  function solvePuzzle(startBoard) {
+    if (checkIsSolved(startBoard)) return [];
+
+    const startStr = boardToString(startBoard);
+    let queue = [startBoard.map(row => [...row])];
+    let visited = new Set([startStr]);
+    let cameFrom = new Map([[startStr, null]]);
+    let moveRecord = new Map();
+
+    const directions = [{dr:-1,dc:0},{dr:1,dc:0},{dr:0,dc:-1},{dr:0,dc:1}];
+
+    while (queue.length > 0) {
+      let current = queue.shift();
+      let currStr = boardToString(current);
+      let empty = findEmpty(current);
+
+      for (let d of directions) {
+        let nr = empty.r + d.dr;
+        let nc = empty.c + d.dc;
+        if (nr < 0 || nr >= rows || nc < 0 || nc >= cols) continue;
+
+        let newBoard = current.map(row => [...row]);
+        newBoard[empty.r][empty.c] = newBoard[nr][nc];
+        newBoard[nr][nc] = -1;
+
+        let newStr = boardToString(newBoard);
+
+        if (!visited.has(newStr)) {
+          visited.add(newStr);
+          queue.push(newBoard);
+          cameFrom.set(newStr, currStr);
+          moveRecord.set(newStr, {r: nr, c: nc});
+
+          if (checkIsSolved(newBoard)) {
+            let path = [];
+            let state = newStr;
+            while (cameFrom.get(state) !== null) {
+              path.push(moveRecord.get(state));
+              state = cameFrom.get(state);
             }
+            path.reverse();
+            return path;
+          }
+        }
+      }
+    }
+    return [];
+  }
+  // ====================================================
 
-            function resetToSolved() {
-                let index = 0;
-                for (let r = 0; r < rows; r++) {
-                    board[r] = [];
-                    for (let c = 0; c < cols; c++) {
-                        if (r === 2 && c === 0) {
-                            board[r][c] = -1; 
-                        } else {
-                            board[r][c] = index;
-                            index++;
-                        }
-                    }
-                }
-                emptySlot = { r: 2, c: 0 };
-                moveHistory = []; 
-                isSolving = false;
-            }
+  function drawDrostePuzzle(x, y, currentW, currentH, currentDepth, maxDepth) {
+    let localW = currentW / cols;
+    let localH = currentH / rows;
+    let idx = 0;
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        let tileX = x + c * localW;
+        let tileY = y + r * localH;
+        if (!(r === 2 && c === 0)) {
+          p.image(images[idx++], tileX, tileY, localW, localH);
+        } else if (currentDepth < maxDepth) {
+          drawDrostePuzzle(tileX, tileY, localW, localH, currentDepth + 1, maxDepth);
+        } else {
+          p.fill(255); p.rect(tileX, tileY, localW, localH);
+        }
+      }
+    }
+  }
 
-            function checkIsSolved() {
-                let index = 0;
-                for (let r = 0; r < rows; r++) {
-                    for (let c = 0; c < cols; c++) {
-                        if (r === 2 && c === 0) {
-                            if (board[r][c] !== -1) return false;
-                        } else {
-                            if (board[r][c] !== index) return false;
-                            index++;
-                        }
-                    }
-                }
-                return true;
-            }
+  p.draw = () => {
+    if (isSolving && solvePath.length > 0) {
+      let now = p.millis();
+      if (now - lastSolveTime > solveDelay) {
+        let move = solvePath.shift();
+        moveTile(move.r, move.c);
+        lastSolveTime = now;
 
-            function drawDrostePuzzle(x, y, currentW, currentH, currentDepth, maxDepth) {
-                let localW = currentW / cols;
-                let localH = currentH / rows;
-                let idx = 0;
+        if (solvePath.length === 0) {
+          isSolved = true;
+          solvedAnimFrame = maxAnimFrames;
+          isSolving = false;
+        }
+      }
+    }
 
-                for (let r = 0; r < rows; r++) {
-                    for (let c = 0; c < cols; c++) {
-                        let tileX = x + c * localW;
-                        let tileY = y + r * localH;
+    p.background(isSolved ? 255 : 0);
 
-                        if (!(r === 2 && c === 0)) {
-                            p.image(images[idx], tileX, tileY, localW, localH);
-                            idx++;
-                        } else {
-                            if (currentDepth < maxDepth) {
-                                drawDrostePuzzle(tileX, tileY, localW, localH, currentDepth + 1, maxDepth);
-                            } else {
-                                p.fill(255);
-                                p.noStroke();
-                                p.rect(tileX, tileY, localW, localH);
-                            }
-                        }
-                    }
-                }
-            }
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        let idx = board[r][c];
+        if (idx !== -1) p.image(images[idx], c * w, r * h, w, h);
+        else if (isSolved) drawDrostePuzzle(c * w, r * h, w, h, 1, 4);
+        else { p.fill(0); p.rect(c * w, r * h, w, h); }
 
-            p.draw = () => {
-                if (isSolving) {
-                    let currentTime = p.millis();
-                    if (currentTime - lastSolveTime > solveDelay) {
-                        if (moveHistory.length > 0) {
-                            let prevEmptySlot = moveHistory.pop();
-                            moveTile(prevEmptySlot.r, prevEmptySlot.c, false);
-                            lastSolveTime = currentTime;
-                            
-                            if (moveHistory.length === 0 && checkIsSolved()) {
-                                isSolved = true;
-                                solvedAnimFrame = maxAnimFrames;
-                            }
-                        } else {
-                            isSolving = false; 
-                        }
-                    }
-                }
+        if (!isSolved) {
+          p.stroke(255, 50); p.noFill(); p.rect(c * w, r * h, w, h);
+        }
+      }
+    }
 
-                if (isSolved) {
-                    p.background(255); 
-                } else {
-                    p.background(0);   
-                }
+    // Nachdenken Animation
+    if (isThinking) {
+      let dots = ".".repeat(Math.floor(p.frameCount / 10) % 4);
+      p.fill(255, 240);
+      p.textAlign(p.CENTER, p.CENTER);
+      p.textSize(32);
+      p.textStyle(p.BOLD);
+      p.text("Nachdenken" + dots, p.width/2, p.height/2 - 10);
+    }
 
-                for (let r = 0; r < rows; r++) {
-                    for (let c = 0; c < cols; c++) {
-                        let imgIndex = board[r][c];
-                        
-                        if (imgIndex !== -1) {
-                            p.image(images[imgIndex], c * w, r * h, w, h);
-                        } else {
-                            if (isSolved) {
-                                drawDrostePuzzle(c * w, r * h, w, h, 1, 4);
-                            } else {
-                                p.fill(0);
-                                p.rect(c * w, r * h, w, h);
-                            }
-                        }
+    // Glow bei gelöstem Puzzle
+    if (isSolved) {
+      if (solvedAnimFrame > 0) {
+        let prog = solvedAnimFrame > peakFrame 
+          ? p.map(solvedAnimFrame, maxAnimFrames, peakFrame, 0, 1)
+          : p.map(solvedAnimFrame, peakFrame, 0, 1, 0);
 
-                        if (!isSolved) {
-                            p.stroke(255, 50);
-                            p.noFill();
-                            p.rect(c * w, r * h, w, h);
-                        }
-                    }
-                }
+        for (let i = 1; i <= 10; i++) {
+          let alpha = p.map(prog, 0, 1, 0, 120 / (i * 0.8));
+          p.stroke(255, alpha);
+          p.strokeWeight(4 + i * 4.5 * prog);
+          p.noFill();
+          p.rect(0, 0, p.width, p.height);
+        }
 
-                if (isSolved) {
-                    if (solvedAnimFrame > 0) {
-                        let progress = 0;
-                        
-                        if (solvedAnimFrame > peakFrame) {
-                            progress = p.map(solvedAnimFrame, maxAnimFrames, peakFrame, 0, 1);
-                        } else {
-                            progress = p.map(solvedAnimFrame, peakFrame, 0, 1, 0);
-                        }
+        p.stroke(255, 220 * prog);
+        p.strokeWeight(5);
+        p.noFill();
+        p.rect(0, 0, p.width, p.height);
 
-                        let flashAlpha = p.map(progress, 0, 1, 0, 200); 
-                        p.fill(255, flashAlpha);
-                        p.noStroke();
-                        p.rect(0, 0, p.width, p.height);
+        solvedAnimFrame--;
+      } else {
+        p.stroke(255, 100);
+        p.strokeWeight(5);
+        p.noFill();
+        p.rect(0, 0, p.width, p.height);
+      }
+    }
+    p.strokeWeight(1);
+  };
 
-                        p.noFill();
-                        for (let i = 1; i <= 6; i++) {
-                            let glowWeight = i * 8 * progress; 
-                            let glowAlpha = p.map(progress, 0, 1, 0, 45 / i);
-                            
-                            p.stroke(255, glowAlpha * 2.5);
-                            p.strokeWeight(glowWeight);
-                            p.rect(0, 0, p.width, p.height);
-                        }
-                        
-                        p.stroke(255);
-                        p.strokeWeight(1 + 5 * progress);
-                        p.rect(0, 0, p.width, p.height);
+  p.mousePressed = () => {
+    if (isSolved) { startNewGame(); return; }
+    if (isSolving || isThinking) { isSolving = false; isThinking = false; return; }
 
-                        solvedAnimFrame--; 
-                    } else {
-                        p.stroke(255);
-                        p.strokeWeight(4);
-                        p.noFill();
-                        p.rect(0, 0, p.width, p.height);
-                    }
-                    p.strokeWeight(1); 
-                }
-            };
+    if (p.mouseX < 0 || p.mouseX > p.width || p.mouseY < 0 || p.mouseY > p.height) return;
 
-            p.mousePressed = () => {
-                if (isSolved) {
-                    startNewGame();
-                    return;
-                }
+    let c = Math.floor(p.mouseX / w);
+    let r = Math.floor(p.mouseY / h);
 
-                if (isSolving) {
-                    isSolving = false;
-                    return; 
-                }
+    if (c < 0 || c >= cols || r < 0 || r >= rows) return;
 
-                if (p.mouseX >= 0 && p.mouseX <= p.width && p.mouseY >= 0 && p.mouseY <= p.height) {
-                    let c = p.floor(p.mouseX / w);
-                    let r = p.floor(p.mouseY / h);
+    let now = p.millis();
 
-                    if (c >= 0 && c < cols && r >= 0 && r < rows) {
-                        let currentTime = p.millis();
+    if (r === emptySlot.r && c === emptySlot.c) {
+      if (now - lastClickTime < doubleClickThreshold) {
+        isThinking = true;                    // Nachdenken aktivieren
+        lastClickTime = 0;
 
-                        if (r === emptySlot.r && c === emptySlot.c) {
-                            if (currentTime - lastClickTime < doubleClickThreshold) {
-                                if (checkIsSolved()) {
-                                    startNewGame();
-                                } else if (moveHistory.length > 0) {
-                                    isSolving = true;
-                                    lastSolveTime = p.millis();
-                                }
-                                lastClickTime = 0;
-                                return;
-                            }
-                            lastClickTime = currentTime;
-                            return;
-                        }
+        // Kurze Verzögerung damit "Nachdenken" sichtbar wird
+        setTimeout(() => {
+          let solution = solvePuzzle(board);
+          isThinking = false;
+          if (solution.length > 0) {
+            solvePath = [...solution];
+            isSolving = true;
+            lastSolveTime = p.millis();
+          }
+        }, 80); // kurze Pause für die Anzeige
 
-                        lastClickTime = 0;
-                        if (isAdjacent(r, c, emptySlot.r, emptySlot.c)) {
-                            moveTile(r, c, true);  // ← WICHTIG: Player-Moves werden jetzt auch aufgezeichnet
-                            
-                            if (checkIsSolved()) {
-                                isSolved = true;
-                                solvedAnimFrame = maxAnimFrames; 
-                            }
-                        }
-                    }
-                }
-            };
+        return;
+      }
+      lastClickTime = now;
+      return;
+    }
 
-            function isAdjacent(r1, c1, r2, c2) {
-                let dRow = p.abs(r1 - r2);
-                let dCol = p.abs(c1 - c2);
-                return (dRow === 1 && dCol === 0) || (dRow === 0 && dCol === 1);
-            }
+    lastClickTime = 0;
 
-            function moveTile(r, c, record = false) {
-                if (record) {
-                    moveHistory.push({ r: emptySlot.r, c: emptySlot.c });
-                }
-                board[emptySlot.r][emptySlot.c] = board[r][c];
-                board[r][c] = -1;
-                emptySlot = { r: r, c: c };
-            }
+    if (isAdjacent(r, c, emptySlot.r, emptySlot.c)) {
+      moveTile(r, c);
+      if (checkIsSolved()) {
+        isSolved = true;
+        solvedAnimFrame = maxAnimFrames;
+      }
+    }
+  };
 
-            function shuffleBoard() {
-                let lastMovedTileValue = -1;
+  function isAdjacent(r1, c1, r2, c2) {
+    let dr = Math.abs(r1 - r2);
+    let dc = Math.abs(c1 - c2);
+    return (dr === 1 && dc === 0) || (dr === 0 && dc === 1);
+  }
 
-                for (let i = 0; i < 40; i++) {
-                    let validMoves = [];
-                    let r = emptySlot.r;
-                    let c = emptySlot.c;
+  function moveTile(r, c) {
+    board[emptySlot.r][emptySlot.c] = board[r][c];
+    board[r][c] = -1;
+    emptySlot = { r, c };
+  }
 
-                    if (r > 0) validMoves.push({ r: r - 1, c: c });
-                    if (r < rows - 1) validMoves.push({ r: r + 1, c: c });
-                    if (c > 0) validMoves.push({ r: r, c: c - 1 });
-                    if (c < cols - 1) validMoves.push({ r: r, c: c + 1 });
+  function shuffleBoard() {
+    let last = -1;
+    for (let i = 0; i < 40; i++) {
+      let moves = [];
+      let {r, c} = emptySlot;
+      if (r > 0) moves.push({r:r-1, c});
+      if (r < rows-1) moves.push({r:r+1, c});
+      if (c > 0) moves.push({r, c:c-1});
+      if (c < cols-1) moves.push({r, c:c+1});
 
-                    validMoves = validMoves.filter(move => {
-                        let tileValue = board[move.r][move.c];
-                        return tileValue !== lastMovedTileValue; 
-                    });
+      moves = moves.filter(m => board[m.r][m.c] !== last);
+      if (!moves.length) moves = [{r: r>0 ? r-1 : r+1, c}];
 
-                    if (validMoves.length === 0) {
-                        if (r > 0) validMoves.push({ r: r - 1, c: c });
-                        if (r < rows - 1) validMoves.push({ r: r + 1, c: c });
-                        if (c > 0) validMoves.push({ r: r, c: c - 1 });
-                        if (c < cols - 1) validMoves.push({ r: r, c: c + 1 });
-                    }
+      let chosen = p.random(moves);
+      last = board[chosen.r][chosen.c];
+      moveTile(chosen.r, chosen.c);
+    }
+  }
 
-                    let randomMove = p.random(validMoves);
-                    lastMovedTileValue = board[randomMove.r][randomMove.c];
+  function calculateGrid() {
+    w = p.width / cols;
+    h = p.height / rows;
+  }
+};
 
-                    moveTile(randomMove.r, randomMove.c, true);
-                }
-            }
-
-            function calculateGrid() {
-                w = p.width / cols;
-                h = p.height / rows;
-            }
-        };
-
-        new p5(puzzleSketch);
+new p5(puzzleSketch);
