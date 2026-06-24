@@ -95,12 +95,14 @@
       ist und das <span class="bc">Shamans Oracle</span> wegen der schönen und geheimnisvollen Höhlen&shy;male&shy;reien.
     </p>
     
-    <div class="image-scroll">
+    <div class="image-scroll" id="tarot-scroll">
       <div class="scroll-item"><img src="colman-smith-karte.jpg" alt=""></div>
       <!-- <div class="scroll-item has-play"><img src="primordeal_tarot.jpg" id="openTarotImgBtn" alt=""></div> -->
       
       <figure class="scroll-item has-play">
-        <img src="primordeal_tarot.jpg" id="openTarotImgBtn" alt="">
+         <a href="tarot.html">
+           <img src="primordeal_tarot.jpg" alt="">
+         </a>
         <figcaption></figcaption>
       </figure>
       
@@ -170,6 +172,28 @@
     Zauber von Tod und Leben<br> 
     Form deine Wirkung&ldquo;
     </blockquote>
+    
+    <h3>MalachimWriter</h3>
+    <div class="kastentext box-bl" style="text-align: left;">
+      Ein "Schreibprogramm" für Malachim, das Engel-Alphabet von Agrippa von Nettesheim 
+      (und für hebräische Buchstaben).
+    </div>
+    
+    <p class="subtext-bl">
+      Läuft online im Browser.
+    </p>
+    
+
+    <a href="https://khz-66.github.io/malachim_writer/">➔ MalachimWriter</a><br>
+      
+
+<figure class="image-figure noborder">
+      
+      <figcaption>Der "Charm of Making" in Malachim-Schrift.
+      Erstellt mit <a href="https://khz-66.github.io/malachim_writer/" target="_blank">MalachimWriter</a>.</figcaption>
+      <img src="charm_of_making_black.jpg" alt="Neues Bild" loading="lazy" onerror="this.style.display='none';">
+      
+    </figure>
 
     <hr>
     
@@ -231,36 +255,7 @@
     </blockquote>
   </dialog>
 
-  <dialog id="tarotImgDialog" class="dialog-base" style="padding: 30px 20px; color: #fff; background: #1a1a1a; border: 2px solid #ffaa00; border-radius: 8px; max-width: 80vw; max-height: 85vh; box-sizing: border-box; overflow-y: auto;">
-      <style>
-        #tarotImgDialog[open] {
-            display: flex !important;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            gap: 20px;
-        }
-      </style>
-      <button id="closeTarotImgBtn" class="closeDialogBtn" aria-label="Schließen" style="position: absolute; top: 10px; right: 15px; background: none; border: none; color: #ffaa00; font-size: 24px; cursor: pointer; z-index: 10;">&times;</button>
-      
-      <a href="primordial_cards.html" target="_blank"><img src="primordial_cards.png" alt="Primordial Tarot" style="max-width: 100%; max-height: 55vh; object-fit: contain; border-radius: 4px; flex-shrink: 0;"></a>
-      
-      <p class="subtext">
-        Mein Lieblings-Tarot!
-        Anders als das Rider-Waite-Smith-Tarot für die intuitive Deutung der starken Bilder.
-      </p>
-      <blockquote class="quote-bl">
-      &bdquo;The images on the cards are a little disturbing 
-      when you first look at them, but after a quick read 
-      of the LWB, any fear is dissipated and replaced with respect. 
-      At first I was afraid that the lack of a multitude of colour 
-      would be limiting and I was very pleased to find that it isn't. 
-      The drawings create the depth that many other decks use colour to achieve.&ldquo;
-      <div class="text-right">
-        <br>(Review auf <a href="https://www.aeclectic.net/tarot/">Aeclectic Tarot</a>)
-      </div>
-      </blockquote>
-  </dialog>
+  
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -318,16 +313,7 @@
         }
     });
 
-    // 4. Primordial Tarot Bild-Popup
-    const tarotImgDialog = document.getElementById('tarotImgDialog');
-    const openTarotImgBtn = document.getElementById('openTarotImgBtn');
-
-    if (openTarotImgBtn && tarotImgDialog) {
-        openTarotImgBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            tarotImgDialog.showModal();
-        });
-    }
+    
 
     // Universal-Buttons zum Schließen abfangen
     document.querySelectorAll('.closeDialogBtn').forEach(btn => {

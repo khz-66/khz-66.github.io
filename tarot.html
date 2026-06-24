@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html class="spooky" lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarot</title>
+  
+  <link rel="stylesheet" href="/css/styles.css">
+    
+  <script src="p5.min.js"></script>
+</head>
+<body class="spooky">
+
+  <!-- Avatar-Widget für die Navigation zurück zur Hauptseite -->
+  <div class="avatar-widget-container avatar-bottom-left">
+    <a href="index.html" id="avatar-link" class="avatar-link-wrapper" style="display: block;">
+      <div id="avatar-animation-holder"></div>
+    </a>
+  </div>
+  
+  <div class="container">
+    <h1>Tarot</h1>
+    
+    <h2>Primordial Tarot</h2>
+    
+    <div class="kastentext box-bl" style="text-align: left; margin-bottom: 30px;">
+      Mein Lieblings-Tarot! Anders als das Rider-Waite-Smith-Tarot für die intuitive Deutung der starken Bilder.
+    </div>
+
+    <!-- Hauptbild der Tarotkarten -->
+    <figure class="image-figure" style="margin: 20px 0;">
+      <img src="primordial_cards.png" alt="Primordial Tarot" style="max-width: 100%; height: auto; border-radius: 4px; border: 1px solid #ffaa00;">
+    </figure>
+    
+    <!-- Rezension im passenden Blockquote-Design -->
+    <blockquote class="quote-bl" style="margin-top: 30px;">
+      &bdquo;The images on the cards are a little disturbing 
+      when you first look at them, but after a quick read 
+      of the LWB, any fear is dissipated and replaced with respect. 
+      At first I was afraid that the lack of a multitude of colour 
+      would be limiting and I was very pleased to find that it isn't. 
+      The drawings create the depth that many other decks use colour to achieve.&ldquo;
+      <div class="text-right">
+        <br>(Review auf <a href="https://www.aeclectic.net/tarot/" target="_blank">Aeclectic Tarot</a>)
+      </div>
+    </blockquote>
+
+    <p style="text-align: center; margin-top: 40px;">
+      <a href="esoterik_und_magie.html#tarot-scroll" style="text-decoration: underline;">➔ Zurück zur Übersicht</a>
+    </p>
+
+    <hr>
+    
+    <p class="subtext-or text-center">Sommer 2026</p>
+    <div class="header-footer"></div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const avatarLink = document.getElementById('avatar-link');
+        
+        if (avatarLink) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const hatWeiterleitungParam = urlParams.get('weiterleitung') === 'ja';
+            const kamDirektVonIndexVoll = document.referrer.includes('index_voll.html');
+
+            if (hatWeiterleitungParam || kamDirektVonIndexVoll) {
+                sessionStorage.setItem('kommtVonIndexVoll', 'true');
+            }
+
+            const istAktiviertFuerSession = sessionStorage.getItem('kommtVonIndexVoll') === 'true';
+
+            if (istAktiviertFuerSession) {
+                avatarLink.href = "index_voll.html";
+            }
+        }
+    });
+
+    // P5.js Avatar Sketch Logic (Exakt wie auf der Hauptseite)
+    const avatarSketch = (p) => {
+      let img;
+      let blinkTimer = 0;
+      let pauseTimer = 0;       
+      let isBlinking = false;
+      let doubleBlinkQueue = false; 
+      let nextBlinkFrame = 200;     
+
+      p.preload = () => {
+        img = p.loadImage('him.jpg'); 
+      };
+
+      p.setup = () => {
+        let canvas = p.createCanvas(350, 350);
+        canvas.parent('avatar-animation-holder');
+      };
+
+      p.draw = () => {
+        p.clear();
+        p.image(img, 0, 0, p.width, p.height);
+
+        if (p.frameCount >= nextBlinkFrame && !isBlinking && pauseTimer <= 0) {
+          isBlinking = true;
+          blinkTimer = 10; 
+          doubleBlinkQueue = p.random(1) < 0.1; 
+          nextBlinkFrame = p.frameCount + p.floor(p.random(200, 250));
+        }
+
+        if (isBlinking) {
+          blinkEyes();
+          blinkTimer--;
+          
+          if (blinkTimer <= 0) {
+            isBlinking = false;
+            if (doubleBlinkQueue) {
+              doubleBlinkQueue = false; 
+              pauseTimer = 6; 
+            }
+          }
+        }
+        
+        if (pauseTimer > 0) {
+          pauseTimer--;
+          if (pauseTimer === 0) {
+            isBlinking = true;
+            blinkTimer = 10;
+          }
+        }
+           
+        p.stroke(0);          
+        p.strokeWeight(6);    
+        p.fill(183, 189, 189);          
+        p.ellipse(175, 185, 170, 120);
+      };
+
+      function blinkEyes() {
+        p.push(); 
+        p.stroke(0);          
+        p.strokeWeight(6);    
+        p.fill(183, 189, 189);          
+
+        p.ellipse(135, 115, 70, 70); 
+        p.ellipse(205, 115, 75, 75); 
+
+        p.strokeWeight(5);
+        p.line(130, 115, 174, 115); 
+        p.line(176, 115, 220, 115); 
+
+        p.pop(); 
+      }
+    };
+
+    new p5(avatarSketch);
+  </script>
+</body>
+</html>
