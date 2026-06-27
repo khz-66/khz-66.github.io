@@ -519,6 +519,14 @@ table td, table th {
   padding: 10px 12px;
 }
 
+.table-bc td:first-child {
+  /* Hier kopierst du die Eigenschaften deiner .bc-Klasse hinein */
+  font-weight: bold;
+  color: var(--accbl); 
+  
+  /* Falls .bc noch mehr macht (z.B. Farbe), fügst du das hier ebenfalls ein */
+}
+
 
 
 
