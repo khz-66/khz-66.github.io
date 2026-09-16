@@ -582,6 +582,13 @@ table td, table th {
   padding: 0 16px;
 }
 
+.no-break {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 16px;
+}
+
 .image-item {
   margin: 0;
   display: flex;
@@ -1123,13 +1130,13 @@ a.has-play::after {
   bottom: 20px;
   left: 20px;
 }
-
 #avatar-animation-holder canvas {
-  width: 100% !important;
-  height: 100% !important;
+  display: block;
+  width: 120px !important;
+  height: 120px !important;
+  border: none !important;
   border-radius: 50%;
-  border: 5px solid #5A6E8F !important; 
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+  margin: 0;
 }
 
 
