@@ -10,6 +10,10 @@
       window.location.href = "index_voll.html"; // <-- Für Weiterleitung "?weiterleitung=ja" an die Adresse anhängen
     }
   </script>
+
+<script data-goatcounter="https://khz-66.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js">
+  </script>
   
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -397,19 +401,8 @@
         
     <p class="subtext-or text-center">
       Sommer 2026<br><br>
-      Diese Seite wurde <span id="visits">0</span>-mal besucht.
     </p>
-    <script>
-      // Verwendung des neuen, funktionierenden Ersatz-Dienstes
-      fetch('https://countapi.mileshillyard.com/hit/khz-66-github-io/homepage')
-        .then(res => res.json())
-        .then(res => {
-          document.getElementById('visits').innerText = res.value;
-        })
-        .catch(err => {
-          console.error("Fehler beim Laden des Zählers:", err);
-        });
-    </script>
+    
 
     
     
