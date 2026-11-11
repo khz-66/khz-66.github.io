@@ -398,15 +398,19 @@
     <p class="subtext-or text-center">
       Sommer 2026<br><br>
       Diese Seite wurde <span id="visits">0</span>-mal besucht.
-  </p>
-  <script>
-    // Ersetzen Sie 'meine-website.de' und 'homepage' durch Ihre eigenen Begriffe
-    fetch('https://api.countapi.xyz/hit/https://khz-66.github.io/')
-      .then(res => res.json())
-      .then(res => {
-        document.getElementById('visits').innerText = res.value;
-      });
-  </script>
+    </p>
+    <script>
+      // Verwendung des neuen, funktionierenden Ersatz-Dienstes
+      fetch('https://countapi.mileshillyard.com/hit/khz-66-github-io/homepage')
+        .then(res => res.json())
+        .then(res => {
+          document.getElementById('visits').innerText = res.value;
+        })
+        .catch(err => {
+          console.error("Fehler beim Laden des Zählers:", err);
+        });
+    </script>
+
     
     
     <div class="header-footer"></div>
