@@ -57,6 +57,9 @@
     });
   </script>
   -->
+
+
+  
   
   <div class="container">
     <h1>Guten Tag!</h1>
@@ -392,7 +395,20 @@
      
     <hr>
         
-    <p class="subtext-or text-center">Sommer 2026</p>
+    <p class="subtext-or text-center">
+      Sommer 2026<br><br>
+      Diese Seite wurde <span id="visits">0</span>-mal besucht.
+  </p>
+  <script>
+    // Ersetzen Sie 'meine-website.de' und 'homepage' durch Ihre eigenen Begriffe
+    fetch('https://api.countapi.xyz/hit/https://khz-66.github.io/')
+      .then(res => res.json())
+      .then(res => {
+        document.getElementById('visits').innerText = res.value;
+      });
+  </script>
+    
+    
     <div class="header-footer"></div>
   </div>
 
